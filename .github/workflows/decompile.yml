@@ -3,8 +3,7 @@ on:
   push:
     branches: [ main ]
     paths:
-    # Replace `REPLACE_ME_TO_YOUR_ASSEMBLY.dll` into your C# Assembly file.
-    - REPLACE_ME_TO_YOUR_ASSEMBLY.dll
+    - Assembly-CSharp.dll
   workflow_dispatch:
 jobs:
   decompile:
@@ -17,9 +16,8 @@ jobs:
     - name: Decompile
       uses: shabbywu/gh-action-ILSpyCmd@v1
       with:
-        # Replace `REPLACE_ME_TO_YOUR_ASSEMBLY.dll` into your C# Assembly file.
         files: |
-          REPLACE_ME_TO_YOUR_ASSEMBLY.dll
+          Assembly-CSharp.dll
         output-dir: src/
         project: true
     - name: Fix permission
