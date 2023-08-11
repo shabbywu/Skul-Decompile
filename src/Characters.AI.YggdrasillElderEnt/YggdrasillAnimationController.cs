@@ -1,0 +1,61 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace Characters.AI.YggdrasillElderEnt;
+
+public class YggdrasillAnimationController : MonoBehaviour
+{
+	[SerializeField]
+	private Character _owner;
+
+	[SerializeField]
+	private Transform _phase1Container;
+
+	[SerializeField]
+	private Transform _phase2Container;
+
+	private Dictionary<YggdrasillAnimation.Tag, CharacterAnimationController.AnimationInfo> _phase1Mapper = new Dictionary<YggdrasillAnimation.Tag, CharacterAnimationController.AnimationInfo>();
+
+	private Dictionary<YggdrasillAnimation.Tag, CharacterAnimationController.AnimationInfo> _phase2Mapper = new Dictionary<YggdrasillAnimation.Tag, CharacterAnimationController.AnimationInfo>();
+
+	private float _speed = 1f;
+
+	private const string _referenceAnimationTag = "Behind";
+
+	private void Awake()
+	{
+		CreateMapper(_phase1Container, _phase1Mapper);
+		CreateMapper(_phase2Container, _phase2Mapper);
+	}
+
+	private void CreateMapper(Transform transform, Dictionary<YggdrasillAnimation.Tag, CharacterAnimationController.AnimationInfo> mapper)
+	{
+		YggdrasillAnimation[] componentsInChildren = ((Component)transform).GetComponentsInChildren<YggdrasillAnimation>();
+		foreach (YggdrasillAnimation yggdrasillAnimation in componentsInChildren)
+		{
+			mapper.Add(yggdrasillAnimation.tag, yggdrasillAnimation.info);
+		}
+	}
+
+	public IEnumerator CPlayAndWaitAnimation(YggdrasillAnimation.Tag tag)
+	{
+		if (_phase1Mapper.TryGetValue(tag, out var value) || _phase2Mapper.TryGetValue(tag, out value))
+		{
+			_owner.animationController.Play(value, _speed);
+			yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)_owner.chronometer.animation, value.dictionary["Behind"].length);
+		}
+	}
+
+	public void PlayCutSceneAnimation()
+	{
+		((MonoBehaviour)this).StartCoroutine(CLoop());
+		IEnumerator CLoop()
+		{
+			while (true)
+			{
+				yield return CPlayAndWaitAnimation(YggdrasillAnimation.Tag.P1_Idle_CutScene);
+			}
+		}
+	}
+}

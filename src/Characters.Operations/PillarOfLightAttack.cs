@@ -1,0 +1,27 @@
+using System.Collections;
+using Characters.AI.Hero;
+using UnityEngine;
+
+namespace Characters.Operations;
+
+public class PillarOfLightAttack : CharacterOperation
+{
+	[SerializeField]
+	private Transform _container;
+
+	[SerializeField]
+	private float _attackDelay;
+
+	public override void Run(Character owner)
+	{
+		PillarOfLightContainer component = ((Component)_container.GetChild(Random.Range(0, _container.childCount))).GetComponent<PillarOfLightContainer>();
+		((MonoBehaviour)this).StartCoroutine(CRun(owner, component));
+	}
+
+	private IEnumerator CRun(Character owner, PillarOfLightContainer container)
+	{
+		container.Sign(owner);
+		yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)owner.chronometer.master, _attackDelay);
+		container.Attack(owner);
+	}
+}
