@@ -1,0 +1,46 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>Assembly-CSharp</AssemblyName>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <TargetFramework>net40</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup>
+    <LangVersion>11.0</LangVersion>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup />
+  <ItemGroup />
+  <ItemGroup>
+    <Reference Include="UnityEngine.UI" />
+    <Reference Include="UnityEngine.CoreModule" />
+    <Reference Include="Plugins.Common" />
+    <Reference Include="UnityEngine.Physics2DModule" />
+    <Reference Include="Unity.RenderPipelines.Universal.Runtime" />
+    <Reference Include="Plugins.PhysicsUtils" />
+    <Reference Include="UnityEngine.AudioModule" />
+    <Reference Include="UnityEngine.AnimationModule" />
+    <Reference Include="Unity.ResourceManager" />
+    <Reference Include="UnityEngine.TilemapModule" />
+    <Reference Include="Tilemap" />
+    <Reference Include="Plugins.ObjectPool" />
+    <Reference Include="InControl" />
+    <Reference Include="Plugins.Singletons" />
+    <Reference Include="Assembly-CSharp-firstpass" />
+    <Reference Include="Unity.Addressables" />
+    <Reference Include="Unity.TextMeshPro" />
+    <Reference Include="System.Core">
+      <HintPath>../../../opt/bitnami/dotnet-sdk/bin/shared/Microsoft.NETCore.App/6.0.21/System.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Platforms" />
+    <Reference Include="Plugins.Data" />
+    <Reference Include="UnityEngine.ParticleSystemModule" />
+    <Reference Include="Unity.Mathematics" />
+    <Reference Include="Platforms.Common" />
+    <Reference Include="UnityEngine.UIModule" />
+    <Reference Include="BehaviorDesigner.Runtime" />
+    <Reference Include="Plugins.Animator" />
+    <Reference Include="UnityEngine.InputLegacyModule" />
+    <Reference Include="UserInput" />
+    <Reference Include="UnityEngine.IMGUIModule" />
+  </ItemGroup>
+</Project>
