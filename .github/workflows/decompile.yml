@@ -4,6 +4,10 @@ on:
     branches: [ main ]
     paths:
     - Assembly-CSharp.dll
+    - Assembly-CSharp-firstpass.dll
+    - Plugins.Common.dll
+    - Plugins.Data.dll
+    - Plugins.Singletons.dll
   workflow_dispatch:
 jobs:
   decompile:
@@ -18,6 +22,10 @@ jobs:
       with:
         files: |
           Assembly-CSharp.dll
+          Assembly-CSharp-firstpass.dll
+          Plugins.Common.dll
+          Plugins.Data.dll
+          Plugins.Singletons.dll
         output-dir: src/
         project: true
     - name: Fix permission
