@@ -27,7 +27,7 @@ jobs:
           Plugins.Data.dll
           Plugins.Singletons.dll
         output-dir: src/
-        project: true
+        project: false
     - name: Fix permission
       run: |
         sudo chown -R $USER:$USER src
