@@ -43,7 +43,7 @@ public sealed class QuintessenceEventAdapter : MonoBehaviour
 	{
 		Character quintessenceCharacter = _quintessenceCharacter;
 		quintessenceCharacter.onKilled = (Character.OnKilledDelegate)Delegate.Combine(quintessenceCharacter.onKilled, new Character.OnKilledDelegate(OnKilled));
-		((PriorityList<GiveDamageDelegate>)_quintessenceCharacter.onGiveDamage).Add(int.MinValue, (GiveDamageDelegate)OnGiveDamage);
+		_quintessenceCharacter.onGiveDamage.Add(int.MinValue, OnGiveDamage);
 		Character quintessenceCharacter2 = _quintessenceCharacter;
 		quintessenceCharacter2.onGaveDamage = (GaveDamageDelegate)Delegate.Combine(quintessenceCharacter2.onGaveDamage, new GaveDamageDelegate(OnGaveDamage));
 		Character quintessenceCharacter3 = _quintessenceCharacter;
@@ -59,7 +59,7 @@ public sealed class QuintessenceEventAdapter : MonoBehaviour
 	{
 		Character quintessenceCharacter = _quintessenceCharacter;
 		quintessenceCharacter.onKilled = (Character.OnKilledDelegate)Delegate.Remove(quintessenceCharacter.onKilled, new Character.OnKilledDelegate(OnKilled));
-		((PriorityList<GiveDamageDelegate>)_quintessenceCharacter.onGiveDamage).Remove((GiveDamageDelegate)OnGiveDamage);
+		_quintessenceCharacter.onGiveDamage.Remove(OnGiveDamage);
 		Character quintessenceCharacter2 = _quintessenceCharacter;
 		quintessenceCharacter2.onGaveDamage = (GaveDamageDelegate)Delegate.Remove(quintessenceCharacter2.onGaveDamage, new GaveDamageDelegate(OnGaveDamage));
 		Character quintessenceCharacter3 = _quintessenceCharacter;

@@ -21,8 +21,6 @@ public sealed class SetOwnerColor : CharacterOperation
 	{
 		//IL_002f: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0034: Unknown result type (might be due to invalid IL or missing references)
-		//IL_006a: Unknown result type (might be due to invalid IL or missing references)
-		//IL_006f: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0057: Unknown result type (might be due to invalid IL or missing references)
 		if (owner.spriteEffectStack != null && !((Object)(object)owner.spriteEffectStack.mainRenderer == (Object)null))
 		{
@@ -34,7 +32,7 @@ public sealed class SetOwnerColor : CharacterOperation
 			}
 			else
 			{
-				_changeReference = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)this, CChangeColor());
+				_changeReference = ((MonoBehaviour)(object)this).StartCoroutineWithReference(CChangeColor());
 			}
 		}
 	}
@@ -46,7 +44,7 @@ public sealed class SetOwnerColor : CharacterOperation
 		while (elapsed <= _curve.duration)
 		{
 			renderer.color = Color.Lerp(_originColor, _color, _curve.Evaluate(elapsed / _curve.duration));
-			elapsed += ((ChronometerBase)_owner.chronometer.master).deltaTime;
+			elapsed += _owner.chronometer.master.deltaTime;
 			yield return null;
 		}
 		renderer.color = _originColor;
@@ -56,7 +54,7 @@ public sealed class SetOwnerColor : CharacterOperation
 	{
 		//IL_0022: Unknown result type (might be due to invalid IL or missing references)
 		base.Stop();
-		((CoroutineReference)(ref _changeReference)).Stop();
+		_changeReference.Stop();
 		_owner.spriteEffectStack.mainRenderer.color = _originColor;
 	}
 

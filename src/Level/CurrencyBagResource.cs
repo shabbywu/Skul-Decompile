@@ -35,13 +35,11 @@ public sealed class CurrencyBagResource : ScriptableObject
 
 	public CurrencyBag GetCurrencyBag(GameData.Currency.Type type, Rarity rarity)
 	{
-		//IL_0007: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0008: Unknown result type (might be due to invalid IL or missing references)
 		return type switch
 		{
-			GameData.Currency.Type.Gold => ExtensionMethods.Random<CurrencyBag>(_goldBags.Where((CurrencyBag bag) => bag.rarity == rarity)), 
-			GameData.Currency.Type.Bone => ExtensionMethods.Random<CurrencyBag>(_boneBags.Where((CurrencyBag bag) => bag.rarity == rarity)), 
-			GameData.Currency.Type.DarkQuartz => ExtensionMethods.Random<CurrencyBag>(_quartzBags.Where((CurrencyBag bag) => bag.rarity == rarity)), 
+			GameData.Currency.Type.Gold => _goldBags.Where((CurrencyBag bag) => bag.rarity == rarity).Random(), 
+			GameData.Currency.Type.Bone => _boneBags.Where((CurrencyBag bag) => bag.rarity == rarity).Random(), 
+			GameData.Currency.Type.DarkQuartz => _quartzBags.Where((CurrencyBag bag) => bag.rarity == rarity).Random(), 
 			_ => null, 
 		};
 	}

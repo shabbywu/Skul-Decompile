@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using Characters;
 using CutScenes;
 using Data;
@@ -71,9 +70,9 @@ public class Dwarf : InteractiveObject
 
 	public string displayName => Localization.GetLocalizedString($"npc/{NpcType.Dwarf}/name");
 
-	public string greeting => ExtensionMethods.Random<string>((IEnumerable<string>)Localization.GetLocalizedStringArray($"npc/{NpcType.Dwarf}/greeting"));
+	public string greeting => Localization.GetLocalizedStringArray($"npc/{NpcType.Dwarf}/greeting").Random();
 
-	public string[] chat => ExtensionMethods.Random<string[]>((IEnumerable<string[]>)Localization.GetLocalizedStringArrays($"npc/{NpcType.Dwarf}/chat"));
+	public string[] chat => Localization.GetLocalizedStringArrays($"npc/{NpcType.Dwarf}/chat").Random();
 
 	public int tryLevel => _tryLevel;
 
@@ -182,8 +181,6 @@ public class Dwarf : InteractiveObject
 
 	private void UpdateHardmodeLevelText()
 	{
-		//IL_0037: Unknown result type (might be due to invalid IL or missing references)
-		//IL_003c: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0079: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0071: Unknown result type (might be due to invalid IL or missing references)
 		if (_readyForLevelChangeTutorial)
@@ -193,8 +190,8 @@ public class Dwarf : InteractiveObject
 		}
 		else if (_levelTextActive)
 		{
-			((CoroutineReference)(ref _levelAnimationCoroutineReference)).Stop();
-			_levelAnimationCoroutineReference = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)this, CUpdateAnimation());
+			_levelAnimationCoroutineReference.Stop();
+			_levelAnimationCoroutineReference = ((MonoBehaviour)(object)this).StartCoroutineWithReference(CUpdateAnimation());
 			_activeLevelFrame.SetActive(_tryLevel == GameData.HardmodeProgress.clearedLevel + 1);
 			((Graphic)_levelText).color = ((_tryLevel <= GameData.HardmodeProgress.clearedLevel + 1) ? _activeColor : _deactiveColor);
 			_levelText.text = _tryLevel.ToString();

@@ -71,7 +71,7 @@ public class StatBonusByMoving : Ability
 		{
 			if (_movedDistance != _movedDistanceBefore)
 			{
-				Stat.Value[] values = ((ReorderableArray<Stat.Value>)_stat).values;
+				Stat.Value[] values = _stat.values;
 				float num = _movedDistance / ability._distanceToMax;
 				if ((Object)(object)ability._gauge != (Object)null)
 				{
@@ -79,7 +79,7 @@ public class StatBonusByMoving : Ability
 				}
 				for (int i = 0; i < values.Length; i++)
 				{
-					values[i].value = ((ReorderableArray<Stat.Value>)ability._maxStat).values[i].GetMultipliedValue(num);
+					values[i].value = ability._maxStat.values[i].GetMultipliedValue(num);
 				}
 				owner.stat.SetNeedUpdate();
 				_movedDistanceBefore = _movedDistance;

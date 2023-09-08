@@ -9,7 +9,7 @@ namespace Characters.AI.Behaviours.Hero;
 public abstract class UnconditionalCombo : Behaviour, IComboable, IEntryCombo
 {
 	[SerializeField]
-	[Subcomponent(typeof(ChainAction))]
+	[UnityEditor.Subcomponent(typeof(ChainAction))]
 	private Action _startAction;
 
 	public IEnumerator CTryContinuedCombo(AIController controller, ComboSystem comboSystem)

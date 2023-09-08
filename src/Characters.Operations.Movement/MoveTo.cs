@@ -39,8 +39,6 @@ public sealed class MoveTo : CharacterOperation
 		//IL_00eb: Unknown result type (might be due to invalid IL or missing references)
 		//IL_00f0: Unknown result type (might be due to invalid IL or missing references)
 		//IL_00cd: Unknown result type (might be due to invalid IL or missing references)
-		//IL_00d3: Unknown result type (might be due to invalid IL or missing references)
-		//IL_00d8: Unknown result type (might be due to invalid IL or missing references)
 		if (!((Object)(object)owner.movement == (Object)null))
 		{
 			Vector2 val = Vector2.op_Implicit(((Component)_target).transform.position - ((Component)owner).transform.position);
@@ -57,8 +55,8 @@ public sealed class MoveTo : CharacterOperation
 			}
 			if (_curve.duration > 0f)
 			{
-				((CoroutineReference)(ref _coroutineReference)).Stop();
-				_coroutineReference = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)owner.movement, CMove(owner, _curve, val2));
+				_coroutineReference.Stop();
+				_coroutineReference = ((MonoBehaviour)(object)owner.movement).StartCoroutineWithReference(CMove(owner, _curve, val2));
 			}
 			else
 			{
@@ -75,7 +73,7 @@ public sealed class MoveTo : CharacterOperation
 		float t = 0f;
 		float amountBefore = 0f;
 		Vector2.op_Implicit(((Component)character).transform.position);
-		for (; t < curve.duration; t += ((ChronometerBase)character.chronometer.animation).deltaTime)
+		for (; t < curve.duration; t += character.chronometer.animation.deltaTime)
 		{
 			if ((Object)(object)character == (Object)null || !character.liveAndActive)
 			{
@@ -105,6 +103,6 @@ public sealed class MoveTo : CharacterOperation
 		{
 			_rotateTransform.rotation = Quaternion.Euler(0f, 0f, 0f);
 		}
-		((CoroutineReference)(ref _coroutineReference)).Stop();
+		_coroutineReference.Stop();
 	}
 }

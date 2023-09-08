@@ -80,7 +80,7 @@ public sealed class UpgradeShop : Singleton<UpgradeShop>
 		Chapter currentChapter = Singleton<Service>.Instance.levelManager.currentChapter;
 		_random = new Random(GameData.Save.instance.randomSeed + 2028506624 + (int)currentChapter.type * 256 + currentChapter.stageIndex * 16 + currentChapter.currentStage.pathIndex);
 		List<UpgradeResource.Reference> list = Singleton<UpgradeManager>.Instance.GetList(UpgradeObject.Type.Cursed);
-		ExtensionMethods.PseudoShuffle<UpgradeResource.Reference>((IList<UpgradeResource.Reference>)list, _random);
+		list.PseudoShuffle(_random);
 		if (_cursedLineUp == null)
 		{
 			_cursedLineUp = new List<UpgradeResource.Reference>();

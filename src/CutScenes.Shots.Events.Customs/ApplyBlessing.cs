@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Characters;
 using Characters.Abilities.Blessing;
 using Runnables;
@@ -26,7 +25,7 @@ public sealed class ApplyBlessing : Event
 	public override void Run()
 	{
 		Character character = _target.character;
-		Blessing blessing = Object.Instantiate<Blessing>(ExtensionMethods.Random<Blessing>((IEnumerable<Blessing>)_blessings));
+		Blessing blessing = Object.Instantiate<Blessing>(_blessings.Random());
 		blessing.Apply(character);
 		_holyGrailAnimator.Play(((Object)blessing.clip).name);
 		_nameKeyCache.key = blessing.activatedNameKey;

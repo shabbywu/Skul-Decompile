@@ -147,7 +147,7 @@ public class SweepAttack : CharacterOperation, IAttack
 			for (int i = 0; i < _caster.results.Count; i++)
 			{
 				RaycastHit2D raycastHit = _caster.results[i];
-				if (ExtensionMethods.Contains(_terrainLayer, ((Component)((RaycastHit2D)(ref raycastHit)).collider).gameObject.layer))
+				if (_terrainLayer.Contains(((Component)((RaycastHit2D)(ref raycastHit)).collider).gameObject.layer))
 				{
 					onTerrainHit(_collider, origin, direction, distance, raycastHit);
 				}
@@ -212,15 +212,15 @@ public class SweepAttack : CharacterOperation, IAttack
 	[SerializeField]
 	private CollisionDetector _collisionDetector;
 
-	[Subcomponent(typeof(OperationInfo))]
+	[UnityEditor.Subcomponent(typeof(OperationInfo))]
 	[SerializeField]
 	private OperationInfo.Subcomponents _operationToOwnerWhenHitInfo;
 
-	[Subcomponent(typeof(OperationInfo))]
+	[UnityEditor.Subcomponent(typeof(OperationInfo))]
 	[SerializeField]
 	private OperationInfo.Subcomponents _onTerrainHit;
 
-	[Subcomponent(typeof(TargetedOperationInfo))]
+	[UnityEditor.Subcomponent(typeof(TargetedOperationInfo))]
 	[SerializeField]
 	private TargetedOperationInfo.Subcomponents _onCharacterHit;
 
@@ -263,7 +263,7 @@ public class SweepAttack : CharacterOperation, IAttack
 		_attackDamage = ((Component)this).GetComponentInParent<IAttackDamage>();
 		_onTerrainHit.Initialize();
 		_onCharacterHit.Initialize();
-		TargetedOperationInfo[] components = ((SubcomponentArray<TargetedOperationInfo>)_onCharacterHit).components;
+		TargetedOperationInfo[] components = _onCharacterHit.components;
 		foreach (TargetedOperationInfo targetedOperationInfo in components)
 		{
 			if (targetedOperationInfo.operation is Knockback knockback)
@@ -324,7 +324,7 @@ public class SweepAttack : CharacterOperation, IAttack
 					_chronoToGlobe.ApplyGlobe();
 					_chronoToOwner.ApplyTo(owner);
 					_chronoToTarget.ApplyTo(target.character);
-					if (((SubcomponentArray<OperationInfo>)_operationToOwnerWhenHitInfo).components.Length != 0)
+					if (_operationToOwnerWhenHitInfo.components.Length != 0)
 					{
 						((MonoBehaviour)this).StartCoroutine(_operationToOwnerWhenHitInfo.CRun(owner));
 					}
@@ -365,19 +365,17 @@ public class SweepAttack : CharacterOperation, IAttack
 
 	public override void Run(Character owner)
 	{
-		//IL_0026: Unknown result type (might be due to invalid IL or missing references)
-		//IL_002b: Unknown result type (might be due to invalid IL or missing references)
 		this.owner = owner;
 		_collisionDetector.Initialize(this);
-		((CoroutineReference)(ref _detectReference)).Stop();
-		_detectReference = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)owner, CDetect());
+		_detectReference.Stop();
+		_detectReference = ((MonoBehaviour)(object)owner).StartCoroutineWithReference(CDetect());
 	}
 
 	public override void Stop()
 	{
 		base.Stop();
 		_operationToOwnerWhenHitInfo.StopAll();
-		((CoroutineReference)(ref _detectReference)).Stop();
+		_detectReference.Stop();
 	}
 
 	private IEnumerator CDetect()
@@ -387,7 +385,7 @@ public class SweepAttack : CharacterOperation, IAttack
 		Chronometer animationChronometer = owner.chronometer.animation;
 		while (time < _duration)
 		{
-			if (_timeIndependent || ((ChronometerBase)animationChronometer).timeScale > float.Epsilon)
+			if (_timeIndependent || animationChronometer.timeScale > float.Epsilon)
 			{
 				Vector2 distance = Vector2.zero;
 				if (_trackMovement && (Object)(object)owner.movement != (Object)null)
@@ -397,7 +395,7 @@ public class SweepAttack : CharacterOperation, IAttack
 				_collisionDetector.Detect(Vector2.op_Implicit(((Component)this).transform.position), distance);
 			}
 			yield return null;
-			time = ((!_timeIndependent) ? (time + ((ChronometerBase)animationChronometer).deltaTime) : (time + ((ChronometerBase)Chronometer.global).deltaTime));
+			time = ((!_timeIndependent) ? (time + animationChronometer.deltaTime) : (time + Chronometer.global.deltaTime));
 		}
 	}
 }

@@ -62,8 +62,6 @@ public sealed class HolyKnightsAssassinAI : AIController
 
 	private void Awake()
 	{
-		//IL_006a: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0074: Expected O, but got Unknown
 		base.behaviours = new List<Behaviour> { _checkWithinSight, _wander, _chase, _attack, _jumpAttack, _evasion };
 		_time = new ChronometerTime(character.chronometer.master, (MonoBehaviour)(object)character);
 		_evasionCounter.Initialize(_time);

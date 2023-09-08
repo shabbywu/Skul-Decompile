@@ -41,58 +41,58 @@ public class BossHealthbarController : MonoBehaviour
 	private void Awake()
 	{
 		_animators = new EnumArray<Type, HangingPanelAnimator>();
-		for (int i = 0; i < ((EnumArray<Type, CharacterHealthBar>)_healthbars).Count; i++)
+		for (int i = 0; i < _healthbars.Count; i++)
 		{
-			_animators.Array[i] = ((Component)((EnumArray<Type, CharacterHealthBar>)_healthbars).Array[i]).GetComponent<HangingPanelAnimator>();
+			_animators.Array[i] = ((Component)_healthbars.Array[i]).GetComponent<HangingPanelAnimator>();
 		}
 	}
 
 	public void Open(Type type, Character character)
 	{
-		for (int i = 0; i < ((EnumArray<Type, CharacterHealthBar>)_healthbars).Count; i++)
+		for (int i = 0; i < _healthbars.Count; i++)
 		{
-			((Component)((EnumArray<Type, CharacterHealthBar>)_healthbars).Array[i]).gameObject.SetActive(false);
+			((Component)_healthbars.Array[i]).gameObject.SetActive(false);
 		}
-		((EnumArray<Type, CharacterHealthBar>)_healthbars)[type].Initialize(character);
+		_healthbars[type].Initialize(character);
 		_animators[type].Appear();
 	}
 
 	public void OpenChapter2Phase1(Character left, Character right)
 	{
-		for (int i = 0; i < ((EnumArray<Type, CharacterHealthBar>)_healthbars).Count; i++)
+		for (int i = 0; i < _healthbars.Count; i++)
 		{
-			((Component)((EnumArray<Type, CharacterHealthBar>)_healthbars).Array[i]).gameObject.SetActive(false);
+			((Component)_healthbars.Array[i]).gameObject.SetActive(false);
 		}
-		((EnumArray<Type, CharacterHealthBar>)_healthbars)[Type.Chpater2_Phase1].Initialize(left);
-		((EnumArray<Type, CharacterHealthBar>)_healthbars)[Type.Chpater2_Phase1_Right].Initialize(right);
+		_healthbars[Type.Chpater2_Phase1].Initialize(left);
+		_healthbars[Type.Chpater2_Phase1_Right].Initialize(right);
 		_animators[Type.Chpater2_Phase1].Appear();
 	}
 
 	public void OpenChapter4Phase1(Character left, Character right)
 	{
-		for (int i = 0; i < ((EnumArray<Type, CharacterHealthBar>)_healthbars).Count; i++)
+		for (int i = 0; i < _healthbars.Count; i++)
 		{
-			((Component)((EnumArray<Type, CharacterHealthBar>)_healthbars).Array[i]).gameObject.SetActive(false);
+			((Component)_healthbars.Array[i]).gameObject.SetActive(false);
 		}
-		((EnumArray<Type, CharacterHealthBar>)_healthbars)[Type.Chapter4_Phase1].Initialize(left);
-		((EnumArray<Type, CharacterHealthBar>)_healthbars)[Type.Chapter4_Phase1_Right].Initialize(right);
+		_healthbars[Type.Chapter4_Phase1].Initialize(left);
+		_healthbars[Type.Chapter4_Phase1_Right].Initialize(right);
 		_animators[Type.Chapter4_Phase1].Appear();
 	}
 
 	public void OpenVeteranAdventurer(Character character, string nameKey, string titleKey)
 	{
-		for (int i = 0; i < ((EnumArray<Type, CharacterHealthBar>)_healthbars).Count; i++)
+		for (int i = 0; i < _healthbars.Count; i++)
 		{
-			((Component)((EnumArray<Type, CharacterHealthBar>)_healthbars).Array[i]).gameObject.SetActive(false);
+			((Component)_healthbars.Array[i]).gameObject.SetActive(false);
 		}
 		_veteranHealthbarController.Appear(character, nameKey, titleKey);
 	}
 
 	public void CloseAll()
 	{
-		for (int i = 0; i < ((EnumArray<Type, CharacterHealthBar>)_healthbars).Count; i++)
+		for (int i = 0; i < _healthbars.Count; i++)
 		{
-			if (((Component)((EnumArray<Type, CharacterHealthBar>)_healthbars).Array[i]).gameObject.activeSelf)
+			if (((Component)_healthbars.Array[i]).gameObject.activeSelf)
 			{
 				_animators.Array[i]?.Disappear();
 			}

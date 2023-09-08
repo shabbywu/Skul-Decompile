@@ -147,7 +147,7 @@ public class RisingPierce : MonoBehaviour
 			_spawnAttackSign.Run(character);
 		}
 		MakeAttackRange(startX, ((Bounds)(ref platformBounds)).max.y, count);
-		yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)character.chronometer.master, _attackDelay);
+		yield return character.chronometer.master.WaitForSeconds(_attackDelay);
 		_sweepAttack.Run(character);
 		for (int j = 0; j < count; j++)
 		{

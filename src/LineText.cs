@@ -31,18 +31,10 @@ public class LineText : MonoBehaviour
 
 	public void Display(string text, float duration)
 	{
-		//IL_0011: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0016: Unknown result type (might be due to invalid IL or missing references)
-		//IL_003f: Unknown result type (might be due to invalid IL or missing references)
-		ref CoroutineReference? displayCoroutine = ref _displayCoroutine;
-		if (displayCoroutine.HasValue)
-		{
-			CoroutineReference valueOrDefault = displayCoroutine.GetValueOrDefault();
-			((CoroutineReference)(ref valueOrDefault)).Stop();
-		}
+		_displayCoroutine?.Stop();
 		if (!Scene<GameBase>.instance.uiManager.npcConversation.visible)
 		{
-			_displayCoroutine = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)this, CDisplay(text, duration));
+			_displayCoroutine = ((MonoBehaviour)(object)this).StartCoroutineWithReference(CDisplay(text, duration));
 		}
 	}
 

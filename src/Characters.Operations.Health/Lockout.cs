@@ -15,11 +15,9 @@ public sealed class Lockout : CharacterOperation
 
 	public override void Run(Character owner)
 	{
-		//IL_001b: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0020: Unknown result type (might be due to invalid IL or missing references)
 		_owner = owner;
-		((CoroutineReference)(ref _runReference)).Stop();
-		_runReference = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)this, CRun(owner));
+		_runReference.Stop();
+		_runReference = ((MonoBehaviour)(object)this).StartCoroutineWithReference(CRun(owner));
 	}
 
 	private IEnumerator CRun(Character character)
@@ -28,16 +26,16 @@ public sealed class Lockout : CharacterOperation
 		{
 			_duration = 2.1474836E+09f;
 		}
-		character.status.unstoppable.Attach((object)this);
-		yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)character.chronometer.master, _duration);
-		character.status.unstoppable.Detach((object)this);
+		character.status.unstoppable.Attach(this);
+		yield return character.chronometer.master.WaitForSeconds(_duration);
+		character.status.unstoppable.Detach(this);
 	}
 
 	public override void Stop()
 	{
 		if ((Object)(object)_owner != (Object)null)
 		{
-			_owner.status.unstoppable.Detach((object)this);
+			_owner.status.unstoppable.Detach(this);
 		}
 	}
 }

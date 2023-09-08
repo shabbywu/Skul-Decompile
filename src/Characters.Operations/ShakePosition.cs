@@ -29,7 +29,7 @@ public class ShakePosition : CharacterOperation
 		Vector3 shakeVector = Vector3.zero;
 		while (elapsed <= _curve.duration)
 		{
-			float deltaTime = ((ChronometerBase)owner.chronometer.master).deltaTime;
+			float deltaTime = owner.chronometer.master.deltaTime;
 			elapsed += deltaTime;
 			intervalElapsed -= deltaTime;
 			shakeVector -= shakeVector * 60f * deltaTime;

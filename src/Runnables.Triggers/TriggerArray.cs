@@ -26,6 +26,6 @@ internal class TriggerArray : MonoBehaviour
 
 	public override string ToString()
 	{
-		return ExtensionMethods.GetAutoName((object)trigger) ?? "";
+		return trigger.GetAutoName() ?? "";
 	}
 }

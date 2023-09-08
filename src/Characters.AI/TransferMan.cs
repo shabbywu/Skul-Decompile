@@ -93,7 +93,7 @@ public sealed class TransferMan : AIController
 		{
 			player.movement.TryGetClosestBelowCollider(out collider, Layers.footholdMask);
 		}
-		ExtensionMethods.Shuffle<Character>((IList<Character>)allEnemies);
+		allEnemies.Shuffle();
 		foreach (Character item in allEnemies)
 		{
 			Collider2D lastStandingCollider = item.movement.controller.collisionState.lastStandingCollider;

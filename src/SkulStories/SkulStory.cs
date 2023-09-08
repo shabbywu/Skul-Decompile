@@ -11,7 +11,7 @@ public class SkulStory : Runnable
 	[Event.Subcomponent]
 	private Event.Subcomponents _onStart;
 
-	[Subcomponent(typeof(SequenceInfo))]
+	[UnityEditor.Subcomponent(typeof(SequenceInfo))]
 	[SerializeField]
 	private SequenceInfo.Subcomponents _sequence;
 

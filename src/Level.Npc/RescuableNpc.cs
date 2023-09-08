@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using Characters;
 using Data;
 using GameResources;
@@ -75,7 +74,7 @@ public class RescuableNpc : InteractiveObject
 	private IEnumerator CChat()
 	{
 		LetterBox.instance.Appear();
-		yield return _npcConversation.CConversation(ExtensionMethods.Random<string[]>((IEnumerable<string[]>)chatScripts));
+		yield return _npcConversation.CConversation(chatScripts.Random());
 		LetterBox.instance.Disappear();
 	}
 
@@ -83,7 +82,7 @@ public class RescuableNpc : InteractiveObject
 	{
 		LetterBox.instance.Appear();
 		yield return MoveTo(_conversationPosition.position);
-		yield return _npcConversation.CConversation(ExtensionMethods.Random<string[]>((IEnumerable<string[]>)rescuedScripts));
+		yield return _npcConversation.CConversation(rescuedScripts.Random());
 		LetterBox.instance.Disappear();
 	}
 

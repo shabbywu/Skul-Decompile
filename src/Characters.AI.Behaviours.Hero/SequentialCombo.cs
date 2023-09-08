@@ -9,11 +9,11 @@ namespace Characters.AI.Behaviours.Hero;
 public abstract class SequentialCombo : Behaviour, IComboable, IEntryCombo
 {
 	[SerializeField]
-	[Subcomponent(typeof(ChainAction))]
+	[UnityEditor.Subcomponent(typeof(ChainAction))]
 	private Action _startAction;
 
 	[SerializeField]
-	[Subcomponent(typeof(ChainAction))]
+	[UnityEditor.Subcomponent(typeof(ChainAction))]
 	private Action _endAction;
 
 	public IEnumerator CTryContinuedCombo(AIController controller, ComboSystem comboSystem)

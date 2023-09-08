@@ -35,7 +35,7 @@ public class Rotate : MonoBehaviour
 	{
 		//IL_002e: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0045: Unknown result type (might be due to invalid IL or missing references)
-		float num = _amount * ((ChronometerBase)_iprojectile.owner.chronometer.projectile).deltaTime;
+		float num = _amount * _iprojectile.owner.chronometer.projectile.deltaTime;
 		num *= Mathf.Sign(_iprojectile.transform.localScale.x);
 		((Component)this).transform.Rotate(Vector3.forward, num, (Space)1);
 	}

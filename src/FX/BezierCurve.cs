@@ -38,8 +38,8 @@ public class BezierCurve : MonoBehaviour
 		//IL_0029: Unknown result type (might be due to invalid IL or missing references)
 		for (int i = 0; i < _lineRenderer.positionCount; i++)
 		{
-			float num = (float)i / (float)(_lineRenderer.positionCount - 1);
-			_lineRenderer.SetPosition(i, Vector2.op_Implicit(MMMaths.BezierCurve(_points, num)));
+			float time = (float)i / (float)(_lineRenderer.positionCount - 1);
+			_lineRenderer.SetPosition(i, Vector2.op_Implicit(MMMaths.BezierCurve(_points, time)));
 		}
 	}
 }

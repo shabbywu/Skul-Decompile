@@ -9,7 +9,7 @@ public class SummonMonster : CharacterOperation
 	[SerializeField]
 	private bool _containSummonWave;
 
-	[Information(/*Could not decode attribute arguments.*/)]
+	[Information("비어 있어도 문제 없음,", InformationAttribute.InformationType.Info, false)]
 	[SerializeField]
 	private MonsterContainer _container;
 
@@ -17,7 +17,7 @@ public class SummonMonster : CharacterOperation
 	private Monster _monsterPrefab;
 
 	[SerializeField]
-	[Information(/*Could not decode attribute arguments.*/)]
+	[Information("비워둘 경우 플레이어 위치에 1마리 소환, 그 외에는 지정된 위치마다 소환됨", InformationAttribute.InformationType.Info, false)]
 	private Transform[] _spawnPositions;
 
 	public override void Run(Character owner)

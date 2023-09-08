@@ -7,7 +7,7 @@ namespace Characters.Projectiles.Operations;
 public class Stuck : HitOperation
 {
 	[SerializeField]
-	[Information(/*Could not decode attribute arguments.*/)]
+	[Information("0일 경우 삭제 되지 않음", InformationAttribute.InformationType.Info, false)]
 	private float _lifeTime;
 
 	[SerializeField]

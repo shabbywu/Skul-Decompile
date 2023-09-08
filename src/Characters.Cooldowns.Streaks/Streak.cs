@@ -35,12 +35,10 @@ public class Streak : IStreak
 
 	public void Start()
 	{
-		//IL_0020: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0025: Unknown result type (might be due to invalid IL or missing references)
 		if (count != 0)
 		{
-			((CoroutineReference)(ref _update)).Stop();
-			_update = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)CoroutineProxy.instance, CUpdate());
+			_update.Stop();
+			_update = ((MonoBehaviour)(object)CoroutineProxy.instance).StartCoroutineWithReference(CUpdate());
 		}
 	}
 
@@ -48,18 +46,18 @@ public class Streak : IStreak
 	{
 		remains = count;
 		_remainTime = timeout;
-		Global chronometer = Chronometer.global;
+		Chronometer.Global chronometer = Chronometer.global;
 		while (_remainTime > 0f)
 		{
 			yield return null;
-			_remainTime -= ((ChronometerBase)chronometer).deltaTime;
+			_remainTime -= chronometer.deltaTime;
 		}
 		remains = 0;
 	}
 
 	public void Expire()
 	{
-		((CoroutineReference)(ref _update)).Stop();
+		_update.Stop();
 		remains = 0;
 		_remainTime = 0f;
 	}

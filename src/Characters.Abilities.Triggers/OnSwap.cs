@@ -1,5 +1,4 @@
 using System;
-using Characters.Gear.Weapons;
 using UnityEngine;
 
 namespace Characters.Abilities.Triggers;
@@ -25,7 +24,7 @@ public class OnSwap : Trigger
 
 	private void Check()
 	{
-		if (((EnumArray<Weapon.Category, bool>)_types)[_character.playerComponents.inventory.weapon.polymorphOrCurrent.category])
+		if (_types[_character.playerComponents.inventory.weapon.polymorphOrCurrent.category])
 		{
 			Invoke();
 		}

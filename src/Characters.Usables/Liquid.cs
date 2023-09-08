@@ -109,7 +109,7 @@ public class Liquid : MonoBehaviour
 		}
 		if (_fadeOut.length > 0)
 		{
-			yield return _poolObject.CFadeOut(_renderers, (ChronometerBase)(object)Chronometer.global, _fadeOut, _fadeOutDuration);
+			yield return _poolObject.CFadeOut(_renderers, Chronometer.global, _fadeOut, _fadeOutDuration);
 		}
 	}
 

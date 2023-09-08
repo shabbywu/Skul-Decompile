@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using Characters.Abilities.Triggers;
 using UnityEngine;
 
@@ -24,7 +23,7 @@ public class RandomTriggerAbilityAttacher : AbilityAttacher
 
 	private void OnTriggered()
 	{
-		base.owner.ability.Add(ExtensionMethods.Random<AbilityComponent>((IEnumerable<AbilityComponent>)((SubcomponentArray<AbilityComponent>)_abilityComponents).components).ability);
+		base.owner.ability.Add(_abilityComponents.components.Random().ability);
 	}
 
 	public override void OnIntialize()
@@ -34,10 +33,8 @@ public class RandomTriggerAbilityAttacher : AbilityAttacher
 
 	public override void StartAttach()
 	{
-		//IL_0019: Unknown result type (might be due to invalid IL or missing references)
-		//IL_001e: Unknown result type (might be due to invalid IL or missing references)
 		_trigger.Attach(base.owner);
-		_cUpdateReference = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)this, CUpdate());
+		_cUpdateReference = ((MonoBehaviour)(object)this).StartCoroutineWithReference(CUpdate());
 	}
 
 	public override void StopAttach()
@@ -45,8 +42,8 @@ public class RandomTriggerAbilityAttacher : AbilityAttacher
 		if (!((Object)(object)base.owner == (Object)null))
 		{
 			_trigger.Detach();
-			((CoroutineReference)(ref _cUpdateReference)).Stop();
-			AbilityComponent[] components = ((SubcomponentArray<AbilityComponent>)_abilityComponents).components;
+			_cUpdateReference.Stop();
+			AbilityComponent[] components = _abilityComponents.components;
 			foreach (AbilityComponent abilityComponent in components)
 			{
 				base.owner.ability.Remove(abilityComponent.ability);
@@ -58,13 +55,13 @@ public class RandomTriggerAbilityAttacher : AbilityAttacher
 	{
 		while (true)
 		{
-			_trigger.UpdateTime(((ChronometerBase)Chronometer.global).deltaTime);
+			_trigger.UpdateTime(Chronometer.global.deltaTime);
 			yield return null;
 		}
 	}
 
 	public override string ToString()
 	{
-		return ExtensionMethods.GetAutoName((object)this);
+		return this.GetAutoName();
 	}
 }

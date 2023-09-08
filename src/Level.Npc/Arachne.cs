@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using Characters;
 using Characters.AI;
 using Characters.Player;
@@ -83,7 +82,7 @@ public class Arachne : InteractiveObject
 
 	private string[] tutorial => Localization.GetLocalizedStringArray("npc/" + arachne + "/tutorial");
 
-	private string[] chat => ExtensionMethods.Random<string[]>((IEnumerable<string[]>)Localization.GetLocalizedStringArrays("npc/" + arachne + "/chat"));
+	private string[] chat => Localization.GetLocalizedStringArrays("npc/" + arachne + "/chat").Random();
 
 	private string askAwaken(int cost)
 	{
@@ -204,17 +203,16 @@ public class Arachne : InteractiveObject
 		yield return _npcConversation.CWaitInput();
 		_npcConversation.visible = false;
 		_phase = Phase.Awakened;
-		Rarity rarity = _weaponInventory.current.nextLevelReference.rarity;
-		switch ((int)rarity)
+		switch (_weaponInventory.current.nextLevelReference.rarity)
 		{
-		case 0:
-		case 1:
+		case Rarity.Common:
+		case Rarity.Rare:
 			_awakeningForRare.Run();
 			break;
-		case 2:
+		case Rarity.Unique:
 			_awakeningForUnique.Run();
 			break;
-		case 3:
+		case Rarity.Legendary:
 			_awakeningForLegendary.Run();
 			break;
 		}

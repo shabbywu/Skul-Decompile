@@ -23,7 +23,7 @@ public class DeadCastleWitch : NPC
 		if (!_done)
 		{
 			_done = true;
-			PlayerInput.blocked.Attach((object)this);
+			PlayerInput.blocked.Attach(this);
 			Scene<GameBase>.instance.uiManager.letterBox.Appear(1.5f);
 			((MonoBehaviour)this).StartCoroutine(Converse());
 		}
@@ -31,7 +31,7 @@ public class DeadCastleWitch : NPC
 
 	protected override void Deactivate()
 	{
-		PlayerInput.blocked.Detach((object)this);
+		PlayerInput.blocked.Detach(this);
 		Scene<GameBase>.instance.uiManager.letterBox.Disappear(0.5f);
 		_messageBox.sprite = null;
 	}
@@ -45,7 +45,7 @@ public class DeadCastleWitch : NPC
 		yield return Skip(_duration[1]);
 		_messageBox.sprite = _messages[2];
 		yield return Skip(_duration[2]);
-		PlayerInput.blocked.Detach((object)this);
+		PlayerInput.blocked.Detach(this);
 		Scene<GameBase>.instance.uiManager.letterBox.Disappear(0.5f);
 		_messageBox.sprite = null;
 	}
@@ -56,7 +56,7 @@ public class DeadCastleWitch : NPC
 		while (!Input.anyKeyDown)
 		{
 			yield return null;
-			elapsed += ((ChronometerBase)Chronometer.global).deltaTime;
+			elapsed += Chronometer.global.deltaTime;
 			if (elapsed > duration)
 			{
 				break;

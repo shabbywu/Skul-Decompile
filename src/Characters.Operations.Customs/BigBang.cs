@@ -15,7 +15,7 @@ public sealed class BigBang : CharacterOperation
 	private float _radius = 20f;
 
 	[SerializeField]
-	[Subcomponent(typeof(MultipleFireProjectile))]
+	[UnityEditor.Subcomponent(typeof(MultipleFireProjectile))]
 	private MultipleFireProjectile _multipleFireProjectile;
 
 	public override void Initialize()

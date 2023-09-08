@@ -146,21 +146,14 @@ public class HardmodeChest : InteractiveObject, ILootable
 
 	private void Initialize()
 	{
-		//IL_0020: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0025: Unknown result type (might be due to invalid IL or missing references)
-		//IL_002b: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0030: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0031: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0047: Expected I4, but got Unknown
 		//IL_0065: Unknown result type (might be due to invalid IL or missing references)
 		//IL_00b4: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0103: Unknown result type (might be due to invalid IL or missing references)
 		//IL_014c: Unknown result type (might be due to invalid IL or missing references)
 		_rarity = Singleton<Service>.Instance.levelManager.currentChapter.currentStage.gearPossibilities.Evaluate(_random);
-		Rarity rarity = _rarity;
-		switch ((int)rarity)
+		switch (_rarity)
 		{
-		case 0:
+		case Rarity.Common:
 			if (_isOmenChest)
 			{
 				((Component)_craw).transform.position = _commonCrawPosition.position;
@@ -171,7 +164,7 @@ public class HardmodeChest : InteractiveObject, ILootable
 				_animator.runtimeAnimatorController = _commonChest;
 			}
 			break;
-		case 1:
+		case Rarity.Rare:
 			if (_isOmenChest)
 			{
 				((Component)_craw).transform.position = _rareCrawPosition.position;
@@ -182,7 +175,7 @@ public class HardmodeChest : InteractiveObject, ILootable
 				_animator.runtimeAnimatorController = _rareChest;
 			}
 			break;
-		case 2:
+		case Rarity.Unique:
 			if (_isOmenChest)
 			{
 				((Component)_craw).transform.position = _uniqueCrawPosition.position;
@@ -193,7 +186,7 @@ public class HardmodeChest : InteractiveObject, ILootable
 				_animator.runtimeAnimatorController = _uniqueChest;
 			}
 			break;
-		case 3:
+		case Rarity.Legendary:
 			if (_isOmenChest)
 			{
 				((Component)_craw).transform.position = _legendaryCrawPosition.position;
@@ -226,7 +219,6 @@ public class HardmodeChest : InteractiveObject, ILootable
 
 	private void Load()
 	{
-		//IL_00a2: Unknown result type (might be due to invalid IL or missing references)
 		_toDropReferences.Clear();
 		ReleaseRequests();
 		_toDropRequests.Clear();
@@ -291,9 +283,6 @@ public class HardmodeChest : InteractiveObject, ILootable
 
 	private void EvaluateGearRarity()
 	{
-		//IL_000c: Unknown result type (might be due to invalid IL or missing references)
-		//IL_001c: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0021: Unknown result type (might be due to invalid IL or missing references)
 		_gearRarity = Settings.instance.containerPossibilities[_rarity].Evaluate(_random);
 	}
 
@@ -334,13 +323,13 @@ public class HardmodeChest : InteractiveObject, ILootable
 				GearRequest request = _toDropRequests[i];
 				while (!request.isDone)
 				{
-					elapsed += ((ChronometerBase)Chronometer.global).deltaTime;
+					elapsed += Chronometer.global.deltaTime;
 					yield return null;
 				}
 			}
 			while (elapsed < 0.5f)
 			{
-				elapsed += ((ChronometerBase)Chronometer.global).deltaTime;
+				elapsed += Chronometer.global.deltaTime;
 				yield return null;
 			}
 			for (int j = 0; j < _rewardCount; j++)
@@ -370,8 +359,6 @@ public class HardmodeChest : InteractiveObject, ILootable
 	{
 		Array.Sort(_rewards, delegate(Gear gear1, Gear gear2)
 		{
-			//IL_0025: Unknown result type (might be due to invalid IL or missing references)
-			//IL_002b: Unknown result type (might be due to invalid IL or missing references)
 			if (gear1.type != gear2.type)
 			{
 				if (gear1.type == Gear.Type.Item)

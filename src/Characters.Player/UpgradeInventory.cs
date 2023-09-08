@@ -57,7 +57,7 @@ public sealed class UpgradeInventory : MonoBehaviour
 			}
 			else
 			{
-				ExtensionMethods.Swap<UpgradeObject>((IList<UpgradeObject>)upgrades, i, i - num);
+				upgrades.Swap(i, i - num);
 			}
 		}
 	}

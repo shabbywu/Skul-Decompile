@@ -35,12 +35,7 @@ public class MysticalRuin : MonoBehaviour
 
 	private void Awake()
 	{
-		_weightedRandomizer = WeightedRandomizer.From<Gear.Type>(new(Gear.Type, float)[3]
-		{
-			(Gear.Type.Item, _itemWeight),
-			(Gear.Type.Weapon, _weaponWeight),
-			(Gear.Type.Quintessence, _quintessenceWeight)
-		});
+		_weightedRandomizer = WeightedRandomizer.From<Gear.Type>((Gear.Type.Item, _itemWeight), (Gear.Type.Weapon, _weaponWeight), (Gear.Type.Quintessence, _quintessenceWeight));
 		DropGear();
 	}
 
@@ -67,9 +62,6 @@ public class MysticalRuin : MonoBehaviour
 
 	private void DropItem()
 	{
-		//IL_0013: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0018: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0023: Unknown result type (might be due to invalid IL or missing references)
 		ItemReference itemToTake;
 		do
 		{
@@ -93,9 +85,6 @@ public class MysticalRuin : MonoBehaviour
 
 	private void DropWeapon()
 	{
-		//IL_0013: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0018: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0023: Unknown result type (might be due to invalid IL or missing references)
 		ItemReference itemToTake;
 		do
 		{
@@ -119,9 +108,6 @@ public class MysticalRuin : MonoBehaviour
 
 	private void DropQuintessence()
 	{
-		//IL_0013: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0018: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0023: Unknown result type (might be due to invalid IL or missing references)
 		EssenceReference quintessenceToTake;
 		do
 		{

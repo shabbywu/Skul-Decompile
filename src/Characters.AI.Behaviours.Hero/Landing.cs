@@ -8,14 +8,14 @@ namespace Characters.AI.Behaviours.Hero;
 public sealed class Landing : Behaviour
 {
 	[SerializeField]
-	[Subcomponent(typeof(ChainAction))]
+	[UnityEditor.Subcomponent(typeof(ChainAction))]
 	private Action _jump;
 
-	[Subcomponent(typeof(ChainAction))]
+	[UnityEditor.Subcomponent(typeof(ChainAction))]
 	[SerializeField]
 	private Action _action;
 
-	[Subcomponent(typeof(ChainAction))]
+	[UnityEditor.Subcomponent(typeof(ChainAction))]
 	[SerializeField]
 	private Action _end;
 

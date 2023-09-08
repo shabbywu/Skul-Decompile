@@ -108,7 +108,7 @@ public class Commander : MonoBehaviour
 
 	private void ChangeAdventurerRole()
 	{
-		Character character = ExtensionMethods.Random<Character>((IEnumerable<Character>)_adventurers);
+		Character character = _adventurers.Random();
 		if (_subAdventurers != null)
 		{
 			_subAdventurers.Clear();

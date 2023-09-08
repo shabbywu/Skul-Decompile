@@ -165,7 +165,7 @@ public sealed class Execution : InscriptionInstance
 
 			protected override void OnAttach()
 			{
-				owner.health.onTakeDamage.Add(int.MinValue, (TakeDamageDelegate)OnTakeDamage);
+				owner.health.onTakeDamage.Add(int.MinValue, OnTakeDamage);
 				owner.health.onChanged += OnHealthChanged;
 				_currentState = _step0;
 				OnHealthChanged();
@@ -173,7 +173,7 @@ public sealed class Execution : InscriptionInstance
 
 			protected override void OnDetach()
 			{
-				owner.health.onTakeDamage.Remove((TakeDamageDelegate)OnTakeDamage);
+				owner.health.onTakeDamage.Remove(OnTakeDamage);
 				owner.health.onChanged -= OnHealthChanged;
 				_currentState.Exit();
 			}
@@ -248,12 +248,12 @@ public sealed class Execution : InscriptionInstance
 
 	public override void Attach()
 	{
-		((PriorityList<GiveDamageDelegate>)base.character.onGiveDamage).Add(int.MinValue, (GiveDamageDelegate)GiveDamageDelegate);
+		base.character.onGiveDamage.Add(int.MinValue, GiveDamageDelegate);
 	}
 
 	public override void Detach()
 	{
-		((PriorityList<GiveDamageDelegate>)base.character.onGiveDamage).Remove((GiveDamageDelegate)GiveDamageDelegate);
+		base.character.onGiveDamage.Remove(GiveDamageDelegate);
 	}
 
 	private bool GiveDamageDelegate(ITarget target, ref Damage damage)

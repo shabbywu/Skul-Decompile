@@ -116,7 +116,7 @@ public class StageInfo : IStageInfo
 		for (int i = 0; i < array.Length; i++)
 		{
 			List<MapReference> list = _remainMaps[Map.Type.Normal];
-			int index = ExtensionMethods.RandomIndex<MapReference>((IEnumerable<MapReference>)list, random);
+			int index = list.RandomIndex(random);
 			MapReference reference = list[index];
 			list.RemoveAt(index);
 			array[i] = (new PathNode(reference, MapReward.Type.Gold, Gate.Type.Normal), new PathNode(reference, MapReward.Type.Gold, Gate.Type.Normal));
@@ -143,46 +143,46 @@ public class StageInfo : IStageInfo
 		if (_remainMaps[Map.Type.Special] != null)
 		{
 			List<MapReference> list2 = _remainMaps[Map.Type.Special].Where((MapReference m) => !SpecialMap.GetEncoutered(m.specialMapType)).ToList();
-			int num6 = Math.Min(GetSpecialMapCount(random), list2.Count);
-			array3 = MMMaths.MultipleRandomWithoutDuplactes(random, num6, 0, num);
+			int count = Math.Min(GetSpecialMapCount(random), list2.Count);
+			array3 = MMMaths.MultipleRandomWithoutDuplactes(random, count, 0, num);
 			for (int k = 0; k < array3.Length; k++)
 			{
-				int index2 = ExtensionMethods.RandomIndex<MapReference>((IEnumerable<MapReference>)list2, random);
+				int index2 = list2.RandomIndex(random);
 				MapReference reference2 = list2[index2];
 				list2.RemoveAt(index2);
-				int num7 = array3[k];
-				array[num7].Item1.reference = reference2;
-				array[num7].Item2.reference = reference2;
+				int num6 = array3[k];
+				array[num6].Item1.reference = reference2;
+				array[num6].Item2.reference = reference2;
 			}
 		}
 		if (Singleton<HardmodeManager>.Instance.hardmode)
 		{
-			int num8 = Mathf.Min(num, DarkEnemySelector.instance.SetTargetCountInStage());
-			if (num8 > 0 && num > 0)
+			int num7 = Mathf.Min(num, DarkEnemySelector.instance.SetTargetCountInStage());
+			if (num7 > 0 && num > 0)
 			{
 				int[] array4 = null;
 				int[] array2;
 				if (_remainMaps[Map.Type.Special] == null)
 				{
-					array4 = MMMaths.MultipleRandomWithoutDuplactes(random, num8, 0, num);
+					array4 = MMMaths.MultipleRandomWithoutDuplactes(random, num7, 0, num);
 				}
 				else
 				{
 					bool flag = true;
-					int num9 = 0;
-					int num10 = 100;
-					while (flag && num9 < num10)
+					int num8 = 0;
+					int num9 = 100;
+					while (flag && num8 < num9)
 					{
-						array4 = MMMaths.MultipleRandomWithoutDuplactes(random, num8, 0, num);
+						array4 = MMMaths.MultipleRandomWithoutDuplactes(random, num7, 0, num);
 						flag = false;
-						num9++;
+						num8++;
 						array2 = array4;
-						foreach (int num11 in array2)
+						foreach (int num10 in array2)
 						{
 							int[] array5 = array3;
-							foreach (int num12 in array5)
+							foreach (int num11 in array5)
 							{
-								if (num11 == num12)
+								if (num10 == num11)
 								{
 									flag = true;
 									break;
@@ -196,20 +196,20 @@ public class StageInfo : IStageInfo
 					}
 				}
 				array2 = array4;
-				foreach (int num13 in array2)
+				foreach (int num12 in array2)
 				{
-					array[num13].Item1.reference.darkEnemy = true;
-					array[num13].Item2.reference.darkEnemy = true;
+					array[num12].Item1.reference.darkEnemy = true;
+					array[num12].Item2.reference.darkEnemy = true;
 				}
 			}
 		}
 		int minValue = Mathf.RoundToInt((float)(num * ((Vector2Int)(ref _castleNpc.positionRange)).x) * 0.01f);
 		int maxValue = Mathf.RoundToInt((float)(num * ((Vector2Int)(ref _castleNpc.positionRange)).y) * 0.01f);
-		int num14 = random.Next(minValue, maxValue) + 1;
+		int num13 = random.Next(minValue, maxValue) + 1;
 		if (!_castleNpc.reference.IsNullOrEmpty() && !GameData.Progress.GetRescued(_npcType))
 		{
-			array[num14].Item1 = _castleNpc;
-			array[num14].Item2 = _castleNpc;
+			array[num13].Item1 = _castleNpc;
+			array[num13].Item2 = _castleNpc;
 		}
 		for (int n = 0; n < array.Length; n++)
 		{
@@ -231,7 +231,7 @@ public class StageInfo : IStageInfo
 			list3.Add((_terminal, PathNode.none));
 		}
 		List<ExtraMapInfo> list4 = new List<ExtraMapInfo>();
-		ExtraMapInfo[] values = ((ReorderableArray<ExtraMapInfo>)_extraMaps).values;
+		ExtraMapInfo[] values = _extraMaps.values;
 		foreach (ExtraMapInfo extraMapInfo in values)
 		{
 			if (MMMaths.Chance(random, extraMapInfo.possibility / 100f))

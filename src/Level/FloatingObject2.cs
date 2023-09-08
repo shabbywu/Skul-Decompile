@@ -47,7 +47,7 @@ public class FloatingObject2 : MonoBehaviour
 			yield return null;
 			float amount = amountStart + time * _speed;
 			UpdateTransform(amount, _translateDegree.Evaluate(time));
-			time += ((ChronometerBase)Chronometer.global).deltaTime;
+			time += Chronometer.global.deltaTime;
 		}
 	}
 

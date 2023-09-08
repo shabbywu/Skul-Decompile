@@ -73,7 +73,7 @@ public class CharacterDieEffect : MonoBehaviour
 		_particleInfo?.Emit(Vector2.op_Implicit(((Component)_character).transform.position), ((Collider2D)_character.collider).bounds, _character.movement.push);
 		if (_vibrationDuration > 0f)
 		{
-			Singleton<Service>.Instance.controllerVibation.vibration.Attach((object)this, _vibrationAmount, _vibrationDuration);
+			Singleton<Service>.Instance.controllerVibation.vibration.Attach(this, _vibrationAmount, _vibrationDuration);
 		}
 		if (_sound != null)
 		{

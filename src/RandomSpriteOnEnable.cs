@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class RandomSpriteOnEnable : MonoBehaviour
@@ -11,6 +10,6 @@ public class RandomSpriteOnEnable : MonoBehaviour
 
 	private void OnEnable()
 	{
-		_spriteRenderer.sprite = ExtensionMethods.Random<Sprite>((IEnumerable<Sprite>)_sprites);
+		_spriteRenderer.sprite = _sprites.Random();
 	}
 }

@@ -56,7 +56,7 @@ public sealed class Protection : Ability
 			while (elapsed <= length)
 			{
 				ability._guard.currentDurability = Mathf.Lerp(0f, ability._guard.durability, elapsed / length);
-				elapsed += ((ChronometerBase)owner.chronometer.master).deltaTime;
+				elapsed += owner.chronometer.master.deltaTime;
 				yield return null;
 			}
 			_raising = false;

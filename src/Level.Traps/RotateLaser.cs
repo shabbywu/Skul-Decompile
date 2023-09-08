@@ -82,7 +82,7 @@ public sealed class RotateLaser : MonoBehaviour
 
 	private IEnumerator CStart(Chronometer chronometer)
 	{
-		yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)chronometer, _rotate.delay);
+		yield return chronometer.WaitForSeconds(_rotate.delay);
 		((MonoBehaviour)this).StartCoroutine(CLoop(chronometer));
 	}
 
@@ -100,8 +100,8 @@ public sealed class RotateLaser : MonoBehaviour
 			{
 				_speed += _rotate.delta;
 			}
-			((Component)_body).transform.Rotate(Vector3.forward, (float)_direction * _speed * ((ChronometerBase)chronometer).deltaTime);
-			elapsed += ((ChronometerBase)chronometer).deltaTime;
+			((Component)_body).transform.Rotate(Vector3.forward, (float)_direction * _speed * chronometer.deltaTime);
+			elapsed += chronometer.deltaTime;
 			yield return null;
 		}
 		((MonoBehaviour)this).StartCoroutine(CEnd(chronometer));
@@ -109,7 +109,7 @@ public sealed class RotateLaser : MonoBehaviour
 
 	private IEnumerator CEnd(Chronometer chronometer)
 	{
-		yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)chronometer, _endAnimation.length);
+		yield return chronometer.WaitForSeconds(_endAnimation.length);
 		Hide();
 	}
 

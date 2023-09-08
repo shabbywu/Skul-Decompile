@@ -7,7 +7,7 @@ namespace Characters.AI.Conditions;
 
 public sealed class CheckCollision : Condition
 {
-	[Subcomponent(typeof(OperationInfos))]
+	[UnityEditor.Subcomponent(typeof(OperationInfos))]
 	[SerializeField]
 	private OperationInfos _operationInfos;
 

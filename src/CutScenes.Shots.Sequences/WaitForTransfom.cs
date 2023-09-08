@@ -19,7 +19,7 @@ public sealed class WaitForTransfom : Sequence
 
 	public override IEnumerator CRun()
 	{
-		for (float elapsed = 0f; elapsed <= (float)_maxTime; elapsed += ((ChronometerBase)Chronometer.global).deltaTime)
+		for (float elapsed = 0f; elapsed <= (float)_maxTime; elapsed += Chronometer.global.deltaTime)
 		{
 			yield return null;
 			if (Vector2.Distance(Vector2.op_Implicit(_target.position), Vector2.op_Implicit(_destination.position)) < _epsilon)

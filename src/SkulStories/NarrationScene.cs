@@ -93,7 +93,7 @@ public class NarrationScene : MonoBehaviour
 		float time = 0f;
 		while (time < speed)
 		{
-			time += ((ChronometerBase)Chronometer.global).deltaTime;
+			time += Chronometer.global.deltaTime;
 			((Graphic)_currentScene).color = startColor + different * (time / speed);
 			yield return null;
 		}

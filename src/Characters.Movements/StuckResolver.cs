@@ -23,7 +23,7 @@ public class StuckResolver : MonoBehaviour
 
 	private Vector3 _lastValidPosition;
 
-	public readonly TrueOnlyLogicalSumList stop = new TrueOnlyLogicalSumList(false);
+	public readonly TrueOnlyLogicalSumList stop = new TrueOnlyLogicalSumList();
 
 	private void Awake()
 	{

@@ -199,7 +199,7 @@ public class YggdrasillElderEntCollisionDetector : MonoBehaviour
 		while (_running)
 		{
 			Vector2 nextPosition = Vector2.op_Implicit(moveTarget.position);
-			if (((ChronometerBase)_owner.chronometer.animation).deltaTime > float.Epsilon)
+			if (_owner.chronometer.animation.deltaTime > float.Epsilon)
 			{
 				Detect(val, nextPosition - val);
 			}

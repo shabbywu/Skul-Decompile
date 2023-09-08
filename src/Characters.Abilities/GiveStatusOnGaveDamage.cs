@@ -37,7 +37,7 @@ public class GiveStatusOnGaveDamage : Ability
 
 		private void OnGaveDamage(ITarget target, in Damage originalDamage, in Damage gaveDamage, double damageDealt)
 		{
-			if (!(_remainCooldown > 0f) && !((Object)(object)target.character == (Object)null) && !target.character.health.dead && ((EnumArray<Damage.MotionType, bool>)ability._motionTypeFilter)[gaveDamage.motionType] && ((EnumArray<Damage.AttackType, bool>)ability._damageTypeFilter)[gaveDamage.attackType])
+			if (!(_remainCooldown > 0f) && !((Object)(object)target.character == (Object)null) && !target.character.health.dead && ability._motionTypeFilter[gaveDamage.motionType] && ability._damageTypeFilter[gaveDamage.attackType])
 			{
 				_remainCooldown = ability._cooldown;
 				owner.GiveStatus(target.character, ability._status);

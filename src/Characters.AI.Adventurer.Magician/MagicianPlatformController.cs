@@ -48,10 +48,10 @@ public class MagicianPlatformController : MonoBehaviour
 
 	private void NextSpawn()
 	{
-		MagicianPlatform magicianPlatform = ExtensionMethods.Random<MagicianPlatform>((IEnumerable<MagicianPlatform>)_left);
+		MagicianPlatform magicianPlatform = _left.Random();
 		magicianPlatform.Show();
 		_left.Remove(magicianPlatform);
-		magicianPlatform = ExtensionMethods.Random<MagicianPlatform>((IEnumerable<MagicianPlatform>)_right);
+		magicianPlatform = _right.Random();
 		magicianPlatform.Show();
 		_right.Remove(magicianPlatform);
 	}

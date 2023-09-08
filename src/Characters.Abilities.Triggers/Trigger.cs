@@ -64,7 +64,7 @@ public abstract class Trigger : ITrigger
 
 	public override string ToString()
 	{
-		return ExtensionMethods.GetAutoName((object)this);
+		return this.GetAutoName();
 	}
 
 	public virtual void Refresh()

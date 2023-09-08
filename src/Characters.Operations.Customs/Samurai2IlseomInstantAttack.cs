@@ -31,7 +31,7 @@ public sealed class Samurai2IlseomInstantAttack : CharacterOperation, IAttack
 	private bool _optimizedCollider = true;
 
 	[SerializeField]
-	[Subcomponent(typeof(TargetedOperationInfo))]
+	[UnityEditor.Subcomponent(typeof(TargetedOperationInfo))]
 	private TargetedOperationInfo.Subcomponents _operationInfo;
 
 	[SerializeField]
@@ -46,7 +46,7 @@ public sealed class Samurai2IlseomInstantAttack : CharacterOperation, IAttack
 	[FrameTime]
 	private float _attack1Time;
 
-	[Subcomponent(typeof(BoundsAttackInfo))]
+	[UnityEditor.Subcomponent(typeof(BoundsAttackInfo))]
 	[SerializeField]
 	private BoundsAttackInfo _attack1;
 
@@ -55,11 +55,11 @@ public sealed class Samurai2IlseomInstantAttack : CharacterOperation, IAttack
 	private float _attack2Time;
 
 	[SerializeField]
-	[Subcomponent(typeof(BoundsAttackInfo))]
+	[UnityEditor.Subcomponent(typeof(BoundsAttackInfo))]
 	private BoundsAttackInfo _attack2;
 
 	[SerializeField]
-	[Subcomponent(typeof(OperationInfo))]
+	[UnityEditor.Subcomponent(typeof(OperationInfo))]
 	internal OperationInfo.Subcomponents _operationOnMaxStackHit;
 
 	private IAttackDamage _attackDamage;
@@ -81,7 +81,7 @@ public sealed class Samurai2IlseomInstantAttack : CharacterOperation, IAttack
 	private void Awake()
 	{
 		//IL_0080: Unknown result type (might be due to invalid IL or missing references)
-		Array.Sort(((SubcomponentArray<TargetedOperationInfo>)_operationInfo).components, (TargetedOperationInfo x, TargetedOperationInfo y) => x.timeToTrigger.CompareTo(y.timeToTrigger));
+		Array.Sort(_operationInfo.components, (TargetedOperationInfo x, TargetedOperationInfo y) => x.timeToTrigger.CompareTo(y.timeToTrigger));
 		if (_optimizedCollider && (Object)(object)_collider != (Object)null)
 		{
 			((Behaviour)_collider).enabled = false;
@@ -137,7 +137,7 @@ public sealed class Samurai2IlseomInstantAttack : CharacterOperation, IAttack
 			}
 			((MonoBehaviour)component).StartCoroutine(CAttack(owner, bounds, component, num));
 		}
-		if (flag && ((SubcomponentArray<OperationInfo>)_operationOnMaxStackHit).components.Length != 0)
+		if (flag && _operationOnMaxStackHit.components.Length != 0)
 		{
 			((MonoBehaviour)this).StartCoroutine(_operationOnMaxStackHit.CRun(owner));
 		}
@@ -197,10 +197,10 @@ public sealed class Samurai2IlseomInstantAttack : CharacterOperation, IAttack
 			}
 			Bounds val = bounds;
 			Bounds bounds2 = target.collider.bounds;
-			Bounds val2 = default(Bounds);
-			((Bounds)(ref val2)).min = Vector2.op_Implicit(MMMaths.Max(Vector2.op_Implicit(((Bounds)(ref val)).min), Vector2.op_Implicit(((Bounds)(ref bounds2)).min)));
-			((Bounds)(ref val2)).max = Vector2.op_Implicit(MMMaths.Min(Vector2.op_Implicit(((Bounds)(ref val)).max), Vector2.op_Implicit(((Bounds)(ref bounds2)).max)));
-			Vector2 hitPoint = MMMaths.RandomPointWithinBounds(val2);
+			Bounds bounds3 = default(Bounds);
+			((Bounds)(ref bounds3)).min = Vector2.op_Implicit(MMMaths.Max(Vector2.op_Implicit(((Bounds)(ref val)).min), Vector2.op_Implicit(((Bounds)(ref bounds2)).min)));
+			((Bounds)(ref bounds3)).max = Vector2.op_Implicit(MMMaths.Min(Vector2.op_Implicit(((Bounds)(ref val)).max), Vector2.op_Implicit(((Bounds)(ref bounds2)).max)));
+			Vector2 hitPoint = MMMaths.RandomPointWithinBounds(bounds3);
 			Vector2 force = Vector2.zero;
 			if (attackInfo.pushInfo != null)
 			{
@@ -212,7 +212,7 @@ public sealed class Samurai2IlseomInstantAttack : CharacterOperation, IAttack
 				if (target.character.liveAndActive)
 				{
 					attackInfo.ApplyChrono(owner, target.character);
-					if (((SubcomponentArray<OperationInfo>)attackInfo.operationsToOwner).components.Length != 0)
+					if (attackInfo.operationsToOwner.components.Length != 0)
 					{
 						((MonoBehaviour)owner).StartCoroutine(attackInfo.operationsToOwner.CRun(owner));
 					}
@@ -223,13 +223,13 @@ public sealed class Samurai2IlseomInstantAttack : CharacterOperation, IAttack
 					}
 					if (target.character.cinematic.value)
 					{
-						attackInfo.effect.Spawn(owner, val2, in damage, target);
+						attackInfo.effect.Spawn(owner, bounds3, in damage, target);
 						return;
 					}
 					((MonoBehaviour)owner).StartCoroutine(attackInfo.operationInfo.CRun(owner, target.character));
 					this.onHit?.Invoke(target, ref damage);
 					owner.TryAttackCharacter(target, ref damage);
-					attackInfo.effect.Spawn(owner, val2, in damage, target);
+					attackInfo.effect.Spawn(owner, bounds3, in damage, target);
 				}
 			}
 			else if ((Object)(object)target.damageable != (Object)null)
@@ -240,7 +240,7 @@ public sealed class Samurai2IlseomInstantAttack : CharacterOperation, IAttack
 				if (target.damageable.spawnEffectOnHit && attackInfo.hitInfo.attackType != 0)
 				{
 					CommonResource.instance.hitParticle.Emit(Vector2.op_Implicit(((Component)target).transform.position), target.collider.bounds, force);
-					attackInfo.effect.Spawn(owner, val2, in damage2, target);
+					attackInfo.effect.Spawn(owner, bounds3, in damage2, target);
 				}
 				if (attackInfo.hitInfo.attackType != 0)
 				{
@@ -259,13 +259,13 @@ public sealed class Samurai2IlseomInstantAttack : CharacterOperation, IAttack
 		while ((Object)(object)this != (Object)null && time < _attack1Time)
 		{
 			yield return null;
-			time += ((ChronometerBase)owner.chronometer.animation).deltaTime;
+			time += owner.chronometer.animation.deltaTime;
 		}
 		Attack(owner, bounds, target, _attack1);
 		while ((Object)(object)this != (Object)null && time < _attack2Time)
 		{
 			yield return null;
-			time += ((ChronometerBase)owner.chronometer.animation).deltaTime;
+			time += owner.chronometer.animation.deltaTime;
 		}
 		float damageMultiplier = _attack2.hitInfo.damageMultiplier;
 		int num = (int)math.min(stacks, (float)_mark.maxStack);

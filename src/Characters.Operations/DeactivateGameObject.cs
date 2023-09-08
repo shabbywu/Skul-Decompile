@@ -20,7 +20,7 @@ public class DeactivateGameObject : CharacterOperation
 	{
 		if (_duration != 0f)
 		{
-			yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)chronometer, _duration);
+			yield return chronometer.WaitForSeconds(_duration);
 		}
 		_gameObject.SetActive(false);
 	}

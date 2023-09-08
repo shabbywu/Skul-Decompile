@@ -31,7 +31,7 @@ public class AdditionalHitByTargetStatus : Ability
 		protected override void OnAttach()
 		{
 			_remainCount = ability._applyCount;
-			((PriorityList<GiveDamageDelegate>)owner.onGiveDamage).Add(int.MaxValue, (GiveDamageDelegate)HandleOnGiveDamage);
+			owner.onGiveDamage.Add(int.MaxValue, HandleOnGiveDamage);
 			Character character = owner;
 			character.onGaveDamage = (GaveDamageDelegate)Delegate.Combine(character.onGaveDamage, new GaveDamageDelegate(OnOwnerGaveDamage));
 		}
@@ -51,7 +51,7 @@ public class AdditionalHitByTargetStatus : Ability
 		{
 			Character character = owner;
 			character.onGaveDamage = (GaveDamageDelegate)Delegate.Remove(character.onGaveDamage, new GaveDamageDelegate(OnOwnerGaveDamage));
-			((PriorityList<GiveDamageDelegate>)owner.onGiveDamage).Remove((GiveDamageDelegate)HandleOnGiveDamage);
+			owner.onGiveDamage.Remove(HandleOnGiveDamage);
 		}
 
 		private void OnOwnerGaveDamage(ITarget target, in Damage originalDamage, in Damage tookDamage, double damageDealt)
@@ -60,7 +60,7 @@ public class AdditionalHitByTargetStatus : Ability
 			//IL_0124: Unknown result type (might be due to invalid IL or missing references)
 			//IL_0129: Unknown result type (might be due to invalid IL or missing references)
 			//IL_0164: Unknown result type (might be due to invalid IL or missing references)
-			if (_passPrecondition && !(_remainCooldownTime > 0f) && !target.character.health.dead && ((Component)target.transform).gameObject.activeSelf && (!ability._needCritical || tookDamage.critical) && ((EnumArray<Damage.MotionType, bool>)ability._attackTypes)[tookDamage.motionType] && ((EnumArray<Damage.AttackType, bool>)ability._damageTypes)[tookDamage.attackType] && !(tookDamage.amount < (double)ability._minDamage))
+			if (_passPrecondition && !(_remainCooldownTime > 0f) && !target.character.health.dead && ((Component)target.transform).gameObject.activeSelf && (!ability._needCritical || tookDamage.critical) && ability._attackTypes[tookDamage.motionType] && ability._damageTypes[tookDamage.attackType] && !(tookDamage.amount < (double)ability._minDamage))
 			{
 				if ((Object)(object)ability._targetPoint != (Object)null)
 				{

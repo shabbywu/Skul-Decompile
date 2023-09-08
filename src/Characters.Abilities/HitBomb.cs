@@ -30,7 +30,7 @@ public sealed class HitBomb : Ability
 
 		private void HandleOnTookDamage(in Damage originalDamage, in Damage tookDamage, double damageDealt)
 		{
-			if (!((Object)(object)tookDamage.attacker.character == (Object)null) && ((EnumArray<Character.Type, bool>)ability._attackerFilter)[tookDamage.attacker.character.type] && ((EnumArray<Damage.MotionType, bool>)ability._motionTypeFilter)[tookDamage.motionType] && ((EnumArray<Damage.AttackType, bool>)ability._attackTypeFilter)[tookDamage.attackType])
+			if (!((Object)(object)tookDamage.attacker.character == (Object)null) && ability._attackerFilter[tookDamage.attacker.character.type] && ability._motionTypeFilter[tookDamage.motionType] && ability._attackTypeFilter[tookDamage.attackType])
 			{
 				_baseDamage += damageDealt;
 			}

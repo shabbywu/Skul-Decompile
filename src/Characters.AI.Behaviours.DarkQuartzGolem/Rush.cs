@@ -14,7 +14,7 @@ public class Rush : Behaviour, IPattern
 	private Action _action;
 
 	[SerializeField]
-	[Subcomponent(typeof(MoveToDestination))]
+	[UnityEditor.Subcomponent(typeof(MoveToDestination))]
 	private MoveToDestination _moveToDestination;
 
 	public bool CanUse(AIController controller)

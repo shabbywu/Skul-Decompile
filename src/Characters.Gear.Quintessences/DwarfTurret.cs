@@ -96,7 +96,7 @@ public class DwarfTurret : DestructibleObject
 		}
 		while (true)
 		{
-			float num = ((ChronometerBase)_minion.character.chronometer.master).deltaTime;
+			float num = _minion.character.chronometer.master.deltaTime;
 			bool hasTarget = true;
 			HandleLaserAttack(num, hasTarget);
 			if (_instance != null && _instance.attached)

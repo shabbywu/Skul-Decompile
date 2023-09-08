@@ -51,7 +51,7 @@ public sealed class CurrencyAbilityAttacher : AbilityAttacher
 	{
 		if (_startAttachCheck)
 		{
-			_elapsed += ((ChronometerBase)Chronometer.global).deltaTime;
+			_elapsed += Chronometer.global.deltaTime;
 			if (!(_elapsed < _checkInterval))
 			{
 				_elapsed -= _checkInterval;
@@ -147,6 +147,6 @@ public sealed class CurrencyAbilityAttacher : AbilityAttacher
 
 	public override string ToString()
 	{
-		return ExtensionMethods.GetAutoName((object)this);
+		return this.GetAutoName();
 	}
 }

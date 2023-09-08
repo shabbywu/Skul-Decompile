@@ -14,12 +14,12 @@ public class GetInvulnerable : Ability
 
 		protected override void OnAttach()
 		{
-			owner.invulnerable.Attach((object)this);
+			owner.invulnerable.Attach(this);
 		}
 
 		protected override void OnDetach()
 		{
-			owner.invulnerable.Detach((object)this);
+			owner.invulnerable.Detach(this);
 		}
 	}
 

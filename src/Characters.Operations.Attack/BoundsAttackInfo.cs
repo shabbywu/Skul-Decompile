@@ -46,7 +46,7 @@ public class BoundsAttackInfo : MonoBehaviour
 	{
 		_operationsToOwner.Initialize();
 		_operationInfo.Initialize();
-		TargetedOperationInfo[] components = ((SubcomponentArray<TargetedOperationInfo>)_operationInfo).components;
+		TargetedOperationInfo[] components = _operationInfo.components;
 		foreach (TargetedOperationInfo targetedOperationInfo in components)
 		{
 			if (targetedOperationInfo.operation is Knockback knockback)

@@ -90,14 +90,14 @@ public class Confirm : Dialogue
 	protected override void OnEnable()
 	{
 		base.OnEnable();
-		((ChronometerBase)Chronometer.global).AttachTimeScale((object)this, 0f);
+		Chronometer.global.AttachTimeScale(this, 0f);
 		_elaspedTime = 0f;
 	}
 
 	protected override void OnDisable()
 	{
 		base.OnDisable();
-		((ChronometerBase)Chronometer.global).DetachTimeScale((object)this);
+		Chronometer.global.DetachTimeScale(this);
 	}
 
 	protected override void Update()

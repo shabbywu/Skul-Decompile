@@ -7,7 +7,7 @@ namespace Characters.AI.Behaviours.Hero;
 
 public class Throwing : Behaviour
 {
-	[Subcomponent(typeof(ChainAction))]
+	[UnityEditor.Subcomponent(typeof(ChainAction))]
 	[SerializeField]
 	private Action _attackAction;
 

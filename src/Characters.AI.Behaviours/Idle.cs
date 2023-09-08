@@ -19,7 +19,7 @@ public class Idle : Behaviour
 			while (base.result == Result.Doing)
 			{
 				yield return null;
-				elapsed += ((ChronometerBase)controller.character.chronometer.master).deltaTime;
+				elapsed += controller.character.chronometer.master.deltaTime;
 				if (elapsed > duration)
 				{
 					break;

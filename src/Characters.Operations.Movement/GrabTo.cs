@@ -18,7 +18,7 @@ public sealed class GrabTo : TargetedCharacterOperation
 	[Header("Destination")]
 	private Collider2D _targetPlace;
 
-	[Information(/*Could not decode attribute arguments.*/)]
+	[Information("필수", InformationAttribute.InformationType.Info, false)]
 	[SerializeField]
 	private Transform _targetPoint;
 
@@ -43,7 +43,7 @@ public sealed class GrabTo : TargetedCharacterOperation
 	[SmashAttackVisualEffect.Subcomponent]
 	private SmashAttackVisualEffect.Subcomponents _effect;
 
-	[Subcomponent(typeof(TargetedOperationInfo))]
+	[UnityEditor.Subcomponent(typeof(TargetedOperationInfo))]
 	[SerializeField]
 	private TargetedOperationInfo.Subcomponents _onCollide;
 
@@ -112,7 +112,7 @@ public sealed class GrabTo : TargetedCharacterOperation
 			{
 				owner.GiveStatus(target, _statusInfo);
 			}
-			elapsed += ((ChronometerBase)Chronometer.global).deltaTime;
+			elapsed += Chronometer.global.deltaTime;
 			yield return null;
 		}
 	}

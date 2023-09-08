@@ -47,7 +47,7 @@ public class MummyGunDropPassive : Ability, IAbilityInstance
 	private DroppedMummyGunSupply _supplyPrefab;
 
 	[SerializeField]
-	[Information(/*Could not decode attribute arguments.*/)]
+	[Information("보급 주기, 0이면 보급되지 않습니다.", InformationAttribute.InformationType.Info, false)]
 	private float _supplyInterval;
 
 	private float _remainSupplyTime;
@@ -193,7 +193,7 @@ public class MummyGunDropPassive : Ability, IAbilityInstance
 
 	private DroppedMummyGun GetRandomGun(DroppedGuns guns)
 	{
-		DroppedGuns.Property[] values = ((ReorderableArray<DroppedGuns.Property>)guns).values;
+		DroppedGuns.Property[] values = guns.values;
 		float num = Random.Range(0f, values.Sum((DroppedGuns.Property a) => a.weight));
 		for (int i = 0; i < values.Length; i++)
 		{

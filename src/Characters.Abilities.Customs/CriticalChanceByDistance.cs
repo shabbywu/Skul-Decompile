@@ -17,12 +17,12 @@ public class CriticalChanceByDistance : Ability
 
 		protected override void OnAttach()
 		{
-			((PriorityList<GiveDamageDelegate>)owner.onGiveDamage).Add(0, (GiveDamageDelegate)OnOwnerGiveDamage);
+			owner.onGiveDamage.Add(0, OnOwnerGiveDamage);
 		}
 
 		protected override void OnDetach()
 		{
-			((PriorityList<GiveDamageDelegate>)owner.onGiveDamage).Remove((GiveDamageDelegate)OnOwnerGiveDamage);
+			owner.onGiveDamage.Remove(OnOwnerGiveDamage);
 		}
 
 		private bool OnOwnerGiveDamage(ITarget target, ref Damage damage)
@@ -33,7 +33,7 @@ public class CriticalChanceByDistance : Ability
 			//IL_0052: Unknown result type (might be due to invalid IL or missing references)
 			//IL_0057: Unknown result type (might be due to invalid IL or missing references)
 			//IL_0058: Unknown result type (might be due to invalid IL or missing references)
-			if (!((EnumArray<Damage.MotionType, bool>)ability._motionFilter)[damage.motionType] || !((EnumArray<Damage.AttackType, bool>)ability._attackFilter)[damage.attackType])
+			if (!ability._motionFilter[damage.motionType] || !ability._attackFilter[damage.attackType])
 			{
 				return false;
 			}

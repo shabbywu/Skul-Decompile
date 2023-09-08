@@ -17,7 +17,7 @@ public class NpcAnimation : MonoBehaviour
 
 	private static readonly int _castleHash = Animator.StringToHash("Idle_Castle");
 
-	private static readonly EnumArray<Animation, int> _hashes = new EnumArray<Animation, int>(new int[3] { _idleHash, _cageHash, _castleHash });
+	private static readonly EnumArray<Animation, int> _hashes = new EnumArray<Animation, int>(_idleHash, _cageHash, _castleHash);
 
 	[SerializeField]
 	private Animation _animation;

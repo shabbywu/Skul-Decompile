@@ -37,7 +37,7 @@ public class BloodEatingSword : Ability
 
 		private void OnApplyBleed(Character attacker, Character target)
 		{
-			if (!((Object)(object)target == (Object)null) && ((EnumArray<Character.Type, bool>)ability._characterTypeFilter)[target.type])
+			if (!((Object)(object)target == (Object)null) && ability._characterTypeFilter[target.type])
 			{
 				ability.component.currentStack++;
 				UpdateStack();
@@ -51,9 +51,9 @@ public class BloodEatingSword : Ability
 
 		public void UpdateStack()
 		{
-			for (int i = 0; i < ((ReorderableArray<Stat.Value>)_stat).values.Length; i++)
+			for (int i = 0; i < _stat.values.Length; i++)
 			{
-				((ReorderableArray<Stat.Value>)_stat).values[i].value = ((ReorderableArray<Stat.Value>)ability._statPerStack).values[i].GetStackedValue(ability.component.currentStack);
+				_stat.values[i].value = ability._statPerStack.values[i].GetStackedValue(ability.component.currentStack);
 			}
 			owner.stat.SetNeedUpdate();
 		}

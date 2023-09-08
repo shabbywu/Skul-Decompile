@@ -12,7 +12,7 @@ public sealed class Sacrament : Behaviour
 	[SerializeField]
 	private Character _character;
 
-	[Subcomponent(typeof(ActionAttack))]
+	[UnityEditor.Subcomponent(typeof(ActionAttack))]
 	[SerializeField]
 	private ActionAttack _attack;
 
@@ -22,7 +22,7 @@ public sealed class Sacrament : Behaviour
 	[SerializeField]
 	private SacramentOrbPool _sacramentOrbPool;
 
-	[Subcomponent(typeof(MoveHandler))]
+	[UnityEditor.Subcomponent(typeof(MoveHandler))]
 	[SerializeField]
 	private MoveHandler _moveHandler;
 

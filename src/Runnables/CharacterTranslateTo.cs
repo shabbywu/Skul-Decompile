@@ -20,7 +20,7 @@ public sealed class CharacterTranslateTo : CRunnable
 		Character character = _target.character;
 		Vector3 start = ((Component)character).transform.position;
 		Vector3 end = _destination.position;
-		for (float elapsed = 0f; elapsed < curve.duration; elapsed += ((ChronometerBase)Chronometer.global).deltaTime)
+		for (float elapsed = 0f; elapsed < curve.duration; elapsed += Chronometer.global.deltaTime)
 		{
 			yield return null;
 			((Component)character).transform.position = Vector2.op_Implicit(Vector2.Lerp(Vector2.op_Implicit(start), Vector2.op_Implicit(end), curve.Evaluate(elapsed)));

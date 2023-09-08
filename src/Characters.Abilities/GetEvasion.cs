@@ -14,12 +14,12 @@ public sealed class GetEvasion : Ability
 
 		protected override void OnAttach()
 		{
-			owner.evasion.Attach((object)this);
+			owner.evasion.Attach(this);
 		}
 
 		protected override void OnDetach()
 		{
-			owner.evasion.Detach((object)this);
+			owner.evasion.Detach(this);
 		}
 	}
 

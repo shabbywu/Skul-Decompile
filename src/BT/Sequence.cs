@@ -8,11 +8,11 @@ public class Sequence : Composite
 
 	protected virtual Node GetChild(int i)
 	{
-		if (i >= ((SubcomponentArray<BehaviourTree>)_child).components.Length || i < 0)
+		if (i >= _child.components.Length || i < 0)
 		{
 			throw new ArgumentException("invalid child index");
 		}
-		return ((SubcomponentArray<BehaviourTree>)_child).components[i].node;
+		return _child.components[i].node;
 	}
 
 	protected override NodeState UpdateDeltatime(Context context)
@@ -25,7 +25,7 @@ public class Sequence : Composite
 				return nodeState;
 			}
 		}
-		while (++_currentIndex < ((SubcomponentArray<BehaviourTree>)_child).components.Length);
+		while (++_currentIndex < _child.components.Length);
 		return NodeState.Success;
 	}
 

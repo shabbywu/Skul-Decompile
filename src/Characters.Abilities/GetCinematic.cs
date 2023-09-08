@@ -14,12 +14,12 @@ public class GetCinematic : Ability
 
 		protected override void OnAttach()
 		{
-			owner.cinematic.Attach((object)this);
+			owner.cinematic.Attach(this);
 		}
 
 		protected override void OnDetach()
 		{
-			owner.cinematic.Detach((object)this);
+			owner.cinematic.Detach(this);
 		}
 	}
 

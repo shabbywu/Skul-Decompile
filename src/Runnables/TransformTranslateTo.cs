@@ -18,7 +18,7 @@ public sealed class TransformTranslateTo : CRunnable
 	{
 		Vector3 start = ((Component)_target).transform.position;
 		Vector3 end = _destination.position;
-		for (float elapsed = 0f; elapsed < curve.duration; elapsed += ((ChronometerBase)Chronometer.global).deltaTime)
+		for (float elapsed = 0f; elapsed < curve.duration; elapsed += Chronometer.global.deltaTime)
 		{
 			yield return null;
 			((Component)_target).transform.position = Vector2.op_Implicit(Vector2.Lerp(Vector2.op_Implicit(start), Vector2.op_Implicit(end), curve.Evaluate(elapsed)));

@@ -41,7 +41,7 @@ public class MapReward : MonoBehaviour
 
 	private GameObject _reward;
 
-	public bool hasReward => (Object)(object)((EnumArray<Type, GameObject>)_rewardPrefabs)[type] != (Object)null;
+	public bool hasReward => (Object)(object)_rewardPrefabs[type] != (Object)null;
 
 	public bool activated { get; set; }
 
@@ -68,7 +68,7 @@ public class MapReward : MonoBehaviour
 	{
 		//IL_0047: Unknown result type (might be due to invalid IL or missing references)
 		//IL_004c: Unknown result type (might be due to invalid IL or missing references)
-		GameObject val = ((EnumArray<Type, GameObject>)_rewardPrefabs)[type];
+		GameObject val = _rewardPrefabs[type];
 		if (isHardmodeItem)
 		{
 			val = CommonResource.instance.hardmodeChest;

@@ -90,7 +90,7 @@ public sealed class FloatingObject : MonoBehaviour
 		{
 			//IL_0091: Unknown result type (might be due to invalid IL or missing references)
 			//IL_0096: Unknown result type (might be due to invalid IL or missing references)
-			float deltaTime2 = ((ChronometerBase)Chronometer.global).deltaTime;
+			float deltaTime2 = Chronometer.global.deltaTime;
 			verticalAmount += deltaTime2 * _vertical.speed;
 			horizontalAmount += deltaTime2 * _horizontal.speed;
 			float num2 = GetSineAmplitudeIn(horizontalAmount) * _horizontal.extent;
@@ -102,7 +102,7 @@ public sealed class FloatingObject : MonoBehaviour
 			//IL_004b: Unknown result type (might be due to invalid IL or missing references)
 			//IL_0056: Unknown result type (might be due to invalid IL or missing references)
 			//IL_005b: Unknown result type (might be due to invalid IL or missing references)
-			float deltaTime = ((ChronometerBase)Chronometer.global).deltaTime;
+			float deltaTime = Chronometer.global.deltaTime;
 			rotationAmount += deltaTime * _rotation.speed;
 			float num = GetSineAmplitudeIn(rotationAmount) * _rotation.extent;
 			((Component)this).transform.localRotation = Quaternion.AngleAxis(num + ((Quaternion)(ref _awakeRotation)).eulerAngles.z, Vector3.forward);

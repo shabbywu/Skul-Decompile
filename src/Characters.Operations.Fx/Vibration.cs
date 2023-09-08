@@ -11,6 +11,6 @@ public class Vibration : CharacterOperation
 
 	public override void Run(Character owner)
 	{
-		Singleton<Service>.Instance.controllerVibation.vibration.Attach((object)this, _curve);
+		Singleton<Service>.Instance.controllerVibation.vibration.Attach(this, _curve);
 	}
 }

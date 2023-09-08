@@ -414,10 +414,8 @@ public class Map : MonoBehaviour
 	{
 		//IL_0014: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0024: Unknown result type (might be due to invalid IL or missing references)
-		//IL_002c: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0031: Unknown result type (might be due to invalid IL or missing references)
-		((CoroutineReference)(ref _lightLerpReference)).Stop();
-		_lightLerpReference = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)this, CLerp(_globalLight.color, _globalLight.intensity, color, intensity, seconds));
+		_lightLerpReference.Stop();
+		_lightLerpReference = ((MonoBehaviour)(object)this).StartCoroutineWithReference(CLerp(_globalLight.color, _globalLight.intensity, color, intensity, seconds));
 	}
 
 	public void SetCameraZoneOrDefault()
@@ -468,10 +466,8 @@ public class Map : MonoBehaviour
 	{
 		//IL_0014: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0025: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0036: Unknown result type (might be due to invalid IL or missing references)
-		//IL_003b: Unknown result type (might be due to invalid IL or missing references)
-		((CoroutineReference)(ref _lightLerpReference)).Stop();
-		_lightLerpReference = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)this, CLerp(globalLight.color, globalLight.intensity, originalLightColor, originalLightIntensity, seconds));
+		_lightLerpReference.Stop();
+		_lightLerpReference = ((MonoBehaviour)(object)this).StartCoroutineWithReference(CLerp(globalLight.color, globalLight.intensity, originalLightColor, originalLightIntensity, seconds));
 	}
 
 	private IEnumerator CLerp(Color colorA, float intensityA, Color colorB, float intensityB, float seconds)
@@ -480,7 +476,7 @@ public class Map : MonoBehaviour
 		//IL_000f: Unknown result type (might be due to invalid IL or missing references)
 		//IL_001c: Unknown result type (might be due to invalid IL or missing references)
 		//IL_001d: Unknown result type (might be due to invalid IL or missing references)
-		for (float t = 0f; t < 1f; t += ((ChronometerBase)Chronometer.global).deltaTime / seconds)
+		for (float t = 0f; t < 1f; t += Chronometer.global.deltaTime / seconds)
 		{
 			yield return null;
 			globalLight.color = Color.Lerp(colorA, colorB, t);

@@ -83,7 +83,7 @@ public class Spirit : MonoBehaviour
 		((Behaviour)_detectRange).enabled = true;
 		_overlapper.OverlapCollider(_detectRange);
 		((Behaviour)_detectRange).enabled = false;
-		List<Target> components = GetComponentExtension.GetComponents<Collider2D, Target>((IEnumerable<Collider2D>)_overlapper.results, true);
+		List<Target> components = ((IEnumerable<Collider2D>)_overlapper.results).GetComponents<Collider2D, Target>(clearList: true);
 		if (components.Count == 0)
 		{
 			target = null;
@@ -110,13 +110,13 @@ public class Spirit : MonoBehaviour
 			if (time < _attackCooldown)
 			{
 				yield return null;
-				float deltaTime = ((ChronometerBase)_owner.chronometer.master).deltaTime;
+				float deltaTime = _owner.chronometer.master.deltaTime;
 				time += deltaTime;
 				Move(deltaTime);
 			}
-			else if (!((SubcomponentArray<Constraint>)_constraints).components.Pass())
+			else if (!_constraints.components.Pass())
 			{
-				time -= ((ChronometerBase)_owner.chronometer.master).deltaTime;
+				time -= _owner.chronometer.master.deltaTime;
 				yield return null;
 			}
 			else if (!FindTarget(out target))

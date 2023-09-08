@@ -24,12 +24,12 @@ public class OperationOnGuardMotion : Ability
 		{
 			count = 0;
 			_guarding = false;
-			owner.health.onTakeDamage.Add(int.MaxValue, (TakeDamageDelegate)Guard);
+			owner.health.onTakeDamage.Add(int.MaxValue, Guard);
 		}
 
 		protected override void OnDetach()
 		{
-			owner.health.onTakeDamage.Remove((TakeDamageDelegate)Guard);
+			owner.health.onTakeDamage.Remove(Guard);
 			ability._operationOnGuard.Stop();
 		}
 
@@ -69,7 +69,7 @@ public class OperationOnGuardMotion : Ability
 			{
 				return false;
 			}
-			if (!((EnumArray<Damage.AttackType, bool>)ability._attackType)[damage.attackType])
+			if (!ability._attackType[damage.attackType])
 			{
 				return false;
 			}
@@ -87,7 +87,7 @@ public class OperationOnGuardMotion : Ability
 				}
 			}
 			damage.@null = true;
-			if (((SubcomponentArray<CharacterOperation>)ability._operationOnGuard).components.Length == 0)
+			if (ability._operationOnGuard.components.Length == 0)
 			{
 				return false;
 			}

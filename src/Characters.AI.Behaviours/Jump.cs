@@ -19,7 +19,7 @@ public class Jump : Behaviour
 	[SerializeField]
 	private bool _waitForGrounded;
 
-	[Subcomponent(typeof(Idle))]
+	[UnityEditor.Subcomponent(typeof(Idle))]
 	[SerializeField]
 	private Idle _idle;
 
@@ -55,12 +55,12 @@ public class Jump : Behaviour
 		Character character = controller.character;
 		while (character.movement.verticalVelocity > 0f)
 		{
-			_elapsedTime += ((ChronometerBase)character.chronometer.animation).deltaTime;
+			_elapsedTime += character.chronometer.animation.deltaTime;
 			yield return null;
 		}
 		while (_jump.running)
 		{
-			_elapsedTime += ((ChronometerBase)character.chronometer.animation).deltaTime;
+			_elapsedTime += character.chronometer.animation.deltaTime;
 			yield return null;
 		}
 		if (_elapsedTime > _minimumTimeForFallAction)

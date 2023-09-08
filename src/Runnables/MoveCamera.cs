@@ -21,7 +21,7 @@ public class MoveCamera : CRunnable
 		Vector3 startPosition = ((Component)Camera.main).transform.position;
 		while (elapsed < _curve.duration)
 		{
-			elapsed += ((ChronometerBase)Chronometer.global).deltaTime;
+			elapsed += Chronometer.global.deltaTime;
 			Vector3 position = Vector3.Lerp(startPosition, _target.position, _curve.Evaluate(elapsed));
 			position.z = ((Component)Camera.main).transform.position.z;
 			((Component)Camera.main).transform.position = position;

@@ -33,7 +33,7 @@ public class QuintessenceInventory : MonoBehaviour
 			}
 			else
 			{
-				ExtensionMethods.Swap<Quintessence>((IList<Quintessence>)items, i, i - num);
+				items.Swap(i, i - num);
 			}
 		}
 	}
@@ -143,8 +143,6 @@ public class QuintessenceInventory : MonoBehaviour
 
 	public int GetCountByRarity(Rarity rarity)
 	{
-		//IL_0022: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0027: Unknown result type (might be due to invalid IL or missing references)
 		int num = 0;
 		foreach (Quintessence item in items)
 		{

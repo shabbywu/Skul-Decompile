@@ -56,7 +56,7 @@ public class RotateTransform : CharacterOperation
 		{
 			yield return null;
 			_transform.Rotate(Vector3.forward * _speed * (float)direction);
-			elpased += ((ChronometerBase)owner.chronometer.master).deltaTime;
+			elpased += owner.chronometer.master.deltaTime;
 		}
 		while (!(elpased >= _duration));
 	}

@@ -189,7 +189,7 @@ public class ChargeComboAction : Action
 
 	private Motion[] _motions;
 
-	internal ActionInfo current => ((ReorderableArray<ActionInfo>)_actionInfo).values[_current];
+	internal ActionInfo current => _actionInfo.values[_current];
 
 	public override Motion[] motions
 	{
@@ -197,7 +197,7 @@ public class ChargeComboAction : Action
 		{
 			if (_motions == null)
 			{
-				_motions = ((ReorderableArray<ActionInfo>)_actionInfo).values.SelectMany((ActionInfo m) => m.motions).ToArray();
+				_motions = _actionInfo.values.SelectMany((ActionInfo m) => m.motions).ToArray();
 			}
 			return _motions;
 		}
@@ -219,12 +219,12 @@ public class ChargeComboAction : Action
 	{
 		while (_cancelReserved)
 		{
-			Vector2 val;
-			Vector2 val2;
+			Vector2 range;
+			Vector2 range2;
 			if ((Object)(object)_owner.runningMotion == (Object)(object)current.earlyFinish)
 			{
-				val = current.earlyInput;
-				val2 = current.earlyCancel;
+				range = current.earlyInput;
+				range2 = current.earlyCancel;
 			}
 			else
 			{
@@ -232,18 +232,18 @@ public class ChargeComboAction : Action
 				{
 					break;
 				}
-				val = current.input;
-				val2 = current.cancel;
+				range = current.input;
+				range2 = current.cancel;
 			}
-			if (MMMaths.Range(_owner.runningMotion.normalizedTime, val2) && (_cancelReserved || MMMaths.Range(_owner.runningMotion.normalizedTime, val)))
+			if (MMMaths.Range(_owner.runningMotion.normalizedTime, range2) && (_cancelReserved || MMMaths.Range(_owner.runningMotion.normalizedTime, range)))
 			{
 				_cancelReserved = false;
 				int num = _current + 1;
-				if (num >= ((ReorderableArray<ActionInfo>)_actionInfo).values.Length)
+				if (num >= _actionInfo.values.Length)
 				{
 					num = _cycleOffset;
 				}
-				ActionInfo actionInfo = ((ReorderableArray<ActionInfo>)_actionInfo).values[num];
+				ActionInfo actionInfo = _actionInfo.values[num];
 				if (_endReserved)
 				{
 					_endReserved = false;
@@ -258,9 +258,9 @@ public class ChargeComboAction : Action
 
 	protected override void Awake()
 	{
-		for (int i = 0; i < ((ReorderableArray<ActionInfo>)_actionInfo).values.Length; i++)
+		for (int i = 0; i < _actionInfo.values.Length; i++)
 		{
-			((ReorderableArray<ActionInfo>)_actionInfo).values[i].InitializeMotions(this);
+			_actionInfo.values[i].InitializeMotions(this);
 		}
 	}
 

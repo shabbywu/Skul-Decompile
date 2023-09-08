@@ -48,7 +48,7 @@ public sealed class Bone : InscriptionInstance
 			protected override void OnDetach()
 			{
 				owner.onStartAction -= OnStartAction;
-				owner.evasion.Detach((object)this);
+				owner.evasion.Detach(this);
 			}
 
 			public override void UpdateTime(float deltaTime)
@@ -76,12 +76,12 @@ public sealed class Bone : InscriptionInstance
 
 			private void AttachEvasion()
 			{
-				owner.evasion.Attach((object)this);
+				owner.evasion.Attach(this);
 			}
 
 			private void DetachEvasion()
 			{
-				owner.evasion.Detach((object)this);
+				owner.evasion.Detach(this);
 			}
 
 			private void Apply()

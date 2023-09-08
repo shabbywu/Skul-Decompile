@@ -66,7 +66,7 @@ public class Doomsday : Ability
 	private double _maxBaseDamage = 9999.0;
 
 	[SerializeField]
-	[Information(/*Could not decode attribute arguments.*/)]
+	[Information("입힌 물리피해의 전환비율, 폭발 시 입히는 피해도 물리피해라서 스탯 효과를 받으므로 주의.", InformationAttribute.InformationType.Info, false)]
 	private double _damageConversionRatio = 0.20000000298023224;
 
 	[Subcomponent(typeof(OperationInfo))]

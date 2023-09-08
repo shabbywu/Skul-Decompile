@@ -77,10 +77,10 @@ public class Freeze : CharacterStatusAbility, IAbility, IAbilityInstance
 		_breakableTime = remainTime - CharacterStatusSetting.instance.freeze.minimumTime;
 		if ((Object)(object)owner.movement != (Object)null)
 		{
-			owner.movement.blocked.Attach((object)this);
+			owner.movement.blocked.Attach(this);
 		}
-		((ChronometerBase)owner.chronometer.animation).AttachTimeScale((object)this, 0f);
-		owner.blockLook.Attach((object)this);
+		owner.chronometer.animation.AttachTimeScale(this, 0f);
+		owner.blockLook.Attach(this);
 		_remainHitStack = hitStack;
 		owner.health.onTookDamage += OnTookDamage;
 		onAttached?.Invoke(base.attacker, owner);
@@ -113,12 +113,12 @@ public class Freeze : CharacterStatusAbility, IAbility, IAbilityInstance
 	public void Detach()
 	{
 		remainTime = 0f;
-		((ChronometerBase)owner.chronometer.animation).DetachTimeScale((object)this);
+		owner.chronometer.animation.DetachTimeScale(this);
 		owner.movement.push.Expire();
-		owner.blockLook.Detach((object)this);
+		owner.blockLook.Detach(this);
 		if ((Object)(object)owner.movement != (Object)null)
 		{
-			owner.movement.blocked.Detach((object)this);
+			owner.movement.blocked.Detach(this);
 		}
 		owner.health.onTookDamage -= OnTookDamage;
 		onDetachEvents?.Invoke(base.attacker, owner);

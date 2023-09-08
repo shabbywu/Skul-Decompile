@@ -7,10 +7,10 @@ namespace Runnables;
 
 public abstract class CurrencyAmount : MonoBehaviour
 {
-	public class SubcomponentAttribute : SubcomponentAttribute
+	public class SubcomponentAttribute : UnityEditor.SubcomponentAttribute
 	{
 		public SubcomponentAttribute()
-			: base(true, types)
+			: base(allowCustom: true, CurrencyAmount.types)
 		{
 		}
 	}

@@ -34,7 +34,7 @@ public class LeapWithFly : CharacterOperation
 	{
 		Vector3 destination = (((Object)(object)_target == (Object)null) ? ((Component)_aiController.target).transform.position : ((Component)_target).transform.position);
 		Vector3 source = ((Component)owner).transform.position;
-		for (float elapsed = 0f; elapsed < curve.duration; elapsed += ((ChronometerBase)owner.chronometer.master).deltaTime)
+		for (float elapsed = 0f; elapsed < curve.duration; elapsed += owner.chronometer.master.deltaTime)
 		{
 			yield return null;
 			while (owner.stunedOrFreezed)

@@ -12,15 +12,15 @@ internal class OperationInfo : MonoBehaviour
 	{
 		internal void Initialize()
 		{
-			for (int i = 0; i < base._components.Length; i++)
+			for (int i = 0; i < _components.Length; i++)
 			{
-				base._components[i].operation.Initialize();
+				_components[i].operation.Initialize();
 			}
 		}
 
 		internal void Sort()
 		{
-			base._components = base._components.OrderBy((OperationInfo operation) => operation.timeToTrigger).ToArray();
+			_components = _components.OrderBy((OperationInfo operation) => operation.timeToTrigger).ToArray();
 		}
 
 		internal IEnumerator CRun(Character target)
@@ -32,14 +32,14 @@ internal class OperationInfo : MonoBehaviour
 		{
 			int operationIndex = 0;
 			float time = 0f;
-			while (operationIndex < base._components.Length)
+			while (operationIndex < _components.Length)
 			{
-				for (; operationIndex < base._components.Length && time >= base._components[operationIndex].timeToTrigger; operationIndex++)
+				for (; operationIndex < _components.Length && time >= _components[operationIndex].timeToTrigger; operationIndex++)
 				{
-					base._components[operationIndex].operation.Run(owner, target);
+					_components[operationIndex].operation.Run(owner, target);
 				}
 				yield return null;
-				time += ((ChronometerBase)owner.chronometer.animation).deltaTime;
+				time += owner.chronometer.animation.deltaTime;
 			}
 		}
 

@@ -28,7 +28,7 @@ public class SpawnGoldAtTarget : TargetedCharacterOperation
 		//IL_0030: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0042: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0059: Unknown result type (might be due to invalid IL or missing references)
-		if (((EnumArray<Character.Type, bool>)_characterTypeFilter)[target.type] && MMMaths.PercentChance(_possibility))
+		if (_characterTypeFilter[target.type] && MMMaths.PercentChance(_possibility))
 		{
 			Vector3 position = (_spawnAtOwner ? ((Component)owner).transform.position : ((Component)target).transform.position);
 			Singleton<Service>.Instance.levelManager.DropGold(_gold, _count, position);

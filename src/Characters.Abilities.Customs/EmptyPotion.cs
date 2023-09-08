@@ -32,7 +32,7 @@ public sealed class EmptyPotion : Ability
 
 		private void OnGaveDamage(ITarget target, in Damage originalDamage, in Damage gaveDamage, double damageDealt)
 		{
-			if (!((Object)(object)target.character == (Object)null) && target.character.status.wounded && ((EnumArray<Damage.AttackType, bool>)ability._attackType)[gaveDamage.attackType])
+			if (!((Object)(object)target.character == (Object)null) && target.character.status.wounded && ability._attackType[gaveDamage.attackType])
 			{
 				stack++;
 				if (stack >= ability._maxStack)

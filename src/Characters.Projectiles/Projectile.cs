@@ -134,7 +134,7 @@ public class Projectile : MonoBehaviour, IProjectile, IMonoBehaviour
 			for (int i = 0; i < _caster.results.Count; i++)
 			{
 				RaycastHit2D raycastHit = _caster.results[i];
-				if (ExtensionMethods.Contains(_terrainLayer, ((Component)((RaycastHit2D)(ref raycastHit)).collider).gameObject.layer))
+				if (_terrainLayer.Contains(((Component)((RaycastHit2D)(ref raycastHit)).collider).gameObject.layer))
 				{
 					this.onTerrainHit(origin, direction, distance, raycastHit);
 					break;
@@ -320,9 +320,9 @@ public class Projectile : MonoBehaviour, IProjectile, IMonoBehaviour
 			{
 				if (target.character.liveAndActive && !target.character.cinematic.value && owner.TryAttackCharacter(target, ref damage))
 				{
-					for (int i = 0; i < ((SubcomponentArray<Characters.Projectiles.Operations.CharacterHitOperation>)_onCharacterHit).components.Length; i++)
+					for (int i = 0; i < _onCharacterHit.components.Length; i++)
 					{
-						((SubcomponentArray<Characters.Projectiles.Operations.CharacterHitOperation>)_onCharacterHit).components[i].Run(this, raycastHit, target.character);
+						_onCharacterHit.components[i].Run(this, raycastHit, target.character);
 					}
 					if (_hitInfo.attackType != 0)
 					{
@@ -347,9 +347,9 @@ public class Projectile : MonoBehaviour, IProjectile, IMonoBehaviour
 			//IL_0034: Unknown result type (might be due to invalid IL or missing references)
 			//IL_0035: Unknown result type (might be due to invalid IL or missing references)
 			//IL_0037: Unknown result type (might be due to invalid IL or missing references)
-			for (int j = 0; j < ((SubcomponentArray<HitOperation>)_onTerrainHit).components.Length; j++)
+			for (int j = 0; j < _onTerrainHit.components.Length; j++)
 			{
-				((SubcomponentArray<HitOperation>)_onTerrainHit).components[j].Run(this, raycastHit);
+				_onTerrainHit.components[j].Run(this, raycastHit);
 			}
 			_effect.Spawn(this, origin, direction, distance, raycastHit);
 			if (_despawnOnTerrainHit)
@@ -378,13 +378,13 @@ public class Projectile : MonoBehaviour, IProjectile, IMonoBehaviour
 	{
 		while (delay > 0f)
 		{
-			delay -= (((Object)(object)owner != (Object)null) ? ((ChronometerBase)owner.chronometer.projectile).deltaTime : ((ChronometerBase)Chronometer.global).deltaTime);
+			delay -= (((Object)(object)owner != (Object)null) ? owner.chronometer.projectile.deltaTime : Chronometer.global.deltaTime);
 			yield return null;
 		}
 		_time = 0f;
 		while (_time <= _maxLifeTime)
 		{
-			float num = (((Object)(object)owner != (Object)null) ? ((ChronometerBase)owner.chronometer.projectile).deltaTime : ((ChronometerBase)Chronometer.global).deltaTime);
+			float num = (((Object)(object)owner != (Object)null) ? owner.chronometer.projectile.deltaTime : Chronometer.global.deltaTime);
 			_time += num;
 			(Vector2, float) tuple = _movement.GetSpeed(_time, num);
 			(firedDirection, speed) = tuple;
@@ -406,9 +406,9 @@ public class Projectile : MonoBehaviour, IProjectile, IMonoBehaviour
 
 	public void Despawn()
 	{
-		for (int i = 0; i < ((SubcomponentArray<Characters.Projectiles.Operations.Operation>)_onDespawn).components.Length; i++)
+		for (int i = 0; i < _onDespawn.components.Length; i++)
 		{
-			((SubcomponentArray<Characters.Projectiles.Operations.Operation>)_onDespawn).components[i].Run(this);
+			_onDespawn.components[i].Run(this);
 		}
 		_effect.SpawnDespawn(this);
 		_reusable.Despawn();
@@ -445,9 +445,9 @@ public class Projectile : MonoBehaviour, IProjectile, IMonoBehaviour
 		{
 			SetHitHistroyManager(hitHistoryManager);
 		}
-		for (int i = 0; i < ((SubcomponentArray<Characters.Projectiles.Operations.Operation>)_onSpawned).components.Length; i++)
+		for (int i = 0; i < _onSpawned.components.Length; i++)
 		{
-			((SubcomponentArray<Characters.Projectiles.Operations.Operation>)_onSpawned).components[i].Run(this);
+			_onSpawned.components[i].Run(this);
 		}
 		((MonoBehaviour)this).StartCoroutine(_operations.CRun(this));
 		((MonoBehaviour)this).StartCoroutine(CUpdate(delay));

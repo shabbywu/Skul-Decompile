@@ -57,7 +57,7 @@ public sealed class IgnoreDamageReductionAttacher : MonoBehaviour
 	{
 		if (!((Object)(object)_owner == (Object)null) && _trigger.IsSatisfied())
 		{
-			((PriorityList<GiveDamageDelegate>)_owner.onGiveDamage).Add(int.MaxValue, (GiveDamageDelegate)OnOwnerGiveDamage);
+			_owner.onGiveDamage.Add(int.MaxValue, OnOwnerGiveDamage);
 		}
 	}
 }

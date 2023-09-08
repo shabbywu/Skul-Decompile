@@ -91,17 +91,15 @@ public sealed class ChosenHerosCirclet : Ability
 
 		private void AttachBuff()
 		{
-			//IL_0093: Unknown result type (might be due to invalid IL or missing references)
-			//IL_0098: Unknown result type (might be due to invalid IL or missing references)
 			//IL_00b4: Unknown result type (might be due to invalid IL or missing references)
 			_remainBuffTime = ability._fortitudeTime;
 			_fortitude = true;
-			owner.invulnerable.Attach((object)this);
+			owner.invulnerable.Attach(this);
 			Character character = owner;
 			character.onGaveDamage = (GaveDamageDelegate)Delegate.Combine(character.onGaveDamage, new GaveDamageDelegate(HandleOnGaveDamage));
 			owner.stat.AttachValues(ability._bonusStat);
-			((CoroutineReference)(ref _cooldownReference)).Stop();
-			_cooldownReference = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)owner, ability._onFortitudeStart.CRun(owner));
+			_cooldownReference.Stop();
+			_cooldownReference = ((MonoBehaviour)(object)owner).StartCoroutineWithReference(ability._onFortitudeStart.CRun(owner));
 			_loopEffect = ability._fortitudeLoopEffect.Spawn(((Component)owner).transform.position, owner);
 		}
 
@@ -112,7 +110,7 @@ public sealed class ChosenHerosCirclet : Ability
 				((MonoBehaviour)owner).StartCoroutine(ability._onFortitudeEnd.CRun(owner));
 			}
 			_fortitude = false;
-			owner.invulnerable.Detach((object)this);
+			owner.invulnerable.Detach(this);
 			Character character = owner;
 			character.onGaveDamage = (GaveDamageDelegate)Delegate.Remove(character.onGaveDamage, new GaveDamageDelegate(HandleOnGaveDamage));
 			owner.stat.DetachValues(ability._bonusStat);

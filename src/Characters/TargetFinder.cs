@@ -55,12 +55,12 @@ public static class TargetFinder
 		{
 			return null;
 		}
-		if (((IEnumerable<Collider2D>)results).Where((Collider2D collider) => (Object)(object)((Component)collider).GetComponent<Target>() != (Object)null).Count() <= 0)
+		if (results.Where((Collider2D collider) => (Object)(object)((Component)collider).GetComponent<Target>() != (Object)null).Count() <= 0)
 		{
 			return null;
 		}
-		Collider2D[] array = ((IEnumerable<Collider2D>)results).ToArray();
-		ExtensionMethods.Shuffle<Collider2D>((IList<Collider2D>)array);
+		Collider2D[] array = results.ToArray();
+		array.Shuffle();
 		Collider2D[] array2 = array;
 		for (int i = 0; i < array2.Length; i++)
 		{
@@ -195,20 +195,20 @@ public static class TargetFinder
 		{
 			return false;
 		}
-		int num = 0;
+		int index = 0;
 		RaycastHit2D val = results[0];
-		float num2 = ((RaycastHit2D)(ref val)).distance;
+		float num = ((RaycastHit2D)(ref val)).distance;
 		for (int i = 1; i < results.Count; i++)
 		{
 			val = results[i];
 			float distance = ((RaycastHit2D)(ref val)).distance;
-			if (distance < num2)
+			if (distance < num)
 			{
-				num2 = distance;
-				num = i;
+				num = distance;
+				index = i;
 			}
 		}
-		hit = results[num];
+		hit = results[index];
 		return true;
 	}
 }

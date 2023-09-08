@@ -21,18 +21,18 @@ public class DropLootOnDie : MonoBehaviour
 		{
 			public int Take()
 			{
-				if (base.values.Length == 0)
+				if (values.Length == 0)
 				{
 					return 0;
 				}
-				int num = base.values.Sum((DarkQuartzPossibility v) => v.weight);
+				int num = values.Sum((DarkQuartzPossibility v) => v.weight);
 				int num2 = Random.Range(0, num) + 1;
-				for (int i = 0; i < base.values.Length; i++)
+				for (int i = 0; i < values.Length; i++)
 				{
-					num2 -= base.values[i].weight;
+					num2 -= values[i].weight;
 					if (num2 <= 0)
 					{
-						return (int)base.values[i].amount.value;
+						return (int)values[i].amount.value;
 					}
 				}
 				return 0;
@@ -40,10 +40,10 @@ public class DropLootOnDie : MonoBehaviour
 
 			public float GetAverage()
 			{
-				float num = base.values.Sum((DarkQuartzPossibility v) => v.weight);
+				float num = values.Sum((DarkQuartzPossibility v) => v.weight);
 				float num2 = 0f;
-				DarkQuartzPossibility[] values = base.values;
-				foreach (DarkQuartzPossibility darkQuartzPossibility in values)
+				DarkQuartzPossibility[] array = values;
+				foreach (DarkQuartzPossibility darkQuartzPossibility in array)
 				{
 					num2 += (float)((int)darkQuartzPossibility.amount.value * darkQuartzPossibility.weight) / num;
 				}

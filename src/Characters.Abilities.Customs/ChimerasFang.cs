@@ -38,20 +38,20 @@ public class ChimerasFang : Ability
 			{
 				return;
 			}
-			if (((EnumArray<Character.Type, bool>)ability._normalTypes)[target.character.type])
+			if (ability._normalTypes[target.character.type])
 			{
 				if (target.character.health.percent > (double)ability._healthPercent * 0.01)
 				{
 					return;
 				}
 			}
-			else if (!((EnumArray<Character.Type, bool>)ability._bossTypes)[target.character.type] || target.character.health.percent > (double)ability._healthPercentForBoss * 0.01)
+			else if (!ability._bossTypes[target.character.type] || target.character.health.percent > (double)ability._healthPercentForBoss * 0.01)
 			{
 				return;
 			}
 			ability._operationPosition.position = target.transform.position;
 			ability._operations.Run(target.character);
-			((ChronometerBase)target.character.chronometer.animation).AttachTimeScale((object)this, ability._timeScaleDuringKilling);
+			target.character.chronometer.animation.AttachTimeScale(this, ability._timeScaleDuringKilling);
 			((MonoBehaviour)target.character).StartCoroutine(CDelayedKill(target.character));
 			_targets.Add(target.character);
 		}
@@ -59,7 +59,7 @@ public class ChimerasFang : Ability
 		private IEnumerator CDelayedKill(Character target)
 		{
 			yield return Chronometer.global.WaitForSeconds(ability._killingDelay);
-			((ChronometerBase)target.chronometer.animation).DetachTimeScale((object)this);
+			target.chronometer.animation.DetachTimeScale(this);
 			if (target.health.dead)
 			{
 				_targets.Remove(target);

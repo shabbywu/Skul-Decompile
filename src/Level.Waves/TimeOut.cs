@@ -22,7 +22,7 @@ public sealed class TimeOut : Leaf
 
 	private IEnumerator CTimeOut()
 	{
-		for (_remainTime = _timeOut; _remainTime > 0f; _remainTime -= ((ChronometerBase)Chronometer.global).deltaTime)
+		for (_remainTime = _timeOut; _remainTime > 0f; _remainTime -= Chronometer.global.deltaTime)
 		{
 			yield return null;
 		}

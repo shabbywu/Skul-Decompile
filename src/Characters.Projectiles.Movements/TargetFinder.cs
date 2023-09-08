@@ -64,7 +64,7 @@ public class TargetFinder
 		((Behaviour)_range).enabled = true;
 		_overlapper.OverlapCollider(_range);
 		((Behaviour)_range).enabled = false;
-		return _finder((IReadOnlyList<Collider2D>)_overlapper.results);
+		return _finder(_overlapper.results);
 	}
 
 	private Target FindClosest(IReadOnlyList<Collider2D> result)
@@ -99,17 +99,17 @@ public class TargetFinder
 
 	private Target FindFirst(IReadOnlyList<Collider2D> result)
 	{
-		return GetComponentExtension.GetComponent<Collider2D, Target>((IEnumerable<Collider2D>)result);
+		return ((IEnumerable<Collider2D>)result).GetComponent<Collider2D, Target>();
 	}
 
 	private Target FindRandom(IReadOnlyList<Collider2D> result)
 	{
-		List<Target> components = GetComponentExtension.GetComponents<Collider2D, Target>((IEnumerable<Collider2D>)result, true);
+		List<Target> components = ((IEnumerable<Collider2D>)result).GetComponents<Collider2D, Target>(clearList: true);
 		if (components.Count == 0)
 		{
 			return null;
 		}
-		return ExtensionMethods.Random<Target>((IEnumerable<Target>)components);
+		return components.Random();
 	}
 
 	private Target FindPlayer(IReadOnlyList<Collider2D> result)

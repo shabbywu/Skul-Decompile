@@ -42,7 +42,7 @@ public sealed class FightersBelt : Ability
 
 		private void HandleOnStartAction(Characters.Actions.Action action)
 		{
-			if (!(_remainCooldownTime > 0f) && ((EnumArray<Characters.Actions.Action.Type, bool>)ability._triggerActionFilter)[action.type])
+			if (!(_remainCooldownTime > 0f) && ability._triggerActionFilter[action.type])
 			{
 				_count = ability.GetCountWithinRange(((Component)owner).gameObject);
 				_remainCooldownTime = ability._cooldownTime - ability._cooldownTimeReducementPerTarget * (float)_count;
@@ -120,7 +120,7 @@ public sealed class FightersBelt : Ability
 			if (((Component)item).TryGetComponent<Target>(ref target) && !((Object)(object)target.character == (Object)null))
 			{
 				Character character = target.character;
-				if (((EnumArray<Character.Type, bool>)_targetCharacterTypeFilter)[character.type])
+				if (_targetCharacterTypeFilter[character.type])
 				{
 					num++;
 				}

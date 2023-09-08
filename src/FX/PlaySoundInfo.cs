@@ -6,7 +6,7 @@ namespace FX;
 
 public class PlaySoundInfo : MonoBehaviour
 {
-	[Information(/*Could not decode attribute arguments.*/)]
+	[Information("SoundInfo를 오브젝트풀을 이용하지 않고 현재 게임오브젝트에서 곧바로 재생합니다. AudioSource는 자동으로 생성됩니다. length가 0이고 loop이면 무한히 지속됩니다. length가 0이고 loop가 아니면 AudioClip의 length만큼 재생됩니다. 즉 딱 한 번 재생됩니다.", InformationAttribute.InformationType.Info, false)]
 	[SerializeField]
 	private bool _playOnEnable = true;
 

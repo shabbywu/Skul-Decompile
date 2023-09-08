@@ -15,7 +15,7 @@ public class Sequencer : CharacterOperation
 
 	public override void Run(Character owner)
 	{
-		CharacterOperation[] components = ((SubcomponentArray<CharacterOperation>)_operations).components;
+		CharacterOperation[] components = _operations.components;
 		for (int i = 0; i < components.Length; i++)
 		{
 			components[i].Run(owner);
@@ -24,7 +24,7 @@ public class Sequencer : CharacterOperation
 
 	public override void Run(Character owner, Character target)
 	{
-		CharacterOperation[] components = ((SubcomponentArray<CharacterOperation>)_operations).components;
+		CharacterOperation[] components = _operations.components;
 		for (int i = 0; i < components.Length; i++)
 		{
 			components[i].Run(owner);

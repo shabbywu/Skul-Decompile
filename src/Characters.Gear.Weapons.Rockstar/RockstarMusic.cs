@@ -20,7 +20,7 @@ public class RockstarMusic : MonoBehaviour
 
 		private float _currentBeat;
 
-		private bool pause => ((ChronometerBase)Chronometer.global).timeScale <= 0f;
+		private bool pause => Chronometer.global.timeScale <= 0f;
 
 		public float currentBpm
 		{
@@ -158,7 +158,7 @@ public class RockstarMusic : MonoBehaviour
 
 	private float passiveBeat => 60f / _passiveBpm;
 
-	private bool pause => ((ChronometerBase)Chronometer.global).timeScale <= 0f;
+	private bool pause => Chronometer.global.timeScale <= 0f;
 
 	private float currentBpm
 	{

@@ -133,8 +133,8 @@ public class GameResult : MonoBehaviour
 
 	private void OnEnable()
 	{
-		PlayerInput.blocked.Attach((object)this);
-		((ChronometerBase)Chronometer.global).AttachTimeScale((object)this, 0f);
+		PlayerInput.blocked.Attach(this);
+		Chronometer.global.AttachTimeScale(this, 0f);
 		((MonoBehaviour)this).StartCoroutine(CAnimate());
 		if (Singleton<HardmodeManager>.Instance.hardmode)
 		{
@@ -175,15 +175,15 @@ public class GameResult : MonoBehaviour
 
 	private void OnDisable()
 	{
-		PlayerInput.blocked.Detach((object)this);
-		((ChronometerBase)Chronometer.global).DetachTimeScale((object)this);
+		PlayerInput.blocked.Detach(this);
+		Chronometer.global.DetachTimeScale(this);
 		_deathCam.texture = null;
 	}
 
 	private void UpdateGearList()
 	{
-		ExtensionMethods.Empty(_gearListContainer);
-		ExtensionMethods.Empty(_upgradeListListContainer);
+		_gearListContainer.Empty();
+		_upgradeListListContainer.Empty();
 		Characters.Player.Inventory inventory = Singleton<Service>.Instance.levelManager.player.playerComponents.inventory;
 		WeaponInventory weapon = inventory.weapon;
 		QuintessenceInventory quintessence = inventory.quintessence;

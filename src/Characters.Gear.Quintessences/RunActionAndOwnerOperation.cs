@@ -33,7 +33,7 @@ public class RunActionAndOwnerOperation : UseQuintessence
 	{
 		Character character = _character;
 		character.onKilled = (Character.OnKilledDelegate)Delegate.Combine(character.onKilled, new Character.OnKilledDelegate(OnKilled));
-		((PriorityList<GiveDamageDelegate>)_character.onGiveDamage).Add(int.MinValue, (GiveDamageDelegate)OnGiveDamage);
+		_character.onGiveDamage.Add(int.MinValue, OnGiveDamage);
 		Character character2 = _character;
 		character2.onGaveDamage = (GaveDamageDelegate)Delegate.Combine(character2.onGaveDamage, new GaveDamageDelegate(OnGaveDamage));
 		Character character3 = _character;
@@ -44,7 +44,7 @@ public class RunActionAndOwnerOperation : UseQuintessence
 	{
 		Character character = _character;
 		character.onKilled = (Character.OnKilledDelegate)Delegate.Remove(character.onKilled, new Character.OnKilledDelegate(OnKilled));
-		((PriorityList<GiveDamageDelegate>)_character.onGiveDamage).Remove((GiveDamageDelegate)OnGiveDamage);
+		_character.onGiveDamage.Remove(OnGiveDamage);
 		Character character2 = _character;
 		character2.onGaveDamage = (GaveDamageDelegate)Delegate.Remove(character2.onGaveDamage, new GaveDamageDelegate(OnGaveDamage));
 		Character character3 = _character;

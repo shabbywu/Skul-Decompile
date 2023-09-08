@@ -101,9 +101,9 @@ public class Spiral : Movement
 		if (time >= _delay)
 		{
 			float num = time;
-			for (int i = 0; i < ((ReorderableArray<RotationInfo>)_rotationInfos).values.Length; i++)
+			for (int i = 0; i < _rotationInfos.values.Length; i++)
 			{
-				RotationInfo rotationInfo = ((ReorderableArray<RotationInfo>)_rotationInfos).values[i];
+				RotationInfo rotationInfo = _rotationInfos.values[i];
 				if (num > rotationInfo.length)
 				{
 					num -= rotationInfo.length;
@@ -115,9 +115,9 @@ public class Spiral : Movement
 			}
 		}
 		float num2 = _startSpeed;
-		for (int j = 0; j < ((ReorderableArray<MoveInfo>)_moveInfos).values.Length; j++)
+		for (int j = 0; j < _moveInfos.values.Length; j++)
 		{
-			MoveInfo moveInfo = ((ReorderableArray<MoveInfo>)_moveInfos).values[j];
+			MoveInfo moveInfo = _moveInfos.values[j];
 			if (time > moveInfo.length)
 			{
 				num2 = moveInfo.targetSpeed;

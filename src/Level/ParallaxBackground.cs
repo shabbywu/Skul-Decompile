@@ -141,19 +141,19 @@ public class ParallaxBackground : MonoBehaviour
 	private void Awake()
 	{
 		//IL_0039: Unknown result type (might be due to invalid IL or missing references)
-		Element[] values = ((ReorderableArray<Element>)_elements).values;
+		Element[] values = _elements.values;
 		for (int i = 0; i < values.Length; i++)
 		{
 			values[i].Initialize();
 		}
 		_cameraController = Scene<GameBase>.instance.cameraController;
-		UpdateElements(_cameraController.delta, ((ChronometerBase)Chronometer.global).deltaTime);
+		UpdateElements(_cameraController.delta, Chronometer.global.deltaTime);
 	}
 
 	private void Update()
 	{
 		//IL_0007: Unknown result type (might be due to invalid IL or missing references)
-		UpdateElements(_cameraController.delta, ((ChronometerBase)Chronometer.global).deltaTime);
+		UpdateElements(_cameraController.delta, Chronometer.global.deltaTime);
 	}
 
 	public void Initialize(float originHeight)
@@ -166,7 +166,7 @@ public class ParallaxBackground : MonoBehaviour
 	{
 		//IL_0013: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0014: Unknown result type (might be due to invalid IL or missing references)
-		Element[] values = ((ReorderableArray<Element>)_elements).values;
+		Element[] values = _elements.values;
 		for (int i = 0; i < values.Length; i++)
 		{
 			values[i].Update(Vector2.op_Implicit(delta), deltaTime);
@@ -175,7 +175,7 @@ public class ParallaxBackground : MonoBehaviour
 
 	private void SetFadeAlpha(float alpha)
 	{
-		Element[] values = ((ReorderableArray<Element>)_elements).values;
+		Element[] values = _elements.values;
 		for (int i = 0; i < values.Length; i++)
 		{
 			values[i].SetAlpha(alpha);

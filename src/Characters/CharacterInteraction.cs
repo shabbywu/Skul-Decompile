@@ -148,11 +148,11 @@ public class CharacterInteraction : MonoBehaviour
 
 	private IEnumerator CPressing()
 	{
-		_pressingTime = ((ChronometerBase)Chronometer.global).deltaTime;
+		_pressingTime = Chronometer.global.deltaTime;
 		while (_pressingTime < 1f)
 		{
 			yield return null;
-			_pressingTime += ((ChronometerBase)Chronometer.global).deltaTime;
+			_pressingTime += Chronometer.global.deltaTime;
 			_objectToInteract.pressingPercent = _pressingTime / 1f;
 		}
 		_objectToInteract.InteractWithByPressing(_character);

@@ -69,7 +69,7 @@ public class Stomp : Behaviour
 	private IEnumerator CoolDown(Chronometer chronometer)
 	{
 		_coolDown = false;
-		yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)chronometer, _coolTime);
+		yield return chronometer.WaitForSeconds(_coolTime);
 		_coolDown = true;
 	}
 

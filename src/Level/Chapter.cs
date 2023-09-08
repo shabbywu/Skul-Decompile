@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Globalization;
 using Characters;
 using Characters.Controllers;
@@ -288,11 +287,11 @@ public class Chapter : ScriptableObject
 			{
 				strings = Localization.GetLocalizedStringArray("loading/description/common");
 			}
-			description = ExtensionMethods.Random<string>((IEnumerable<string>)strings);
+			description = strings.Random();
 		}
 		else
 		{
-			description = ExtensionMethods.Random<string>((IEnumerable<string>)Localization.GetLocalizedStringArray("loading/description/common"));
+			description = Localization.GetLocalizedStringArray("loading/description/common").Random();
 		}
 		AnimationClip walkClip = null;
 		Character player = Singleton<Service>.Instance.levelManager.player;
@@ -323,20 +322,20 @@ public class Chapter : ScriptableObject
 	private IEnumerator CChangeMap(PathNode pathNode, LoadingScreen.LoadingScreenData? loadingScreenData = null)
 	{
 		LevelManager levelManager = Singleton<Service>.Instance.levelManager;
-		PlayerInput.blocked.Attach((object)this);
+		PlayerInput.blocked.Attach(this);
 		if ((Object)(object)levelManager.player != (Object)null && levelManager.player.invulnerable != null)
 		{
-			levelManager.player.invulnerable.Attach((object)this);
+			levelManager.player.invulnerable.Attach(this);
 		}
 		if ((Object)(object)map == (Object)null)
 		{
-			((ChronometerBase)Chronometer.global).AttachTimeScale((object)this, 0f);
+			Chronometer.global.AttachTimeScale(this, 0f);
 			Singleton<Service>.Instance.fadeInOut.FadeOutImmediately();
 		}
 		else
 		{
 			yield return Singleton<Service>.Instance.fadeInOut.CFadeOut();
-			((ChronometerBase)Chronometer.global).AttachTimeScale((object)this, 0f);
+			Chronometer.global.AttachTimeScale(this, 0f);
 			Clear();
 		}
 		yield return Resources.UnloadUnusedAssets();
@@ -366,7 +365,7 @@ public class Chapter : ScriptableObject
 		map.SetExits(currentStage.nextMapPath.node1, currentStage.nextMapPath.node2);
 		levelManager.SpawnPlayerIfNotExist();
 		ResetPlayerPosition();
-		ExtensionMethods.ExcuteInNextFrame((MonoBehaviour)(object)levelManager, (Action)ResetPlayerPosition);
+		((MonoBehaviour)(object)levelManager).ExcuteInNextFrame(ResetPlayerPosition);
 		GameBase instance = Scene<GameBase>.instance;
 		Vector3 position = ((Component)instance.cameraController).transform.position;
 		Vector3 val = -map.backgroundOrigin;
@@ -381,14 +380,14 @@ public class Chapter : ScriptableObject
 		levelManager.InvokeOnMapChanged();
 		Singleton<Service>.Instance.fadeInOut.HideLoadingIcon();
 		yield return Singleton<Service>.Instance.fadeInOut.CFadeIn();
-		((ChronometerBase)Chronometer.global).DetachTimeScale((object)this);
-		PlayerInput.blocked.Detach((object)this);
+		Chronometer.global.DetachTimeScale(this);
+		PlayerInput.blocked.Detach(this);
 		((MonoBehaviour)levelManager.player).StartCoroutine(CDetachInvulnerableInSecond());
 		levelManager.InvokeOnMapChangedAndFadeIn(map);
 		IEnumerator CDetachInvulnerableInSecond()
 		{
 			yield return (object)new WaitForSeconds(1f);
-			levelManager.player.invulnerable.Detach((object)this);
+			levelManager.player.invulnerable.Detach(this);
 		}
 		void ResetPlayerPosition()
 		{

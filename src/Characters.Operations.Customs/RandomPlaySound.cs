@@ -26,7 +26,7 @@ public sealed class RandomPlaySound : CharacterOperation
 
 	private void Awake()
 	{
-		_audioClipInfo = ExtensionMethods.Random<SoundInfo>((IEnumerable<SoundInfo>)_randomAudioClipsInfo);
+		_audioClipInfo = _randomAudioClipsInfo.Random();
 	}
 
 	public override void Run(Character owner)
@@ -37,7 +37,7 @@ public sealed class RandomPlaySound : CharacterOperation
 		//IL_0059: Unknown result type (might be due to invalid IL or missing references)
 		if (!randomOnlyAwake)
 		{
-			_audioClipInfo = ExtensionMethods.Random<SoundInfo>((IEnumerable<SoundInfo>)_randomAudioClipsInfo);
+			_audioClipInfo = _randomAudioClipsInfo.Random();
 		}
 		Vector3 position = (((Object)(object)_position == (Object)null) ? ((Component)this).transform.position : _position.position);
 		ReusableAudioSource reusableAudioSource = PersistentSingleton<SoundManager>.Instance.PlaySound(_audioClipInfo, position);

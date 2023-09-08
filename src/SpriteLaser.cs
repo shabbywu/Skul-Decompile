@@ -99,20 +99,20 @@ public class SpriteLaser : MonoBehaviour
 			_hitEffect.SetActive(false);
 			return;
 		}
-		int num = 0;
+		int index = 0;
 		RaycastHit2D val2 = results[0];
-		float num2 = ((RaycastHit2D)(ref val2)).distance;
+		float num = ((RaycastHit2D)(ref val2)).distance;
 		for (int i = 1; i < results.Count; i++)
 		{
 			val2 = results[i];
 			float distance = ((RaycastHit2D)(ref val2)).distance;
-			if (distance < num2)
+			if (distance < num)
 			{
-				num2 = distance;
-				num = i;
+				num = distance;
+				index = i;
 			}
 		}
-		RaycastHit2D val3 = results[num];
+		RaycastHit2D val3 = results[index];
 		_body.localScale = Vector2.op_Implicit(new Vector2(1f, Vector2.Distance(Vector2.op_Implicit(((Component)_firePosition).transform.position), ((RaycastHit2D)(ref val3)).point)));
 		_hitEffect.transform.position = Vector2.op_Implicit(((RaycastHit2D)(ref val3)).point);
 		_hitEffect.SetActive(true);

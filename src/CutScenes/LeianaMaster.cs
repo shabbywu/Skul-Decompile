@@ -67,7 +67,7 @@ public class LeianaMaster : MonoBehaviour
 	private void OnDestroy()
 	{
 		Scene<GameBase>.instance.uiManager.npcConversation.Done();
-		PlayerInput.blocked.Detach((object)this);
+		PlayerInput.blocked.Detach(this);
 		Scene<GameBase>.instance.uiManager.headupDisplay.bossHealthBar.CloseAll();
 		Scene<GameBase>.instance.uiManager.headupDisplay.visible = true;
 	}

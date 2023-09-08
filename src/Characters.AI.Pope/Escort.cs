@@ -64,14 +64,14 @@ public class Escort : Trap
 			_elapsed = 0f;
 			while (_elapsed < _sizeChangeDuration)
 			{
-				_elapsed += ((ChronometerBase)Chronometer.global).deltaTime;
+				_elapsed += Chronometer.global.deltaTime;
 				yield return null;
 			}
 			yield return CChangeSizeUp();
 			_elapsed = 0f;
 			while (_elapsed < _sizeChangeDuration)
 			{
-				_elapsed += ((ChronometerBase)Chronometer.global).deltaTime;
+				_elapsed += Chronometer.global.deltaTime;
 				yield return null;
 			}
 			yield return CChangeSizeDown();
@@ -86,7 +86,7 @@ public class Escort : Trap
 		float end = _radius * 3f;
 		while (elapsed < duration)
 		{
-			elapsed += ((ChronometerBase)Chronometer.global).deltaTime;
+			elapsed += Chronometer.global.deltaTime;
 			_radius = Mathf.Lerp(start, end, elapsed / duration);
 			yield return null;
 		}
@@ -101,7 +101,7 @@ public class Escort : Trap
 		float end = _radius / 3f;
 		while (elapsed < duration)
 		{
-			elapsed += ((ChronometerBase)Chronometer.global).deltaTime;
+			elapsed += Chronometer.global.deltaTime;
 			_radius = Mathf.Lerp(start, end, elapsed / duration);
 			yield return null;
 		}

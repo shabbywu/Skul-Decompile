@@ -7,7 +7,7 @@ namespace Characters.Gear.Quintessences.Effects;
 public sealed class RunOperations : QuintessenceEffect
 {
 	[SerializeField]
-	[Subcomponent(typeof(OperationInfo))]
+	[UnityEditor.Subcomponent(typeof(OperationInfo))]
 	private OperationInfo.Subcomponents _operations;
 
 	private void Awake()

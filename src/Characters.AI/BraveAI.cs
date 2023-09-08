@@ -52,7 +52,7 @@ public sealed class BraveAI : AIController
 
 	private void Awake()
 	{
-		character.status.unstoppable.Attach((object)this);
+		character.status.unstoppable.Attach(this);
 		base.behaviours = new List<Behaviour> { _checkWithinSight, _moveToTargetHead, _moveToTargetGround };
 		_attackOperations.Initialize();
 		_landingOperations.Initialize();

@@ -41,7 +41,7 @@ public class SpriteEffectStack : MonoBehaviour, ISpriteEffectStack
 	{
 		for (int num = _effects.Count - 1; num >= 0; num--)
 		{
-			if (!_effects[num].Update(ChronometerExtension.DeltaTime((ChronometerBase)(object)_chronometer)))
+			if (!_effects[num].Update(_chronometer.DeltaTime()))
 			{
 				_effects.RemoveAt(num);
 			}

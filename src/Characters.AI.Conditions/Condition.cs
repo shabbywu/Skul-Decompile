@@ -7,9 +7,9 @@ namespace Characters.AI.Conditions;
 public abstract class Condition : MonoBehaviour
 {
 	[AttributeUsage(AttributeTargets.Field)]
-	public class SubcomponentAttribute : SubcomponentAttribute
+	public class SubcomponentAttribute : UnityEditor.SubcomponentAttribute
 	{
-		public static readonly Type[] types = new Type[11]
+		public new static readonly Type[] types = new Type[11]
 		{
 			typeof(BehaviourCoolTime),
 			typeof(BehaviourResult),

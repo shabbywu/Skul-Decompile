@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using Characters;
 using Data;
 using FX;
@@ -56,9 +55,6 @@ public class Plebby : FieldNpc
 
 	private void Load()
 	{
-		//IL_001d: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0022: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0034: Unknown result type (might be due to invalid IL or missing references)
 		_itemRequest?.Release();
 		do
 		{
@@ -171,7 +167,7 @@ public class Plebby : FieldNpc
 		_npcConversation.skippable = true;
 		string[][] localizedStringArrays = Localization.GetLocalizedStringArrays($"npc/{_type}/chat");
 		string[][] localizedStringArrays2 = Localization.GetLocalizedStringArrays($"npc/{_type}/chat/speaker");
-		int num = ExtensionMethods.RandomIndex<string[]>((IEnumerable<string[]>)localizedStringArrays);
+		int num = localizedStringArrays.RandomIndex();
 		yield return CConversation(localizedStringArrays2[num], localizedStringArrays[num]);
 		LetterBox.instance.Disappear();
 	}

@@ -137,8 +137,8 @@ public class SummonOperationRunnersOnGroundOneDirection : CharacterOperation
 			Bounds bounds2 = _overlapper.results[i].bounds;
 			if (!_onlyOwnersTerrain || !((Object)(object)_overlapper.results[i] != (Object)(object)owner.movement.controller.collisionState.lastStandingCollider))
 			{
-				float2 val = float2.op_Implicit(ExtensionMethods.GetMostLeftTop(bounds2));
-				float2 val2 = float2.op_Implicit(ExtensionMethods.GetMostRightTop(bounds2));
+				float2 val = float2.op_Implicit(bounds2.GetMostLeftTop());
+				float2 val2 = float2.op_Implicit(bounds2.GetMostRightTop());
 				val.x = Mathf.Max(val.x, x);
 				val2.x = Mathf.Min(val2.x, x2);
 				_surfaces.Add((val, val2));

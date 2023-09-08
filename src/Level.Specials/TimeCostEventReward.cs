@@ -60,29 +60,22 @@ public class TimeCostEventReward : InteractiveObject
 
 	private void Start()
 	{
-		//IL_005b: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0060: Unknown result type (might be due to invalid IL or missing references)
-		//IL_006c: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0071: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0072: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0088: Expected I4, but got Unknown
 		Chapter currentChapter = Singleton<Service>.Instance.levelManager.currentChapter;
 		_random = new Random(GameData.Save.instance.randomSeed + 1281776104 + (int)currentChapter.type * 256 + currentChapter.stageIndex * 16 + currentChapter.currentStage.pathIndex);
 		_rarity = _rarityPossibilities.Evaluate(_random);
 		EvaluateGearRarity();
-		Rarity val = _rarity;
-		switch ((int)val)
+		switch (_rarity)
 		{
-		case 0:
+		case Rarity.Common:
 			_animator.runtimeAnimatorController = _commonChest;
 			break;
-		case 1:
+		case Rarity.Rare:
 			_animator.runtimeAnimatorController = _rareChest;
 			break;
-		case 2:
+		case Rarity.Unique:
 			_animator.runtimeAnimatorController = _uniqueChest;
 			break;
-		case 3:
+		case Rarity.Legendary:
 			_animator.runtimeAnimatorController = _legendaryChest;
 			break;
 		}
@@ -96,7 +89,6 @@ public class TimeCostEventReward : InteractiveObject
 
 	private void Load()
 	{
-		//IL_0018: Unknown result type (might be due to invalid IL or missing references)
 		do
 		{
 			EvaluateGearRarity();
@@ -108,9 +100,6 @@ public class TimeCostEventReward : InteractiveObject
 
 	private void EvaluateGearRarity()
 	{
-		//IL_000c: Unknown result type (might be due to invalid IL or missing references)
-		//IL_001c: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0021: Unknown result type (might be due to invalid IL or missing references)
 		_gearRarity = Settings.instance.containerPossibilities[_rarity].Evaluate(_random);
 	}
 

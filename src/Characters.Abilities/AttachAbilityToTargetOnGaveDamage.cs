@@ -30,7 +30,7 @@ public class AttachAbilityToTargetOnGaveDamage : Ability
 		private void OnGaveDamage(ITarget target, in Damage originalDamage, in Damage gaveDamage, double damageDealt)
 		{
 			//IL_00ed: Unknown result type (might be due to invalid IL or missing references)
-			if (!((Object)(object)target.character == (Object)null) && !target.character.health.dead && (!ability._needCritical || gaveDamage.critical) && (string.IsNullOrWhiteSpace(ability._attackKey) || gaveDamage.key.Equals(ability._attackKey, StringComparison.OrdinalIgnoreCase)) && ((EnumArray<Character.Type, bool>)ability._targetFilter)[target.character.type] && ((EnumArray<Damage.MotionType, bool>)ability._motionTypeFilter)[gaveDamage.motionType] && ((EnumArray<Damage.AttackType, bool>)ability._attackTypeFilter)[gaveDamage.attackType])
+			if (!((Object)(object)target.character == (Object)null) && !target.character.health.dead && (!ability._needCritical || gaveDamage.critical) && (string.IsNullOrWhiteSpace(ability._attackKey) || gaveDamage.key.Equals(ability._attackKey, StringComparison.OrdinalIgnoreCase)) && ability._targetFilter[target.character.type] && ability._motionTypeFilter[gaveDamage.motionType] && ability._attackTypeFilter[gaveDamage.attackType])
 			{
 				target.character.ability.Add(ability._abilityComponent.ability);
 				PersistentSingleton<SoundManager>.Instance.PlaySound(ability._attachAudioClipInfo, ((Component)owner).transform.position);

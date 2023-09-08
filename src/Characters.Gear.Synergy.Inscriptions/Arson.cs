@@ -151,7 +151,7 @@ public class Arson : SimpleStatBonusKeyword
 	{
 		if (keyword.isMaxStep)
 		{
-			_deathrattle.UpdateTime(((ChronometerBase)base.character.chronometer.master).deltaTime);
+			_deathrattle.UpdateTime(base.character.chronometer.master.deltaTime);
 		}
 	}
 

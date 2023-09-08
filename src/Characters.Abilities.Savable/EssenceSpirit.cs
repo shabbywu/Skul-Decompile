@@ -71,18 +71,18 @@ public sealed class EssenceSpirit : IAbility, IAbilityInstance, ISavableAbility
 	void IAbilityInstance.Attach()
 	{
 		_stat = _buff.Clone();
-		for (int i = 0; i < ((ReorderableArray<Stat.Value>)_buff).values.Length; i++)
+		for (int i = 0; i < _buff.values.Length; i++)
 		{
-			((ReorderableArray<Stat.Value>)_stat).values[i].value = _level;
+			_stat.values[i].value = _level;
 		}
 		_owner.stat.AttachValues(_stat);
 	}
 
 	void IAbilityInstance.Refresh()
 	{
-		for (int i = 0; i < ((ReorderableArray<Stat.Value>)_buff).values.Length; i++)
+		for (int i = 0; i < _buff.values.Length; i++)
 		{
-			((ReorderableArray<Stat.Value>)_stat).values[i].value = _level;
+			_stat.values[i].value = _level;
 		}
 		_owner.stat.SetNeedUpdate();
 	}

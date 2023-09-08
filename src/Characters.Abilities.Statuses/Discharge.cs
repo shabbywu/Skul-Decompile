@@ -115,14 +115,6 @@ public class Discharge : IAbility, IAbilityInstance
 		//IL_0136: Unknown result type (might be due to invalid IL or missing references)
 		//IL_014c: Unknown result type (might be due to invalid IL or missing references)
 		//IL_015c: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0182: Unknown result type (might be due to invalid IL or missing references)
-		//IL_018c: Expected O, but got Unknown
-		//IL_0190: Unknown result type (might be due to invalid IL or missing references)
-		//IL_019a: Expected O, but got Unknown
-		//IL_01a7: Unknown result type (might be due to invalid IL or missing references)
-		//IL_01b1: Expected O, but got Unknown
-		//IL_01b7: Unknown result type (might be due to invalid IL or missing references)
-		//IL_01c1: Expected O, but got Unknown
 		//IL_01d5: Unknown result type (might be due to invalid IL or missing references)
 		//IL_01da: Unknown result type (might be due to invalid IL or missing references)
 		//IL_01eb: Unknown result type (might be due to invalid IL or missing references)
@@ -134,11 +126,7 @@ public class Discharge : IAbility, IAbilityInstance
 		//IL_0221: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0226: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0236: Expected O, but got Unknown
-		//IL_0231: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0238: Expected O, but got Unknown
 		//IL_0247: Expected O, but got Unknown
-		//IL_0242: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0249: Expected O, but got Unknown
 		if ((Object)(object)attacker == (Object)null || (Object)(object)owner == (Object)null)
 		{
 			return;
@@ -158,7 +146,7 @@ public class Discharge : IAbility, IAbilityInstance
 			PushForce force = new PushForce
 			{
 				power = new CustomFloat(3f, 4f),
-				angle = new CustomFloat((float)num)
+				angle = new CustomFloat(num)
 			};
 			PushForce force2 = new PushForce
 			{

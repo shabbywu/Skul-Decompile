@@ -27,7 +27,7 @@ public sealed class Counter : Decorator
 		_ownerHealth.onTookDamage += RunCounter;
 		while (elapsed < duration && !_success)
 		{
-			elapsed += ((ChronometerBase)controller.character.chronometer.master).deltaTime;
+			elapsed += controller.character.chronometer.master.deltaTime;
 			yield return null;
 		}
 		if (_success)

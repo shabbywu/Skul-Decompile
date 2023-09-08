@@ -33,7 +33,7 @@ public sealed class GhostStories : Ability
 			if (!(_remainCooldownTime > 0f))
 			{
 				Character character = tookDamage.attacker.character;
-				if (!((Object)(object)character == (Object)null) && ((EnumArray<Character.Type, bool>)ability._attackerFilter)[character.type])
+				if (!((Object)(object)character == (Object)null) && ability._attackerFilter[character.type])
 				{
 					_remainCooldownTime = ability._cooldownTime;
 					((MonoBehaviour)owner).StartCoroutine(CTeleport());

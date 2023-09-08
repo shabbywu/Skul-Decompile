@@ -254,19 +254,19 @@ public abstract class AIController : MonoBehaviour
 			return results[0];
 		}
 		float num = float.MaxValue;
-		int num2 = 0;
+		int index = 0;
 		for (int i = 1; i < results.Count; i++)
 		{
 			ColliderDistance2D val = Physics2D.Distance(results[i], (Collider2D)(object)character.collider);
 			float distance = ((ColliderDistance2D)(ref val)).distance;
 			if (num > distance)
 			{
-				num2 = i;
+				index = i;
 				num = distance;
 			}
 		}
 		((Behaviour)collider).enabled = false;
-		return results[num2];
+		return results[index];
 	}
 
 	public List<Character> FindRandomEnemies(Collider2D collider, Character except, int amount)
@@ -287,7 +287,7 @@ public abstract class AIController : MonoBehaviour
 			return null;
 		}
 		int[] array = Enumerable.Range(0, components.Count).ToArray();
-		ExtensionMethods.PseudoShuffle<int>((IList<int>)array);
+		array.PseudoShuffle();
 		IEnumerable<int> enumerable = array.Take(amount);
 		List<Character> list = new List<Character>(components.Count);
 		foreach (int item2 in enumerable)

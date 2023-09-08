@@ -9,7 +9,7 @@ public class ActivateChild : CharacterOperation
 	private Transform _parent;
 
 	[SerializeField]
-	[Information(/*Could not decode attribute arguments.*/)]
+	[Information("duration이 0이면 Operation이 끝날 때 Deactivate됨", InformationAttribute.InformationType.Info, false)]
 	private float _duration;
 
 	[SerializeField]
@@ -40,13 +40,13 @@ public class ActivateChild : CharacterOperation
 		foreach (Transform item in _parent)
 		{
 			((Component)item).gameObject.SetActive(true);
-			yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)chronometer, _interval);
+			yield return chronometer.WaitForSeconds(_interval);
 		}
 	}
 
 	private IEnumerator CExpire(Chronometer chronometer)
 	{
-		yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)chronometer, _duration);
+		yield return chronometer.WaitForSeconds(_duration);
 		Stop();
 	}
 

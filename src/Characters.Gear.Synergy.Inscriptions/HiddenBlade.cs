@@ -18,7 +18,7 @@ public sealed class HiddenBlade : InscriptionInstance
 
 			protected override void OnAttach()
 			{
-				if (((EnumArray<Character.Type, bool>)ability._bossCharacterType)[owner.type])
+				if (ability._bossCharacterType[owner.type])
 				{
 					base.remainTime = ability._durationForBoss;
 				}
@@ -84,8 +84,8 @@ public sealed class HiddenBlade : InscriptionInstance
 
 	public override void Attach()
 	{
-		((PriorityList<GiveDamageDelegate>)base.character.onGiveDamage).Add(int.MinValue, (GiveDamageDelegate)AttachMark);
-		((PriorityList<GiveDamageDelegate>)base.character.onGiveDamage).Add(int.MinValue, (GiveDamageDelegate)EvaluateCritical);
+		base.character.onGiveDamage.Add(int.MinValue, AttachMark);
+		base.character.onGiveDamage.Add(int.MinValue, EvaluateCritical);
 	}
 
 	private bool AttachMark(ITarget target, ref Damage damage)
@@ -98,7 +98,7 @@ public sealed class HiddenBlade : InscriptionInstance
 		{
 			return false;
 		}
-		if (!((EnumArray<Character.Type, bool>)_targetTypes)[target.character.type])
+		if (!_targetTypes[target.character.type])
 		{
 			return false;
 		}
@@ -128,7 +128,7 @@ public sealed class HiddenBlade : InscriptionInstance
 		{
 			return false;
 		}
-		if (!((EnumArray<Character.Type, bool>)_targetTypes)[target.character.type])
+		if (!_targetTypes[target.character.type])
 		{
 			return false;
 		}
@@ -142,7 +142,7 @@ public sealed class HiddenBlade : InscriptionInstance
 
 	public override void Detach()
 	{
-		((PriorityList<GiveDamageDelegate>)base.character.onGiveDamage).Remove((GiveDamageDelegate)AttachMark);
-		((PriorityList<GiveDamageDelegate>)base.character.onGiveDamage).Remove((GiveDamageDelegate)EvaluateCritical);
+		base.character.onGiveDamage.Remove(AttachMark);
+		base.character.onGiveDamage.Remove(EvaluateCritical);
 	}
 }

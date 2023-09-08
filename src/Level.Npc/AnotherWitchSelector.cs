@@ -22,7 +22,7 @@ public sealed class AnotherWitchSelector : MonoBehaviour
 
 		public GameObject GetRandomWitch()
 		{
-			return ExtensionMethods.Random<GameObject>((IEnumerable<GameObject>)_witchs);
+			return _witchs.Random();
 		}
 
 		public void Hide()
@@ -83,6 +83,6 @@ public sealed class AnotherWitchSelector : MonoBehaviour
 		{
 			list.Add(_witchByHardmodeLevel[j]);
 		}
-		ExtensionMethods.Random<WitchsByLevel>((IEnumerable<WitchsByLevel>)list).GetRandomWitch().SetActive(true);
+		list.Random().GetRandomWitch().SetActive(true);
 	}
 }

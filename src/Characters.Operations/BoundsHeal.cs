@@ -21,7 +21,7 @@ public class BoundsHeal : CharacterOperation
 	[SerializeField]
 	private Collider2D _range;
 
-	[Subcomponent(typeof(OperationInfos))]
+	[UnityEditor.Subcomponent(typeof(OperationInfos))]
 	[SerializeField]
 	private OperationInfos _ToTargetOperations;
 

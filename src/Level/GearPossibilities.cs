@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using Characters.Gear;
@@ -47,6 +46,6 @@ public class GearPossibilities
 				return values[i];
 			}
 		}
-		return ExtensionMethods.Random<Gear.Type>((IEnumerable<Gear.Type>)values);
+		return values.Random();
 	}
 }

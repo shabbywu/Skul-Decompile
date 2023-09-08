@@ -38,7 +38,7 @@ public class AltarSelector : MonoBehaviour
 		Chapter currentChapter = Singleton<Service>.Instance.levelManager.currentChapter;
 		Random random = new Random(GameData.Save.instance.randomSeed + 898776742 + (int)currentChapter.type * 256 + currentChapter.stageIndex * 16 + currentChapter.currentStage.pathIndex);
 		Prop prop = null;
-		Altars.Property[] values = ((ReorderableArray<Altars.Property>)_altars).values;
+		Altars.Property[] values = _altars.values;
 		double num = random.NextDouble() * (double)values.Sum((Altars.Property a) => a.weight);
 		for (int i = 0; i < values.Length; i++)
 		{

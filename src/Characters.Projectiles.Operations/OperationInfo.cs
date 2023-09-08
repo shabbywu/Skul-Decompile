@@ -12,21 +12,21 @@ internal class OperationInfo : MonoBehaviour
 	{
 		internal void Sort()
 		{
-			base._components = base._components.OrderBy((OperationInfo operation) => operation.timeToTrigger).ToArray();
+			_components = _components.OrderBy((OperationInfo operation) => operation.timeToTrigger).ToArray();
 		}
 
 		internal IEnumerator CRun(IProjectile projectile)
 		{
 			int operationIndex = 0;
 			float time = 0f;
-			while (operationIndex < base._components.Length)
+			while (operationIndex < _components.Length)
 			{
-				for (; operationIndex < base._components.Length && time >= base._components[operationIndex].timeToTrigger; operationIndex++)
+				for (; operationIndex < _components.Length && time >= _components[operationIndex].timeToTrigger; operationIndex++)
 				{
-					base._components[operationIndex].operation.Run(projectile);
+					_components[operationIndex].operation.Run(projectile);
 				}
 				yield return null;
-				time += ((ChronometerBase)projectile.owner.chronometer.projectile).deltaTime;
+				time += projectile.owner.chronometer.projectile.deltaTime;
 			}
 		}
 	}

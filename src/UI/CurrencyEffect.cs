@@ -38,7 +38,7 @@ public class CurrencyEffect : MonoBehaviour
 		while (_remainTime > 0f)
 		{
 			yield return null;
-			float deltaTime = ((ChronometerBase)Chronometer.global).deltaTime;
+			float deltaTime = Chronometer.global.deltaTime;
 			_animator.Update(deltaTime);
 			_remainTime -= deltaTime;
 		}

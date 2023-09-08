@@ -32,7 +32,7 @@ public sealed class RunDeadAction : Runnable
 			((Behaviour)_behaviorTree).enabled = false;
 		}
 		_character.status.RemoveAllStatus();
-		_character.invulnerable.Attach((object)this);
+		_character.invulnerable.Attach(this);
 		_character.CancelAction();
 		if (_deadAction.TryStart())
 		{

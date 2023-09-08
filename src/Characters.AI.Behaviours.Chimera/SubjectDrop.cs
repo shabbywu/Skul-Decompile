@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using Characters.Actions;
 using Characters.Operations;
 using UnityEngine;
@@ -94,7 +93,7 @@ public class SubjectDrop : Behaviour
 		base.result = Result.Doing;
 		_coolDown = ((MonoBehaviour)this).StartCoroutine(CoolDown(controller.character.chronometer.animation));
 		SetPoints();
-		ExtensionMethods.Shuffle<OperationInfos>((IList<OperationInfos>)_fireOperationInfos);
+		_fireOperationInfos.Shuffle();
 		for (int i = 0; i < _fireOperationInfos.Length; i++)
 		{
 			((Component)_fireOperationInfos[i]).gameObject.SetActive(true);
@@ -119,7 +118,7 @@ public class SubjectDrop : Behaviour
 	private IEnumerator CoolDown(Chronometer chronometer)
 	{
 		canUse = false;
-		yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)chronometer, _coolTime);
+		yield return chronometer.WaitForSeconds(_coolTime);
 		canUse = true;
 	}
 }

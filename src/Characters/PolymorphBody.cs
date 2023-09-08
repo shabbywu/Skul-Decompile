@@ -111,7 +111,7 @@ public class PolymorphBody : MonoBehaviour
 
 	private IEnumerator CEndPolymorph(float duration)
 	{
-		yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)character.chronometer.master, duration);
+		yield return character.chronometer.master.WaitForSeconds(duration);
 		EndPolymorph();
 	}
 

@@ -49,15 +49,15 @@ public class ParryAction : Action
 		_waitingMotion.onStart += delegate
 		{
 			_lookingDirection = base.owner.lookingDirection;
-			_owner.health.onTakeDamage.Add(10000, (TakeDamageDelegate)OnTakeDamage);
+			_owner.health.onTakeDamage.Add(10000, OnTakeDamage);
 		};
 		_waitingMotion.onEnd += delegate
 		{
-			_owner.health.onTakeDamage.Remove((TakeDamageDelegate)OnTakeDamage);
+			_owner.health.onTakeDamage.Remove(OnTakeDamage);
 		};
 		_waitingMotion.onCancel += delegate
 		{
-			_owner.health.onTakeDamage.Remove((TakeDamageDelegate)OnTakeDamage);
+			_owner.health.onTakeDamage.Remove(OnTakeDamage);
 		};
 		_parryMotion.onStart += delegate
 		{
@@ -78,7 +78,7 @@ public class ParryAction : Action
 
 	private void OnDisable()
 	{
-		_owner.health.onTakeDamage.Remove((TakeDamageDelegate)OnTakeDamage);
+		_owner.health.onTakeDamage.Remove(OnTakeDamage);
 	}
 
 	private bool OnTakeDamage(ref Damage damage)

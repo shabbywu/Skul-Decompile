@@ -66,7 +66,7 @@ public class ScrollImage : Sequence
 		yield return Chronometer.global.WaitForSeconds(_startDelay);
 		while (moveTime < 1f)
 		{
-			moveTime += ((ChronometerBase)Chronometer.global).deltaTime / _speed;
+			moveTime += Chronometer.global.deltaTime / _speed;
 			if (_narrationScene.changed)
 			{
 				break;

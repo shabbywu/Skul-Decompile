@@ -7,15 +7,15 @@ namespace Characters.AI.Behaviours;
 
 public sealed class TeleportAttack : Behaviour
 {
-	[Subcomponent(typeof(TeleportBehind))]
+	[UnityEditor.Subcomponent(typeof(TeleportBehind))]
 	[SerializeField]
 	private TeleportBehind _teleportBehind;
 
 	[SerializeField]
-	[Subcomponent(typeof(ActionAttack))]
+	[UnityEditor.Subcomponent(typeof(ActionAttack))]
 	private ActionAttack _attack;
 
-	[Subcomponent(typeof(EscapeTeleport))]
+	[UnityEditor.Subcomponent(typeof(EscapeTeleport))]
 	[SerializeField]
 	private EscapeTeleport _escapeTeleport;
 

@@ -7,7 +7,7 @@ namespace Characters.AI.Behaviours.Adventurer.Magician;
 
 public class KeepDistanceMagician : Behaviour
 {
-	[Subcomponent(typeof(MoveToDestinationWithFly))]
+	[UnityEditor.Subcomponent(typeof(MoveToDestinationWithFly))]
 	[SerializeField]
 	private MoveToDestinationWithFly _moveToDestinationWithFly;
 

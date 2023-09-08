@@ -46,7 +46,7 @@ public class BehaviourTemplate : Behaviour
 	private IEnumerator CCoolDown(Chronometer chronometer)
 	{
 		canUse = false;
-		yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)chronometer, _coolTime);
+		yield return chronometer.WaitForSeconds(_coolTime);
 		canUse = true;
 	}
 }

@@ -15,12 +15,12 @@ public sealed class ModifyDamageByDistance : Ability
 
 		protected override void OnAttach()
 		{
-			((PriorityList<GiveDamageDelegate>)owner.onGiveDamage).Add(0, (GiveDamageDelegate)OnGiveDamage);
+			owner.onGiveDamage.Add(0, OnGiveDamage);
 		}
 
 		protected override void OnDetach()
 		{
-			((PriorityList<GiveDamageDelegate>)owner.onGiveDamage).Remove((GiveDamageDelegate)OnGiveDamage);
+			owner.onGiveDamage.Remove(OnGiveDamage);
 		}
 
 		private bool OnGiveDamage(ITarget target, ref Damage damage)
@@ -33,7 +33,7 @@ public sealed class ModifyDamageByDistance : Ability
 			//IL_0052: Unknown result type (might be due to invalid IL or missing references)
 			//IL_006e: Unknown result type (might be due to invalid IL or missing references)
 			//IL_0074: Unknown result type (might be due to invalid IL or missing references)
-			if (!((EnumArray<Damage.MotionType, bool>)ability._motionType)[damage.motionType])
+			if (!ability._motionType[damage.motionType])
 			{
 				return false;
 			}

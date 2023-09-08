@@ -73,10 +73,8 @@ public class PlayerAchievementTracker : MonoBehaviour
 
 	private void TrackHeadLootAchievement(Weapon old, Weapon @new)
 	{
-		//IL_000b: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0011: Invalid comparison between Unknown and I4
 		//IL_006c: Unknown result type (might be due to invalid IL or missing references)
-		if ((Object)(object)@new == (Object)null || (int)@new.rarity != 3)
+		if ((Object)(object)@new == (Object)null || @new.rarity != Rarity.Legendary)
 		{
 			return;
 		}

@@ -84,7 +84,7 @@ public class StatBonusByAirTime : Ability
 
 		public void UpdateStat()
 		{
-			_ = ((ReorderableArray<Stat.Value>)_stat).values;
+			_ = _stat.values;
 			float num = 0f;
 			if (_remainBuffTime > 0f)
 			{
@@ -99,10 +99,10 @@ public class StatBonusByAirTime : Ability
 
 		private void SetStat(float multiplier)
 		{
-			Stat.Value[] values = ((ReorderableArray<Stat.Value>)_stat).values;
+			Stat.Value[] values = _stat.values;
 			for (int i = 0; i < values.Length; i++)
 			{
-				values[i].value = ((ReorderableArray<Stat.Value>)ability._maxStat).values[i].GetMultipliedValue(multiplier);
+				values[i].value = ability._maxStat.values[i].GetMultipliedValue(multiplier);
 			}
 			owner.stat.SetNeedUpdate();
 		}

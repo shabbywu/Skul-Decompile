@@ -44,7 +44,7 @@ public sealed class DarkEnemy : MonoBehaviour
 		_character.stat.AttachValues(_baseStatValues);
 		_character.stat.AttachValues(_bonusStatValues);
 		_introOperations.Initialize();
-		_character.cinematic.Attach((object)this);
+		_character.cinematic.Attach(this);
 		_characterDieEffect.particleInfo = null;
 		_characterDieEffect.effect = null;
 		_character.health.onDiedTryCatch += HandleOnDied;
@@ -110,7 +110,7 @@ public sealed class DarkEnemy : MonoBehaviour
 		{
 			PersistentSingleton<SoundManager>.Instance.PlaySound(DarkEnemySelector.instance.introSound, ((Component)_character).transform.position);
 		}
-		for (; elapsed < duration; elapsed += ((ChronometerBase)_character.chronometer.master).deltaTime)
+		for (; elapsed < duration; elapsed += _character.chronometer.master.deltaTime)
 		{
 			((Renderer)renderer).GetPropertyBlock(propertyBlock);
 			propertyBlock.SetFloat(id, 1f - elapsed / duration);
@@ -125,7 +125,7 @@ public sealed class DarkEnemy : MonoBehaviour
 	public void RunIntro()
 	{
 		//IL_005a: Unknown result type (might be due to invalid IL or missing references)
-		_character.cinematic.Detach((object)this);
+		_character.cinematic.Detach(this);
 		((Renderer)_character.spriteEffectStack.mainRenderer).material = MaterialResource.darkEnemy;
 		if (DarkEnemySelector.instance.introEffects != null)
 		{
@@ -194,7 +194,7 @@ public sealed class DarkEnemy : MonoBehaviour
 			}
 			else
 			{
-				hud.darkEnemyHealthBar.Set(ExtensionMethods.Random<KeyValuePair<Character, string>>((IEnumerable<KeyValuePair<Character, string>>)attached).Key);
+				hud.darkEnemyHealthBar.Set(attached.Random().Key);
 			}
 		};
 	}

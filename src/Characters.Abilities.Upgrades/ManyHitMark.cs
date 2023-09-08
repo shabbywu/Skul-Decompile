@@ -167,7 +167,7 @@ public sealed class ManyHitMark : Ability
 		protected override void OnAttach()
 		{
 			ability._manyHitMarkTarget.SetAttacker(owner, ability);
-			((PriorityList<GiveDamageDelegate>)owner.onGiveDamage).Add(int.MinValue, (GiveDamageDelegate)HandleOnGiveDamage);
+			owner.onGiveDamage.Add(int.MinValue, HandleOnGiveDamage);
 			Singleton<Service>.Instance.levelManager.onMapLoaded += HandleOnMapLoaded;
 		}
 
@@ -192,15 +192,15 @@ public sealed class ManyHitMark : Ability
 			{
 				return false;
 			}
-			if (!((EnumArray<Damage.AttackType, bool>)ability._attackType)[damage.attackType])
+			if (!ability._attackType[damage.attackType])
 			{
 				return false;
 			}
-			if (!((EnumArray<Damage.MotionType, bool>)ability._motionType)[damage.motionType])
+			if (!ability._motionType[damage.motionType])
 			{
 				return false;
 			}
-			if (!((EnumArray<Character.Type, bool>)ability._targetType)[character.type])
+			if (!ability._targetType[character.type])
 			{
 				return false;
 			}
@@ -226,7 +226,7 @@ public sealed class ManyHitMark : Ability
 		{
 			_targets.Clear();
 			_times.Clear();
-			((PriorityList<GiveDamageDelegate>)owner.onGiveDamage).Remove((GiveDamageDelegate)HandleOnGiveDamage);
+			owner.onGiveDamage.Remove(HandleOnGiveDamage);
 			Singleton<Service>.Instance.levelManager.onMapLoaded -= HandleOnMapLoaded;
 		}
 	}

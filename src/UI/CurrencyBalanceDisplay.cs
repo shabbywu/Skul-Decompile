@@ -21,12 +21,7 @@ public class CurrencyBalanceDisplay : MonoBehaviour
 
 	private int _balanceCache;
 
-	private EnumArray<GameData.Currency.Type, string> _colorOpenByCurrency => new EnumArray<GameData.Currency.Type, string>(new string[3]
-	{
-		Localization.GetLocalizedString(Localization.Key.colorOpenGold),
-		Localization.GetLocalizedString(Localization.Key.colorOpenDarkQuartz),
-		Localization.GetLocalizedString(Localization.Key.colorOpenBone)
-	});
+	private EnumArray<GameData.Currency.Type, string> _colorOpenByCurrency => new EnumArray<GameData.Currency.Type, string>(Localization.GetLocalizedString(Localization.Key.colorOpenGold), Localization.GetLocalizedString(Localization.Key.colorOpenDarkQuartz), Localization.GetLocalizedString(Localization.Key.colorOpenBone));
 
 	private string _colorClose => Localization.GetLocalizedString("cc");
 

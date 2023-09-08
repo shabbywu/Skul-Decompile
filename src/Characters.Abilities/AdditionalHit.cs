@@ -65,7 +65,7 @@ public class AdditionalHit : Ability
 			//IL_00f2: Unknown result type (might be due to invalid IL or missing references)
 			//IL_00f7: Unknown result type (might be due to invalid IL or missing references)
 			//IL_0103: Unknown result type (might be due to invalid IL or missing references)
-			if (!(_remainCooldownTime > 0f) && !target.character.health.dead && ((Component)target.transform).gameObject.activeSelf && (!ability._needCritical || tookDamage.critical) && ((EnumArray<Damage.MotionType, bool>)ability._attackTypes)[tookDamage.motionType] && ((EnumArray<Damage.AttackType, bool>)ability._damageTypes)[tookDamage.attackType])
+			if (!(_remainCooldownTime > 0f) && !target.character.health.dead && ((Component)target.transform).gameObject.activeSelf && (!ability._needCritical || tookDamage.critical) && ability._attackTypes[tookDamage.motionType] && ability._damageTypes[tookDamage.attackType])
 			{
 				if ((Object)(object)ability._targetPoint != (Object)null)
 				{

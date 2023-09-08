@@ -40,7 +40,7 @@ public class LetterBox : MonoBehaviour
 
 	private void OnDisable()
 	{
-		PlayerInput.blocked.Detach((object)this);
+		PlayerInput.blocked.Detach(this);
 	}
 
 	public void Appear(float duration = 0.4f)
@@ -60,7 +60,7 @@ public class LetterBox : MonoBehaviour
 
 	public IEnumerator CAppear(float duration = 0.4f)
 	{
-		PlayerInput.blocked.Attach((object)this);
+		PlayerInput.blocked.Attach(this);
 		Scene<GameBase>.instance.uiManager.headupDisplay.visible = false;
 		visible = true;
 		float elapsed = 0f;
@@ -73,7 +73,7 @@ public class LetterBox : MonoBehaviour
 			((Graphic)_bottom).rectTransform.sizeDelta = new Vector2(((Graphic)_bottom).rectTransform.sizeDelta.x, num);
 			if (!(elapsed > duration))
 			{
-				elapsed += ((ChronometerBase)Chronometer.global).deltaTime;
+				elapsed += Chronometer.global.deltaTime;
 				yield return null;
 				continue;
 			}
@@ -95,10 +95,10 @@ public class LetterBox : MonoBehaviour
 			{
 				break;
 			}
-			elapsed += ((ChronometerBase)Chronometer.global).deltaTime;
+			elapsed += Chronometer.global.deltaTime;
 			yield return null;
 		}
 		visible = false;
-		PlayerInput.blocked.Detach((object)this);
+		PlayerInput.blocked.Detach(this);
 	}
 }

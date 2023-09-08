@@ -43,11 +43,11 @@ public class KeywordRandomizer : MonoBehaviour
 		list.Remove(Inscription.Key.Masterpiece);
 		list.Remove(Inscription.Key.Omen);
 		list.Remove(Inscription.Key.Sin);
-		_item.keyword1 = ExtensionMethods.Random<Inscription.Key>((IEnumerable<Inscription.Key>)list, _random);
+		_item.keyword1 = list.Random(_random);
 		if (_type == Type.Normal)
 		{
 			list.Remove(_item.keyword1);
-			_item.keyword2 = ExtensionMethods.Random<Inscription.Key>((IEnumerable<Inscription.Key>)list, _random);
+			_item.keyword2 = list.Random(_random);
 		}
 		else if (_type == Type.Clone)
 		{

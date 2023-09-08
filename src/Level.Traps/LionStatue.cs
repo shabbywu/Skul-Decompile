@@ -30,7 +30,7 @@ public class LionStatue : MonoBehaviour
 		float elapsed = (0f - _startTiming) * _interval;
 		while (true)
 		{
-			elapsed += ((ChronometerBase)Chronometer.global).deltaTime;
+			elapsed += Chronometer.global.deltaTime;
 			if (elapsed >= _interval)
 			{
 				_attackAction.TryStart();

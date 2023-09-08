@@ -147,7 +147,7 @@ public class LineBasedLaser : MonoBehaviour
 			return;
 		}
 		((Renderer)laserLineRenderer).material.mainTextureOffset = new Vector2(laserTextureOffset, 0f);
-		laserTextureOffset -= ((ChronometerBase)_character.chronometer.master).deltaTime * laserTexOffsetSpeed;
+		laserTextureOffset -= _character.chronometer.master.deltaTime * laserTexOffsetSpeed;
 		RaycastHit2D val3;
 		if (laserRotationEnabled && (Object)(object)targetGo != (Object)null)
 		{
@@ -160,7 +160,7 @@ public class LineBasedLaser : MonoBehaviour
 			float num = laserAngle * 57.29578f;
 			if (lerpLaserRotation)
 			{
-				((Component)this).transform.rotation = Quaternion.Slerp(((Component)this).transform.rotation, Quaternion.AngleAxis(num, ((Component)this).transform.forward), ((ChronometerBase)_character.chronometer.master).deltaTime * turningRate);
+				((Component)this).transform.rotation = Quaternion.Slerp(((Component)this).transform.rotation, Quaternion.AngleAxis(num, ((Component)this).transform.forward), _character.chronometer.master.deltaTime * turningRate);
 				Vector3 val2 = ((Component)this).transform.rotation * Vector3.right;
 				val3 = Physics2D.Raycast(Vector2.op_Implicit(((Component)this).transform.position), Vector2.op_Implicit(val2), maxLaserRaycastDistance, LayerMask.op_Implicit(mask));
 			}
@@ -201,7 +201,7 @@ public class LineBasedLaser : MonoBehaviour
 		//IL_0016: Unknown result type (might be due to invalid IL or missing references)
 		waitingForTriggerTime = true;
 		this.OnLaserHitTriggered?.Invoke(hit);
-		yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)_character.chronometer.master, triggerInterval);
+		yield return _character.chronometer.master.WaitForSeconds(triggerInterval);
 		waitingForTriggerTime = false;
 	}
 

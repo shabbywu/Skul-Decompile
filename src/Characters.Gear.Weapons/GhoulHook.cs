@@ -170,7 +170,7 @@ public class GhoulHook : MonoBehaviour
 		{
 			yield return null;
 			((ContactFilter2D)(ref _caster.contactFilter)).SetLayerMask(Layers.terrainMaskForProjectile);
-			float num = _speed * ((ChronometerBase)_weapon.owner.chronometer.animation).deltaTime;
+			float num = _speed * _weapon.owner.chronometer.animation.deltaTime;
 			traveled += num;
 			if (_weapon.owner.lookingDirection == Character.LookingDirection.Left)
 			{
@@ -186,14 +186,14 @@ public class GhoulHook : MonoBehaviour
 					Transform transform = ((Component)_head).transform;
 					val = _caster.results[0];
 					transform.position = Vector2.op_Implicit(((RaycastHit2D)(ref val)).point);
-					yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)_weapon.owner.chronometer.animation, _flyDelay);
+					yield return _weapon.owner.chronometer.animation.WaitForSeconds(_flyDelay);
 					this.onTerrainHit?.Invoke();
 					yield break;
 				}
 			}
 			((Component)_head).transform.Translate(Vector2.op_Implicit(right * num));
 		}
-		yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)_weapon.owner.chronometer.animation, _pullDelay);
+		yield return _weapon.owner.chronometer.animation.WaitForSeconds(_pullDelay);
 		this.onExpired?.Invoke();
 	}
 
@@ -211,7 +211,7 @@ public class GhoulHook : MonoBehaviour
 		while (time < 1f)
 		{
 			yield return null;
-			time += ((ChronometerBase)_weapon.owner.chronometer.animation).deltaTime * _pullSpeed;
+			time += _weapon.owner.chronometer.animation.deltaTime * _pullSpeed;
 			((Component)_head).transform.position = Vector2.op_Implicit(Vector2.LerpUnclamped(Vector2.op_Implicit(headPosition), Vector2.op_Implicit(((Component)_origin).transform.position), time));
 		}
 		((Component)_chain).gameObject.SetActive(false);
@@ -233,7 +233,7 @@ public class GhoulHook : MonoBehaviour
 		while (time < _flyTimeout)
 		{
 			yield return (object)new WaitForEndOfFrame();
-			float deltaTime = ((ChronometerBase)_weapon.owner.chronometer.animation).deltaTime;
+			float deltaTime = _weapon.owner.chronometer.animation.deltaTime;
 			time += deltaTime;
 			((ContactFilter2D)(ref _caster.contactFilter)).SetLayerMask(Layers.terrainMask);
 			float num = _flySpeed * deltaTime;

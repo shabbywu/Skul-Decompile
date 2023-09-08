@@ -13,9 +13,7 @@ public class AbilityBuffList : ScriptableObject
 
 	public AbilityBuff Take(Random random, Rarity rarity)
 	{
-		//IL_0007: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0008: Unknown result type (might be due to invalid IL or missing references)
-		return ExtensionMethods.Random<AbilityBuff>(_abilityBuff.Where((AbilityBuff food) => food.rarity == rarity), random);
+		return _abilityBuff.Where((AbilityBuff food) => food.rarity == rarity).Random(random);
 	}
 
 	public AbilityBuff Get(string name)

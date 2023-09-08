@@ -75,9 +75,9 @@ public class AbyssMonarchPassive : Ability
 
 		private void UpdateStack(int stack)
 		{
-			for (int i = 0; i < ((ReorderableArray<Stat.Value>)_stat).values.Length; i++)
+			for (int i = 0; i < _stat.values.Length; i++)
 			{
-				((ReorderableArray<Stat.Value>)_stat).values[i].value = ((ReorderableArray<Stat.Value>)_statPerStack).values[i].GetStackedValue(stack);
+				_stat.values[i].value = _statPerStack.values[i].GetStackedValue(stack);
 			}
 			owner.stat.SetNeedUpdate();
 		}

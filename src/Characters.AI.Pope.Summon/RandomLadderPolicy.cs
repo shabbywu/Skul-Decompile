@@ -27,7 +27,7 @@ public class RandomLadderPolicy : LadderPolicy
 	protected override void GetLadders(ref List<FanaticLadder> results, int count)
 	{
 		results.Clear();
-		ExtensionMethods.Shuffle<FanaticLadder>((IList<FanaticLadder>)_ladders);
+		_ladders.Shuffle();
 		FanaticLadder[] array = _ladders.Take(count).ToArray();
 		for (int i = 0; i < count; i++)
 		{

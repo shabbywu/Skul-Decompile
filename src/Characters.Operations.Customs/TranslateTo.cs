@@ -34,7 +34,7 @@ public class TranslateTo : Operation
 		while (elapsed <= duration)
 		{
 			yield return null;
-			elapsed += ((ChronometerBase)Chronometer.global).deltaTime;
+			elapsed += Chronometer.global.deltaTime;
 			_object.position = Vector2.op_Implicit(Vector2.Lerp(Vector2.op_Implicit(start), Vector2.op_Implicit(end), _curve.Evaluate(elapsed)));
 		}
 		_object.position = end;

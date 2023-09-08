@@ -30,11 +30,11 @@ public class LightChase : Behaviour
 	private Behaviour _attack;
 
 	[SerializeField]
-	[Subcomponent(typeof(OperationInfos))]
+	[UnityEditor.Subcomponent(typeof(OperationInfos))]
 	private OperationInfos _readyGhost;
 
 	[SerializeField]
-	[Subcomponent(typeof(OperationInfos))]
+	[UnityEditor.Subcomponent(typeof(OperationInfos))]
 	private OperationInfos _attackGhost;
 
 	private void Awake()

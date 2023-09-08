@@ -37,7 +37,7 @@ public class GrabTo : CharacterHitOperation
 	[SerializeField]
 	private SmashAttackVisualEffect.Subcomponents _effect;
 
-	[Subcomponent(typeof(TargetedOperationInfo))]
+	[UnityEditor.Subcomponent(typeof(TargetedOperationInfo))]
 	[SerializeField]
 	private TargetedOperationInfo.Subcomponents _onCollide;
 
@@ -76,7 +76,7 @@ public class GrabTo : CharacterHitOperation
 			Vector2 val = ((!((Object)(object)_targetPlace != (Object)null)) ? Vector2.op_Implicit(_targetPoint.position) : MMMaths.RandomPointWithinBounds(_targetPlace.bounds));
 			Vector2 force = val - Vector2.op_Implicit(((Component)target).transform.position);
 			target.movement.push.ApplySmash(owner, force, _curve, _ignoreOtherForce, _expireOnGround, OnEnd);
-			elapsed += ((ChronometerBase)Chronometer.global).deltaTime;
+			elapsed += Chronometer.global.deltaTime;
 			yield return null;
 		}
 	}

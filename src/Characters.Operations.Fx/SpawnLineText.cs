@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using GameResources;
 using UnityEngine;
 
@@ -47,7 +46,7 @@ public class SpawnLineText : CharacterOperation
 			string[] localizedStringArray = Localization.GetLocalizedStringArray(_textKey);
 			if (localizedStringArray.Length != 0)
 			{
-				string text = ExtensionMethods.Random<string>((IEnumerable<string>)localizedStringArray);
+				string text = localizedStringArray.Random();
 				Vector2 val = (((Object)(object)_spawnPosition == (Object)null) ? GetDefaultPosition(((Collider2D)owner.collider).bounds) : Vector2.op_Implicit(_spawnPosition.position));
 				((Component)_lineText).transform.position = Vector2.op_Implicit(val);
 				_lineText.Display(text, _duration);

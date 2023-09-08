@@ -49,7 +49,7 @@ public sealed class ReusableChronoSpriteEffect : MonoBehaviour, IUseChronometer,
 
 	private void OnDespawn()
 	{
-		((CoroutineReference)(ref _cPlayReference)).Stop();
+		_cPlayReference.Stop();
 	}
 
 	public void Copy(ReusableChronoSpriteEffect to)
@@ -78,9 +78,7 @@ public sealed class ReusableChronoSpriteEffect : MonoBehaviour, IUseChronometer,
 
 	public void Play(float delay, float duration, bool loop, AnimationCurve fadeOutCurve, float fadeOutDuration)
 	{
-		//IL_0013: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0018: Unknown result type (might be due to invalid IL or missing references)
-		_cPlayReference = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)CoroutineProxy.instance, CPlay(delay, duration, loop, fadeOutCurve, fadeOutDuration));
+		_cPlayReference = ((MonoBehaviour)(object)CoroutineProxy.instance).StartCoroutineWithReference(CPlay(delay, duration, loop, fadeOutCurve, fadeOutDuration));
 	}
 
 	private IEnumerator CPlay(float delay, float duration, bool loop, AnimationCurve fadeOutCurve, float fadeOutDuration)
@@ -90,7 +88,7 @@ public sealed class ReusableChronoSpriteEffect : MonoBehaviour, IUseChronometer,
 		{
 			((Renderer)_renderer).enabled = false;
 			yield return null;
-			float num = ChronometerExtension.DeltaTime(chronometer);
+			float num = chronometer.DeltaTime();
 			remain2 -= num;
 		}
 		((Renderer)_renderer).enabled = true;
@@ -115,7 +113,7 @@ public sealed class ReusableChronoSpriteEffect : MonoBehaviour, IUseChronometer,
 		if (duration <= 0f)
 		{
 			Debug.LogError((object)"Duration - Fade out duration이 0이하입니다.");
-			((CoroutineReference)(ref _cPlayReference)).Clear();
+			_cPlayReference.Clear();
 			_reusable.Despawn();
 			yield break;
 		}
@@ -124,7 +122,7 @@ public sealed class ReusableChronoSpriteEffect : MonoBehaviour, IUseChronometer,
 		while (remain2 > float.Epsilon)
 		{
 			yield return null;
-			float num2 = ChronometerExtension.DeltaTime(chronometer);
+			float num2 = chronometer.DeltaTime();
 			_animator.Update(num2);
 			remain2 -= num2;
 		}
@@ -133,7 +131,7 @@ public sealed class ReusableChronoSpriteEffect : MonoBehaviour, IUseChronometer,
 			yield return CFadeOut(0f - remain2, fadeOutDuration, fadeOutCurve);
 		}
 		((Behaviour)_animator).enabled = true;
-		((CoroutineReference)(ref _cPlayReference)).Clear();
+		_cPlayReference.Clear();
 		_reusable.Despawn();
 	}
 
@@ -144,7 +142,7 @@ public sealed class ReusableChronoSpriteEffect : MonoBehaviour, IUseChronometer,
 		while (time < duration)
 		{
 			yield return null;
-			float num = ChronometerExtension.DeltaTime(chronometer);
+			float num = chronometer.DeltaTime();
 			time += num;
 			_animator.Update(num);
 			color.a = alpha * (1f - fadeOutCurve.Evaluate(time / duration));

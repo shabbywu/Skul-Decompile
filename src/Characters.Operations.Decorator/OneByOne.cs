@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Characters.Operations.Decorator;
@@ -20,14 +19,14 @@ public class OneByOne : CharacterOperation
 		_operations.Initialize();
 		if (_randomizeEntry)
 		{
-			_index = ExtensionMethods.RandomIndex<CharacterOperation>((IEnumerable<CharacterOperation>)((SubcomponentArray<CharacterOperation>)_operations).components);
+			_index = _operations.components.RandomIndex();
 		}
 	}
 
 	public override void Run(Character owner)
 	{
-		CharacterOperation characterOperation = ((SubcomponentArray<CharacterOperation>)_operations).components[_index];
-		_index = (_index + 1) % ((SubcomponentArray<CharacterOperation>)_operations).components.Length;
+		CharacterOperation characterOperation = _operations.components[_index];
+		_index = (_index + 1) % _operations.components.Length;
 		if (!((Object)(object)characterOperation == (Object)null))
 		{
 			characterOperation.Run(owner);

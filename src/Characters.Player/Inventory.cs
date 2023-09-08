@@ -237,7 +237,7 @@ public class Inventory
 	{
 		for (int i = 0; i < GameData.HardmodeProgress.InscriptionSynthesisEquipment.count; i++)
 		{
-			int value = ((Data<int>)(object)GameData.HardmodeProgress.inscriptionSynthesisEquipment[i]).value;
+			int value = GameData.HardmodeProgress.inscriptionSynthesisEquipment[i].value;
 			if (value != -1)
 			{
 				synergy.inscriptions[(Inscription.Key)value].bonusCount += InscriptionSynthesisEquipment.increasement;

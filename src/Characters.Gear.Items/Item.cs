@@ -95,9 +95,7 @@ public class Item : Gear
 			{
 				foreach (Inscription.Key value in Enum.GetValues(typeof(Inscription.Key)))
 				{
-					EnumArray<Inscription.Key, int> val = keywordCounts;
-					Inscription.Key key = value;
-					val[key] += count;
+					keywordCounts[value] += count;
 				}
 				break;
 			}
@@ -107,30 +105,18 @@ public class Item : Gear
 				{
 					if (keywordCounts[value2] > 0)
 					{
-						EnumArray<Inscription.Key, int> val = keywordCounts;
-						Inscription.Key key = value2;
-						val[key] += count;
+						keywordCounts[value2] += count;
 					}
 				}
 				break;
 			}
 			case Type.Items:
-			{
-				EnumArray<Inscription.Key, int> val = keywordCounts;
-				Inscription.Key key = _ownerItem.keyword1;
-				val[key] += count;
-				val = keywordCounts;
-				key = _ownerItem.keyword2;
-				val[key] += count;
+				keywordCounts[_ownerItem.keyword1] += count;
+				keywordCounts[_ownerItem.keyword2] += count;
 				break;
-			}
 			case Type.Single:
-			{
-				EnumArray<Inscription.Key, int> val = keywordCounts;
-				Inscription.Key key = keyword;
-				val[key] += count;
+				keywordCounts[keyword] += count;
 				break;
-			}
 			}
 		}
 
@@ -194,10 +180,6 @@ public class Item : Gear
 		//IL_00d5: Unknown result type (might be due to invalid IL or missing references)
 		//IL_00d8: Unknown result type (might be due to invalid IL or missing references)
 		//IL_00b3: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0102: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0107: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0109: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0120: Expected I4, but got Unknown
 		if (Service.quitting)
 		{
 			return;
@@ -233,19 +215,18 @@ public class Item : Gear
 		int count = 1;
 		if (currencyByDiscard > 0)
 		{
-			Rarity val = base.rarity;
-			switch ((int)val)
+			switch (base.rarity)
 			{
-			case 0:
+			case Rarity.Common:
 				count = 5;
 				break;
-			case 1:
+			case Rarity.Rare:
 				count = 8;
 				break;
-			case 2:
+			case Rarity.Unique:
 				count = 15;
 				break;
-			case 3:
+			case Rarity.Legendary:
 				count = 25;
 				break;
 			}

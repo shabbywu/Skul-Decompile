@@ -26,15 +26,13 @@ public class MoveToDestination : CharacterOperation
 		//IL_0075: Unknown result type (might be due to invalid IL or missing references)
 		//IL_007a: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0057: Unknown result type (might be due to invalid IL or missing references)
-		//IL_005d: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0062: Unknown result type (might be due to invalid IL or missing references)
 		if (!((Object)(object)owner.movement == (Object)null))
 		{
 			Vector2 val = Vector2.op_Implicit(_destination.position - ((Component)owner).transform.position);
 			if (_curve.duration > 0f)
 			{
-				((CoroutineReference)(ref _coroutineReference)).Stop();
-				_coroutineReference = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)owner, CMove(owner, _curve, val));
+				_coroutineReference.Stop();
+				_coroutineReference = ((MonoBehaviour)(object)owner).StartCoroutineWithReference(CMove(owner, _curve, val));
 			}
 			else
 			{
@@ -50,7 +48,7 @@ public class MoveToDestination : CharacterOperation
 		//IL_0016: Unknown result type (might be due to invalid IL or missing references)
 		float t = 0f;
 		float amountBefore = 0f;
-		for (; t < curve.duration; t += ((ChronometerBase)character.chronometer.animation).deltaTime)
+		for (; t < curve.duration; t += character.chronometer.animation.deltaTime)
 		{
 			if ((Object)(object)character == (Object)null)
 			{
@@ -70,6 +68,6 @@ public class MoveToDestination : CharacterOperation
 
 	public override void Stop()
 	{
-		((CoroutineReference)(ref _coroutineReference)).Stop();
+		_coroutineReference.Stop();
 	}
 }

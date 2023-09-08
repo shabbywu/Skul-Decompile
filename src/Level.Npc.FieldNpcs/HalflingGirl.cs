@@ -94,9 +94,6 @@ public class HalflingGirl : FieldNpc
 
 	private void PlaceFood()
 	{
-		//IL_0006: Unknown result type (might be due to invalid IL or missing references)
-		//IL_000b: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0018: Unknown result type (might be due to invalid IL or missing references)
 		Rarity rarity = _abilityPossiblities.Evaluate();
 		AbilityBuff abilityBuff = _abilityBuffList.Take(_random, rarity);
 		AbilityBuff abilityBuff2 = Object.Instantiate<AbilityBuff>(abilityBuff, _dropPosition);

@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
@@ -15,9 +14,9 @@ public class SequentialAction : Action
 
 	private int _motionIndex;
 
-	public override Motion[] motions => ((SubcomponentArray<Motion>)_motions).components;
+	public override Motion[] motions => _motions.components;
 
-	public Motion currentMotion => ((SubcomponentArray<Motion>)_motions).components[_motionIndex];
+	public Motion currentMotion => _motions.components[_motionIndex];
 
 	public override bool canUse
 	{
@@ -36,7 +35,7 @@ public class SequentialAction : Action
 		base.Initialize(owner);
 		if (_shuffle)
 		{
-			ExtensionMethods.PseudoShuffle<Motion>((IList<Motion>)motions);
+			motions.PseudoShuffle();
 		}
 		for (int i = 0; i < motions.Length; i++)
 		{
@@ -50,8 +49,8 @@ public class SequentialAction : Action
 		{
 			return false;
 		}
-		DoAction(((SubcomponentArray<Motion>)_motions).components[_motionIndex]);
-		_motionIndex = (_motionIndex + 1) % ((SubcomponentArray<Motion>)_motions).components.Length;
+		DoAction(_motions.components[_motionIndex]);
+		_motionIndex = (_motionIndex + 1) % _motions.components.Length;
 		return true;
 	}
 }

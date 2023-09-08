@@ -29,18 +29,18 @@ public class Chapter3Script : MonoBehaviour
 		{
 			public int Take()
 			{
-				if (base.values.Length == 0)
+				if (values.Length == 0)
 				{
 					return 0;
 				}
-				int num = base.values.Sum((DarkQuartzPossibility v) => v.weight);
+				int num = values.Sum((DarkQuartzPossibility v) => v.weight);
 				int num2 = Random.Range(0, num) + 1;
-				for (int i = 0; i < base.values.Length; i++)
+				for (int i = 0; i < values.Length; i++)
 				{
-					num2 -= base.values[i].weight;
+					num2 -= values[i].weight;
 					if (num2 <= 0)
 					{
-						return (int)base.values[i].amount.value;
+						return (int)values[i].amount.value;
 					}
 				}
 				return 0;
@@ -81,9 +81,9 @@ public class Chapter3Script : MonoBehaviour
 			//IL_000f: Unknown result type (might be due to invalid IL or missing references)
 			Character player = Singleton<Service>.Instance.levelManager.player;
 			player.CancelAction();
-			PlayerInput.blocked.Attach((object)_script);
+			PlayerInput.blocked.Attach(_script);
 			yield return MoveTo(Vector2.op_Implicit(dest), player);
-			PlayerInput.blocked.Detach((object)_script);
+			PlayerInput.blocked.Detach(_script);
 		}
 
 		private IEnumerator MoveTo(Vector3 destination, Character player)
@@ -218,8 +218,8 @@ public class Chapter3Script : MonoBehaviour
 	{
 		if (!Service.quitting)
 		{
-			PlayerInput.blocked.Detach((object)this);
-			Singleton<Service>.Instance.levelManager.player.movement.blocked.Detach((object)this);
+			PlayerInput.blocked.Detach(this);
+			Singleton<Service>.Instance.levelManager.player.movement.blocked.Detach(this);
 			if ((Object)(object)Scene<GameBase>.instance.uiManager != (Object)null && (Object)(object)Scene<GameBase>.instance.uiManager.npcConversation != (Object)null)
 			{
 				Scene<GameBase>.instance.uiManager.npcConversation.Done();

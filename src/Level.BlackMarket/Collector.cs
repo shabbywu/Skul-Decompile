@@ -37,7 +37,7 @@ public class Collector : Npc
 
 	private Dictionary<string, int> _keywordRandomItemRerollCount;
 
-	public string submitLine => ExtensionMethods.Random<string>((IEnumerable<string>)Localization.GetLocalizedStringArray("npc/collector/submit/line"));
+	public string submitLine => Localization.GetLocalizedStringArray("npc/collector/submit/line").Random();
 
 	public bool loadCompleted { get; set; }
 

@@ -16,7 +16,7 @@ public class WeaponChangeEffect : MonoBehaviour
 	private SpriteRenderer _spriteRenderer;
 
 	[SerializeField]
-	private Method _runEaseMethod = (Method)21;
+	private EasingFunction.Method _runEaseMethod = EasingFunction.Method.Linear;
 
 	private EasingFunction _runEase;
 
@@ -53,7 +53,7 @@ public class WeaponChangeEffect : MonoBehaviour
 		{
 			yield return null;
 			_spriteRenderer.color = Color.Lerp(_startColor, _endColor, t / _duration);
-			t += ((ChronometerBase)chronometer).deltaTime;
+			t += chronometer.deltaTime;
 		}
 		while (!(t > _duration));
 		((Renderer)_spriteRenderer).material = defaultMaterial;

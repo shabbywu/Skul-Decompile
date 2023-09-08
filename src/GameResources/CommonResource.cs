@@ -561,7 +561,7 @@ public class CommonResource : ScriptableObject
 		//IL_021b: Unknown result type (might be due to invalid IL or missing references)
 		instance = this;
 		((Object)this).hideFlags = (HideFlags)(((Object)this).hideFlags | 0x20);
-		potions = new EnumArray<Potion.Size, Potion>(new Potion[3] { _smallPotion, _mediumPotion, _largePotion });
+		potions = new EnumArray<Potion.Size, Potion>(_smallPotion, _mediumPotion, _largePotion);
 		_keyboardButtonDictionary = _keyboardButtons.ToDictionary<Sprite, string>((Sprite sprite) => ((Object)sprite).name, StringComparer.OrdinalIgnoreCase);
 		_keyboardButtonOutlineDictionary = _keyboardButtonsOutline.ToDictionary<Sprite, string>((Sprite sprite) => ((Object)sprite).name, StringComparer.OrdinalIgnoreCase);
 		_mouseButtonDictionary = _mouseButtons.ToDictionary<Sprite, string>((Sprite sprite) => ((Object)sprite).name, StringComparer.OrdinalIgnoreCase);

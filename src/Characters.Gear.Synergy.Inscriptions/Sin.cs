@@ -21,7 +21,7 @@ public sealed class Sin : InscriptionInstance
 	{
 		ExtensionMethods.Set((Type)66);
 		base.character.stat.adaptiveAttribute = true;
-		((PriorityList<GiveDamageDelegate>)base.character.onGiveDamage).Add(int.MaxValue, (GiveDamageDelegate)HandleOnGiveDamage);
+		base.character.onGiveDamage.Add(int.MaxValue, HandleOnGiveDamage);
 	}
 
 	private bool HandleOnGiveDamage(ITarget target, ref Damage damage)
@@ -38,6 +38,6 @@ public sealed class Sin : InscriptionInstance
 	public override void Detach()
 	{
 		base.character.stat.adaptiveAttribute = false;
-		((PriorityList<GiveDamageDelegate>)base.character.onGiveDamage).Remove((GiveDamageDelegate)HandleOnGiveDamage);
+		base.character.onGiveDamage.Remove(HandleOnGiveDamage);
 	}
 }

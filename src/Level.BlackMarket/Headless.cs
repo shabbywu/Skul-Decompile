@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using Characters;
 using Characters.Gear.Weapons;
@@ -39,7 +38,7 @@ public class Headless : Npc
 
 	private Random _random;
 
-	public string submitLine => ExtensionMethods.Random<string>((IEnumerable<string>)Localization.GetLocalizedStringArray("npc/headless/submit/line"));
+	public string submitLine => Localization.GetLocalizedStringArray("npc/headless/submit/line").Random();
 
 	private void OnDisable()
 	{

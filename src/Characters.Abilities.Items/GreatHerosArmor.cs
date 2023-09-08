@@ -57,7 +57,7 @@ public sealed class GreatHerosArmor : Ability
 
 			private void HandleOnTookDamage(in Damage originalDamage, in Damage tookDamage, double damageDealt)
 			{
-				if (((EnumArray<Damage.AttackType, bool>)ability._stackDamageType)[tookDamage.attackType])
+				if (ability._stackDamageType[tookDamage.attackType])
 				{
 					_stackedDamage += damageDealt;
 				}

@@ -36,9 +36,9 @@ public sealed class SymbolOfToughness : Ability
 
 		protected override void OnAttach()
 		{
-			owner.health.onTakeDamage.Add(int.MaxValue, (TakeDamageDelegate)HandleOnTakeDamage);
+			owner.health.onTakeDamage.Add(int.MaxValue, HandleOnTakeDamage);
 			owner.health.onTookDamage += OnTookDamage;
-			((PriorityList<GiveDamageDelegate>)owner.onGiveDamage).Add(int.MaxValue, (GiveDamageDelegate)OnGiveDamage);
+			owner.onGiveDamage.Add(int.MaxValue, OnGiveDamage);
 			Character character = owner;
 			character.onGaveDamage = (GaveDamageDelegate)Delegate.Combine(character.onGaveDamage, new GaveDamageDelegate(HanldeOnGaveDamage));
 			_lastAttackTime = Time.time;
@@ -139,9 +139,9 @@ public sealed class SymbolOfToughness : Ability
 		protected override void OnDetach()
 		{
 			_instances.Remove(this);
-			owner.health.onTakeDamage.Remove((TakeDamageDelegate)HandleOnTakeDamage);
+			owner.health.onTakeDamage.Remove(HandleOnTakeDamage);
 			owner.health.onTookDamage -= OnTookDamage;
-			((PriorityList<GiveDamageDelegate>)owner.onGiveDamage).Remove((GiveDamageDelegate)OnGiveDamage);
+			owner.onGiveDamage.Remove(OnGiveDamage);
 			Character character = owner;
 			character.onGaveDamage = (GaveDamageDelegate)Delegate.Remove(character.onGaveDamage, new GaveDamageDelegate(HanldeOnGaveDamage));
 		}

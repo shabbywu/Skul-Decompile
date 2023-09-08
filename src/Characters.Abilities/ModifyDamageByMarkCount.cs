@@ -21,12 +21,12 @@ public class ModifyDamageByMarkCount : Ability
 
 		protected override void OnAttach()
 		{
-			((PriorityList<GiveDamageDelegate>)owner.onGiveDamage).Add(int.MinValue, (GiveDamageDelegate)OnGiveDamage);
+			owner.onGiveDamage.Add(int.MinValue, OnGiveDamage);
 		}
 
 		protected override void OnDetach()
 		{
-			((PriorityList<GiveDamageDelegate>)owner.onGiveDamage).Remove((GiveDamageDelegate)OnGiveDamage);
+			owner.onGiveDamage.Remove(OnGiveDamage);
 		}
 
 		private bool OnGiveDamage(ITarget target, ref Damage damage)

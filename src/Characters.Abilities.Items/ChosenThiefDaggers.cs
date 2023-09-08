@@ -21,7 +21,7 @@ public sealed class ChosenThiefDaggers : Ability
 
 		protected override void OnAttach()
 		{
-			((PriorityList<GiveDamageDelegate>)owner.onGiveDamage).Add(int.MaxValue, (GiveDamageDelegate)HandleOnGiveDamage);
+			owner.onGiveDamage.Add(int.MaxValue, HandleOnGiveDamage);
 			Character character = owner;
 			character.onGaveDamage = (GaveDamageDelegate)Delegate.Combine(character.onGaveDamage, new GaveDamageDelegate(HandleOnGaveDamage));
 			Singleton<Service>.Instance.levelManager.onMapLoaded += LevelManager_onMapLoaded;
@@ -43,7 +43,7 @@ public sealed class ChosenThiefDaggers : Ability
 			if (damageDealt != 0.0)
 			{
 				owner.ability.Add(ability._ownerAbility.ability);
-				AbilityComponent[] components = ((SubcomponentArray<AbilityComponent>)ability._targetAbility).components;
+				AbilityComponent[] components = ability._targetAbility.components;
 				foreach (AbilityComponent abilityComponent in components)
 				{
 					character.ability.Add(abilityComponent.ability);
@@ -70,7 +70,7 @@ public sealed class ChosenThiefDaggers : Ability
 
 		protected override void OnDetach()
 		{
-			((PriorityList<GiveDamageDelegate>)owner.onGiveDamage).Remove((GiveDamageDelegate)HandleOnGiveDamage);
+			owner.onGiveDamage.Remove(HandleOnGiveDamage);
 			Character character = owner;
 			character.onGaveDamage = (GaveDamageDelegate)Delegate.Remove(character.onGaveDamage, new GaveDamageDelegate(HandleOnGaveDamage));
 			Singleton<Service>.Instance.levelManager.onMapLoaded -= LevelManager_onMapLoaded;

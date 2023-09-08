@@ -25,7 +25,7 @@ public sealed class ActivateLaser : CharacterOperation
 
 	private IEnumerator CRun(Character owner)
 	{
-		yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)owner.chronometer.master, _duration);
+		yield return owner.chronometer.master.WaitForSeconds(_duration);
 		_laser.Deactivate();
 	}
 

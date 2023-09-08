@@ -6,7 +6,7 @@ namespace Characters.Operations.Attack;
 public sealed class InstantAttackInContainer : CharacterOperation
 {
 	[SerializeField]
-	[Subcomponent(typeof(InstantAttack))]
+	[UnityEditor.Subcomponent(typeof(InstantAttack))]
 	private InstantAttack _instantAttack;
 
 	[SerializeField]

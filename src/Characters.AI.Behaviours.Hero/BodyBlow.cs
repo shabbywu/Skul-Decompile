@@ -10,26 +10,26 @@ namespace Characters.AI.Behaviours.Hero;
 public class BodyBlow : Behaviour, IFinish, IComboable
 {
 	[SerializeField]
-	[Subcomponent(typeof(ChainAction))]
+	[UnityEditor.Subcomponent(typeof(ChainAction))]
 	private Characters.Actions.Action _startAction;
 
-	[Subcomponent(typeof(ChainAction))]
+	[UnityEditor.Subcomponent(typeof(ChainAction))]
 	[SerializeField]
 	private Characters.Actions.Action _readyAction;
 
-	[Subcomponent(typeof(ChainAction))]
+	[UnityEditor.Subcomponent(typeof(ChainAction))]
 	[SerializeField]
 	private Characters.Actions.Action _attackAction;
 
 	[SerializeField]
-	[Subcomponent(typeof(ChainAction))]
+	[UnityEditor.Subcomponent(typeof(ChainAction))]
 	private Characters.Actions.Action _failAction;
 
 	[SerializeField]
-	[Subcomponent(typeof(SlashCombo))]
+	[UnityEditor.Subcomponent(typeof(SlashCombo))]
 	private SlashCombo _slashCombo;
 
-	[Subcomponent(typeof(SkipableIdle))]
+	[UnityEditor.Subcomponent(typeof(SkipableIdle))]
 	[SerializeField]
 	private SkipableIdle _skipableIdle;
 

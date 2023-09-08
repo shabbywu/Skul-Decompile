@@ -64,11 +64,11 @@ public class Stun : CharacterStatusAbility, IAbility, IAbilityInstance
 		remainTime = duration;
 		if (owner.type == Character.Type.Boss)
 		{
-			((ChronometerBase)owner.chronometer.animation).AttachTimeScale((object)this, 0f);
-			owner.blockLook.Attach((object)this);
+			owner.chronometer.animation.AttachTimeScale(this, 0f);
+			owner.blockLook.Attach(this);
 			if ((Object)(object)owner.movement != (Object)null)
 			{
-				owner.movement.blocked.Attach((object)this);
+				owner.movement.blocked.Attach(this);
 			}
 		}
 		else
@@ -76,10 +76,10 @@ public class Stun : CharacterStatusAbility, IAbility, IAbilityInstance
 			owner.CancelAction();
 			owner.animationController.Stun();
 		}
-		owner.blockLook.Attach((object)this);
+		owner.blockLook.Attach(this);
 		if ((Object)(object)owner.movement != (Object)null)
 		{
-			owner.movement.blocked.Attach((object)this);
+			owner.movement.blocked.Attach(this);
 		}
 		onAttachEvents?.Invoke(base.attacker, owner);
 		onAttached?.Invoke(base.attacker, owner);
@@ -91,21 +91,21 @@ public class Stun : CharacterStatusAbility, IAbility, IAbilityInstance
 		remainTime = 0f;
 		if (owner.type == Character.Type.Boss)
 		{
-			((ChronometerBase)owner.chronometer.animation).DetachTimeScale((object)this);
-			owner.blockLook.Detach((object)this);
+			owner.chronometer.animation.DetachTimeScale(this);
+			owner.blockLook.Detach(this);
 			if ((Object)(object)owner.movement != (Object)null)
 			{
-				owner.movement.blocked.Detach((object)this);
+				owner.movement.blocked.Detach(this);
 			}
 		}
 		else
 		{
 			owner.animationController.StopAll();
 		}
-		owner.blockLook.Detach((object)this);
+		owner.blockLook.Detach(this);
 		if ((Object)(object)owner.movement != (Object)null)
 		{
-			owner.movement.blocked.Detach((object)this);
+			owner.movement.blocked.Detach(this);
 		}
 		onDetachEvents?.Invoke(base.attacker, owner);
 		onDetached?.Invoke(base.attacker, owner);

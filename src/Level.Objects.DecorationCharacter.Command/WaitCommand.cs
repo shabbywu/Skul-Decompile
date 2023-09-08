@@ -15,6 +15,6 @@ public class WaitCommand : ICommand
 
 	public IEnumerator CRun()
 	{
-		yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)_owner.chronometer.master, _waitSeconds.value);
+		yield return _owner.chronometer.master.WaitForSeconds(_waitSeconds.value);
 	}
 }

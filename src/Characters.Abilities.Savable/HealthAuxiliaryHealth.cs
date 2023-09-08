@@ -70,20 +70,20 @@ public sealed class HealthAuxiliaryHealth : IAbility, IAbilityInstance, ISavable
 
 	void IAbilityInstance.Attach()
 	{
-		for (int i = 0; i < ((ReorderableArray<Stat.Value>)_buff).values.Length; i++)
+		for (int i = 0; i < _buff.values.Length; i++)
 		{
 			float num = Singleton<DarktechManager>.Instance.setting.건강보조장치체력버프스텟[_level] * Singleton<DarktechManager>.Instance.setting.건강보조장치스탯증폭량;
-			((ReorderableArray<Stat.Value>)_buff).values[i].value = num;
+			_buff.values[i].value = num;
 		}
 		_owner.stat.AttachValues(_buff);
 	}
 
 	void IAbilityInstance.Refresh()
 	{
-		for (int i = 0; i < ((ReorderableArray<Stat.Value>)_buff).values.Length; i++)
+		for (int i = 0; i < _buff.values.Length; i++)
 		{
 			float num = Singleton<DarktechManager>.Instance.setting.건강보조장치체력버프스텟[_level] * Singleton<DarktechManager>.Instance.setting.건강보조장치스탯증폭량;
-			((ReorderableArray<Stat.Value>)_buff).values[i].value = num;
+			_buff.values[i].value = num;
 		}
 		_owner.stat.SetNeedUpdate();
 	}

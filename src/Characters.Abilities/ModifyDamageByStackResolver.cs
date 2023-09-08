@@ -17,7 +17,7 @@ public sealed class ModifyDamageByStackResolver : Ability
 
 		protected override void OnAttach()
 		{
-			((PriorityList<GiveDamageDelegate>)owner.onGiveDamage).Add(ability._priority, (GiveDamageDelegate)HandleOnGiveDamage);
+			owner.onGiveDamage.Add(ability._priority, HandleOnGiveDamage);
 			ability._stackResolver.Attach(owner);
 		}
 
@@ -49,15 +49,15 @@ public sealed class ModifyDamageByStackResolver : Ability
 			{
 				return false;
 			}
-			if ((Object)(object)target.character != (Object)null && !((EnumArray<Character.Type, bool>)ability._characterTypes)[target.character.type])
+			if ((Object)(object)target.character != (Object)null && !ability._characterTypes[target.character.type])
 			{
 				return false;
 			}
-			if (!((EnumArray<Damage.MotionType, bool>)ability._attackTypes)[damage.motionType])
+			if (!ability._attackTypes[damage.motionType])
 			{
 				return false;
 			}
-			if (!((EnumArray<Damage.AttackType, bool>)ability._damageTypes)[damage.attackType])
+			if (!ability._damageTypes[damage.attackType])
 			{
 				return false;
 			}
@@ -83,7 +83,7 @@ public sealed class ModifyDamageByStackResolver : Ability
 
 		protected override void OnDetach()
 		{
-			((PriorityList<GiveDamageDelegate>)owner.onGiveDamage).Remove((GiveDamageDelegate)HandleOnGiveDamage);
+			owner.onGiveDamage.Remove(HandleOnGiveDamage);
 			ability._stackResolver.Detach(owner);
 		}
 	}

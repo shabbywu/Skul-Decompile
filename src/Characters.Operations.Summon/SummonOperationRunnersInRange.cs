@@ -143,8 +143,8 @@ public sealed class SummonOperationRunnersInRange : CharacterOperation
 			for (int i = 0; i < _overlapper.results.Count; i++)
 			{
 				Bounds bounds2 = _overlapper.results[i].bounds;
-				float2 val = float2.op_Implicit(ExtensionMethods.GetMostLeftTop(bounds2));
-				float2 val2 = float2.op_Implicit(ExtensionMethods.GetMostRightTop(bounds2));
+				float2 val = float2.op_Implicit(bounds2.GetMostLeftTop());
+				float2 val2 = float2.op_Implicit(bounds2.GetMostRightTop());
 				val.x = Mathf.Max(val.x, x);
 				val2.x = Mathf.Min(val2.x, x2);
 				_surfaces.Add((val, val2));
@@ -155,7 +155,7 @@ public sealed class SummonOperationRunnersInRange : CharacterOperation
 	private IEnumerator CSummonAll(Character owner)
 	{
 		int remain = _count;
-		ExtensionMethods.PseudoShuffle<(float2, float2)>((IList<(float2, float2)>)_surfaces);
+		_surfaces.PseudoShuffle();
 		float num = 0f;
 		foreach (var surface2 in _surfaces)
 		{

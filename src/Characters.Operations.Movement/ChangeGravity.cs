@@ -19,12 +19,10 @@ public sealed class ChangeGravity : CharacterOperation
 
 	public override void Run(Character owner)
 	{
-		//IL_0020: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0025: Unknown result type (might be due to invalid IL or missing references)
 		character = owner;
 		Attach();
-		((CoroutineReference)(ref _coroutineReference)).Stop();
-		_coroutineReference = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)owner, CUpdate());
+		_coroutineReference.Stop();
+		_coroutineReference = ((MonoBehaviour)(object)owner).StartCoroutineWithReference(CUpdate());
 	}
 
 	private IEnumerator CUpdate()
@@ -52,7 +50,7 @@ public sealed class ChangeGravity : CharacterOperation
 
 	public override void Stop()
 	{
-		((CoroutineReference)(ref _coroutineReference)).Stop();
+		_coroutineReference.Stop();
 		if ((Object)(object)character != (Object)null && _originalConfig != null)
 		{
 			_originalConfig.gravity = _originalGravity;

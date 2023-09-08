@@ -41,9 +41,9 @@ public class ActionConstraint : Constraint
 		{
 			return true;
 		}
-		for (int i = 0; i < ((ReorderableArray<Exception>)_exceptions).values.Length; i++)
+		for (int i = 0; i < _exceptions.values.Length; i++)
 		{
-			Exception ex = ((ReorderableArray<Exception>)_exceptions).values[i];
+			Exception ex = _exceptions.values[i];
 			if ((Object)(object)ex.motion == (Object)(object)runningMotion)
 			{
 				if (ex.range.x == ex.range.y)
@@ -53,6 +53,6 @@ public class ActionConstraint : Constraint
 				return MMMaths.Range(runningMotion.normalizedTime, ex.range);
 			}
 		}
-		return ((EnumArray<Action.Type, bool>)_canCancel).GetOrDefault(runningMotion.action.type);
+		return _canCancel.GetOrDefault(runningMotion.action.type);
 	}
 }

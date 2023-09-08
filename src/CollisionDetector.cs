@@ -129,7 +129,7 @@ public class CollisionDetector
 		{
 			LayerMask terrainLayer = _terrainLayer;
 			RaycastHit2D val = _caster.results[i];
-			if (ExtensionMethods.Contains(terrainLayer, ((Component)((RaycastHit2D)(ref val)).collider).gameObject.layer))
+			if (terrainLayer.Contains(((Component)((RaycastHit2D)(ref val)).collider).gameObject.layer))
 			{
 				this.onTerrainHit(_collider, origin, direction, distance, _caster.results[i]);
 			}

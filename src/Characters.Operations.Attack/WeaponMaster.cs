@@ -38,7 +38,7 @@ public sealed class WeaponMaster : CharacterOperation
 	private EffectInfo _spawnEffect;
 
 	[SerializeField]
-	[Subcomponent(typeof(PlaySound))]
+	[UnityEditor.Subcomponent(typeof(PlaySound))]
 	private PlaySound _spawnSound;
 
 	[Space]

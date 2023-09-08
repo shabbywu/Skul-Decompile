@@ -347,7 +347,7 @@ public class Stat
 
 		private List<string> _strings;
 
-		public List<string> strings => _strings ?? (_strings = base.values.Select((Value v) => v.ToString()).ToList());
+		public List<string> strings => _strings ?? (_strings = values.Select((Value v) => v.ToString()).ToList());
 
 		public Values(params Value[] values)
 		{
@@ -356,10 +356,10 @@ public class Stat
 
 		public Values Clone()
 		{
-			Value[] array = new Value[base.values.Length];
-			for (int i = 0; i < base.values.Length; i++)
+			Value[] array = new Value[values.Length];
+			for (int i = 0; i < values.Length; i++)
 			{
-				array[i] = base.values[i].Clone();
+				array[i] = values[i].Clone();
 			}
 			return new Values(array);
 		}
@@ -460,9 +460,9 @@ public class Stat
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	private void Apply(Values value)
 	{
-		for (int i = 0; i < ((ReorderableArray<Value>)value).values.Length; i++)
+		for (int i = 0; i < value.values.Length; i++)
 		{
-			Apply(((ReorderableArray<Value>)value).values[i]);
+			Apply(value.values[i]);
 		}
 	}
 

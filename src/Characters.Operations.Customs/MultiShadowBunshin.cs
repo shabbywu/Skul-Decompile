@@ -68,7 +68,7 @@ public class MultiShadowBunshin : CharacterOperation
 			}
 			_spawnEffect.Spawn(Vector2.op_Implicit(val2));
 			operationInfos.Run(owner);
-			yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)owner.chronometer.master, _delay);
+			yield return owner.chronometer.master.WaitForSeconds(_delay);
 		}
 	}
 

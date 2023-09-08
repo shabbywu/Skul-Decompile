@@ -43,7 +43,7 @@ public class FireBouncyProjectile : CharacterOperation
 	private DirectionType _directionType;
 
 	[SerializeField]
-	private Reorderable _directions;
+	private CustomAngle.Reorderable _directions;
 
 	[SerializeField]
 	[Space]
@@ -111,7 +111,7 @@ public class FireBouncyProjectile : CharacterOperation
 		for (int i = 0; i < _positionsToInterpolate.Length && !FindFirePosition(_positionsToInterpolate[i]); i++)
 		{
 		}
-		CustomAngle[] values = ((ReorderableArray<CustomAngle>)(object)_directions).values;
+		CustomAngle[] values = _directions.values;
 		bool flipX = false;
 		bool flipY = false;
 		HitHistoryManager hitHistoryManager = (_group ? new HitHistoryManager(15) : null);

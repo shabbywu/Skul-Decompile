@@ -311,7 +311,7 @@ public class DarkAideAI : AIController
 			yield return RunPattern(Pattern.SkippableIdle);
 			yield break;
 		}
-		Pattern pattern = ExtensionMethods.Random<Pattern>((IEnumerable<Pattern>)_patterns);
+		Pattern pattern = _patterns.Random();
 		yield return RunPattern(pattern);
 		switch (pattern)
 		{
@@ -641,7 +641,7 @@ public class DarkAideAI : AIController
 			}
 			Vector2 val3 = Vector2.Lerp(Vector2.op_Implicit(source), Vector2.op_Implicit(dest), elapsed / duration);
 			((Component)character).transform.position = Vector2.op_Implicit(val3);
-			elapsed += ((ChronometerBase)character.chronometer.master).deltaTime;
+			elapsed += character.chronometer.master.deltaTime;
 			if (elapsed > duration)
 			{
 				character.CancelAction();
@@ -690,7 +690,7 @@ public class DarkAideAI : AIController
 	private IEnumerator CStartPredelay()
 	{
 		_darkRushPredelayEnd = false;
-		yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)character.chronometer.master, _darkRushPredelay);
+		yield return character.chronometer.master.WaitForSeconds(_darkRushPredelay);
 		_darkRushPredelayEnd = true;
 	}
 }

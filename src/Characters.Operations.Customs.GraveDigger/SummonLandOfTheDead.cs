@@ -85,8 +85,8 @@ public sealed class SummonLandOfTheDead : CharacterOperation
 		//IL_00d7: Unknown result type (might be due to invalid IL or missing references)
 		//IL_00d8: Unknown result type (might be due to invalid IL or missing references)
 		Bounds bounds = collider.bounds;
-		Vector2 mostLeftTop = ExtensionMethods.GetMostLeftTop(bounds);
-		Vector2 mostRightTop = ExtensionMethods.GetMostRightTop(bounds);
+		Vector2 mostLeftTop = bounds.GetMostLeftTop();
+		Vector2 mostRightTop = bounds.GetMostRightTop();
 		Vector3 position = ((Component)owner).transform.position;
 		mostLeftTop.x = math.max(mostLeftTop.x, position.x - _range);
 		mostRightTop.x = math.min(mostRightTop.x, position.x + _range);

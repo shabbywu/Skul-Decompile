@@ -71,21 +71,19 @@ public class YakshaPassive : Ability, IAbilityInstance
 
 	public void Detach()
 	{
-		((CoroutineReference)(ref _operationRunner)).Stop();
+		_operationRunner.Stop();
 	}
 
 	public void AddStack()
 	{
-		//IL_0064: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0069: Unknown result type (might be due to invalid IL or missing references)
 		_gauge.Add(1f);
 		iconStacks++;
 		if (iconStacks >= _stacksToAttack)
 		{
 			_gauge.Clear();
 			iconStacks = 0;
-			((CoroutineReference)(ref _operationRunner)).Stop();
-			_operationRunner = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)owner, _operations.CRun(owner));
+			_operationRunner.Stop();
+			_operationRunner = ((MonoBehaviour)(object)owner).StartCoroutineWithReference(_operations.CRun(owner));
 		}
 	}
 }

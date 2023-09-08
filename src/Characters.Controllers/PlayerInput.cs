@@ -7,9 +7,9 @@ namespace Characters.Controllers;
 
 public sealed class PlayerInput : MonoBehaviour
 {
-	public static readonly TrueOnlyLogicalSumList blocked = new TrueOnlyLogicalSumList(false);
+	public static readonly TrueOnlyLogicalSumList blocked = new TrueOnlyLogicalSumList();
 
-	public static readonly TrueOnlyLogicalSumList reverseHorizontal = new TrueOnlyLogicalSumList(false);
+	public static readonly TrueOnlyLogicalSumList reverseHorizontal = new TrueOnlyLogicalSumList();
 
 	public readonly PlayerAction[] _map = (PlayerAction[])(object)new PlayerAction[Button.count];
 

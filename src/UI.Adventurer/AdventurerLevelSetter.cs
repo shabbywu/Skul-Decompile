@@ -27,7 +27,7 @@ public class AdventurerLevelSetter : MonoBehaviour
 		float time = 0f;
 		while (time < duration)
 		{
-			time += ((ChronometerBase)Chronometer.global).deltaTime;
+			time += Chronometer.global.deltaTime;
 			_levelText.text = Mathf.Lerp((float)currentLevel, (float)targetLevel, time).ToString("0");
 			yield return null;
 		}

@@ -6,7 +6,7 @@ namespace Runnables.Triggers;
 public class Sequence : Trigger
 {
 	[SerializeField]
-	[Subcomponent(typeof(TriggerArray))]
+	[UnityEditor.Subcomponent(typeof(TriggerArray))]
 	private TriggerArray.Subcomponents _triggers;
 
 	protected override bool Check()

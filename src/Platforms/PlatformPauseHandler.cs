@@ -20,11 +20,11 @@ public class PlatformPauseHandler : MonoBehaviour
 		{
 			Scene<GameBase>.instance.uiManager.ShowPausePopup();
 		}
-		((ChronometerBase)Chronometer.global).AttachTimeScale((object)this, 0f);
+		Chronometer.global.AttachTimeScale(this, 0f);
 	}
 
 	private void OnResume()
 	{
-		((ChronometerBase)Chronometer.global).DetachTimeScale((object)this);
+		Chronometer.global.DetachTimeScale(this);
 	}
 }

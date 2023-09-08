@@ -75,7 +75,7 @@ public sealed class QuintessenceSubObject : MonoBehaviour
 
 	private IEnumerator CLifeSpan()
 	{
-		for (float elapsed = 0f; elapsed < _lifeTime; elapsed += ((ChronometerBase)Chronometer.global).deltaTime)
+		for (float elapsed = 0f; elapsed < _lifeTime; elapsed += Chronometer.global.deltaTime)
 		{
 			yield return null;
 		}

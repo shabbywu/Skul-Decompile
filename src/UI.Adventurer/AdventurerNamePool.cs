@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using GameResources;
 using TMPro;
 using UnityEngine;
@@ -21,7 +20,7 @@ public class AdventurerNamePool : MonoBehaviour
 			string[] localizedStringArray = Localization.GetLocalizedStringArray(_poolKey);
 			if (localizedStringArray.Length != 0)
 			{
-				_text.text = ExtensionMethods.Random<string>((IEnumerable<string>)localizedStringArray);
+				_text.text = localizedStringArray.Random();
 			}
 		}
 	}

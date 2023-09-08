@@ -27,7 +27,7 @@ public class MultipleFireProjectile : CharacterOperation
 	private DirectionType _directionType;
 
 	[SerializeField]
-	private Reorderable _directions;
+	private CustomAngle.Reorderable _directions;
 
 	[SerializeField]
 	private IAttackDamage _attackDamage;
@@ -54,7 +54,7 @@ public class MultipleFireProjectile : CharacterOperation
 		//IL_0093: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0140: Unknown result type (might be due to invalid IL or missing references)
 		//IL_00e1: Unknown result type (might be due to invalid IL or missing references)
-		CustomAngle[] values = ((ReorderableArray<CustomAngle>)(object)_directions).values;
+		CustomAngle[] values = _directions.values;
 		HitHistoryManager hitHistoryManager = (_group ? new HitHistoryManager(15) : null);
 		foreach (Transform item in _fireTransformsParent)
 		{

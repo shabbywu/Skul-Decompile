@@ -66,7 +66,7 @@ public class OnAction : Trigger
 
 	private void OnCharacterAction(Characters.Actions.Action action)
 	{
-		if (((EnumArray<Characters.Actions.Action.Type, bool>)_types).GetOrDefault(action.type) && (action.type != Characters.Actions.Action.Type.Skill || !action.cooldown.usedByStreak))
+		if (_types.GetOrDefault(action.type) && (action.type != Characters.Actions.Action.Type.Skill || !action.cooldown.usedByStreak))
 		{
 			_count++;
 			if (_count >= _cycle)

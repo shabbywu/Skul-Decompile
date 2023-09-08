@@ -97,7 +97,7 @@ public static class Precondition
 		{
 			return false;
 		}
-		float num = character.movement.velocity.x * ((ChronometerBase)character.chronometer.master).deltaTime;
+		float num = character.movement.velocity.x * character.chronometer.master.deltaTime;
 		Bounds bounds;
 		if (direction.x > 0f)
 		{

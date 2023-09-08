@@ -48,7 +48,7 @@ public class CharacterSynchronization
 			source.stat.DetachValues(_attachedStats);
 		}
 		source.stat.adaptiveAttribute = target.stat.adaptiveAttribute;
-		List<Stat.Value> list = ((((ReorderableArray<Stat.Value>)_statsToCopy).values.Length == 0) ? new List<Stat.Value>() : ((ReorderableArray<Stat.Value>)_statsToCopy).values.ToList());
+		List<Stat.Value> list = ((_statsToCopy.values.Length == 0) ? new List<Stat.Value>() : _statsToCopy.values.ToList());
 		if (_copyDamageStat)
 		{
 			list.Add(new Stat.Value(Stat.Category.Percent, Stat.Kind.AttackDamage, 0.0));
@@ -78,11 +78,11 @@ public class CharacterSynchronization
 			list.Add(new Stat.Value(Stat.Category.PercentPoint, Stat.Kind.SkillAttackSpeed, 0.0));
 		}
 		_attachedStats = new Stat.Values(list.ToArray());
-		if (((ReorderableArray<Stat.Value>)_attachedStats).values.Length != 0)
+		if (_attachedStats.values.Length != 0)
 		{
-			for (int i = 0; i < ((ReorderableArray<Stat.Value>)_attachedStats).values.Length; i++)
+			for (int i = 0; i < _attachedStats.values.Length; i++)
 			{
-				Stat.Value value = ((ReorderableArray<Stat.Value>)_attachedStats).values[i];
+				Stat.Value value = _attachedStats.values[i];
 				value.value = target.stat.Get(value.categoryIndex, value.kindIndex);
 			}
 			source.stat.AttachOrUpdateValues(_attachedStats);

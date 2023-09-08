@@ -60,7 +60,7 @@ public class WreckDestroy : Behaviour
 
 	public void End(Character character)
 	{
-		character.status.unstoppable.Detach((object)character);
+		character.status.unstoppable.Detach(character);
 		((Component)_endOperations).gameObject.SetActive(true);
 		_endOperations.Run(character);
 	}

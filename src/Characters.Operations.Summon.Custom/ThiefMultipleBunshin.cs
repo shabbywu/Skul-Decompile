@@ -67,7 +67,7 @@ public class ThiefMultipleBunshin : CharacterOperation
 				list2.Add(i);
 			}
 		}
-		ExtensionMethods.Shuffle<int>((IList<int>)list2);
+		list2.Shuffle();
 		for (int k = 0; k < list2.Count; k++)
 		{
 			Vector2 position = _positionPolicy.GetPosition(originPosition, _summonRange.size.x, list2.Count, k);

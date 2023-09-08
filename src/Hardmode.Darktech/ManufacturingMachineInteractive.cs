@@ -177,10 +177,10 @@ public sealed class ManufacturingMachineInteractive : InteractiveObject
 		{
 			yield return null;
 		}
-		_gearList = new List<GearReference>(Singleton<Service>.Instance.gearManager.GetGearListByRarity(_type, (Rarity)0));
+		_gearList = new List<GearReference>(Singleton<Service>.Instance.gearManager.GetGearListByRarity(_type, Rarity.Common));
 		if (isEnhanced && _type == Gear.Type.Weapon)
 		{
-			_gearList.AddRange(Singleton<Service>.Instance.gearManager.GetGearListByRarity(_type, (Rarity)1));
+			_gearList.AddRange(Singleton<Service>.Instance.gearManager.GetGearListByRarity(_type, Rarity.Rare));
 		}
 		if (!needEnhancedCutscene && Singleton<DarktechManager>.Instance.IsActivated(_darktechType))
 		{
@@ -403,7 +403,7 @@ public sealed class ManufacturingMachineInteractive : InteractiveObject
 		while (elapsed < 0.08f)
 		{
 			target.position = Vector2.op_Implicit(new Vector2(origin.x, origin.y + Random.Range(-0.05f, 0.05f)));
-			elapsed += ((ChronometerBase)Chronometer.global).deltaTime;
+			elapsed += Chronometer.global.deltaTime;
 			yield return null;
 		}
 		target.position = origin;
@@ -424,7 +424,7 @@ public sealed class ManufacturingMachineInteractive : InteractiveObject
 		{
 			((Component)_displays[1]).transform.position = Vector2.op_Implicit(Vector2.Lerp(Vector2.op_Implicit(fromMid), Vector2.op_Implicit(toDown), _animationCurve.Evaluate(elapsed / _animationDuration)));
 			((Component)_displays[2]).transform.position = Vector2.op_Implicit(Vector2.Lerp(Vector2.op_Implicit(fromUp), Vector2.op_Implicit(toMid), _animationCurve.Evaluate(elapsed / _animationDuration)));
-			elapsed += ((ChronometerBase)Chronometer.global).deltaTime;
+			elapsed += Chronometer.global.deltaTime;
 			yield return null;
 		}
 		((Component)_displays[0]).transform.position = upPoint;
@@ -456,7 +456,7 @@ public sealed class ManufacturingMachineInteractive : InteractiveObject
 		{
 			((Component)_displays[0]).transform.position = Vector2.op_Implicit(Vector2.Lerp(Vector2.op_Implicit(fromDown), Vector2.op_Implicit(toMid), _animationCurve.Evaluate(elapsed / _animationDuration)));
 			((Component)_displays[1]).transform.position = Vector2.op_Implicit(Vector2.Lerp(Vector2.op_Implicit(fromMid), Vector2.op_Implicit(toUp), _animationCurve.Evaluate(elapsed / _animationDuration)));
-			elapsed += ((ChronometerBase)Chronometer.global).deltaTime;
+			elapsed += Chronometer.global.deltaTime;
 			yield return null;
 		}
 		((Component)_displays[0]).transform.position = toMid;

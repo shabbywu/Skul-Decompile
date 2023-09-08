@@ -21,14 +21,14 @@ public sealed class Awakening : Behaviour
 			base.result = Result.Fail;
 			yield break;
 		}
-		controller.character.cinematic.Attach((object)this);
+		controller.character.cinematic.Attach(this);
 		controller.character.status.RemoveAllStatus();
 		YggdrasillAnimation.Tag[] tags = _tags;
 		foreach (YggdrasillAnimation.Tag tag in tags)
 		{
 			yield return _controller.CPlayAndWaitAnimation(tag);
 		}
-		controller.character.cinematic.Detach((object)this);
+		controller.character.cinematic.Detach(this);
 		base.result = Result.Success;
 	}
 }

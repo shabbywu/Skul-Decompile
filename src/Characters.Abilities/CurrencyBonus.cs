@@ -16,12 +16,12 @@ public class CurrencyBonus : Ability
 
 		protected override void OnAttach()
 		{
-			((Sum<double>)(object)GameData.Currency.currencies[ability._type].multiplier).AddOrUpdate((object)this, (double)ability._percentPoint);
+			GameData.Currency.currencies[ability._type].multiplier.AddOrUpdate(this, ability._percentPoint);
 		}
 
 		protected override void OnDetach()
 		{
-			((Sum<double>)(object)GameData.Currency.currencies[ability._type].multiplier).Remove((object)this);
+			GameData.Currency.currencies[ability._type].multiplier.Remove(this);
 		}
 	}
 

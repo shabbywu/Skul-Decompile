@@ -8,10 +8,10 @@ namespace Characters.AI.Behaviours.Hero;
 public class DashSlash : SequentialCombo
 {
 	[SerializeField]
-	[Subcomponent(typeof(ChainAction))]
+	[UnityEditor.Subcomponent(typeof(ChainAction))]
 	private Action _readyAction;
 
-	[Subcomponent(typeof(ChainAction))]
+	[UnityEditor.Subcomponent(typeof(ChainAction))]
 	[SerializeField]
 	private Action _attackAction;
 

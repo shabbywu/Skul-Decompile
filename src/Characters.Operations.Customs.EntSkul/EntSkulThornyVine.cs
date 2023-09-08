@@ -61,7 +61,7 @@ public class EntSkulThornyVine : CharacterOperation
 		((ContactFilter2D)(ref _overlapper.contactFilter)).SetLayerMask(_layer.Evaluate(((Component)owner).gameObject));
 		((Behaviour)_searchRange).enabled = true;
 		_overlapper.OverlapCollider(_searchRange);
-		List<Target> components = GetComponentExtension.GetComponents<Collider2D, Target>((IEnumerable<Collider2D>)_overlapper.results, true);
+		List<Target> components = ((IEnumerable<Collider2D>)_overlapper.results).GetComponents<Collider2D, Target>(clearList: true);
 		if (components.Count == 0)
 		{
 			((Behaviour)_searchRange).enabled = false;

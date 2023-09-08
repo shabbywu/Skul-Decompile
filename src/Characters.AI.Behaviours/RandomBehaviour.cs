@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
@@ -7,7 +6,7 @@ namespace Characters.AI.Behaviours;
 
 public class RandomBehaviour : Behaviour
 {
-	[Subcomponent(typeof(BehaviourInfo))]
+	[UnityEditor.Subcomponent(typeof(BehaviourInfo))]
 	[SerializeField]
 	private BehaviourInfo.Subcomponents _behaviours;
 
@@ -19,12 +18,12 @@ public class RandomBehaviour : Behaviour
 			Debug.LogError((object)"Behaviours length is null");
 			yield break;
 		}
-		if (((SubcomponentArray<BehaviourInfo>)_behaviours).components.Length == 0)
+		if (_behaviours.components.Length == 0)
 		{
 			Debug.LogError((object)"Behaviours length is 0");
 			yield break;
 		}
-		BehaviourInfo behaviour = ExtensionMethods.Random<BehaviourInfo>((IEnumerable<BehaviourInfo>)((SubcomponentArray<BehaviourInfo>)_behaviours).components);
+		BehaviourInfo behaviour = _behaviours.components.Random();
 		yield return behaviour.CRun(controller);
 		base.result = behaviour.result;
 	}

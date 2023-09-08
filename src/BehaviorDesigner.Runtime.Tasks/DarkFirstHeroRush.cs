@@ -109,7 +109,7 @@ public sealed class DarkFirstHeroRush : Action
 		//IL_0084: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0089: Unknown result type (might be due to invalid IL or missing references)
 		//IL_008e: Unknown result type (might be due to invalid IL or missing references)
-		_elapsed += ((ChronometerBase)Chronometer.global).deltaTime;
+		_elapsed += Chronometer.global.deltaTime;
 		if (!(_elapsed < _signTime))
 		{
 			_laser.Deactivate();

@@ -185,7 +185,6 @@ public sealed class LevelManager : MonoBehaviour
 
 	public void DropCurrencyBag(GameData.Currency.Type type, Rarity rarity, int amount, int count, Vector3 position)
 	{
-		//IL_000b: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0013: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0015: Unknown result type (might be due to invalid IL or missing references)
 		if (count != 0)
@@ -382,7 +381,7 @@ public sealed class LevelManager : MonoBehaviour
 			GameData.Buff.ResetAll();
 		}
 		GameData.HardmodeProgress.hardmode = chapterIndex >= 8;
-		ExtensionMethods.Empty(((Component)this).transform);
+		((Component)this).transform.Empty();
 		ChangeChapter(chapterIndex);
 		if ((Object)(object)Scene<GameBase>.instance == (Object)null)
 		{
@@ -500,7 +499,7 @@ public sealed class LevelManager : MonoBehaviour
 	public void Unload()
 	{
 		Reset();
-		ExtensionMethods.Empty(((Component)this).transform);
+		((Component)this).transform.Empty();
 		currentChapter.Clear();
 	}
 

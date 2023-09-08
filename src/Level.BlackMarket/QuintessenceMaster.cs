@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using Characters;
 using Characters.Gear.Quintessences;
 using Data;
@@ -34,7 +33,7 @@ public class QuintessenceMaster : Npc
 
 	private Random _random;
 
-	public string submitLine => ExtensionMethods.Random<string>((IEnumerable<string>)Localization.GetLocalizedStringArray("npc/QuintessenceMeister/submit/line"));
+	public string submitLine => Localization.GetLocalizedStringArray("npc/QuintessenceMeister/submit/line").Random();
 
 	private void Start()
 	{

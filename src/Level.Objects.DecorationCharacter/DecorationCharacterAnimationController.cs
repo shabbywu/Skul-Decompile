@@ -19,7 +19,7 @@ public class DecorationCharacterAnimationController : MonoBehaviour
 		for (int i = 0; i < _animations.Count; i++)
 		{
 			CharacterAnimation characterAnimation = _animations[i];
-			characterAnimation.speed = ((ChronometerBase)_chronometer.animation).timeScale / Time.timeScale;
+			characterAnimation.speed = _chronometer.animation.timeScale / Time.timeScale;
 			((AnimatorVariable<bool>)(object)characterAnimation.parameter.walk).Value = parameter.walk;
 			((AnimatorVariable<bool>)(object)characterAnimation.parameter.grounded).Value = parameter.grounded;
 			((AnimatorVariable<float>)(object)characterAnimation.parameter.movementSpeed).Value = parameter.movementSpeed;

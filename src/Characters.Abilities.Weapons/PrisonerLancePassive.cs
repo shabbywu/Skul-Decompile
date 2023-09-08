@@ -37,7 +37,7 @@ public class PrisonerLancePassive : Ability
 
 		private void OnKilled(ITarget target, ref Damage damage)
 		{
-			if (!((Object)(object)target.character == (Object)null) && ((EnumArray<Character.Type, bool>)ability._characterTypeFilter)[target.character.type] && damage.key.Equals(ability._attackKey, StringComparison.OrdinalIgnoreCase))
+			if (!((Object)(object)target.character == (Object)null) && ability._characterTypeFilter[target.character.type] && damage.key.Equals(ability._attackKey, StringComparison.OrdinalIgnoreCase))
 			{
 				_currentKillCount++;
 			}
@@ -57,7 +57,7 @@ public class PrisonerLancePassive : Ability
 		{
 			if (_currentKillCount >= ability._killCount)
 			{
-				((PriorityList<GiveDamageDelegate>)owner.onGiveDamage).Add(0, (GiveDamageDelegate)OnGiveDamage);
+				owner.onGiveDamage.Add(0, OnGiveDamage);
 			}
 			_currentKillCount = 0;
 			Character character = owner;
@@ -68,7 +68,7 @@ public class PrisonerLancePassive : Ability
 		{
 			Character character = owner;
 			character.onKilled = (Character.OnKilledDelegate)Delegate.Remove(character.onKilled, new Character.OnKilledDelegate(OnKilled));
-			((PriorityList<GiveDamageDelegate>)owner.onGiveDamage).Remove((GiveDamageDelegate)OnGiveDamage);
+			owner.onGiveDamage.Remove(OnGiveDamage);
 		}
 	}
 

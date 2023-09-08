@@ -5,10 +5,10 @@ namespace Runnables;
 
 public abstract class UICommands : Runnable
 {
-	public new class SubcomponentAttribute : SubcomponentAttribute
+	public new class SubcomponentAttribute : UnityEditor.SubcomponentAttribute
 	{
 		public SubcomponentAttribute()
-			: base(true, types)
+			: base(allowCustom: true, UICommands.types)
 		{
 		}
 	}

@@ -39,7 +39,7 @@ public sealed class GrabAction : Action
 
 	private bool _grabbing;
 
-	public override Motion[] motions => ((SubcomponentArray<Motion>)_grabMotions).components.Concat(((SubcomponentArray<Motion>)_maintainMotions).components).Concat(((SubcomponentArray<Motion>)_grabFailMotions).components).ToArray();
+	public override Motion[] motions => _grabMotions.components.Concat(_maintainMotions.components).Concat(_grabFailMotions.components).ToArray();
 
 	public override bool canUse
 	{
@@ -63,7 +63,7 @@ public sealed class GrabAction : Action
 		if (_attackHitTrigger)
 		{
 			_attacks = new List<IAttack>();
-			Motion[] components = ((SubcomponentArray<Motion>)_grabMotions).components;
+			Motion[] components = _grabMotions.components;
 			for (int i = 0; i < components.Length; i++)
 			{
 				IAttack componentInChildren = ((Component)components[i]).GetComponentInChildren<IAttack>();
@@ -82,12 +82,12 @@ public sealed class GrabAction : Action
 				attack.onHit += OnAttackHit;
 			});
 		}
-		_ = ((SubcomponentArray<Motion>)_maintainMotions).components.LongLength;
+		_ = _maintainMotions.components.LongLength;
 		void JoinGrabMotion(Motion.Subcomponents subcomponents)
 		{
-			for (int k = 0; k < ((SubcomponentArray<Motion>)subcomponents).components.Length; k++)
+			for (int k = 0; k < subcomponents.components.Length; k++)
 			{
-				Motion motion2 = ((SubcomponentArray<Motion>)subcomponents).components[k];
+				Motion motion2 = subcomponents.components[k];
 				if (motion2.blockLook)
 				{
 					if (blockLookBefore)
@@ -103,33 +103,33 @@ public sealed class GrabAction : Action
 					};
 				}
 				blockLookBefore = motion2.blockLook;
-				if (k + 1 < ((SubcomponentArray<Motion>)subcomponents).components.Length)
+				if (k + 1 < subcomponents.components.Length)
 				{
 					int cached2 = k + 1;
-					((SubcomponentArray<Motion>)subcomponents).components[k].onEnd += delegate
+					subcomponents.components[k].onEnd += delegate
 					{
-						DoMotion(((SubcomponentArray<Motion>)subcomponents).components[cached2]);
+						DoMotion(subcomponents.components[cached2]);
 					};
 				}
 			}
-			((SubcomponentArray<Motion>)subcomponents).components[((SubcomponentArray<Motion>)subcomponents).components.Length - 1].onEnd += delegate
+			subcomponents.components[subcomponents.components.Length - 1].onEnd += delegate
 			{
 				_grabbing = false;
 				if (_grabBoard.targets.Count > 0)
 				{
-					DoMotion(((SubcomponentArray<Motion>)_maintainMotions).components[0]);
+					DoMotion(_maintainMotions.components[0]);
 				}
-				else if (_doFailMotion && _grabBoard.failTargets.Count > 0 && ((SubcomponentArray<Motion>)_grabFailMotions).components.Length != 0)
+				else if (_doFailMotion && _grabBoard.failTargets.Count > 0 && _grabFailMotions.components.Length != 0)
 				{
-					DoMotion(((SubcomponentArray<Motion>)_grabFailMotions).components[0]);
+					DoMotion(_grabFailMotions.components[0]);
 				}
 			};
 		}
 		void JoinMotion(Motion.Subcomponents subcomponents)
 		{
-			for (int j = 0; j < ((SubcomponentArray<Motion>)subcomponents).components.Length; j++)
+			for (int j = 0; j < subcomponents.components.Length; j++)
 			{
-				Motion motion = ((SubcomponentArray<Motion>)subcomponents).components[j];
+				Motion motion = subcomponents.components[j];
 				if (motion.blockLook)
 				{
 					if (blockLookBefore)
@@ -145,12 +145,12 @@ public sealed class GrabAction : Action
 					};
 				}
 				blockLookBefore = motion.blockLook;
-				if (j + 1 < ((SubcomponentArray<Motion>)subcomponents).components.Length)
+				if (j + 1 < subcomponents.components.Length)
 				{
 					int cached = j + 1;
-					((SubcomponentArray<Motion>)subcomponents).components[j].onEnd += delegate
+					subcomponents.components[j].onEnd += delegate
 					{
-						DoMotion(((SubcomponentArray<Motion>)subcomponents).components[cached]);
+						DoMotion(subcomponents.components[cached]);
 					};
 				}
 			}
@@ -191,7 +191,7 @@ public sealed class GrabAction : Action
 			return false;
 		}
 		_grabbing = true;
-		DoAction(((SubcomponentArray<Motion>)_grabMotions).components[0]);
+		DoAction(_grabMotions.components[0]);
 		return true;
 	}
 

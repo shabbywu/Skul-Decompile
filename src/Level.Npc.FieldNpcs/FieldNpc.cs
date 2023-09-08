@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using Characters;
 using Data;
 using GameResources;
@@ -75,11 +74,11 @@ public abstract class FieldNpc : InteractiveObject
 
 	protected string[] _noMoney => Localization.GetLocalizedStringArray($"npc/{_type}/noMoney");
 
-	protected string[] _chat => ExtensionMethods.Random<string[]>((IEnumerable<string[]>)Localization.GetLocalizedStringArrays($"npc/{_type}/chat"));
+	protected string[] _chat => Localization.GetLocalizedStringArrays($"npc/{_type}/chat").Random();
 
 	public string cageDestroyedLine => Localization.GetLocalizedString($"npc/{_type}/line/resqued");
 
-	public string normalLine => ExtensionMethods.Random<string>((IEnumerable<string>)Localization.GetLocalizedStringArray($"npc/{_type}/line"));
+	public string normalLine => Localization.GetLocalizedStringArray($"npc/{_type}/line").Random();
 
 	public bool release => _release;
 

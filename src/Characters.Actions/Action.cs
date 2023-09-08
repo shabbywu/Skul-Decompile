@@ -94,7 +94,7 @@ public abstract class Action : MonoBehaviour
 
 	protected PlayerAction defaultButton => _input[_button];
 
-	internal OperationInfo[] operations => ((SubcomponentArray<OperationInfo>)_operations).components;
+	internal OperationInfo[] operations => _operations.components;
 
 	public bool running
 	{
@@ -159,7 +159,7 @@ public abstract class Action : MonoBehaviour
 
 	protected virtual void Awake()
 	{
-		Array.Sort(((SubcomponentArray<OperationInfo>)_operations).components, (OperationInfo x, OperationInfo y) => x.timeToTrigger.CompareTo(y.timeToTrigger));
+		Array.Sort(_operations.components, (OperationInfo x, OperationInfo y) => x.timeToTrigger.CompareTo(y.timeToTrigger));
 	}
 
 	public virtual void Initialize(Character owner)
@@ -179,9 +179,9 @@ public abstract class Action : MonoBehaviour
 		}
 		_owner = owner;
 		_input = ((Component)_owner).GetComponent<PlayerInput>();
-		for (int i = 0; i < ((SubcomponentArray<Constraint>)_constraints).components.Length; i++)
+		for (int i = 0; i < _constraints.components.Length; i++)
 		{
-			((SubcomponentArray<Constraint>)_constraints).components[i].Initilaize(this);
+			_constraints.components[i].Initilaize(this);
 		}
 		if (_cancelOnGround)
 		{
@@ -343,7 +343,7 @@ public abstract class Action : MonoBehaviour
 
 	internal bool PassAllConstraints(Motion motion)
 	{
-		if (((SubcomponentArray<Constraint>)_constraints).components.Pass())
+		if (_constraints.components.Pass())
 		{
 			return motion.PassConstraints();
 		}
@@ -352,12 +352,12 @@ public abstract class Action : MonoBehaviour
 
 	internal bool PassConstraints(Motion motion)
 	{
-		return ((SubcomponentArray<Constraint>)_constraints).components.Pass();
+		return _constraints.components.Pass();
 	}
 
 	internal void ConsumeConstraints()
 	{
-		((SubcomponentArray<Constraint>)_constraints).components.Consume();
+		_constraints.components.Consume();
 	}
 
 	protected bool ConsumeCooldownIfNeeded()

@@ -44,12 +44,12 @@ public class VerticalMove : SubMovement
 		while (elpased < _curve.duration)
 		{
 			yield return null;
-			elpased += ((ChronometerBase)Chronometer.global).deltaTime;
+			elpased += Chronometer.global.deltaTime;
 			float num = Mathf.Lerp(startY, destinationY, _curve.Evaluate(elpased / _curve.duration));
 			((Vector2)(ref val))._002Ector(0f, num);
 			Vector2 val2 = _projectile.firedDirection;
 			val2 = ((!(elpased >= _curve.duration / 2f)) ? (val2 + Vector2.up * (float)lookingDirection) : (val2 + Vector2.down * (float)lookingDirection));
-			_projectile.DetectCollision(Vector2.op_Implicit(((Component)this).transform.position), ((Vector2)(ref val2)).normalized, ((ChronometerBase)_projectile.owner.chronometer.projectile).deltaTime);
+			_projectile.DetectCollision(Vector2.op_Implicit(((Component)this).transform.position), ((Vector2)(ref val2)).normalized, _projectile.owner.chronometer.projectile.deltaTime);
 			((Component)this).transform.localPosition = Vector2.op_Implicit(val);
 		}
 	}

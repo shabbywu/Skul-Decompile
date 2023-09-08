@@ -346,15 +346,7 @@ public class Panel : Dialogue
 		//IL_039a: Expected O, but got Unknown
 		//IL_03c8: Unknown result type (might be due to invalid IL or missing references)
 		//IL_03d2: Expected O, but got Unknown
-		_panels = new EnumArray<Type, GameObject>((GameObject[])(object)new GameObject[6]
-		{
-			_main,
-			_mapList,
-			_gearList,
-			((Component)_log).gameObject,
-			_dataControl,
-			_bonusStatPanel
-		});
+		_panels = new EnumArray<Type, GameObject>(_main, _mapList, _gearList, ((Component)_log).gameObject, _dataControl, _bonusStatPanel);
 		_log.StartLog();
 		LevelManager levelManager = Singleton<Service>.Instance.levelManager;
 		_ = CommonResource.instance;
@@ -568,15 +560,15 @@ public class Panel : Dialogue
 		});
 		((UnityEvent<float>)(object)_timeScaleSlider.onValueChanged).AddListener((UnityAction<float>)delegate(float value)
 		{
-			((ChronometerBase)Chronometer.global).DetachTimeScale((object)_timeScaleSlider);
-			((ChronometerBase)Chronometer.global).AttachTimeScale((object)_timeScaleSlider, value);
+			Chronometer.global.DetachTimeScale(_timeScaleSlider);
+			Chronometer.global.AttachTimeScale(_timeScaleSlider, value);
 			_timeScaleValue.text = $"{value:0.00}";
 		});
 		((UnityEvent)_timeScaleReset.onClick).AddListener((UnityAction)delegate
 		{
 			_timeScaleSlider.value = 1f;
 		});
-		_timeScaleValue.text = ((ChronometerBase)Chronometer.global).timeScale.ToString();
+		_timeScaleValue.text = Chronometer.global.timeScale.ToString();
 		((UnityEvent<bool>)(object)_infiniteRevive.onValueChanged).AddListener((UnityAction<bool>)delegate(bool isOn)
 		{
 			if (isOn)
@@ -644,8 +636,8 @@ public class Panel : Dialogue
 	protected override void OnEnable()
 	{
 		base.OnEnable();
-		PlayerInput.blocked.Attach((object)this);
-		((ChronometerBase)Chronometer.global).AttachTimeScale((object)this, 0f);
+		PlayerInput.blocked.Attach(this);
+		Chronometer.global.AttachTimeScale(this, 0f);
 		LevelManager levelManager = Singleton<Service>.Instance.levelManager;
 		_mapName.text = string.Format("Map : {0}/{1}/{2}\nSeed : {3}", levelManager.currentChapter.type, ((Object)levelManager.currentChapter.currentStage).name, ((Object)Map.Instance).name.Replace(" (Clone)", ""), GameData.Save.instance.randomSeed);
 		_localNow.text = $"Local now : {DateTime.Now}";
@@ -659,8 +651,8 @@ public class Panel : Dialogue
 	protected override void OnDisable()
 	{
 		base.OnDisable();
-		PlayerInput.blocked.Detach((object)this);
-		((ChronometerBase)Chronometer.global).DetachTimeScale((object)this);
+		PlayerInput.blocked.Detach(this);
+		Chronometer.global.DetachTimeScale(this);
 	}
 
 	protected override void Update()

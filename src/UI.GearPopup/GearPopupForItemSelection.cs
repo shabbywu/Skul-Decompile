@@ -47,7 +47,6 @@ public class GearPopupForItemSelection : MonoBehaviour
 
 	public void Set(Item item)
 	{
-		//IL_005d: Unknown result type (might be due to invalid IL or missing references)
 		_gear = item;
 		_name.text = item.displayName;
 		if (item.gearTag.HasFlag(Gear.Tag.Omen))

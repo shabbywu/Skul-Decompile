@@ -54,19 +54,11 @@ public class Gauntlet : MonoBehaviour
 
 	private void Load()
 	{
-		//IL_0006: Unknown result type (might be due to invalid IL or missing references)
-		//IL_000b: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0022: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0028: Unknown result type (might be due to invalid IL or missing references)
-		//IL_002d: Unknown result type (might be due to invalid IL or missing references)
-		//IL_005e: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0076: Unknown result type (might be due to invalid IL or missing references)
-		//IL_008e: Unknown result type (might be due to invalid IL or missing references)
-		Rarity val = _rarityPossibilities.Evaluate();
+		Rarity key = _rarityPossibilities.Evaluate();
 		Gear.Type? type = _gearPossibilities.Evaluate();
 		do
 		{
-			Rarity rarity = Settings.instance.containerPossibilities[val].Evaluate();
+			Rarity rarity = Settings.instance.containerPossibilities[key].Evaluate();
 			switch (type)
 			{
 			case Gear.Type.Weapon:

@@ -174,7 +174,6 @@ public class GearPopup : MonoBehaviour
 
 	private void SetBasic(Gear gear)
 	{
-		//IL_0062: Unknown result type (might be due to invalid IL or missing references)
 		_interactiveObject = gear.dropped;
 		_name.text = gear.displayName;
 		if (gear.gearTag.HasFlag(Gear.Tag.Omen))
@@ -213,7 +212,7 @@ public class GearPopup : MonoBehaviour
 			}
 			else
 			{
-				_pressToDestroy.description = _pressToDestroy.description + "( " + currency.spriteTMPKey + " " + $" <color=#{currency.colorCode}>{(int)((double)gear.currencyByDiscard * ((Sum<double>)(object)currency.multiplier).total)}</color> )";
+				_pressToDestroy.description = _pressToDestroy.description + "( " + currency.spriteTMPKey + " " + $" <color=#{currency.colorCode}>{(int)((double)gear.currencyByDiscard * currency.multiplier.total)}</color> )";
 			}
 		}
 	}
@@ -390,7 +389,6 @@ public class GearPopup : MonoBehaviour
 
 	public void Set(string name, string description, Rarity rarity)
 	{
-		//IL_0012: Unknown result type (might be due to invalid IL or missing references)
 		Set(name, description, Localization.GetLocalizedString(string.Format("{0}/{1}/{2}", "label", "Rarity", rarity)));
 	}
 

@@ -45,7 +45,7 @@ public sealed class AttachAbilityToMinionWithinCollider : Ability
 			for (int i = 0; i < _charactersWithinCollider.Current.Count; i++)
 			{
 				Character character = _charactersWithinCollider.Current[i];
-				AbilityComponent[] components = ((SubcomponentArray<AbilityComponent>)ability._abilityComponents).components;
+				AbilityComponent[] components = ability._abilityComponents.components;
 				if (!((Object)(object)character == (Object)null))
 				{
 					for (int j = 0; j < components.Length; j++)
@@ -104,9 +104,9 @@ public sealed class AttachAbilityToMinionWithinCollider : Ability
 					_charactersWithinCollider.Current.RemoveAt(num);
 					continue;
 				}
-				for (int k = 0; k < ((SubcomponentArray<AbilityComponent>)ability._abilityComponents).components.Length; k++)
+				for (int k = 0; k < ability._abilityComponents.components.Length; k++)
 				{
-					component.character.ability.Add(((SubcomponentArray<AbilityComponent>)ability._abilityComponents).components[k].ability);
+					component.character.ability.Add(ability._abilityComponents.components[k].ability);
 				}
 			}
 			for (int l = 0; l < _charactersWithinCollider.Current.Count; l++)
@@ -114,9 +114,9 @@ public sealed class AttachAbilityToMinionWithinCollider : Ability
 				Character character = _charactersWithinCollider.Current[l];
 				if (!((Object)(object)character == (Object)null))
 				{
-					for (int m = 0; m < ((SubcomponentArray<AbilityComponent>)ability._abilityComponents).components.Length; m++)
+					for (int m = 0; m < ability._abilityComponents.components.Length; m++)
 					{
-						character.ability.Remove(((SubcomponentArray<AbilityComponent>)ability._abilityComponents).components[m].ability);
+						character.ability.Remove(ability._abilityComponents.components[m].ability);
 					}
 				}
 			}

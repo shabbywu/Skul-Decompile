@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using Characters.AI.Behaviours;
 using Characters.AI.Behaviours.Hero;
 using UnityEditor;
@@ -155,7 +154,7 @@ public class FirstHeroPhase1Test : AIController
 				switch (Random.Range(0, 3))
 				{
 				case 0:
-					yield return ExtensionMethods.Random<Behaviour>((IEnumerable<Behaviour>)_slash).CRun(this);
+					yield return _slash.Random().CRun(this);
 					if (MMMaths.Chance(_behaviourA_Chance))
 					{
 						yield return _behaviourA.CRun(this);

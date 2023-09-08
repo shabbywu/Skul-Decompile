@@ -31,7 +31,7 @@ public sealed class BoneShield : Ability
 
 		protected override void OnAttach()
 		{
-			owner.health.onTakeDamage.Add(100, (TakeDamageDelegate)HandleOnTakeDamage);
+			owner.health.onTakeDamage.Add(100, HandleOnTakeDamage);
 			Character character = owner;
 			character.onKilled = (Character.OnKilledDelegate)Delegate.Combine(character.onKilled, new Character.OnKilledDelegate(HandleOnKilled));
 		}
@@ -73,7 +73,7 @@ public sealed class BoneShield : Ability
 
 		protected override void OnDetach()
 		{
-			owner.health.onTakeDamage.Remove((TakeDamageDelegate)HandleOnTakeDamage);
+			owner.health.onTakeDamage.Remove(HandleOnTakeDamage);
 			Character character = owner;
 			character.onKilled = (Character.OnKilledDelegate)Delegate.Remove(character.onKilled, new Character.OnKilledDelegate(HandleOnKilled));
 		}

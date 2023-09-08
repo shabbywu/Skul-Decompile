@@ -28,10 +28,10 @@ namespace Characters.Operations;
 
 public abstract class CharacterOperation : TargetedCharacterOperation
 {
-	public new class SubcomponentAttribute : SubcomponentAttribute
+	public new class SubcomponentAttribute : UnityEditor.SubcomponentAttribute
 	{
 		public SubcomponentAttribute()
-			: base(true, types, names)
+			: base(allowCustom: true, CharacterOperation.types, CharacterOperation.names)
 		{
 		}
 	}

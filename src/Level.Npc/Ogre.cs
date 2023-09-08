@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using Characters;
 using Data;
 using GameResources;
@@ -49,17 +48,17 @@ public class Ogre : InteractiveObject
 
 	public string displayName => Localization.GetLocalizedString($"npc/{NpcType.Ogre}/name");
 
-	public string greeting => ExtensionMethods.Random<string>((IEnumerable<string>)Localization.GetLocalizedStringArray($"npc/{NpcType.Ogre}/greeting"));
+	public string greeting => Localization.GetLocalizedStringArray($"npc/{NpcType.Ogre}/greeting").Random();
 
-	public string[] chat => ExtensionMethods.Random<string[]>((IEnumerable<string[]>)Localization.GetLocalizedStringArrays($"npc/{NpcType.Ogre}/chat"));
+	public string[] chat => Localization.GetLocalizedStringArrays($"npc/{NpcType.Ogre}/chat").Random();
 
-	public string[] giveItemScripts => ExtensionMethods.Random<string[]>((IEnumerable<string[]>)Localization.GetLocalizedStringArrays($"npc/{NpcType.Ogre}/GiveItem"));
+	public string[] giveItemScripts => Localization.GetLocalizedStringArrays($"npc/{NpcType.Ogre}/GiveItem").Random();
 
-	public string giveExtraItem => string.Format(ExtensionMethods.Random<string>((IEnumerable<string>)Localization.GetLocalizedStringArray($"npc/{NpcType.Ogre}/GiveExtraItem")), _extraItemDarkQuartzCost);
+	public string giveExtraItem => string.Format(Localization.GetLocalizedStringArray($"npc/{NpcType.Ogre}/GiveExtraItem").Random(), _extraItemDarkQuartzCost);
 
 	public string giveExtraItemLabel => Localization.GetLocalizedString($"npc/{NpcType.Ogre}/GiveExtraItem/label");
 
-	public string[] giveExtraItemNoMoney => ExtensionMethods.Random<string[]>((IEnumerable<string[]>)Localization.GetLocalizedStringArrays($"npc/{NpcType.Ogre}/GiveExtraItem/NoMoney"));
+	public string[] giveExtraItemNoMoney => Localization.GetLocalizedStringArrays($"npc/{NpcType.Ogre}/GiveExtraItem/NoMoney").Random();
 
 	protected override void Awake()
 	{
@@ -73,7 +72,6 @@ public class Ogre : InteractiveObject
 
 	private void Start()
 	{
-		//IL_0032: Unknown result type (might be due to invalid IL or missing references)
 		_npcConversation = Scene<GameBase>.instance.uiManager.npcConversation;
 		_itemToDrop = Singleton<Service>.Instance.gearManager.GetItemToTake(_random, _itemPossibilities.Evaluate(_random)).LoadAsync();
 	}

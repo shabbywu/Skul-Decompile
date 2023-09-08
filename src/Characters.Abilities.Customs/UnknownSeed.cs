@@ -27,7 +27,7 @@ public class UnknownSeed : Ability
 			}
 		}
 
-		public override int iconStacks => (int)(((ReorderableArray<Stat.Value>)_stat).values[0].value * 100.0);
+		public override int iconStacks => (int)(_stat.values[0].value * 100.0);
 
 		public Instance(Character owner, UnknownSeed ability)
 			: base(owner, ability)
@@ -72,11 +72,11 @@ public class UnknownSeed : Ability
 		{
 			if (force || ability.component.healed != ability.component.healedBefore)
 			{
-				Stat.Value[] values = ((ReorderableArray<Stat.Value>)_stat).values;
+				Stat.Value[] values = _stat.values;
 				int num = Mathf.FloorToInt(ability.component.healed / ability._healAmountPerStack);
 				for (int i = 0; i < values.Length; i++)
 				{
-					values[i].value = ((ReorderableArray<Stat.Value>)ability._statBonus).values[i].value * (double)num;
+					values[i].value = ability._statBonus.values[i].value * (double)num;
 				}
 				owner.stat.SetNeedUpdate();
 				ability.component.healedBefore = ability.component.healed;

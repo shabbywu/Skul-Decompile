@@ -9,11 +9,10 @@ public sealed class ClearedLevelCompare : Trigger
 	private int _compareLevel;
 
 	[SerializeField]
-	private CompareOperation _operation;
+	private ExtensionMethods.CompareOperation _operation;
 
 	protected override bool Check()
 	{
-		//IL_000c: Unknown result type (might be due to invalid IL or missing references)
-		return ExtensionMethods.Compare(GameData.HardmodeProgress.clearedLevel, _compareLevel, _operation);
+		return GameData.HardmodeProgress.clearedLevel.Compare(_compareLevel, _operation);
 	}
 }

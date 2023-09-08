@@ -86,7 +86,6 @@ public class Chest : InteractiveObject, ILootable
 
 	private void Load()
 	{
-		//IL_0043: Unknown result type (might be due to invalid IL or missing references)
 		_toDropReferences.Clear();
 		ReleaseRequests();
 		_toDropRequests.Clear();
@@ -125,26 +124,19 @@ public class Chest : InteractiveObject, ILootable
 
 	private void Initialize()
 	{
-		//IL_0020: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0025: Unknown result type (might be due to invalid IL or missing references)
-		//IL_002b: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0030: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0031: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0047: Expected I4, but got Unknown
 		_rarity = Singleton<Service>.Instance.levelManager.currentChapter.currentStage.gearPossibilities.Evaluate(_random);
-		Rarity rarity = _rarity;
-		switch ((int)rarity)
+		switch (_rarity)
 		{
-		case 0:
+		case Rarity.Common:
 			_animator.runtimeAnimatorController = _commonChest;
 			break;
-		case 1:
+		case Rarity.Rare:
 			_animator.runtimeAnimatorController = _rareChest;
 			break;
-		case 2:
+		case Rarity.Unique:
 			_animator.runtimeAnimatorController = _uniqueChest;
 			break;
-		case 3:
+		case Rarity.Legendary:
 			_animator.runtimeAnimatorController = _legendaryChest;
 			break;
 		}
@@ -155,9 +147,6 @@ public class Chest : InteractiveObject, ILootable
 
 	private void EvaluateGearRarity()
 	{
-		//IL_000c: Unknown result type (might be due to invalid IL or missing references)
-		//IL_001c: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0021: Unknown result type (might be due to invalid IL or missing references)
 		_gearRarity = Settings.instance.containerPossibilities[_rarity].Evaluate(_random);
 	}
 
@@ -189,13 +178,13 @@ public class Chest : InteractiveObject, ILootable
 				GearRequest request = _toDropRequests[i];
 				while (!request.isDone)
 				{
-					elapsed += ((ChronometerBase)Chronometer.global).deltaTime;
+					elapsed += Chronometer.global.deltaTime;
 					yield return null;
 				}
 			}
 			while (elapsed <= 0.5f)
 			{
-				elapsed += ((ChronometerBase)Chronometer.global).deltaTime;
+				elapsed += Chronometer.global.deltaTime;
 				yield return null;
 			}
 			for (int j = 0; j < 3; j++)

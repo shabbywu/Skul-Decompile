@@ -7,9 +7,9 @@ namespace Characters.Abilities.Triggers;
 
 public abstract class TriggerComponent : MonoBehaviour, ITrigger
 {
-	public class SubcomponentAttribute : SubcomponentAttribute
+	public class SubcomponentAttribute : UnityEditor.SubcomponentAttribute
 	{
-		public static readonly Type[] types = new Type[31]
+		public new static readonly Type[] types = new Type[31]
 		{
 			typeof(OnActionComponent),
 			typeof(OnApplyStatusComponent),
@@ -45,7 +45,7 @@ public abstract class TriggerComponent : MonoBehaviour, ITrigger
 		};
 
 		public SubcomponentAttribute()
-			: base(true, types)
+			: base(allowCustom: true, types)
 		{
 		}
 	}
@@ -64,7 +64,7 @@ public abstract class TriggerComponent : MonoBehaviour, ITrigger
 
 	public override string ToString()
 	{
-		return ExtensionMethods.GetAutoName((object)this);
+		return this.GetAutoName();
 	}
 
 	public abstract void Refresh();

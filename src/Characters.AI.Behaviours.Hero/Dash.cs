@@ -8,11 +8,11 @@ namespace Characters.AI.Behaviours.Hero;
 
 public class Dash : Behaviour
 {
-	[Subcomponent(typeof(ChainAction))]
+	[UnityEditor.Subcomponent(typeof(ChainAction))]
 	[SerializeField]
 	private Characters.Actions.Action _readyAction;
 
-	[Subcomponent(typeof(ChainAction))]
+	[UnityEditor.Subcomponent(typeof(ChainAction))]
 	[SerializeField]
 	private Characters.Actions.Action _attackAction;
 
@@ -21,7 +21,7 @@ public class Dash : Behaviour
 	private Vector2 _distanceRange;
 
 	[SerializeField]
-	[Subcomponent(typeof(MoveToDestination))]
+	[UnityEditor.Subcomponent(typeof(MoveToDestination))]
 	private MoveToDestination _moveToDestination;
 
 	[SerializeField]
@@ -102,7 +102,7 @@ public class Dash : Behaviour
 				}
 				float num2 = Mathf.Lerp(source.x, destination.x, curve.Evaluate(elapsed));
 				owner.movement.force = new Vector2(num2 - ((Component)owner).transform.position.x, 0f);
-				elapsed += ((ChronometerBase)owner.chronometer.master).deltaTime;
+				elapsed += owner.chronometer.master.deltaTime;
 			}
 		}
 	}

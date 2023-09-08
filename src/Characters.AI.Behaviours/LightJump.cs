@@ -11,30 +11,30 @@ namespace Characters.AI.Behaviours;
 
 public sealed class LightJump : Behaviour
 {
-	[Subcomponent(typeof(Teleport))]
+	[UnityEditor.Subcomponent(typeof(Teleport))]
 	[SerializeField]
 	private Teleport _teleport;
 
-	[Subcomponent(typeof(ActionAttack))]
+	[UnityEditor.Subcomponent(typeof(ActionAttack))]
 	[SerializeField]
 	private ActionAttack _fall;
 
-	[Subcomponent(typeof(ActionAttack))]
+	[UnityEditor.Subcomponent(typeof(ActionAttack))]
 	[SerializeField]
 	private ActionAttack _attack;
 
 	[SerializeField]
-	[Subcomponent(typeof(EscapeTeleport))]
+	[UnityEditor.Subcomponent(typeof(EscapeTeleport))]
 	private EscapeTeleport _escapeTeleport;
 
-	[Subcomponent(typeof(ShiftObject))]
+	[UnityEditor.Subcomponent(typeof(ShiftObject))]
 	[SerializeField]
 	private ShiftObject _shiftObject;
 
 	[SerializeField]
 	private Transform _destination;
 
-	[Subcomponent(typeof(Hide))]
+	[UnityEditor.Subcomponent(typeof(Hide))]
 	[SerializeField]
 	private Hide _hide;
 

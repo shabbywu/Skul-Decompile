@@ -95,7 +95,7 @@ public sealed class DroppedRandomInscriptionItemBox : DroppedPurchasableReward
 		Synergy synergy = Singleton<Service>.Instance.levelManager.player.playerComponents.inventory.synergy;
 		do
 		{
-			_key = ExtensionMethods.Random<Inscription.Key>((IEnumerable<Inscription.Key>)_keywords, _random);
+			_key = _keywords.Random(_random);
 		}
 		while (synergy.inscriptions[_key].isMaxStep);
 		LoadItem();
@@ -103,9 +103,6 @@ public sealed class DroppedRandomInscriptionItemBox : DroppedPurchasableReward
 
 	private void LoadItem()
 	{
-		//IL_000c: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0011: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0023: Unknown result type (might be due to invalid IL or missing references)
 		do
 		{
 			Rarity rarity = _rarityPossibilities.Evaluate(_random);

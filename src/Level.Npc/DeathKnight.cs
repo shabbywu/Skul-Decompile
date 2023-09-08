@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using Characters;
 using Data;
 using GameResources;
@@ -48,23 +47,23 @@ public class DeathKnight : InteractiveObject
 
 	public string displayName => Localization.GetLocalizedString($"npc/{NpcType.DeathKnight}/name");
 
-	public string greeting => ExtensionMethods.Random<string>((IEnumerable<string>)Localization.GetLocalizedStringArray($"npc/{NpcType.DeathKnight}/greeting"));
+	public string greeting => Localization.GetLocalizedStringArray($"npc/{NpcType.DeathKnight}/greeting").Random();
 
-	public string[] chat => ExtensionMethods.Random<string[]>((IEnumerable<string[]>)Localization.GetLocalizedStringArrays($"npc/{NpcType.DeathKnight}/chat"));
+	public string[] chat => Localization.GetLocalizedStringArrays($"npc/{NpcType.DeathKnight}/chat").Random();
 
 	public string buildLabel => Localization.GetLocalizedString($"npc/{NpcType.DeathKnight}/build/Label");
 
-	public string buildSuccess => ExtensionMethods.Random<string>((IEnumerable<string>)Localization.GetLocalizedStringArray($"npc/{NpcType.DeathKnight}/build/Success"));
+	public string buildSuccess => Localization.GetLocalizedStringArray($"npc/{NpcType.DeathKnight}/build/Success").Random();
 
-	public string buildNoMoney => ExtensionMethods.Random<string>((IEnumerable<string>)Localization.GetLocalizedStringArray($"npc/{NpcType.DeathKnight}/build/NoMoney"));
+	public string buildNoMoney => Localization.GetLocalizedStringArray($"npc/{NpcType.DeathKnight}/build/NoMoney").Random();
 
 	public string[] buildNoLevel => Localization.GetLocalizedStringArray($"npc/{NpcType.DeathKnight}/build/NoLevel");
 
-	public string buildAgain => ExtensionMethods.Random<string>((IEnumerable<string>)Localization.GetLocalizedStringArray($"npc/{NpcType.DeathKnight}/build/Again"));
+	public string buildAgain => Localization.GetLocalizedStringArray($"npc/{NpcType.DeathKnight}/build/Again").Random();
 
 	public string BuildText(int cost)
 	{
-		return string.Format(ExtensionMethods.Random<string>((IEnumerable<string>)Localization.GetLocalizedStringArray($"npc/{NpcType.DeathKnight}/build")), cost);
+		return string.Format(Localization.GetLocalizedStringArray($"npc/{NpcType.DeathKnight}/build").Random(), cost);
 	}
 
 	private string GetBuildText(BuildLevel buildLevel)

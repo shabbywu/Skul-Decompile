@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using Characters.Abilities;
 using Data;
 using GameResources;
@@ -37,7 +36,7 @@ public class Chef : Npc
 
 	private Random _random;
 
-	public string submitLine => ExtensionMethods.Random<string>((IEnumerable<string>)Localization.GetLocalizedStringArray("npc/chef/submit/line"));
+	public string submitLine => Localization.GetLocalizedStringArray("npc/chef/submit/line").Random();
 
 	private void Start()
 	{
@@ -55,15 +54,11 @@ public class Chef : Npc
 
 	protected override void OnActivate()
 	{
-		//IL_0030: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0035: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0042: Unknown result type (might be due to invalid IL or missing references)
-		//IL_004e: Unknown result type (might be due to invalid IL or missing references)
 		SettingsByStage marketSettings = Singleton<Service>.Instance.levelManager.currentChapter.currentStage.marketSettings;
 		GlobalSettings marketSettings2 = Settings.instance.marketSettings;
-		Rarity val = marketSettings.masterDishPossibilities.Evaluate(_random);
-		AbilityBuff abilityBuff = _foodList.Take(_random, val);
-		float num = (float)marketSettings2.masterDishPrices[val] * marketSettings.masterDishPriceMultiplier;
+		Rarity rarity = marketSettings.masterDishPossibilities.Evaluate(_random);
+		AbilityBuff abilityBuff = _foodList.Take(_random, rarity);
+		float num = (float)marketSettings2.masterDishPrices[rarity] * marketSettings.masterDishPriceMultiplier;
 		num *= Random.Range(0.95f, 1.05f);
 		_price = (int)(num / 10f) * 10;
 		_foodInstance = Object.Instantiate<AbilityBuff>(abilityBuff, _slot);

@@ -47,7 +47,7 @@ public class ArchlichPassive : CharacterOperation
 		((Behaviour)_searchRange).enabled = true;
 		_overlapper.OverlapCollider(_searchRange);
 		((Behaviour)_searchRange).enabled = false;
-		List<Target> components = GetComponentExtension.GetComponents<Collider2D, Target>((IEnumerable<Collider2D>)_overlapper.results, true);
+		List<Target> components = ((IEnumerable<Collider2D>)_overlapper.results).GetComponents<Collider2D, Target>(clearList: true);
 		if (components.Count == 0)
 		{
 			return;

@@ -37,7 +37,7 @@ public class Vignette : MonoBehaviour
 		//IL_0015: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0016: Unknown result type (might be due to invalid IL or missing references)
 		float duration = curve.duration;
-		for (float time = 0f; time < duration; time += ((ChronometerBase)Chronometer.global).deltaTime)
+		for (float time = 0f; time < duration; time += Chronometer.global.deltaTime)
 		{
 			((Graphic)_image).color = Color.Lerp(startColor, endColor, curve.Evaluate(time));
 			yield return null;

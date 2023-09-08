@@ -49,7 +49,7 @@ public class Leap : CharacterOperation
 				{
 					break;
 				}
-				elapsed += ((ChronometerBase)owner.chronometer.master).deltaTime;
+				elapsed += owner.chronometer.master.deltaTime;
 			}
 		}
 	}

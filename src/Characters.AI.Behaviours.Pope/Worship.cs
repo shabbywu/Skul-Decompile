@@ -8,7 +8,7 @@ namespace Characters.AI.Behaviours.Pope;
 public sealed class Worship : Behaviour
 {
 	[SerializeField]
-	[Subcomponent(typeof(ActionAttack))]
+	[UnityEditor.Subcomponent(typeof(ActionAttack))]
 	private ActionAttack _attack;
 
 	public override IEnumerator CRun(AIController controller)

@@ -6,7 +6,7 @@ namespace Runnables;
 
 public sealed class RunOperations : Runnable
 {
-	[Subcomponent(typeof(OperationInfo))]
+	[UnityEditor.Subcomponent(typeof(OperationInfo))]
 	[SerializeField]
 	private OperationInfo.Subcomponents _operations;
 

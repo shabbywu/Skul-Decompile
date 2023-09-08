@@ -59,26 +59,19 @@ public class Grave : InteractiveObject, ILootable
 
 	private void Start()
 	{
-		//IL_0020: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0025: Unknown result type (might be due to invalid IL or missing references)
-		//IL_002b: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0030: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0031: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0047: Expected I4, but got Unknown
 		_rarity = Singleton<Service>.Instance.levelManager.currentChapter.currentStage.gearPossibilities.Evaluate(_random);
-		Rarity val = _rarity;
-		switch ((int)val)
+		switch (_rarity)
 		{
-		case 0:
+		case Rarity.Common:
 			_animator.runtimeAnimatorController = _common;
 			break;
-		case 1:
+		case Rarity.Rare:
 			_animator.runtimeAnimatorController = _rare;
 			break;
-		case 2:
+		case Rarity.Unique:
 			_animator.runtimeAnimatorController = _unique;
 			break;
-		case 3:
+		case Rarity.Legendary:
 			_animator.runtimeAnimatorController = _legendary;
 			break;
 		}
@@ -92,7 +85,6 @@ public class Grave : InteractiveObject, ILootable
 
 	private void Load()
 	{
-		//IL_0018: Unknown result type (might be due to invalid IL or missing references)
 		do
 		{
 			EvaluateGearRarity();
@@ -104,15 +96,11 @@ public class Grave : InteractiveObject, ILootable
 
 	private void EvaluateGearRarity()
 	{
-		//IL_000c: Unknown result type (might be due to invalid IL or missing references)
-		//IL_001c: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0021: Unknown result type (might be due to invalid IL or missing references)
 		_gearRarity = Settings.instance.containerPossibilities[_rarity].Evaluate(_random);
 	}
 
 	public override void OnActivate()
 	{
-		//IL_001d: Unknown result type (might be due to invalid IL or missing references)
 		base.OnActivate();
 		_animator.Play(InteractiveObject._activateHash);
 		_effect.Play(_rarity);

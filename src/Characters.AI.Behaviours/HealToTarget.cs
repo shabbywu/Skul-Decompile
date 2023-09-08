@@ -43,7 +43,7 @@ public class HealToTarget : Behaviour
 		while (_healMotion.running)
 		{
 			yield return null;
-			_time += ((ChronometerBase)controller.character.chronometer.master).deltaTime;
+			_time += controller.character.chronometer.master.deltaTime;
 			if (_time >= (float)elapsed)
 			{
 				break;

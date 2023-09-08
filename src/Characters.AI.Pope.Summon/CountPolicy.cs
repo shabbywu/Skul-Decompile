@@ -7,9 +7,9 @@ namespace Characters.AI.Pope.Summon;
 public abstract class CountPolicy : MonoBehaviour
 {
 	[AttributeUsage(AttributeTargets.Field)]
-	public class SubcomponentAttribute : SubcomponentAttribute
+	public class SubcomponentAttribute : UnityEditor.SubcomponentAttribute
 	{
-		public static readonly Type[] types = new Type[2]
+		public new static readonly Type[] types = new Type[2]
 		{
 			typeof(ConstantCountPolicy),
 			typeof(RadnomCountPolicy)

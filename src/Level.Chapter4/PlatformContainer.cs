@@ -58,7 +58,7 @@ public class PlatformContainer : MonoBehaviour
 
 	public void RandomTakeTo(Platform[] platforms)
 	{
-		ExtensionMethods.Shuffle<Platform>((IList<Platform>)_platforms);
+		_platforms.Shuffle();
 		Platform[] array = _platforms.Take(platforms.Length).ToArray();
 		for (int i = 0; i < platforms.Length; i++)
 		{
@@ -81,7 +81,7 @@ public class PlatformContainer : MonoBehaviour
 
 	public void NoTentacleTakeTo(Platform[] results)
 	{
-		ExtensionMethods.Shuffle<Platform>((IList<Platform>)_platforms);
+		_platforms.Shuffle();
 		for (int i = 0; i < results.Length; i++)
 		{
 			results[i] = null;

@@ -10,7 +10,7 @@ public class ACutScene : Runnable
 	private OnStartEnd _onStartEnd;
 
 	[SerializeField]
-	[Subcomponent(typeof(ShotInfo))]
+	[UnityEditor.Subcomponent(typeof(ShotInfo))]
 	private ShotInfo.Subcomponents _shotInfos;
 
 	public override void Run()

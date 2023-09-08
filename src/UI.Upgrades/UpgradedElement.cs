@@ -68,8 +68,6 @@ public sealed class UpgradedElement : MonoBehaviour, ISelectHandler, IEventSyste
 
 	public void Set(Panel panel, UpgradeResource.Reference reference, bool effect = false)
 	{
-		//IL_0039: Unknown result type (might be due to invalid IL or missing references)
-		//IL_003e: Unknown result type (might be due to invalid IL or missing references)
 		_panel = panel;
 		_reference = reference;
 		if (_reference == null)
@@ -80,8 +78,8 @@ public sealed class UpgradedElement : MonoBehaviour, ISelectHandler, IEventSyste
 		SetElement();
 		if (effect)
 		{
-			((CoroutineReference)(ref _ceffectReference)).Stop();
-			_ceffectReference = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)this, CActiveGetEffect());
+			_ceffectReference.Stop();
+			_ceffectReference = ((MonoBehaviour)(object)this).StartCoroutineWithReference(CActiveGetEffect());
 		}
 	}
 
@@ -100,7 +98,7 @@ public sealed class UpgradedElement : MonoBehaviour, ISelectHandler, IEventSyste
 		while (remainTime > 0f)
 		{
 			yield return null;
-			float deltaTime = ((ChronometerBase)Chronometer.global).deltaTime;
+			float deltaTime = Chronometer.global.deltaTime;
 			effects = _effects;
 			for (int i = 0; i < effects.Length; i++)
 			{

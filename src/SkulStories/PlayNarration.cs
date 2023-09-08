@@ -40,7 +40,7 @@ public class PlayNarration : Sequence
 		float elapsed = 0f;
 		while (length > elapsed)
 		{
-			elapsed += ((ChronometerBase)Chronometer.global).deltaTime;
+			elapsed += Chronometer.global.deltaTime;
 			yield return null;
 			if (_narration.skipped || !_narration.sceneVisible)
 			{

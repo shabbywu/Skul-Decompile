@@ -108,7 +108,7 @@ public class TerrainCollisionDetector : MonoBehaviour
 			for (int i = 0; i < _caster.results.Count; i++)
 			{
 				RaycastHit2D raycastHit = _caster.results[i];
-				if (ExtensionMethods.Contains(_terrainLayer, ((Component)((RaycastHit2D)(ref raycastHit)).collider).gameObject.layer))
+				if (_terrainLayer.Contains(((Component)((RaycastHit2D)(ref raycastHit)).collider).gameObject.layer))
 				{
 					this.onTerrainHit(origin, direction, distance, raycastHit);
 					continue;
@@ -171,9 +171,9 @@ public class TerrainCollisionDetector : MonoBehaviour
 			//IL_003e: Unknown result type (might be due to invalid IL or missing references)
 			//IL_003f: Unknown result type (might be due to invalid IL or missing references)
 			//IL_0041: Unknown result type (might be due to invalid IL or missing references)
-			for (int i = 0; i < ((SubcomponentArray<HitOperation>)_onTerrainHit).components.Length; i++)
+			for (int i = 0; i < _onTerrainHit.components.Length; i++)
 			{
-				((SubcomponentArray<HitOperation>)_onTerrainHit).components[i].Run(_projectile, raycastHit);
+				_onTerrainHit.components[i].Run(_projectile, raycastHit);
 			}
 			_effect.Spawn(_projectile, origin, direction, distance, raycastHit);
 		}
@@ -190,7 +190,7 @@ public class TerrainCollisionDetector : MonoBehaviour
 		while (_time <= _maxLifeTime)
 		{
 			yield return null;
-			float deltaTime = ((ChronometerBase)Chronometer.global).deltaTime;
+			float deltaTime = Chronometer.global.deltaTime;
 			_time += deltaTime;
 			(Vector2, float) tuple = _movement.GetSpeed(_time, deltaTime);
 			(direction, speed) = tuple;
@@ -206,9 +206,9 @@ public class TerrainCollisionDetector : MonoBehaviour
 
 	internal void Despawn()
 	{
-		for (int i = 0; i < ((SubcomponentArray<Operation>)_onDespawn).components.Length; i++)
+		for (int i = 0; i < _onDespawn.components.Length; i++)
 		{
-			((SubcomponentArray<Operation>)_onDespawn).components[i].Run(_projectile);
+			_onDespawn.components[i].Run(_projectile);
 		}
 		_effect.SpawnDespawn(_projectile);
 	}

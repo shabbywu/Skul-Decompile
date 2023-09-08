@@ -105,11 +105,11 @@ public class KilivanFinish : MonoBehaviour
 		((Component)_projectile).transform.position = _firePosition.position;
 		_sweepAttack.Run(_owner);
 		Show();
-		float num = _speed * ((ChronometerBase)Chronometer.global).deltaTime;
+		float num = _speed * Chronometer.global.deltaTime;
 		while (!DetectCollision(destination, num))
 		{
 			yield return null;
-			num = _speed * ((ChronometerBase)Chronometer.global).deltaTime;
+			num = _speed * Chronometer.global.deltaTime;
 			_projectile.Translate(Vector2.op_Implicit(_direction * num), (Space)0);
 		}
 		_sweepAttack.Stop();

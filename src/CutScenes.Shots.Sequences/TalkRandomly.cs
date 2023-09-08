@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using GameResources;
 using Scenes;
 using UI;
@@ -27,7 +26,7 @@ public sealed class TalkRandomly : Sequence
 		npcConversation.portrait = _portrait;
 		npcConversation.skippable = _skippable;
 		npcConversation.name = Localization.GetLocalizedString(_nameKey);
-		string[] texts = ExtensionMethods.Random<string[]>((IEnumerable<string[]>)Localization.GetLocalizedStringArrays(_textArrayKey));
+		string[] texts = Localization.GetLocalizedStringArrays(_textArrayKey).Random();
 		yield return npcConversation.CConversation(texts);
 	}
 }

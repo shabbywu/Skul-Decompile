@@ -24,11 +24,11 @@ public sealed class HealthFilter : CharacterOperation
 	private Compare _compare;
 
 	[SerializeField]
-	[Information(/*Could not decode attribute arguments.*/)]
+	[Information("percent(0~100)", InformationAttribute.InformationType.Info, false)]
 	private float _value;
 
 	[SerializeField]
-	[Subcomponent(typeof(TargetedOperationInfo))]
+	[UnityEditor.Subcomponent(typeof(TargetedOperationInfo))]
 	private TargetedOperationInfo.Subcomponents _operations;
 
 	public override void Initialize()

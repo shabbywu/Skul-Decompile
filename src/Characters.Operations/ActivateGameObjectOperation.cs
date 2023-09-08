@@ -22,8 +22,6 @@ public class ActivateGameObjectOperation : CharacterOperation
 	public override void Run(Character owner)
 	{
 		//IL_004e: Unknown result type (might be due to invalid IL or missing references)
-		//IL_00b9: Unknown result type (might be due to invalid IL or missing references)
-		//IL_00be: Unknown result type (might be due to invalid IL or missing references)
 		if ((Object)(object)_gameObject == (Object)null)
 		{
 			_gameObject = ((Component)owner).gameObject;
@@ -45,19 +43,19 @@ public class ActivateGameObjectOperation : CharacterOperation
 		}
 		if (_duration > 0f)
 		{
-			_stopCoroutineReference = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)this, CStop(owner.chronometer.animation));
+			_stopCoroutineReference = ((MonoBehaviour)(object)this).StartCoroutineWithReference(CStop(owner.chronometer.animation));
 		}
 	}
 
 	private IEnumerator CStop(Chronometer chronometer)
 	{
-		yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)chronometer, _duration);
+		yield return chronometer.WaitForSeconds(_duration);
 		Stop();
 	}
 
 	public override void Stop()
 	{
-		((CoroutineReference)(ref _stopCoroutineReference)).Stop();
+		_stopCoroutineReference.Stop();
 		if ((Object)(object)_gameObject != (Object)null)
 		{
 			_gameObject.SetActive(false);

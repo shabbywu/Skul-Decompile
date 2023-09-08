@@ -29,13 +29,13 @@ public class NapdoSweepAttak2 : SweepAttack2
 			yield break;
 		}
 		float stack = target.character.mark.GetStack(_mark);
-		int length = (int)Mathf.Min(stack * _attackLengthMultiplier, (float)((SubcomponentArray<CastAttackInfoSequence>)_attackAndEffect).components.Length);
+		int length = (int)Mathf.Min(stack * _attackLengthMultiplier, (float)_attackAndEffect.components.Length);
 		while ((Object)(object)this != (Object)null && index < length)
 		{
 			for (; index < length; index++)
 			{
 				CastAttackInfoSequence castAttackInfoSequence;
-				if (!(time >= (castAttackInfoSequence = ((SubcomponentArray<CastAttackInfoSequence>)_attackAndEffect).components[index]).timeToTrigger))
+				if (!(time >= (castAttackInfoSequence = _attackAndEffect.components[index]).timeToTrigger))
 				{
 					break;
 				}
@@ -43,7 +43,7 @@ public class NapdoSweepAttak2 : SweepAttack2
 				Attack(castAttackInfoSequence.attackInfo, origin, direction, distance, raycastHit, target);
 			}
 			yield return null;
-			time += ((ChronometerBase)base.owner.chronometer.animation).deltaTime;
+			time += base.owner.chronometer.animation.deltaTime;
 		}
 		target.character.mark.TakeAllStack(_mark);
 	}

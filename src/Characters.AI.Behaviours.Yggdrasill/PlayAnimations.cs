@@ -24,11 +24,11 @@ public sealed class PlayAnimations : Behaviour
 		base.result = Result.Doing;
 		if (_invulnerable)
 		{
-			controller.character.cinematic.Attach((object)this);
+			controller.character.cinematic.Attach(this);
 		}
 		if (_statusImmune)
 		{
-			controller.character.status.unstoppable.Attach((object)this);
+			controller.character.status.unstoppable.Attach(this);
 		}
 		if (_tags == null || _tags.Length == 0)
 		{
@@ -43,11 +43,11 @@ public sealed class PlayAnimations : Behaviour
 		}
 		if (_invulnerable)
 		{
-			controller.character.cinematic.Detach((object)this);
+			controller.character.cinematic.Detach(this);
 		}
 		if (_statusImmune)
 		{
-			controller.character.status.unstoppable.Detach((object)this);
+			controller.character.status.unstoppable.Detach(this);
 		}
 		base.result = Result.Success;
 	}

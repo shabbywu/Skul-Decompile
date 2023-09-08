@@ -21,13 +21,13 @@ public sealed class ManaCycle : SimpleStatBonusKeyword
 	public override void Attach()
 	{
 		base.Attach();
-		((PriorityList<GiveDamageDelegate>)base.character.onGiveDamage).Add(int.MaxValue, (GiveDamageDelegate)OnGiveDamage);
+		base.character.onGiveDamage.Add(int.MaxValue, OnGiveDamage);
 	}
 
 	public override void Detach()
 	{
 		base.Detach();
-		((PriorityList<GiveDamageDelegate>)base.character.onGiveDamage).Remove((GiveDamageDelegate)OnGiveDamage);
+		base.character.onGiveDamage.Remove(OnGiveDamage);
 	}
 
 	public override void UpdateBonus(bool wasActive, bool wasOmen)

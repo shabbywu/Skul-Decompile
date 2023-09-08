@@ -99,19 +99,19 @@ public sealed class CollectorSpecialSlot : MonoBehaviour
 				_itemWeights.Add((_remainList[i].item, _remainList[i].weight));
 			}
 		}
-		WeightedRandomizer<DroppedPurchasableReward> val = new WeightedRandomizer<DroppedPurchasableReward>((ICollection<ValueTuple<DroppedPurchasableReward, float>>)_itemWeights);
+		WeightedRandomizer<DroppedPurchasableReward> weightedRandomizer = new WeightedRandomizer<DroppedPurchasableReward>(_itemWeights);
 		DroppedPurchasableReward droppedPurchasableReward;
 		if (_itemWeights.Count > 1)
 		{
 			do
 			{
-				droppedPurchasableReward = val.TakeOne(_random);
+				droppedPurchasableReward = weightedRandomizer.TakeOne(_random);
 			}
 			while ((Object)(object)dropped != (Object)null && ((Object)droppedPurchasableReward).name.Equals(((Object)dropped).name, StringComparison.OrdinalIgnoreCase));
 		}
 		else
 		{
-			droppedPurchasableReward = val.TakeOne(_random);
+			droppedPurchasableReward = weightedRandomizer.TakeOne(_random);
 		}
 		_cycle.Add(droppedPurchasableReward);
 		return droppedPurchasableReward;

@@ -16,7 +16,7 @@ public sealed class WhaleboneAmulet : Ability
 
 		protected override void OnAttach()
 		{
-			owner.health.onTakeDamage.Add(-100, (TakeDamageDelegate)HandleOnTakeDamage);
+			owner.health.onTakeDamage.Add(-100, HandleOnTakeDamage);
 		}
 
 		private bool HandleOnTakeDamage(ref Damage damage)
@@ -57,7 +57,7 @@ public sealed class WhaleboneAmulet : Ability
 
 		protected override void OnDetach()
 		{
-			owner.health.onTakeDamage.Remove((TakeDamageDelegate)HandleOnTakeDamage);
+			owner.health.onTakeDamage.Remove(HandleOnTakeDamage);
 		}
 	}
 

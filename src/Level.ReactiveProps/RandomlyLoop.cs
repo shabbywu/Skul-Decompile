@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Level.ReactiveProps;
@@ -23,10 +22,10 @@ public class RandomlyLoop : MonoBehaviour
 
 	private void Update()
 	{
-		_elapsed += ((ChronometerBase)Chronometer.global).deltaTime;
+		_elapsed += Chronometer.global.deltaTime;
 		if (_elapsed > _term)
 		{
-			ExtensionMethods.Random<FlyGroup>((IEnumerable<FlyGroup>)_groups).Activate();
+			_groups.Random().Activate();
 			_elapsed -= _term;
 			_term = Random.Range(_termRange.x, _termRange.y);
 		}

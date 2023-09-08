@@ -35,7 +35,7 @@ public class GiveCurseOfLight : Ability
 
 		private void OnGaveDamage(ITarget target, in Damage originalDamage, in Damage gaveDamage, double damageDealt)
 		{
-			if (!(_remainCooldown > 0f) && !((Object)(object)target.character == (Object)null) && !target.character.health.dead && target.character.playerComponents != null && (string.IsNullOrWhiteSpace(ability._attackKey) || gaveDamage.key.Equals(ability._attackKey, StringComparison.OrdinalIgnoreCase)) && ((EnumArray<Damage.MotionType, bool>)ability._motionTypeFilter)[gaveDamage.motionType] && ((EnumArray<Damage.AttackType, bool>)ability._damageTypeFilter)[gaveDamage.attackType] && !target.character.invulnerable.value)
+			if (!(_remainCooldown > 0f) && !((Object)(object)target.character == (Object)null) && !target.character.health.dead && target.character.playerComponents != null && (string.IsNullOrWhiteSpace(ability._attackKey) || gaveDamage.key.Equals(ability._attackKey, StringComparison.OrdinalIgnoreCase)) && ability._motionTypeFilter[gaveDamage.motionType] && ability._damageTypeFilter[gaveDamage.attackType] && !target.character.invulnerable.value)
 			{
 				_remainCooldown = ability._cooldown;
 				target.character.playerComponents.savableAbilityManager.Apply(SavableAbilityManager.Name.Curse);
@@ -44,7 +44,7 @@ public class GiveCurseOfLight : Ability
 	}
 
 	[SerializeField]
-	[Information(/*Could not decode attribute arguments.*/)]
+	[Information("Add만 할 뿐 Remove를 하지 않으니 신중히 사용해야함", InformationAttribute.InformationType.Warning, true)]
 	private float _cooldown;
 
 	[SerializeField]

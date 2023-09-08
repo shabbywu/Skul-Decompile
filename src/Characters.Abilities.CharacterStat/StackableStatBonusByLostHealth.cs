@@ -47,10 +47,10 @@ public sealed class StackableStatBonusByLostHealth : Ability
 
 		private void SetStat(int stack)
 		{
-			Stat.Value[] values = ((ReorderableArray<Stat.Value>)_stat).values;
+			Stat.Value[] values = _stat.values;
 			for (int i = 0; i < values.Length; i++)
 			{
-				values[i].value = ((ReorderableArray<Stat.Value>)ability._targetPerStack).values[i].GetStackedValue(stack);
+				values[i].value = ability._targetPerStack.values[i].GetStackedValue(stack);
 			}
 			owner.stat.SetNeedUpdate();
 		}

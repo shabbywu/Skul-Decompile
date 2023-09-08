@@ -10,7 +10,7 @@ public class RunOperationOnGrabBoard : CharacterOperation
 	private GrabBoard _grabBoard;
 
 	[SerializeField]
-	[Subcomponent(typeof(OperationInfo))]
+	[UnityEditor.Subcomponent(typeof(OperationInfo))]
 	private OperationInfo.Subcomponents _operations;
 
 	public override void Run(Character owner)

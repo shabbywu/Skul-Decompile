@@ -44,9 +44,9 @@ public class StackableStatBonus : Ability
 
 		public void UpdateStack()
 		{
-			for (int i = 0; i < ((ReorderableArray<Stat.Value>)_stat).values.Length; i++)
+			for (int i = 0; i < _stat.values.Length; i++)
 			{
-				((ReorderableArray<Stat.Value>)_stat).values[i].value = ((ReorderableArray<Stat.Value>)ability._statPerStack).values[i].GetStackedValue(ability.stack);
+				_stat.values[i].value = ability._statPerStack.values[i].GetStackedValue(ability.stack);
 			}
 			owner.stat.SetNeedUpdate();
 		}

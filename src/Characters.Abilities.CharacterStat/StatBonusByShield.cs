@@ -69,9 +69,9 @@ public class StatBonusByShield : Ability
 			double num = owner.health.shield.amount * ability._stackMultiplier;
 			num = Mathf.Min((int)num, ability._maxStack);
 			_iconStacks = (int)(num * ability._iconStacksPerStack);
-			for (int i = 0; i < ((ReorderableArray<Stat.Value>)_stat).values.Length; i++)
+			for (int i = 0; i < _stat.values.Length; i++)
 			{
-				((ReorderableArray<Stat.Value>)_stat).values[i].value = ((ReorderableArray<Stat.Value>)ability._statPerStack).values[i].GetStackedValue(num);
+				_stat.values[i].value = ability._statPerStack.values[i].GetStackedValue(num);
 			}
 			owner.stat.SetNeedUpdate();
 		}

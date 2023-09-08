@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using Characters.Actions;
 using Level;
 using UnityEngine;
@@ -33,7 +32,7 @@ public class Heal : Behaviour
 	{
 		base.result = Result.Doing;
 		Random.Range(_amountRange.x, _amountRange.y);
-		ExtensionMethods.Random<Character>((IEnumerable<Character>)_enemyWaveContainer.GetAllEnemies());
+		_enemyWaveContainer.GetAllEnemies().Random();
 		_healMotion.TryStart();
 		yield break;
 	}

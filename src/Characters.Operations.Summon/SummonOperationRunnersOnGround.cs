@@ -148,8 +148,8 @@ public class SummonOperationRunnersOnGround : CharacterOperation
 			if (!_onlySpawnToLastStandingCollider || !((Object)(object)val != (Object)(object)_owner.movement.controller.collisionState.lastStandingCollider))
 			{
 				Bounds bounds2 = val.bounds;
-				float2 val2 = float2.op_Implicit(ExtensionMethods.GetMostLeftTop(bounds2));
-				float2 val3 = float2.op_Implicit(ExtensionMethods.GetMostRightTop(bounds2));
+				float2 val2 = float2.op_Implicit(bounds2.GetMostLeftTop());
+				float2 val3 = float2.op_Implicit(bounds2.GetMostRightTop());
 				val2.x = Mathf.Max(val2.x, x);
 				val3.x = Mathf.Min(val3.x, x2);
 				_surfaces.Add((val2, val3));

@@ -35,6 +35,6 @@ public class AttachAbility : CharacterOperation
 
 	public override string ToString()
 	{
-		return ExtensionMethods.GetAutoName((object)this);
+		return this.GetAutoName();
 	}
 }

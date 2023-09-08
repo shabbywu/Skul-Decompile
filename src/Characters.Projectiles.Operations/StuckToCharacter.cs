@@ -6,7 +6,7 @@ namespace Characters.Projectiles.Operations;
 
 public class StuckToCharacter : CharacterHitOperation
 {
-	[Information(/*Could not decode attribute arguments.*/)]
+	[Information("0일 경우 삭제 되지 않음", InformationAttribute.InformationType.Info, false)]
 	[SerializeField]
 	private float _lifeTime;
 
@@ -24,7 +24,7 @@ public class StuckToCharacter : CharacterHitOperation
 
 	private IEnumerator CDespawn(Effects.SpritePoolObject effect, Character target)
 	{
-		for (float elapsed = 0f; elapsed < _lifeTime; elapsed += ((ChronometerBase)Chronometer.global).deltaTime)
+		for (float elapsed = 0f; elapsed < _lifeTime; elapsed += Chronometer.global.deltaTime)
 		{
 			if (target.health.dead)
 			{

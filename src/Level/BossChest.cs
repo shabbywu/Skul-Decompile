@@ -97,11 +97,6 @@ public class BossChest : InteractiveObject
 
 	private void EvaluateGearRarity()
 	{
-		//IL_0020: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0025: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0036: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0046: Unknown result type (might be due to invalid IL or missing references)
-		//IL_004b: Unknown result type (might be due to invalid IL or missing references)
 		_rarity = Singleton<Service>.Instance.levelManager.currentChapter.currentStage.gearPossibilities.Evaluate(_random);
 		_gearRarity = Settings.instance.containerPossibilities[_rarity].Evaluate(_random);
 	}
@@ -187,7 +182,7 @@ public class BossChest : InteractiveObject
 		Gear gear = null;
 		do
 		{
-			BossGears.Property[] values = ((ReorderableArray<BossGears.Property>)_bossGears).values;
+			BossGears.Property[] values = _bossGears.values;
 			double num = _random.NextDouble() * (double)values.Sum((BossGears.Property a) => a.weight);
 			for (int i = 0; i < values.Length; i++)
 			{
@@ -237,9 +232,9 @@ public class BossChest : InteractiveObject
 
 	private bool CheckAlreadyDropAllBossItem()
 	{
-		for (int i = 0; i < ((ReorderableArray<BossGears.Property>)_bossGears).values.Length; i++)
+		for (int i = 0; i < _bossGears.values.Length; i++)
 		{
-			BossGears.Property property = ((ReorderableArray<BossGears.Property>)_bossGears).values[i];
+			BossGears.Property property = _bossGears.values[i];
 			if (!ContainsInRewards(property.gear))
 			{
 				return false;
@@ -264,8 +259,6 @@ public class BossChest : InteractiveObject
 	{
 		Array.Sort(_rewards, delegate(Gear gear1, Gear gear2)
 		{
-			//IL_0025: Unknown result type (might be due to invalid IL or missing references)
-			//IL_002b: Unknown result type (might be due to invalid IL or missing references)
 			if (gear1.type != gear2.type)
 			{
 				if (gear1.type == Gear.Type.Item)

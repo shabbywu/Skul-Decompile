@@ -42,7 +42,7 @@ public class CreditRoll : MonoBehaviour
 		while (val.y > 0f)
 		{
 			yield return null;
-			((Component)_target).transform.Translate(Vector2.op_Implicit(_input.speed * ((ChronometerBase)Chronometer.global).deltaTime * Vector2.up));
+			((Component)_target).transform.Translate(Vector2.op_Implicit(_input.speed * Chronometer.global.deltaTime * Vector2.up));
 			val = ((Component)_destination).transform.position - ((Component)_lastSupporterList).transform.position;
 		}
 		yield return Chronometer.global.WaitForSeconds(_delay);

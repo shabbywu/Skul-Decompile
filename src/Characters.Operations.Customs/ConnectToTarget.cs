@@ -28,7 +28,7 @@ public class ConnectToTarget : TargetedCharacterOperation
 			float elapsed = 0f;
 			while (elapsed < duration && connection.connecting && target.liveAndActive)
 			{
-				elapsed += ((ChronometerBase)chronometer).deltaTime;
+				elapsed += chronometer.deltaTime;
 				yield return null;
 			}
 			if (connection.connecting)

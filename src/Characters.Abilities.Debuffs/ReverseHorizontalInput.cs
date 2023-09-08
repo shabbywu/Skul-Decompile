@@ -15,12 +15,12 @@ public sealed class ReverseHorizontalInput : Ability
 
 		protected override void OnAttach()
 		{
-			PlayerInput.reverseHorizontal.Attach((object)this);
+			PlayerInput.reverseHorizontal.Attach(this);
 		}
 
 		protected override void OnDetach()
 		{
-			PlayerInput.reverseHorizontal.Detach((object)this);
+			PlayerInput.reverseHorizontal.Detach(this);
 		}
 	}
 

@@ -31,7 +31,7 @@ public class SpawnThiefGoldOnGaveDamage : Ability
 		{
 			//IL_007d: Unknown result type (might be due to invalid IL or missing references)
 			//IL_0082: Unknown result type (might be due to invalid IL or missing references)
-			if (!(gaveDamage.amount < ability._minDamage) && !((Object)(object)target.character == (Object)null) && ((EnumArray<Character.Type, bool>)ability._characterTypeFilter)[target.character.type] && ((EnumArray<Damage.MotionType, bool>)ability._motionTypeFilter)[gaveDamage.motionType] && ((EnumArray<Damage.AttackType, bool>)ability._attackTypeFilter)[gaveDamage.attackType])
+			if (!(gaveDamage.amount < ability._minDamage) && !((Object)(object)target.character == (Object)null) && ability._characterTypeFilter[target.character.type] && ability._motionTypeFilter[gaveDamage.motionType] && ability._attackTypeFilter[gaveDamage.attackType])
 			{
 				SpawnGold(Vector2.op_Implicit(gaveDamage.hitPoint));
 			}

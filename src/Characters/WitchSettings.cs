@@ -36,11 +36,11 @@ public class WitchSettings : ScriptableObject
 	public float 외골격강화_보호막;
 
 	[SerializeField]
-	[Information(/*Could not decode attribute arguments.*/)]
+	[Information("고정", InformationAttribute.InformationType.Info, false)]
 	public float 외골격강화_보호막지속시간;
 
 	[SerializeField]
-	[Information(/*Could not decode attribute arguments.*/)]
+	[Information("고정", InformationAttribute.InformationType.Info, false)]
 	public float 외골격강화_교대대기시간감소;
 
 	[SerializeField]

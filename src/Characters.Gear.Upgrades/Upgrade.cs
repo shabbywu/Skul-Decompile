@@ -19,7 +19,7 @@ public class Upgrade
 
 	public GameData.Currency.Type currencyTypeByDiscard => GameData.Currency.Type.Gold;
 
-	public int maxLevel => ((SubcomponentArray<UpgradeAbility>)_abilityByLevel).components.Length;
+	public int maxLevel => _abilityByLevel.components.Length;
 
 	public UpgradeAbility GetAbility(int level)
 	{

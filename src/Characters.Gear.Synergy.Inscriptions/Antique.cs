@@ -18,7 +18,7 @@ public sealed class Antique : SimpleStatBonusKeyword
 	private Sprite _maxStepStatBonusIcon;
 
 	[SerializeField]
-	[Information(/*Could not decode attribute arguments.*/)]
+	[Information("Percent", InformationAttribute.InformationType.Info, false)]
 	private double _takingDamagePercent;
 
 	[SerializeField]

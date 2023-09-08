@@ -119,7 +119,7 @@ public class CharacterStatus : MonoBehaviour
 
 	public readonly SumInt gradeBonuses = new SumInt(0);
 
-	public readonly TrueOnlyLogicalSumList unstoppable = new TrueOnlyLogicalSumList(false);
+	public readonly TrueOnlyLogicalSumList unstoppable = new TrueOnlyLogicalSumList();
 
 	private const string _unstoppableFloatingTextKey = "floating/unstoppable";
 
@@ -187,16 +187,7 @@ public class CharacterStatus : MonoBehaviour
 		}
 	}
 
-	public EnumArray<Kind, SumFloat> durationMultiplier { get; set; } = new EnumArray<Kind, SumFloat>((SumFloat[])(object)new SumFloat[7]
-	{
-		new SumFloat(1f),
-		new SumFloat(1f),
-		new SumFloat(1f),
-		new SumFloat(1f),
-		new SumFloat(1f),
-		new SumFloat(1f),
-		new SumFloat(1f)
-	});
+	public EnumArray<Kind, SumFloat> durationMultiplier { get; set; } = new EnumArray<Kind, SumFloat>(new SumFloat(1f), new SumFloat(1f), new SumFloat(1f), new SumFloat(1f), new SumFloat(1f), new SumFloat(1f), new SumFloat(1f));
 
 
 	public event OnTimeDelegate onApplyBleed;
@@ -331,7 +322,7 @@ public class CharacterStatus : MonoBehaviour
 		stun.attacker = attacker;
 		if ((Object)(object)attacker.status != (Object)null)
 		{
-			stun.durationMultiplier = ((Sum<float>)(object)attacker.status.durationMultiplier[Kind.Stun]).total;
+			stun.durationMultiplier = attacker.status.durationMultiplier[Kind.Stun].total;
 			stun.onAttached = attacker.status.onApplyStun;
 			stun.onRefreshed = attacker.status.onRefreshStun;
 			stun.onDetached = attacker.status.onReleaseStun;
@@ -345,7 +336,7 @@ public class CharacterStatus : MonoBehaviour
 		freeze.attacker = attacker;
 		if ((Object)(object)attacker.status != (Object)null)
 		{
-			freeze.durationMultiplier = ((Sum<float>)(object)attacker.status.durationMultiplier[Kind.Freeze]).total;
+			freeze.durationMultiplier = attacker.status.durationMultiplier[Kind.Freeze].total;
 			freeze.hitStack = attacker.status.freezeMaxHitStack;
 			freeze.onAttached = attacker.status.onApplyFreeze;
 			freeze.onRefreshed = attacker.status.onRefreshFreeze;
@@ -360,7 +351,7 @@ public class CharacterStatus : MonoBehaviour
 		burn.attacker = attacker;
 		if ((Object)(object)attacker.status != (Object)null)
 		{
-			burn.durationMultiplier = ((Sum<float>)(object)attacker.status.durationMultiplier[Kind.Burn]).total;
+			burn.durationMultiplier = attacker.status.durationMultiplier[Kind.Burn].total;
 			burn.onAttached = attacker.status.onApplyBurn;
 			burn.onRefreshed = attacker.status.onRefreshBurn;
 			burn.onDetached = attacker.status.onReleaseBurn;
@@ -389,7 +380,7 @@ public class CharacterStatus : MonoBehaviour
 		poison.attacker = attacker;
 		if ((Object)(object)attacker.status != (Object)null)
 		{
-			poison.durationMultiplier = ((Sum<float>)(object)attacker.status.durationMultiplier[Kind.Poison]).total;
+			poison.durationMultiplier = attacker.status.durationMultiplier[Kind.Poison].total;
 			poison.stoppingPower = attacker.status.giveStoppingPowerOnPoison;
 			poison.onAttached = attacker.status.onApplyPoison;
 			poison.onRefreshed = attacker.status.onRefreshPoison;

@@ -11,7 +11,7 @@ public class Melee : Behaviour, IPattern
 	[SerializeField]
 	internal Collider2D trigger;
 
-	[Subcomponent(typeof(ActionAttack))]
+	[UnityEditor.Subcomponent(typeof(ActionAttack))]
 	[SerializeField]
 	private ActionAttack _attack;
 

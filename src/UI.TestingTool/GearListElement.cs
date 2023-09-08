@@ -13,13 +13,7 @@ namespace UI.TestingTool;
 
 public class GearListElement : MonoBehaviour
 {
-	private static readonly EnumArray<Rarity, Color> _rarityColorTable = new EnumArray<Rarity, Color>((Color[])(object)new Color[4]
-	{
-		Color.black,
-		Color.blue,
-		Color.magenta,
-		Color.red
-	});
+	private static readonly EnumArray<Rarity, Color> _rarityColorTable = new EnumArray<Rarity, Color>(Color.black, Color.blue, Color.magenta, Color.red);
 
 	[SerializeField]
 	private Button _button;
@@ -39,7 +33,6 @@ public class GearListElement : MonoBehaviour
 	public void Set(GearReference gearReference)
 	{
 		//IL_00a9: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0092: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0097: Unknown result type (might be due to invalid IL or missing references)
 		//IL_00db: Unknown result type (might be due to invalid IL or missing references)
 		//IL_00e5: Expected O, but got Unknown

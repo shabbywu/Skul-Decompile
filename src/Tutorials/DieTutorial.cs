@@ -54,7 +54,7 @@ public class DieTutorial : Tutorial
 		_player = Singleton<Service>.Instance.levelManager.player;
 		_enemyWave.onClear += delegate
 		{
-			PlayerInput.blocked.Attach((object)this);
+			PlayerInput.blocked.Attach(this);
 			Scene<GameBase>.instance.uiManager.headupDisplay.bossHealthBar.CloseAll();
 			((MonoBehaviour)this).StartCoroutine(ProcessOgreDie());
 		};
@@ -101,7 +101,7 @@ public class DieTutorial : Tutorial
 		_npcConversation.Done();
 		yield return _hero.CAttack();
 		yield return CDeactivate();
-		PlayerInput.blocked.Detach((object)this);
+		PlayerInput.blocked.Detach(this);
 		Singleton<Service>.Instance.levelManager.ResetGame(Chapter.Type.Castle);
 	}
 
@@ -126,6 +126,6 @@ public class DieTutorial : Tutorial
 	protected override void OnDisable()
 	{
 		base.OnDisable();
-		PlayerInput.blocked.Detach((object)this);
+		PlayerInput.blocked.Detach(this);
 	}
 }

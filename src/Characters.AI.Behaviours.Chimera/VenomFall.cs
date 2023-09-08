@@ -69,7 +69,7 @@ public class VenomFall : Behaviour
 		{
 			array[i] = i;
 		}
-		ExtensionMethods.Shuffle<int>((IList<int>)array);
+		array.Shuffle();
 		_order = new Queue<int>(4);
 		for (int j = 0; j < 4; j++)
 		{
@@ -116,7 +116,7 @@ public class VenomFall : Behaviour
 		while (_order.Count > 0)
 		{
 			yield return null;
-			elapsed += ((ChronometerBase)Chronometer.global).deltaTime;
+			elapsed += Chronometer.global.deltaTime;
 			if (elapsed > term)
 			{
 				elapsed -= term;
@@ -169,7 +169,7 @@ public class VenomFall : Behaviour
 	private IEnumerator CoolDown(Chronometer chronometer)
 	{
 		_coolDown = false;
-		yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)chronometer, _coolTime);
+		yield return chronometer.WaitForSeconds(_coolTime);
 		_coolDown = true;
 	}
 

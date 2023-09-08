@@ -28,7 +28,7 @@ public class MultipleSpriteEffectStack : MonoBehaviour, ISpriteEffectStack
 	{
 		for (int num = _effects.Count - 1; num >= 0; num--)
 		{
-			if (!_effects[num].Update(((ChronometerBase)Chronometer.global).deltaTime))
+			if (!_effects[num].Update(Chronometer.global.deltaTime))
 			{
 				_effects.RemoveAt(num);
 			}

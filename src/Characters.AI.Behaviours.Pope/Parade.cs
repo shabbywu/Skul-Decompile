@@ -9,7 +9,7 @@ namespace Characters.AI.Behaviours.Pope;
 
 public sealed class Parade : Behaviour
 {
-	[Subcomponent(typeof(ActionAttack))]
+	[UnityEditor.Subcomponent(typeof(ActionAttack))]
 	[SerializeField]
 	private ActionAttack _attack;
 
@@ -23,7 +23,7 @@ public sealed class Parade : Behaviour
 	private Transform _rightSpawnPoint;
 
 	[SerializeField]
-	[Subcomponent(typeof(OperationInfo))]
+	[UnityEditor.Subcomponent(typeof(OperationInfo))]
 	private OperationInfo.Subcomponents _operations;
 
 	[SerializeField]

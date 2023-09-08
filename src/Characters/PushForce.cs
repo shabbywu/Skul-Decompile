@@ -68,10 +68,6 @@ public class PushForce
 
 	public PushForce()
 	{
-		//IL_0013: Unknown result type (might be due to invalid IL or missing references)
-		//IL_001d: Expected O, but got Unknown
-		//IL_0023: Unknown result type (might be due to invalid IL or missing references)
-		//IL_002d: Expected O, but got Unknown
 		_method = Method.OwnerDirection;
 		_angle = new CustomFloat(0f);
 		_power = new CustomFloat(0f);

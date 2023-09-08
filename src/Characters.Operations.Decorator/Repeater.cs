@@ -35,10 +35,8 @@ public class Repeater : CharacterOperation
 
 	public override void Run(Character owner)
 	{
-		//IL_002f: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0034: Unknown result type (might be due to invalid IL or missing references)
 		float interval = _interval / runSpeed;
-		_repeatCoroutineReference = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)this, CRepeat());
+		_repeatCoroutineReference = ((MonoBehaviour)(object)this).StartCoroutineWithReference(CRepeat());
 		IEnumerator CRepeat()
 		{
 			for (int i = 0; i < _times; i++)
@@ -51,7 +49,7 @@ public class Repeater : CharacterOperation
 				}
 				else
 				{
-					yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)owner.chronometer.animation, interval);
+					yield return owner.chronometer.animation.WaitForSeconds(interval);
 				}
 			}
 		}
@@ -59,10 +57,8 @@ public class Repeater : CharacterOperation
 
 	public override void Run(Character owner, Character target)
 	{
-		//IL_0036: Unknown result type (might be due to invalid IL or missing references)
-		//IL_003b: Unknown result type (might be due to invalid IL or missing references)
 		float interval = _interval / runSpeed;
-		_repeatCoroutineReference = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)this, CRepeat());
+		_repeatCoroutineReference = ((MonoBehaviour)(object)this).StartCoroutineWithReference(CRepeat());
 		IEnumerator CRepeat()
 		{
 			for (int i = 0; i < _times; i++)
@@ -75,7 +71,7 @@ public class Repeater : CharacterOperation
 				}
 				else
 				{
-					yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)owner.chronometer.animation, interval);
+					yield return owner.chronometer.animation.WaitForSeconds(interval);
 				}
 			}
 		}
@@ -84,6 +80,6 @@ public class Repeater : CharacterOperation
 	public override void Stop()
 	{
 		_toRepeat.Stop();
-		((CoroutineReference)(ref _repeatCoroutineReference)).Stop();
+		_repeatCoroutineReference.Stop();
 	}
 }

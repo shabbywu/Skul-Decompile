@@ -15,9 +15,9 @@ public class StopAnotherOperation : Operation
 
 	public override void Run()
 	{
-		for (int i = 0; i < ((ReorderableArray<CharacterOperation>)_operationsToStop).values.Length; i++)
+		for (int i = 0; i < _operationsToStop.values.Length; i++)
 		{
-			((ReorderableArray<CharacterOperation>)_operationsToStop).values[i].Stop();
+			_operationsToStop.values[i].Stop();
 		}
 	}
 }

@@ -59,14 +59,14 @@ public sealed class StatPerCurrentHealth : Ability
 		private void UpdateStat()
 		{
 			_stack = Mathf.Min(ability._maxStack, Mathf.FloorToInt((float)owner.health.currentHealth / (float)ability._healthPerStack));
-			for (int i = 0; i < ((ReorderableArray<Stat.Value>)_stat).values.Length; i++)
+			for (int i = 0; i < _stat.values.Length; i++)
 			{
-				double num = (double)_stack * ((ReorderableArray<Stat.Value>)ability._statPerCurrentHealth).values[i].value;
-				if (((ReorderableArray<Stat.Value>)ability._statPerCurrentHealth).values[i].categoryIndex == Stat.Category.Percent.index)
+				double num = (double)_stack * ability._statPerCurrentHealth.values[i].value;
+				if (ability._statPerCurrentHealth.values[i].categoryIndex == Stat.Category.Percent.index)
 				{
 					num += 1.0;
 				}
-				((ReorderableArray<Stat.Value>)_stat).values[i].value = num;
+				_stat.values[i].value = num;
 			}
 			owner.stat.SetNeedUpdate();
 		}

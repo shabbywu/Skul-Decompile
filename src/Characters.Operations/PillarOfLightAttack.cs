@@ -21,7 +21,7 @@ public class PillarOfLightAttack : CharacterOperation
 	private IEnumerator CRun(Character owner, PillarOfLightContainer container)
 	{
 		container.Sign(owner);
-		yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)owner.chronometer.master, _attackDelay);
+		yield return owner.chronometer.master.WaitForSeconds(_attackDelay);
 		container.Attack(owner);
 	}
 }

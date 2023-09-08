@@ -25,27 +25,27 @@ public class EnemyWave : Wave
 		{
 			public void Randomize(Random random)
 			{
-				if (base.values.Length == 0)
+				if (values.Length == 0)
 				{
 					return;
 				}
-				int maxValue = base.values.Sum((GameObjectRandomizer v) => v._weight);
+				int maxValue = values.Sum((GameObjectRandomizer v) => v._weight);
 				int num = random.Next(0, maxValue) + 1;
 				int num2 = 0;
-				for (int i = 0; i < base.values.Length; i++)
+				for (int i = 0; i < values.Length; i++)
 				{
-					num -= base.values[i]._weight;
+					num -= values[i]._weight;
 					if (num <= 0)
 					{
 						num2 = i;
 						break;
 					}
 				}
-				for (int j = 0; j < base.values.Length; j++)
+				for (int j = 0; j < values.Length; j++)
 				{
 					if (j != num2)
 					{
-						GameObject gameObject = base.values[j]._gameObject;
+						GameObject gameObject = values[j]._gameObject;
 						gameObject.transform.parent = null;
 						Object.Destroy((Object)(object)gameObject);
 					}

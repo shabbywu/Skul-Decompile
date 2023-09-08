@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Characters.Movements;
 using Data;
 using Level;
@@ -54,7 +53,7 @@ public class ParticleEffectInfo : ScriptableObject
 		//IL_0017: Unknown result type (might be due to invalid IL or missing references)
 		if (GameData.Settings.particleQuality != 0)
 		{
-			DroppedParts parts = ExtensionMethods.Random<DroppedParts>((IEnumerable<DroppedParts>)_parts);
+			DroppedParts parts = _parts.Random();
 			SpawnParts(position, bounds, force, interpolate, parts);
 		}
 	}

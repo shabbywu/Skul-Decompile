@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using Characters;
 using Characters.Abilities.Weapons;
@@ -110,9 +109,7 @@ public class PrisonerChest : InteractiveObject
 
 	private void Start()
 	{
-		//IL_0008: Unknown result type (might be due to invalid IL or missing references)
-		//IL_000d: Unknown result type (might be due to invalid IL or missing references)
-		_lineTextCoroutineReference = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)this, CStartLineText());
+		_lineTextCoroutineReference = ((MonoBehaviour)(object)this).StartCoroutineWithReference(CStartLineText());
 	}
 
 	public override void OnActivate()
@@ -145,7 +142,7 @@ public class PrisonerChest : InteractiveObject
 	{
 		if (_activationTrigger.IsSatisfied())
 		{
-			((CoroutineReference)(ref _lineTextCoroutineReference)).Stop();
+			_lineTextCoroutineReference.Stop();
 			character.status.RemoveStun();
 			_activateCutscene.Run();
 			Deactivate();
@@ -165,8 +162,8 @@ public class PrisonerChest : InteractiveObject
 		}
 		while (true)
 		{
-			yield return Chronometer.global.WaitForSeconds((float)Random.Range(5, 10));
-			string text = ExtensionMethods.Random<string>((IEnumerable<string>)texts);
+			yield return Chronometer.global.WaitForSeconds(Random.Range(5, 10));
+			string text = texts.Random();
 			((Component)_lineText).transform.position = _lineTextPosition.position;
 			_lineText.Display(text, 2f);
 		}

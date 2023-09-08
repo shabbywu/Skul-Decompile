@@ -31,7 +31,7 @@ public class SpawnThiefGoldAtTarget : TargetedCharacterOperation
 		//IL_0041: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0053: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0055: Unknown result type (might be due to invalid IL or missing references)
-		if (_amount != 0 && _count != 0 && ((EnumArray<Character.Type, bool>)_characterTypeFilter)[target.type] && MMMaths.PercentChance(_possibility))
+		if (_amount != 0 && _count != 0 && _characterTypeFilter[target.type] && MMMaths.PercentChance(_possibility))
 		{
 			Vector3 position = (_spawnAtOwner ? ((Component)owner).transform.position : ((Component)target).transform.position);
 			SpawnGold(position);

@@ -17,7 +17,7 @@ public class ChronoInfo
 	{
 		if (_timeScale != 1f && _duration > 0f)
 		{
-			((ChronometerBase)character.chronometer.animation).AttachTimeScale((object)this, _timeScale, _duration);
+			character.chronometer.animation.AttachTimeScale(this, _timeScale, _duration);
 		}
 	}
 
@@ -25,7 +25,7 @@ public class ChronoInfo
 	{
 		if (_timeScale != 1f && _duration > 0f)
 		{
-			((ChronometerBase)Chronometer.global).AttachTimeScale((object)this, _timeScale, _duration);
+			Chronometer.global.AttachTimeScale(this, _timeScale, _duration);
 		}
 	}
 }

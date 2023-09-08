@@ -119,26 +119,26 @@ public class GuardForTeam : CharacterOperation
 		if (damage.attackType == Damage.AttackType.Melee)
 		{
 			_onHitToOwnerChronoInfo.ApplyGlobe();
-			if (((SubcomponentArray<CharacterOperation>)_onHitToOwner).components.Length != 0)
+			if (_onHitToOwner.components.Length != 0)
 			{
-				for (int i = 0; i < ((SubcomponentArray<CharacterOperation>)_onHitToOwner).components.Length; i++)
+				for (int i = 0; i < _onHitToOwner.components.Length; i++)
 				{
-					((SubcomponentArray<CharacterOperation>)_onHitToOwner).components[i].Run(_owner);
+					_onHitToOwner.components[i].Run(_owner);
 				}
 			}
-			if (((SubcomponentArray<CharacterOperation>)_onHitToTarget).components.Length != 0)
+			if (_onHitToTarget.components.Length != 0)
 			{
-				for (int j = 0; j < ((SubcomponentArray<CharacterOperation>)_onHitToTarget).components.Length; j++)
+				for (int j = 0; j < _onHitToTarget.components.Length; j++)
 				{
-					((SubcomponentArray<CharacterOperation>)_onHitToTarget).components[j].Run(attacker);
+					_onHitToTarget.components[j].Run(attacker);
 				}
 			}
 		}
-		else if ((damage.attackType == Damage.AttackType.Ranged || damage.attackType == Damage.AttackType.Projectile) && ((SubcomponentArray<CharacterOperation>)_onHitToOwnerFromRangeAttack).components.Length != 0)
+		else if ((damage.attackType == Damage.AttackType.Ranged || damage.attackType == Damage.AttackType.Projectile) && _onHitToOwnerFromRangeAttack.components.Length != 0)
 		{
-			for (int k = 0; k < ((SubcomponentArray<CharacterOperation>)_onHitToOwnerFromRangeAttack).components.Length; k++)
+			for (int k = 0; k < _onHitToOwnerFromRangeAttack.components.Length; k++)
 			{
-				((SubcomponentArray<CharacterOperation>)_onHitToOwnerFromRangeAttack).components[k].Run(_owner);
+				_onHitToOwnerFromRangeAttack.components[k].Run(_owner);
 			}
 		}
 	}
@@ -146,7 +146,7 @@ public class GuardForTeam : CharacterOperation
 	private IEnumerator CExpire()
 	{
 		_running = true;
-		yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)_owner.chronometer.master, _duration);
+		yield return _owner.chronometer.master.WaitForSeconds(_duration);
 		_running = false;
 		Stop();
 	}
@@ -158,10 +158,10 @@ public class GuardForTeam : CharacterOperation
 		{
 			foreach (Character item in _teamCached)
 			{
-				item.health.onTakeDamage.Remove((TakeDamageDelegate)Block);
+				item.health.onTakeDamage.Remove(Block);
 			}
 		}
-		_owner?.health.onTakeDamage.Remove((TakeDamageDelegate)Block);
+		_owner?.health.onTakeDamage.Remove(Block);
 	}
 
 	private List<Character> FindTeamBody(Collider2D collider)
@@ -183,21 +183,21 @@ public class GuardForTeam : CharacterOperation
 		{
 			foreach (Character item in _teamCached)
 			{
-				item.health.onTakeDamage.Remove((TakeDamageDelegate)Block);
+				item.health.onTakeDamage.Remove(Block);
 			}
 		}
 		foreach (Character item2 in _teamCached)
 		{
 			if (!list.Contains(item2))
 			{
-				item2.health.onTakeDamage.Remove((TakeDamageDelegate)Block);
+				item2.health.onTakeDamage.Remove(Block);
 			}
 		}
 		foreach (Character item3 in list)
 		{
-			if (!item3.health.onTakeDamage.Contains((TakeDamageDelegate)Block))
+			if (!item3.health.onTakeDamage.Contains(Block))
 			{
-				item3.health.onTakeDamage.Add(int.MinValue, (TakeDamageDelegate)Block);
+				item3.health.onTakeDamage.Add(int.MinValue, Block);
 			}
 		}
 		_teamCached.Clear();

@@ -30,7 +30,7 @@ public class CoolTime : Decorator
 	private IEnumerator CCooldown(Chronometer chronometer)
 	{
 		_canRun = false;
-		yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)chronometer, _value);
+		yield return chronometer.WaitForSeconds(_value);
 		_canRun = true;
 	}
 }

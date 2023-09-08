@@ -20,7 +20,7 @@ public class ChangeSpriteColor : CRunnable
 		float elapsed = 0f;
 		while (elapsed < _curve.duration)
 		{
-			elapsed += ((ChronometerBase)Chronometer.global).deltaTime;
+			elapsed += Chronometer.global.deltaTime;
 			_sprite.color = Color.Lerp(startColor, _color, _curve.Evaluate(elapsed));
 			yield return null;
 		}

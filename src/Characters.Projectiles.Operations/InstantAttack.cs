@@ -23,7 +23,7 @@ public class InstantAttack : Operation
 	[SerializeField]
 	private TargetLayer _layer = new TargetLayer(LayerMask.op_Implicit(2048), allyBody: false, foeBody: true, allyProjectile: false, foeProjectile: false);
 
-	[Subcomponent(typeof(TargetedOperationInfo))]
+	[UnityEditor.Subcomponent(typeof(TargetedOperationInfo))]
 	[SerializeField]
 	private TargetedOperationInfo.Subcomponents _operationInfo;
 
@@ -48,11 +48,11 @@ public class InstantAttack : Operation
 		//IL_002f: Unknown result type (might be due to invalid IL or missing references)
 		_limit = Math.Min(_limit, 2048);
 		_overlapper = (NonAllocOverlapper)((_limit == _sharedOverlapper.capacity) ? ((object)_sharedOverlapper) : ((object)new NonAllocOverlapper(_limit)));
-		Array.Sort(((SubcomponentArray<TargetedOperationInfo>)_operationInfo).components, (TargetedOperationInfo x, TargetedOperationInfo y) => x.timeToTrigger.CompareTo(y.timeToTrigger));
+		Array.Sort(_operationInfo.components, (TargetedOperationInfo x, TargetedOperationInfo y) => x.timeToTrigger.CompareTo(y.timeToTrigger));
 		((Behaviour)_collider).enabled = false;
 		_attackDamage = ((Component)this).GetComponentInParent<IAttackDamage>();
 		_operationInfo.Initialize();
-		TargetedOperationInfo[] components = ((SubcomponentArray<TargetedOperationInfo>)_operationInfo).components;
+		TargetedOperationInfo[] components = _operationInfo.components;
 		foreach (TargetedOperationInfo targetedOperationInfo in components)
 		{
 			if (targetedOperationInfo.operation is Characters.Operations.Movement.Knockback knockback)
@@ -138,10 +138,10 @@ public class InstantAttack : Operation
 				continue;
 			}
 			Bounds bounds2 = component.collider.bounds;
-			Bounds val = default(Bounds);
-			((Bounds)(ref val)).min = Vector2.op_Implicit(MMMaths.Max(Vector2.op_Implicit(((Bounds)(ref bounds)).min), Vector2.op_Implicit(((Bounds)(ref bounds2)).min)));
-			((Bounds)(ref val)).max = Vector2.op_Implicit(MMMaths.Min(Vector2.op_Implicit(((Bounds)(ref bounds)).max), Vector2.op_Implicit(((Bounds)(ref bounds2)).max)));
-			Vector2 hitPoint = MMMaths.RandomPointWithinBounds(val);
+			Bounds bounds3 = default(Bounds);
+			((Bounds)(ref bounds3)).min = Vector2.op_Implicit(MMMaths.Max(Vector2.op_Implicit(((Bounds)(ref bounds)).min), Vector2.op_Implicit(((Bounds)(ref bounds2)).min)));
+			((Bounds)(ref bounds3)).max = Vector2.op_Implicit(MMMaths.Min(Vector2.op_Implicit(((Bounds)(ref bounds)).max), Vector2.op_Implicit(((Bounds)(ref bounds2)).max)));
+			Vector2 hitPoint = MMMaths.RandomPointWithinBounds(bounds3);
 			if ((Object)(object)projectile.owner == (Object)null)
 			{
 				continue;
@@ -160,12 +160,12 @@ public class InstantAttack : Operation
 					_chrono.ApplyTo(component.character);
 					if (_hitInfo.attackType != 0)
 					{
-						CommonResource.instance.hitParticle.Emit(Vector2.op_Implicit(((Component)component).transform.position), val, force);
+						CommonResource.instance.hitParticle.Emit(Vector2.op_Implicit(((Component)component).transform.position), bounds3, force);
 					}
 					if (owner.TryAttackCharacter(component, ref damage))
 					{
 						((MonoBehaviour)this).StartCoroutine(_operationInfo.CRun(owner, component.character));
-						_effect.Spawn(owner, val, in damage, component);
+						_effect.Spawn(owner, bounds3, in damage, component);
 					}
 				}
 			}
@@ -174,8 +174,8 @@ public class InstantAttack : Operation
 				Damage damage2 = owner.stat.GetDamage(_attackDamage.amount, hitPoint, _hitInfo);
 				if (component.damageable.spawnEffectOnHit && _hitInfo.attackType != 0)
 				{
-					CommonResource.instance.hitParticle.Emit(Vector2.op_Implicit(((Component)component).transform.position), val, force);
-					_effect.Spawn(owner, val, in damage2, component);
+					CommonResource.instance.hitParticle.Emit(Vector2.op_Implicit(((Component)component).transform.position), bounds3, force);
+					_effect.Spawn(owner, bounds3, in damage2, component);
 				}
 				if (_hitInfo.attackType == Damage.AttackType.None)
 				{

@@ -90,7 +90,7 @@ public class CastleParallax : MonoBehaviour
 		//IL_003e: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0049: Unknown result type (might be due to invalid IL or missing references)
 		//IL_004e: Unknown result type (might be due to invalid IL or missing references)
-		Element[] values = ((ReorderableArray<Element>)_elements).values;
+		Element[] values = _elements.values;
 		for (int i = 0; i < values.Length; i++)
 		{
 			values[i].Initialize();
@@ -102,13 +102,13 @@ public class CastleParallax : MonoBehaviour
 	private void Update()
 	{
 		//IL_0007: Unknown result type (might be due to invalid IL or missing references)
-		UpdateElements(_cameraController.delta, ((ChronometerBase)Chronometer.global).deltaTime);
+		UpdateElements(_cameraController.delta, Chronometer.global.deltaTime);
 	}
 
 	private void UpdateElements(Vector3 delta, float deltaTime)
 	{
 		//IL_0013: Unknown result type (might be due to invalid IL or missing references)
-		Element[] values = ((ReorderableArray<Element>)_elements).values;
+		Element[] values = _elements.values;
 		for (int i = 0; i < values.Length; i++)
 		{
 			values[i].Update(delta, deltaTime);

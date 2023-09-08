@@ -13,11 +13,11 @@ public class TeleportInRangeWithFly : Behaviour
 	[SerializeField]
 	private Action _teleportEnd;
 
-	[Subcomponent(typeof(Hide))]
+	[UnityEditor.Subcomponent(typeof(Hide))]
 	[SerializeField]
 	private Hide _hide;
 
-	[Subcomponent(typeof(Idle))]
+	[UnityEditor.Subcomponent(typeof(Idle))]
 	[SerializeField]
 	private Idle _idle;
 

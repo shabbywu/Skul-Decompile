@@ -62,7 +62,7 @@ public class HeroClearTracker : MonoBehaviour
 		{
 			ExtensionMethods.Set((Type)16);
 		}
-		if (!GameData.Progress.fieldNpcEncountered.Any((KeyValuePair<NpcType, BoolData> kvp) => ((Data<bool>)(object)kvp.Value).value))
+		if (!GameData.Progress.fieldNpcEncountered.Any((KeyValuePair<NpcType, BoolData> kvp) => kvp.Value.value))
 		{
 			ExtensionMethods.Set((Type)17);
 		}

@@ -7,9 +7,9 @@ namespace BT.Conditions;
 public abstract class Condition : MonoBehaviour
 {
 	[AttributeUsage(AttributeTargets.Field)]
-	public class SubcomponentAttribute : SubcomponentAttribute
+	public class SubcomponentAttribute : UnityEditor.SubcomponentAttribute
 	{
-		public static readonly Type[] types = new Type[6]
+		public new static readonly Type[] types = new Type[6]
 		{
 			typeof(ActionCoolDown),
 			typeof(Chance),

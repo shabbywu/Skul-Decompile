@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Characters.Operations;
 using Level;
 using UnityEngine;
@@ -45,7 +44,7 @@ public class SpawnBDRandomCharacter : Operation
 			Vector3 val = position;
 			val.x += Random.Range(0f - _distribution, _distribution);
 			val.y += Random.Range(0f - _distribution, _distribution);
-			Character character = Object.Instantiate<Character>(ExtensionMethods.Random<Character>((IEnumerable<Character>)_characterPrefabs), val, Quaternion.identity);
+			Character character = Object.Instantiate<Character>(_characterPrefabs.Random(), val, Quaternion.identity);
 			character.ForceToLookAt((num < 0f) ? Character.LookingDirection.Left : Character.LookingDirection.Right);
 			if (_containInWave)
 			{

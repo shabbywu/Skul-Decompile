@@ -144,16 +144,16 @@ public class Panel : MonoBehaviour
 
 	private void OnEnable()
 	{
-		PlayerInput.blocked.Attach((object)this);
-		((ChronometerBase)Chronometer.global).AttachTimeScale((object)this, 0f);
+		PlayerInput.blocked.Attach(this);
+		Chronometer.global.AttachTimeScale(this, 0f);
 		EventSystem.current.SetSelectedGameObject(((Component)_tumblbug).gameObject);
 		((Selectable)_tumblbug).Select();
 	}
 
 	private void OnDisable()
 	{
-		PlayerInput.blocked.Detach((object)this);
-		((ChronometerBase)Chronometer.global).DetachTimeScale((object)this);
+		PlayerInput.blocked.Detach(this);
+		Chronometer.global.DetachTimeScale(this);
 	}
 
 	private void Update()

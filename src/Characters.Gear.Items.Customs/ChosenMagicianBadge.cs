@@ -71,8 +71,8 @@ public sealed class ChosenMagicianBadge : MonoBehaviour
 	private void Update()
 	{
 		//IL_001d: Unknown result type (might be due to invalid IL or missing references)
-		_remainTime -= ((ChronometerBase)Chronometer.global).deltaTime;
-		((Component)this).transform.Rotate(Vector3.forward, (_fast ? _fastSpeed : _normalSpeed) * ((ChronometerBase)Chronometer.global).deltaTime, (Space)1);
+		_remainTime -= Chronometer.global.deltaTime;
+		((Component)this).transform.Rotate(Vector3.forward, (_fast ? _fastSpeed : _normalSpeed) * Chronometer.global.deltaTime, (Space)1);
 		if (_remainTime <= 0f && _fast)
 		{
 			_fast = false;

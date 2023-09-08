@@ -9,9 +9,9 @@ namespace Characters.AI.Behaviours;
 public class FlyChase : Behaviour
 {
 	[AttributeUsage(AttributeTargets.Field)]
-	public new class SubcomponentAttribute : SubcomponentAttribute
+	public new class SubcomponentAttribute : UnityEditor.SubcomponentAttribute
 	{
-		public static readonly Type[] types = new Type[1] { typeof(FlyChase) };
+		public new static readonly Type[] types = new Type[1] { typeof(FlyChase) };
 
 		public SubcomponentAttribute(bool allowCustom = true)
 			: base(allowCustom, types)
@@ -19,7 +19,7 @@ public class FlyChase : Behaviour
 		}
 	}
 
-	[Subcomponent(typeof(MoveToTargetWithFly))]
+	[UnityEditor.Subcomponent(typeof(MoveToTargetWithFly))]
 	[SerializeField]
 	private MoveToTargetWithFly _moveToTarget;
 
@@ -28,7 +28,7 @@ public class FlyChase : Behaviour
 	private Wander _wanderWhenChaseFail;
 
 	[SerializeField]
-	[Subcomponent(typeof(Idle))]
+	[UnityEditor.Subcomponent(typeof(Idle))]
 	private Idle _beforeRangeWander;
 
 	private void Start()

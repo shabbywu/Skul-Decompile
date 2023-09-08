@@ -32,7 +32,7 @@ public class SmashTo : TargetedCharacterOperation
 	[SerializeField]
 	private SmashAttackVisualEffect.Subcomponents _effect;
 
-	[Subcomponent(typeof(TargetedOperationInfo))]
+	[UnityEditor.Subcomponent(typeof(TargetedOperationInfo))]
 	[SerializeField]
 	private TargetedOperationInfo.Subcomponents _onCollide;
 

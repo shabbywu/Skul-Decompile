@@ -8,10 +8,10 @@ namespace CutScenes.Shots;
 
 public abstract class Event : Runnable
 {
-	public new class SubcomponentAttribute : SubcomponentAttribute
+	public new class SubcomponentAttribute : UnityEditor.SubcomponentAttribute
 	{
 		public SubcomponentAttribute()
-			: base(true, Runnable.types.Concat(types).ToArray())
+			: base(allowCustom: true, Runnable.types.Concat(Event.types).ToArray())
 		{
 		}
 	}

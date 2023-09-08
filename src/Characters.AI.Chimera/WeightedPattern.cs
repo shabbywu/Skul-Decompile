@@ -48,19 +48,7 @@ public class WeightedPattern : MonoBehaviour
 
 	private void Awake()
 	{
-		_weightedRandomizer = WeightedRandomizer.From<Pattern>(new(Pattern, float)[10]
-		{
-			(Pattern.Idle, _idleWeight),
-			(Pattern.Bite, _biteWeight),
-			(Pattern.Stomp, _slamWeight),
-			(Pattern.VenomFall, _venomFallWeight),
-			(Pattern.VenomBall, _venomBallWeight),
-			(Pattern.VenomCannon, _venomCannonWeight),
-			(Pattern.SubjectDrop, _subjectDropWeight),
-			(Pattern.WreckDrop, _wreckDropWeight),
-			(Pattern.WreckDestroy, _wreckDestroyWeight),
-			(Pattern.VenomBreath, _venomBreathWeight)
-		});
+		_weightedRandomizer = WeightedRandomizer.From<Pattern>((Pattern.Idle, _idleWeight), (Pattern.Bite, _biteWeight), (Pattern.Stomp, _slamWeight), (Pattern.VenomFall, _venomFallWeight), (Pattern.VenomBall, _venomBallWeight), (Pattern.VenomCannon, _venomCannonWeight), (Pattern.SubjectDrop, _subjectDropWeight), (Pattern.WreckDrop, _wreckDropWeight), (Pattern.WreckDestroy, _wreckDestroyWeight), (Pattern.VenomBreath, _venomBreathWeight));
 	}
 
 	public Pattern TakeOne()

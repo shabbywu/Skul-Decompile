@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Characters.Operations;
@@ -81,11 +80,11 @@ public class SequentialActivateObject : CharacterOperation
 		}
 		if (_order == Order.Random)
 		{
-			ExtensionMethods.Shuffle<int>((IList<int>)_indics);
+			_indics.Shuffle();
 		}
 		else if (_order == Order.Decrease)
 		{
-			ExtensionMethods.Reverse<int>((IList<int>)_indics);
+			_indics.Reverse();
 		}
 	}
 }

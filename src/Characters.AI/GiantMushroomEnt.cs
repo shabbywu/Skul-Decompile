@@ -101,7 +101,7 @@ public sealed class GiantMushroomEnt : AIController
 	private IEnumerator CReturnToNormalState(float delay)
 	{
 		yield return CGroggy();
-		yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)character.chronometer.master, delay);
+		yield return character.chronometer.master.WaitForSeconds(delay);
 		yield return CRecover();
 	}
 

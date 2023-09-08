@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using Characters;
 using GameResources;
 using Scenes;
@@ -22,9 +21,9 @@ public class DemonLord : InteractiveObject
 
 	public string displayName => Localization.GetLocalizedString($"npc/{NpcType.DemonLord}/name");
 
-	public string greeting => ExtensionMethods.Random<string>((IEnumerable<string>)Localization.GetLocalizedStringArray($"npc/{NpcType.DemonLord}/greeting"));
+	public string greeting => Localization.GetLocalizedStringArray($"npc/{NpcType.DemonLord}/greeting").Random();
 
-	public string[] chat => ExtensionMethods.Random<string[]>((IEnumerable<string[]>)Localization.GetLocalizedStringArrays($"npc/{NpcType.DemonLord}/chat"));
+	public string[] chat => Localization.GetLocalizedStringArrays($"npc/{NpcType.DemonLord}/chat").Random();
 
 	public override void InteractWith(Character character)
 	{

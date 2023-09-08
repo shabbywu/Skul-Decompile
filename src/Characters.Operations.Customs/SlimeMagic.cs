@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using FX;
 using Level;
 using Level.Objects.DecorationCharacter;
@@ -55,9 +54,9 @@ public sealed class SlimeMagic : TargetedCharacterOperation
 		{
 			Bounds bounds = ((Collider2D)target.collider).bounds;
 			Vector2 val = Vector2.op_Implicit(((Bounds)(ref bounds)).center);
-			Object.Instantiate<DecorationCharacter>(ExtensionMethods.Random<DecorationCharacter>((IEnumerable<DecorationCharacter>)_transformTargetPrefabs), Vector2.op_Implicit(val), Quaternion.identity, ((Component)Map.Instance).transform).SetRenderSortingOrder(_sortingOrder++);
+			Object.Instantiate<DecorationCharacter>(_transformTargetPrefabs.Random(), Vector2.op_Implicit(val), Quaternion.identity, ((Component)Map.Instance).transform).SetRenderSortingOrder(_sortingOrder++);
 			_transformEffectInfo.Spawn(((Component)target).transform.position);
-			PersistentSingleton<SoundManager>.Instance.PlaySound(ExtensionMethods.Random<SoundInfo>((IEnumerable<SoundInfo>)_soundInfos), ((Component)target).transform.position);
+			PersistentSingleton<SoundManager>.Instance.PlaySound(_soundInfos.Random(), ((Component)target).transform.position);
 			target.health.Kill();
 		}
 	}

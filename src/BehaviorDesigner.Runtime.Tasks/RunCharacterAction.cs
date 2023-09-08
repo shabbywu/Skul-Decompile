@@ -109,10 +109,8 @@ public sealed class RunCharacterAction : Action
 
 	private void CheckLastMotionStayTime()
 	{
-		//IL_0018: Unknown result type (might be due to invalid IL or missing references)
-		//IL_001d: Unknown result type (might be due to invalid IL or missing references)
-		((CoroutineReference)(ref _coroutineReference)).Stop();
-		_coroutineReference = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)_characterValue, CCheckLastMotionStayTime());
+		_coroutineReference.Stop();
+		_coroutineReference = ((MonoBehaviour)(object)_characterValue).StartCoroutineWithReference(CCheckLastMotionStayTime());
 	}
 
 	private IEnumerator CCheckLastMotionStayTime()
@@ -122,7 +120,7 @@ public sealed class RunCharacterAction : Action
 		float length = _actionValue.motions[_actionValue.motions.Length - 1].length;
 		while (t < length)
 		{
-			t += ((ChronometerBase)_characterValue.chronometer.animation).deltaTime;
+			t += _characterValue.chronometer.animation.deltaTime;
 			yield return null;
 		}
 		_stayActionRunning = true;

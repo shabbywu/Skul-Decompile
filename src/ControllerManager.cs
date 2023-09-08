@@ -33,7 +33,7 @@ public class ControllerManager : MonoBehaviour
 	private void Update()
 	{
 		vibration.Update();
-		float num = vibration.value * ((ChronometerBase)Chronometer.global).timeScale * 10f * GameData.Settings.vibrationIntensity;
+		float num = vibration.value * Chronometer.global.timeScale * 10f * GameData.Settings.vibrationIntensity;
 		InputManager.ActiveDevice.Vibrate(num);
 	}
 
@@ -53,7 +53,7 @@ public class ControllerManager : MonoBehaviour
 	{
 		if (!_disconnedtedPopup.activeSelf)
 		{
-			((ChronometerBase)Chronometer.global).AttachTimeScale((object)_disconnedtedPopup, 0f);
+			Chronometer.global.AttachTimeScale(_disconnedtedPopup, 0f);
 			_disconnedtedPopup.SetActive(true);
 		}
 	}
@@ -62,7 +62,7 @@ public class ControllerManager : MonoBehaviour
 	{
 		if (_disconnedtedPopup.activeSelf)
 		{
-			((ChronometerBase)Chronometer.global).DetachTimeScale((object)_disconnedtedPopup);
+			Chronometer.global.DetachTimeScale(_disconnedtedPopup);
 			_disconnedtedPopup.SetActive(false);
 			if (!((Object)(object)Scene<GameBase>.instance == (Object)null))
 			{

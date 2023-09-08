@@ -40,11 +40,9 @@ public class FireZone : ControlableTrap
 
 	public override void Activate()
 	{
-		//IL_0010: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0015: Unknown result type (might be due to invalid IL or missing references)
 		if (_repeat)
 		{
-			_coroutineReference = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)this, CRun());
+			_coroutineReference = ((MonoBehaviour)(object)this).StartCoroutineWithReference(CRun());
 		}
 		else
 		{
@@ -57,12 +55,12 @@ public class FireZone : ControlableTrap
 		while (true)
 		{
 			yield return _operations.CRun(_character);
-			yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)_character.chronometer.master, _interval);
+			yield return _character.chronometer.master.WaitForSeconds(_interval);
 		}
 	}
 
 	public override void Deactivate()
 	{
-		((CoroutineReference)(ref _coroutineReference)).Stop();
+		_coroutineReference.Stop();
 	}
 }

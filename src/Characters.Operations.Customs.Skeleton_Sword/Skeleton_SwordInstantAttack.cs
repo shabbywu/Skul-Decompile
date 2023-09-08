@@ -34,11 +34,11 @@ public sealed class Skeleton_SwordInstantAttack : CharacterOperation, IAttack
 	private bool _excludeItself = true;
 
 	[SerializeField]
-	[Subcomponent(typeof(BoundsAttackInfoSequence))]
+	[UnityEditor.Subcomponent(typeof(BoundsAttackInfoSequence))]
 	private BoundsAttackInfoSequence.Subcomponents _attackAndEffect;
 
 	[SerializeField]
-	[Subcomponent(typeof(BoundsAttackInfoSequence))]
+	[UnityEditor.Subcomponent(typeof(BoundsAttackInfoSequence))]
 	private BoundsAttackInfoSequence.Subcomponents _tetanusAttackAndEffect;
 
 	private IAttackDamage _attackDamage;
@@ -93,7 +93,7 @@ public sealed class Skeleton_SwordInstantAttack : CharacterOperation, IAttack
 			}
 			if (_attackAndEffect.noDelay)
 			{
-				BoundsAttackInfoSequence[] array = ((component.character.ability.GetInstance<Skeleton_SwordTatanusDamage>() != null) ? ((SubcomponentArray<BoundsAttackInfoSequence>)_tetanusAttackAndEffect).components : ((SubcomponentArray<BoundsAttackInfoSequence>)_attackAndEffect).components);
+				BoundsAttackInfoSequence[] array = ((component.character.ability.GetInstance<Skeleton_SwordTatanusDamage>() != null) ? _tetanusAttackAndEffect.components : _attackAndEffect.components);
 				BoundsAttackInfoSequence[] array2 = array;
 				foreach (BoundsAttackInfoSequence boundsAttackInfoSequence in array2)
 				{
@@ -160,10 +160,10 @@ public sealed class Skeleton_SwordInstantAttack : CharacterOperation, IAttack
 			}
 			Bounds val = bounds;
 			Bounds bounds2 = target.collider.bounds;
-			Bounds val2 = default(Bounds);
-			((Bounds)(ref val2)).min = Vector2.op_Implicit(MMMaths.Max(Vector2.op_Implicit(((Bounds)(ref val)).min), Vector2.op_Implicit(((Bounds)(ref bounds2)).min)));
-			((Bounds)(ref val2)).max = Vector2.op_Implicit(MMMaths.Min(Vector2.op_Implicit(((Bounds)(ref val)).max), Vector2.op_Implicit(((Bounds)(ref bounds2)).max)));
-			Vector2 hitPoint = MMMaths.RandomPointWithinBounds(val2);
+			Bounds bounds3 = default(Bounds);
+			((Bounds)(ref bounds3)).min = Vector2.op_Implicit(MMMaths.Max(Vector2.op_Implicit(((Bounds)(ref val)).min), Vector2.op_Implicit(((Bounds)(ref bounds2)).min)));
+			((Bounds)(ref bounds3)).max = Vector2.op_Implicit(MMMaths.Min(Vector2.op_Implicit(((Bounds)(ref val)).max), Vector2.op_Implicit(((Bounds)(ref bounds2)).max)));
+			Vector2 hitPoint = MMMaths.RandomPointWithinBounds(bounds3);
 			Vector2 force = Vector2.zero;
 			if (attackInfo.pushInfo != null)
 			{
@@ -175,7 +175,7 @@ public sealed class Skeleton_SwordInstantAttack : CharacterOperation, IAttack
 				if (target.character.liveAndActive && (!_excludeItself || !((Object)(object)target.character == (Object)(object)owner)) && !target.character.cinematic.value)
 				{
 					attackInfo.ApplyChrono(owner, target.character);
-					if (((SubcomponentArray<OperationInfo>)attackInfo.operationsToOwner).components.Length != 0)
+					if (attackInfo.operationsToOwner.components.Length != 0)
 					{
 						((MonoBehaviour)owner).StartCoroutine(attackInfo.operationsToOwner.CRun(owner));
 					}
@@ -192,7 +192,7 @@ public sealed class Skeleton_SwordInstantAttack : CharacterOperation, IAttack
 					((MonoBehaviour)owner).StartCoroutine(attackInfo.operationInfo.CRun(owner, target.character));
 					this.onHit?.Invoke(target, ref damage);
 					owner.TryAttackCharacter(target, ref damage);
-					attackInfo.effect.Spawn(owner, val2, in damage, target);
+					attackInfo.effect.Spawn(owner, bounds3, in damage, target);
 				}
 			}
 			else if ((Object)(object)target.damageable != (Object)null)
@@ -203,7 +203,7 @@ public sealed class Skeleton_SwordInstantAttack : CharacterOperation, IAttack
 				if (target.damageable.spawnEffectOnHit && attackInfo.hitInfo.attackType != 0)
 				{
 					CommonResource.instance.hitParticle.Emit(Vector2.op_Implicit(((Component)target).transform.position), target.collider.bounds, force);
-					attackInfo.effect.Spawn(owner, val2, in damage2, target);
+					attackInfo.effect.Spawn(owner, bounds3, in damage2, target);
 				}
 				if (attackInfo.hitInfo.attackType != 0)
 				{
@@ -220,7 +220,7 @@ public sealed class Skeleton_SwordInstantAttack : CharacterOperation, IAttack
 		//IL_0016: Unknown result type (might be due to invalid IL or missing references)
 		int index = 0;
 		float time = 0f;
-		BoundsAttackInfoSequence[] attackAndEfects = ((target.character.ability.GetInstance<Skeleton_SwordTatanusDamage>() != null) ? ((SubcomponentArray<BoundsAttackInfoSequence>)_tetanusAttackAndEffect).components : ((SubcomponentArray<BoundsAttackInfoSequence>)_attackAndEffect).components);
+		BoundsAttackInfoSequence[] attackAndEfects = ((target.character.ability.GetInstance<Skeleton_SwordTatanusDamage>() != null) ? _tetanusAttackAndEffect.components : _attackAndEffect.components);
 		BoundsAttackInfoSequence[] array = attackAndEfects;
 		for (int i = 0; i < array.Length; i++)
 		{
@@ -237,7 +237,7 @@ public sealed class Skeleton_SwordInstantAttack : CharacterOperation, IAttack
 					Attack(owner, bounds, target, boundsAttackInfoSequence.attackInfo);
 				}
 				yield return null;
-				time += ((ChronometerBase)owner.chronometer.animation).deltaTime;
+				time += owner.chronometer.animation.deltaTime;
 			}
 		}
 	}

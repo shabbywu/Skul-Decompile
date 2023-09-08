@@ -18,12 +18,12 @@ public class StatusLevelBonus : Ability
 
 		protected override void OnAttach()
 		{
-			_characterStatus.gradeBonuses.Add((object)this, ability._level);
+			_characterStatus.gradeBonuses.Add(this, ability._level);
 		}
 
 		protected override void OnDetach()
 		{
-			((Sum<int>)(object)_characterStatus.gradeBonuses).Remove((object)this);
+			_characterStatus.gradeBonuses.Remove(this);
 		}
 	}
 

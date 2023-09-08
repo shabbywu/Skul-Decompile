@@ -7,7 +7,7 @@ namespace Characters.Operations.Customs;
 
 public class AttachSilence : TargetedCharacterOperation
 {
-	[Subcomponent(typeof(GetSilenceComponent))]
+	[UnityEditor.Subcomponent(typeof(GetSilenceComponent))]
 	[SerializeField]
 	private GetSilenceComponent _abilityComponent;
 
@@ -48,6 +48,6 @@ public class AttachSilence : TargetedCharacterOperation
 
 	public override string ToString()
 	{
-		return ExtensionMethods.GetAutoName((object)this);
+		return this.GetAutoName();
 	}
 }

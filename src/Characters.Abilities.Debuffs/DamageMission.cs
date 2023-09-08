@@ -30,7 +30,7 @@ public sealed class DamageMission : Ability
 		private void HandleOnGaveDamage(ITarget target, in Damage originalDamage, in Damage gaveDamage, double damageDealt)
 		{
 			Character character = target.character;
-			if (!((Object)(object)character == (Object)null) && ((EnumArray<Damage.MotionType, bool>)ability._motionType)[gaveDamage.motionType] && ((EnumArray<Damage.AttackType, bool>)ability._attackType)[gaveDamage.attackType] && ((EnumArray<Character.Type, bool>)ability._targetType)[character.type] && !gaveDamage.@null && damageDealt != 0.0)
+			if (!((Object)(object)character == (Object)null) && ability._motionType[gaveDamage.motionType] && ability._attackType[gaveDamage.attackType] && ability._targetType[character.type] && !gaveDamage.@null && damageDealt != 0.0)
 			{
 				_success = true;
 				owner.ability.Remove(this);

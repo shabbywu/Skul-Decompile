@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using GameResources;
 using Scenes;
 using UI;
@@ -23,11 +22,11 @@ public class OpenChatSelector : Sequence
 	private string _textKey;
 
 	[SerializeField]
-	[Subcomponent(typeof(ShotInfo))]
+	[UnityEditor.Subcomponent(typeof(ShotInfo))]
 	private ShotInfo.Subcomponents _onChat;
 
 	[SerializeField]
-	[Subcomponent(typeof(ShotInfo))]
+	[UnityEditor.Subcomponent(typeof(ShotInfo))]
 	private ShotInfo.Subcomponents _onClose;
 
 	public override IEnumerator CRun()
@@ -44,7 +43,7 @@ public class OpenChatSelector : Sequence
 		npcConversation.name = Localization.GetLocalizedString(_nameKey);
 		if (_randomText)
 		{
-			npcConversation.body = ExtensionMethods.Random<string>((IEnumerable<string>)Localization.GetLocalizedStringArray(_textKey));
+			npcConversation.body = Localization.GetLocalizedStringArray(_textKey).Random();
 		}
 		else
 		{

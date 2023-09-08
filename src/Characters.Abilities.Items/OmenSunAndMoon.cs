@@ -69,7 +69,7 @@ public sealed class OmenSunAndMoon : Ability
 		private void HandleOnKilled(ITarget target, ref Damage damage)
 		{
 			Character character = target.character;
-			if (!((Object)(object)character == (Object)null) && ((EnumArray<Character.Type, bool>)ability._killTargetFilter)[character.type])
+			if (!((Object)(object)character == (Object)null) && ability._killTargetFilter[character.type])
 			{
 				ability.stack++;
 				if (ability.stack > ability._killCount)

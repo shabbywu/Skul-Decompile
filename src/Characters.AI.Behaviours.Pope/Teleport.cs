@@ -10,7 +10,7 @@ namespace Characters.AI.Behaviours.Pope;
 public sealed class Teleport : Move
 {
 	[SerializeField]
-	[Subcomponent(typeof(Characters.AI.Behaviours.Teleport))]
+	[UnityEditor.Subcomponent(typeof(Characters.AI.Behaviours.Teleport))]
 	private Characters.AI.Behaviours.Teleport _teleport;
 
 	[SerializeField]
@@ -26,7 +26,7 @@ public sealed class Teleport : Move
 	private Navigation _navigation;
 
 	[SerializeField]
-	[Subcomponent(typeof(LineEffect))]
+	[UnityEditor.Subcomponent(typeof(LineEffect))]
 	private LineEffect _lineEffect;
 
 	public override IEnumerator CRun(AIController controller)

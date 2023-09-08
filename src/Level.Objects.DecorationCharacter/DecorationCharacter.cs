@@ -29,7 +29,7 @@ public class DecorationCharacter : MonoBehaviour
 
 	public DecorationCharacterAnimationController animationController => _animationController;
 
-	public float deltaTime => ChronometerExtension.DeltaTime((ChronometerBase)(object)chronometer.animation);
+	public float deltaTime => chronometer.animation.DeltaTime();
 
 	public Character.LookingDirection lookingDirection
 	{

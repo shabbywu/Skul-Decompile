@@ -8,9 +8,9 @@ namespace Characters.Operations.Decorator;
 public class Repeater3 : CharacterOperation
 {
 	[SerializeField]
-	private ReorderableFloatArray _timesToTrigger = new ReorderableFloatArray(new float[1]);
+	private ReorderableFloatArray _timesToTrigger = new ReorderableFloatArray(default(float));
 
-	[Subcomponent(typeof(OperationInfo))]
+	[UnityEditor.Subcomponent(typeof(OperationInfo))]
 	[SerializeField]
 	private OperationInfo.Subcomponents _operations;
 
@@ -18,8 +18,8 @@ public class Repeater3 : CharacterOperation
 
 	private void Awake()
 	{
-		Array.Sort(((ReorderableArray<float>)(object)_timesToTrigger).values);
-		_repeatCoroutineReferences = (CoroutineReference[])(object)new CoroutineReference[((ReorderableArray<float>)(object)_timesToTrigger).values.Length];
+		Array.Sort(_timesToTrigger.values);
+		_repeatCoroutineReferences = new CoroutineReference[_timesToTrigger.values.Length];
 	}
 
 	public override void Initialize()
@@ -31,7 +31,7 @@ public class Repeater3 : CharacterOperation
 	{
 		int operationIndex = 0;
 		float time = 0f;
-		float[] timesToTrigger = ((ReorderableArray<float>)(object)_timesToTrigger).values;
+		float[] timesToTrigger = _timesToTrigger.values;
 		while (operationIndex < timesToTrigger.Length)
 		{
 			for (; operationIndex < timesToTrigger.Length && time >= timesToTrigger[operationIndex]; operationIndex++)
@@ -39,7 +39,7 @@ public class Repeater3 : CharacterOperation
 				((MonoBehaviour)this).StartCoroutine(_operations.CRun(owner, target));
 			}
 			yield return null;
-			time += ((ChronometerBase)owner.chronometer.animation).deltaTime * runSpeed;
+			time += owner.chronometer.animation.deltaTime * runSpeed;
 		}
 	}
 

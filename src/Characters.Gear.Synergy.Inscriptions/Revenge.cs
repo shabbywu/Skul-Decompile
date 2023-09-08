@@ -121,13 +121,13 @@ public class Revenge : InscriptionInstance
 
 	public override void Attach()
 	{
-		base.character.health.onTakeDamage.Add(int.MaxValue, (TakeDamageDelegate)HandleOnTakeDamage);
+		base.character.health.onTakeDamage.Add(int.MaxValue, HandleOnTakeDamage);
 		base.character.health.onTookDamage += HandleOnTookDamage;
 	}
 
 	public override void Detach()
 	{
-		base.character.health.onTakeDamage.Remove((TakeDamageDelegate)HandleOnTakeDamage);
+		base.character.health.onTakeDamage.Remove(HandleOnTakeDamage);
 		base.character.health.onTookDamage -= HandleOnTookDamage;
 	}
 

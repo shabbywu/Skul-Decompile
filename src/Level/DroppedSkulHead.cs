@@ -56,7 +56,7 @@ public class DroppedSkulHead : MonoBehaviour
 			Vector3 center = ((Bounds)(ref bounds)).center;
 			((Vector2)(ref val))._002Ector(((Component)this).transform.position.x - center.x, ((Component)this).transform.position.y - center.y);
 			float sqrMagnitude = ((Vector2)(ref val)).sqrMagnitude;
-			time += ((ChronometerBase)Chronometer.global).deltaTime;
+			time += Chronometer.global.deltaTime;
 			if (time >= 0.5f && sqrMagnitude < 1f)
 			{
 				_skulHeadController.cooldown.time.remainTime = 0f;

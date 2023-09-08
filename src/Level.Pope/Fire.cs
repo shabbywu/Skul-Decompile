@@ -59,7 +59,7 @@ public class Fire : Trap
 		while (elapsed < (float)time)
 		{
 			((Component)this).transform.position = Vector2.op_Implicit(Vector2.Lerp(start, end, elapsed / (float)time));
-			elapsed += ((ChronometerBase)_character.chronometer.master).deltaTime;
+			elapsed += _character.chronometer.master.deltaTime;
 			yield return null;
 		}
 		((Component)this).transform.position = Vector2.op_Implicit(end);
@@ -75,7 +75,7 @@ public class Fire : Trap
 		while (elapsed < (float)time)
 		{
 			((Component)this).transform.position = Vector2.op_Implicit(Vector2.Lerp(start, end, elapsed / (float)time));
-			elapsed += ((ChronometerBase)_character.chronometer.master).deltaTime;
+			elapsed += _character.chronometer.master.deltaTime;
 			yield return null;
 		}
 		((Component)this).transform.position = Vector2.op_Implicit(end);

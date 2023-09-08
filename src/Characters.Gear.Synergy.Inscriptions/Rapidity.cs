@@ -49,7 +49,7 @@ public sealed class Rapidity : InscriptionInstance
 
 			private void HandleOnStartAction(Characters.Actions.Action action)
 			{
-				if (!((EnumArray<Characters.Actions.Action.Type, bool>)ability._triggerActionFilter)[action.type] || _remainCooldownTime > 0f)
+				if (!ability._triggerActionFilter[action.type] || _remainCooldownTime > 0f)
 				{
 					return;
 				}

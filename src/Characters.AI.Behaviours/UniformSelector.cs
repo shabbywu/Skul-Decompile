@@ -8,7 +8,7 @@ namespace Characters.AI.Behaviours;
 public class UniformSelector : Decorator
 {
 	[SerializeField]
-	[Subcomponent(typeof(Weight))]
+	[UnityEditor.Subcomponent(typeof(Weight))]
 	private Weight.Subcomponents _weights;
 
 	private List<Behaviour> _container = new List<Behaviour>();
@@ -20,7 +20,7 @@ public class UniformSelector : Decorator
 		{
 			Fill();
 		}
-		Behaviour behaviour = ExtensionMethods.Random<Behaviour>((IEnumerable<Behaviour>)_container);
+		Behaviour behaviour = _container.Random();
 		_container.Remove(behaviour);
 		yield return behaviour.CRun(controller);
 		base.result = Result.Success;
@@ -28,7 +28,7 @@ public class UniformSelector : Decorator
 
 	private void Fill()
 	{
-		Weight[] components = ((SubcomponentArray<Weight>)_weights).components;
+		Weight[] components = _weights.components;
 		foreach (Weight weight in components)
 		{
 			for (int j = 0; j < weight.value; j++)

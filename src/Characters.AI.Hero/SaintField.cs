@@ -59,11 +59,9 @@ public class SaintField : MonoBehaviour
 
 	private void ActivePillarOfLight()
 	{
-		//IL_0020: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0025: Unknown result type (might be due to invalid IL or missing references)
 		if (!((Object)(object)Singleton<Service>.Instance.levelManager.player == (Object)null))
 		{
-			_checkPlayerOutReference = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)this, CCheckPlayerOut());
+			_checkPlayerOutReference = ((MonoBehaviour)(object)this).StartCoroutineWithReference(CCheckPlayerOut());
 			_leftPillarOfLight.SetActive(true);
 			_rightPillarOfLight.SetActive(true);
 		}
@@ -74,7 +72,7 @@ public class SaintField : MonoBehaviour
 		_leftPillarOfLight.SetActive(false);
 		_rightPillarOfLight.SetActive(false);
 		_sword.Despawn();
-		((CoroutineReference)(ref _checkPlayerOutReference)).Stop();
+		_checkPlayerOutReference.Stop();
 	}
 
 	private IEnumerator CCheckPlayerOut()
@@ -105,7 +103,7 @@ public class SaintField : MonoBehaviour
 		while (elapsed < _duration)
 		{
 			yield return null;
-			elapsed += ((ChronometerBase)Chronometer.global).deltaTime;
+			elapsed += Chronometer.global.deltaTime;
 			if (!ContainsPlayer())
 			{
 				break;

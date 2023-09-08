@@ -21,7 +21,7 @@ public class Skeleton_SwordTatanusDamage : Ability
 		{
 			_remainTimeToNextTick = ability._delay;
 			base.remainTime += ability._delay;
-			if (((ReorderableArray<Stat.Value>)ability._stat).values.Length != 0)
+			if (ability._stat.values.Length != 0)
 			{
 				owner.stat.AttachValues(ability._stat);
 			}
@@ -29,7 +29,7 @@ public class Skeleton_SwordTatanusDamage : Ability
 
 		protected override void OnDetach()
 		{
-			if (((ReorderableArray<Stat.Value>)ability._stat).values.Length != 0)
+			if (ability._stat.values.Length != 0)
 			{
 				owner.stat.DetachValues(ability._stat);
 			}

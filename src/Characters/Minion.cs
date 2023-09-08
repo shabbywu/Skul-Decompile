@@ -123,7 +123,7 @@ public class Minion : MonoBehaviour
 
 	private void TryToExpire()
 	{
-		_elapsedLifeTime += ((ChronometerBase)Chronometer.global).deltaTime;
+		_elapsedLifeTime += Chronometer.global.deltaTime;
 		if (_elapsedLifeTime > _defaultSetting.lifeTime && _state != State.Unsummoning)
 		{
 			_state = State.Expired;
@@ -204,7 +204,7 @@ public class Minion : MonoBehaviour
 		}
 		if (_defaultSetting.triggerOnGiveDamage)
 		{
-			((PriorityList<GiveDamageDelegate>)_character.onGiveDamage).Add(int.MinValue, (GiveDamageDelegate)OnGiveDamage);
+			_character.onGiveDamage.Add(int.MinValue, OnGiveDamage);
 		}
 		if (_defaultSetting.triggerOnGaveDamage)
 		{
@@ -245,7 +245,7 @@ public class Minion : MonoBehaviour
 			}
 			if (_defaultSetting.triggerOnGiveDamage)
 			{
-				((PriorityList<GiveDamageDelegate>)_character.onGiveDamage).Remove((GiveDamageDelegate)OnGiveDamage);
+				_character.onGiveDamage.Remove(OnGiveDamage);
 			}
 			if (_defaultSetting.triggerOnGaveDamage)
 			{

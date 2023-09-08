@@ -57,7 +57,7 @@ public class TimeCostEventDisplay : MonoBehaviour
 		{
 			int value = (int)Mathf.Lerp((float)start, (float)dest, elapsed / _costEvent.updateInterval);
 			UpdateText(value);
-			elapsed += ((ChronometerBase)Chronometer.global).deltaTime;
+			elapsed += Chronometer.global.deltaTime;
 			yield return null;
 		}
 		UpdateText(dest);

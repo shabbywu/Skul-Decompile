@@ -49,7 +49,7 @@ public class ChangeTilemapColor : CRunnable
 		_interrupt = false;
 		while (elapsed < _curve.duration && !_interrupt)
 		{
-			elapsed += ((ChronometerBase)Chronometer.global).deltaTime;
+			elapsed += Chronometer.global.deltaTime;
 			_tilemap.color = Color.Lerp(start, _color, _curve.Evaluate(elapsed));
 			yield return null;
 		}

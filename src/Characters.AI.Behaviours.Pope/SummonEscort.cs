@@ -10,7 +10,7 @@ public sealed class SummonEscort : Behaviour
 	private RunAction _attack;
 
 	[SerializeField]
-	[Subcomponent(typeof(MoveHandler))]
+	[UnityEditor.Subcomponent(typeof(MoveHandler))]
 	private MoveHandler _moveHandler;
 
 	public override IEnumerator CRun(AIController controller)

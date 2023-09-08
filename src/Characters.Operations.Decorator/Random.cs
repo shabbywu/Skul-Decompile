@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Characters.Operations.Decorator;
@@ -16,7 +15,7 @@ public class Random : CharacterOperation
 
 	public override void Run(Character owner)
 	{
-		CharacterOperation characterOperation = ExtensionMethods.Random<CharacterOperation>((IEnumerable<CharacterOperation>)((SubcomponentArray<CharacterOperation>)_toRandom).components);
+		CharacterOperation characterOperation = _toRandom.components.Random();
 		if (!((Object)(object)characterOperation == (Object)null))
 		{
 			characterOperation.Run(owner);

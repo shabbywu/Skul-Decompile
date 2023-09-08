@@ -51,12 +51,12 @@ public class OnStatusTargetKilled : Trigger
 	{
 		//IL_014c: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0151: Unknown result type (might be due to invalid IL or missing references)
-		if (!((EnumArray<Character.Type, bool>)_characterTypes)[target.character.type] || (((EnumArray<Character.Type, bool>)_characterTypes)[Character.Type.Boss] && (target.character.key == Key.FirstHero1 || target.character.key == Key.FirstHero2 || target.character.key == Key.Unspecified)) || (_onCritical && !damage.critical) || (!string.IsNullOrWhiteSpace(_attackKey) && !damage.key.Equals(_attackKey, StringComparison.OrdinalIgnoreCase)))
+		if (!_characterTypes[target.character.type] || (_characterTypes[Character.Type.Boss] && (target.character.key == Key.FirstHero1 || target.character.key == Key.FirstHero2 || target.character.key == Key.Unspecified)) || (_onCritical && !damage.critical) || (!string.IsNullOrWhiteSpace(_attackKey) && !damage.key.Equals(_attackKey, StringComparison.OrdinalIgnoreCase)))
 		{
 			return;
 		}
 		bool flag = false;
-		if ((((EnumArray<CharacterStatus.Kind, bool>)_characterStatusKinds)[CharacterStatus.Kind.Wound] && target.character.status.wounded) || (((EnumArray<CharacterStatus.Kind, bool>)_characterStatusKinds)[CharacterStatus.Kind.Burn] && target.character.status.burning) || (((EnumArray<CharacterStatus.Kind, bool>)_characterStatusKinds)[CharacterStatus.Kind.Freeze] && target.character.status.freezed) || (((EnumArray<CharacterStatus.Kind, bool>)_characterStatusKinds)[CharacterStatus.Kind.Poison] && target.character.status.poisoned) || (((EnumArray<CharacterStatus.Kind, bool>)_characterStatusKinds)[CharacterStatus.Kind.Stun] && target.character.status.stuned))
+		if ((_characterStatusKinds[CharacterStatus.Kind.Wound] && target.character.status.wounded) || (_characterStatusKinds[CharacterStatus.Kind.Burn] && target.character.status.burning) || (_characterStatusKinds[CharacterStatus.Kind.Freeze] && target.character.status.freezed) || (_characterStatusKinds[CharacterStatus.Kind.Poison] && target.character.status.poisoned) || (_characterStatusKinds[CharacterStatus.Kind.Stun] && target.character.status.stuned))
 		{
 			flag = true;
 		}

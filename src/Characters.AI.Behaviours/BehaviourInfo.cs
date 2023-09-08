@@ -31,6 +31,6 @@ public class BehaviourInfo : MonoBehaviour
 		{
 			return _tag;
 		}
-		return ExtensionMethods.GetAutoName((object)this);
+		return this.GetAutoName();
 	}
 }

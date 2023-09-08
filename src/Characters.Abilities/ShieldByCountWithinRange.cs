@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using PhysicsUtils;
 using UnityEngine;
@@ -86,7 +85,7 @@ public class ShieldByCountWithinRange : Ability
 	private CharacterStatusKindBoolArray _statusKinds;
 
 	[SerializeField]
-	[Information(/*Could not decode attribute arguments.*/)]
+	[Information("효과가 적용되기 시작하는 최소 개수", InformationAttribute.InformationType.Info, false)]
 	private int _min;
 
 	[SerializeField]
@@ -109,14 +108,14 @@ public class ShieldByCountWithinRange : Ability
 		((ContactFilter2D)(ref _overlapper.contactFilter)).SetLayerMask(_layer.Evaluate(gameObject));
 		((Behaviour)_range).enabled = true;
 		_overlapper.OverlapCollider(_range);
-		int num = ((IEnumerable<Collider2D>)_overlapper.results).Where(delegate(Collider2D result)
+		int num = _overlapper.results.Where(delegate(Collider2D result)
 		{
 			Character component = ((Component)result).GetComponent<Character>();
 			if ((Object)(object)component == (Object)null)
 			{
 				return false;
 			}
-			return (!_statusCheck || ((!((EnumArray<CharacterStatus.Kind, bool>)_statusKinds)[CharacterStatus.Kind.Burn] || component.status.burning) && (!((EnumArray<CharacterStatus.Kind, bool>)_statusKinds)[CharacterStatus.Kind.Freeze] || component.status.freezed) && (!((EnumArray<CharacterStatus.Kind, bool>)_statusKinds)[CharacterStatus.Kind.Poison] || component.status.poisoned) && (!((EnumArray<CharacterStatus.Kind, bool>)_statusKinds)[CharacterStatus.Kind.Wound] || component.status.wounded) && (!((EnumArray<CharacterStatus.Kind, bool>)_statusKinds)[CharacterStatus.Kind.Stun] || component.status.stuned))) && ((EnumArray<Character.Type, bool>)_characterTypes)[component.type];
+			return (!_statusCheck || ((!_statusKinds[CharacterStatus.Kind.Burn] || component.status.burning) && (!_statusKinds[CharacterStatus.Kind.Freeze] || component.status.freezed) && (!_statusKinds[CharacterStatus.Kind.Poison] || component.status.poisoned) && (!_statusKinds[CharacterStatus.Kind.Wound] || component.status.wounded) && (!_statusKinds[CharacterStatus.Kind.Stun] || component.status.stuned))) && _characterTypes[component.type];
 		}).Count();
 		((Behaviour)_range).enabled = false;
 		if (num < _min)

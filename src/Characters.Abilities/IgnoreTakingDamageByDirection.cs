@@ -15,12 +15,12 @@ public class IgnoreTakingDamageByDirection : Ability
 
 		protected override void OnAttach()
 		{
-			owner.health.onTakeDamage.Add(int.MaxValue, (TakeDamageDelegate)CancelDamage);
+			owner.health.onTakeDamage.Add(int.MaxValue, CancelDamage);
 		}
 
 		protected override void OnDetach()
 		{
-			owner.health.onTakeDamage.Remove((TakeDamageDelegate)CancelDamage);
+			owner.health.onTakeDamage.Remove(CancelDamage);
 		}
 
 		private bool CancelDamage(ref Damage damage)

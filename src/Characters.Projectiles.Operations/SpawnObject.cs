@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Hardmode;
 using Level;
 using Singletons;
@@ -29,12 +28,12 @@ public class SpawnObject : HitOperation
 		{
 			if (_objectsInHardmode != null && _objectsInHardmode.Length != 0)
 			{
-				_object = ExtensionMethods.Random<GameObject>((IEnumerable<GameObject>)_objectsInHardmode);
+				_object = _objectsInHardmode.Random();
 			}
 		}
 		else if (_objects != null && _objects.Length != 0)
 		{
-			_object = ExtensionMethods.Random<GameObject>((IEnumerable<GameObject>)_objects);
+			_object = _objects.Random();
 		}
 		GameObject val = Object.Instantiate<GameObject>(_object, Vector2.op_Implicit(((RaycastHit2D)(ref raycastHit)).point), Quaternion.identity, ((Component)Map.Instance).transform);
 		Character component = val.GetComponent<Character>();

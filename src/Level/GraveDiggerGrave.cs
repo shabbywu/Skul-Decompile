@@ -91,7 +91,7 @@ public sealed class GraveDiggerGrave : MonoBehaviour
 	{
 		while (_elapsed < _lifeTime)
 		{
-			_elapsed += ((ChronometerBase)Chronometer.global).deltaTime;
+			_elapsed += Chronometer.global.deltaTime;
 			yield return null;
 		}
 		_container.Remove(this);

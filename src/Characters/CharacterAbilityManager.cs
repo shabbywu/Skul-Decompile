@@ -197,7 +197,7 @@ public class CharacterAbilityManager : MonoBehaviour
 		}
 		try
 		{
-			float deltaTime = ((ChronometerBase)_character.chronometer.master).deltaTime;
+			float deltaTime = _character.chronometer.master.deltaTime;
 			int num = _abilities.Count - 1;
 			while (num >= 0 && num < _abilities.Count)
 			{

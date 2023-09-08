@@ -23,25 +23,25 @@ public class ModifyTimeScale : Ability
 
 		private Chronometer GetChronometer()
 		{
-			return (Chronometer)(ability._chronometerType switch
+			return ability._chronometerType switch
 			{
 				ChronometerType.Animation => owner.chronometer.animation, 
 				ChronometerType.Effect => owner.chronometer.effect, 
 				ChronometerType.Projectile => owner.chronometer.projectile, 
 				_ => owner.chronometer.master, 
-			});
+			};
 		}
 
 		protected override void OnAttach()
 		{
-			((ChronometerBase)Chronometer.global).AttachTimeScale((object)this, ability._globalTimeScale);
-			((ChronometerBase)GetChronometer()).AttachTimeScale((object)this, ability._timeScale);
+			Chronometer.global.AttachTimeScale(this, ability._globalTimeScale);
+			GetChronometer().AttachTimeScale(this, ability._timeScale);
 		}
 
 		protected override void OnDetach()
 		{
-			((ChronometerBase)Chronometer.global).DetachTimeScale((object)this);
-			((ChronometerBase)GetChronometer()).DetachTimeScale((object)this);
+			Chronometer.global.DetachTimeScale(this);
+			GetChronometer().DetachTimeScale(this);
 		}
 	}
 

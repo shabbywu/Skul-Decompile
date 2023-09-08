@@ -21,10 +21,10 @@ namespace Characters.Operations;
 
 public abstract class TargetedCharacterOperation : MonoBehaviour
 {
-	public class SubcomponentAttribute : SubcomponentAttribute
+	public class SubcomponentAttribute : UnityEditor.SubcomponentAttribute
 	{
 		public SubcomponentAttribute()
-			: base(types, names)
+			: base(TargetedCharacterOperation.types, TargetedCharacterOperation.names)
 		{
 		}
 	}
@@ -226,6 +226,6 @@ public abstract class TargetedCharacterOperation : MonoBehaviour
 
 	public override string ToString()
 	{
-		return ExtensionMethods.GetAutoName((object)this);
+		return this.GetAutoName();
 	}
 }

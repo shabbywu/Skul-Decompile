@@ -47,7 +47,7 @@ public class SacramentOrb : MonoBehaviour
 	private IEnumerator CRun()
 	{
 		ShowSign();
-		yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)_character.chronometer.master, _delay);
+		yield return _character.chronometer.master.WaitForSeconds(_delay);
 		Run();
 	}
 }

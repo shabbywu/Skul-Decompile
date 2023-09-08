@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>Assembly-CSharp-firstpass</AssemblyName>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <TargetFramework>net40</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup>
+    <LangVersion>11.0</LangVersion>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup />
+  <ItemGroup />
+  <ItemGroup>
+    <Reference Include="UnityEngine.CoreModule" />
+    <Reference Include="Plugins.Common">
+      <HintPath>../Plugins.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core">
+      <HintPath>../../../opt/bitnami/dotnet-sdk/bin/shared/Microsoft.NETCore.App/6.0.21/System.Core.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+</Project>

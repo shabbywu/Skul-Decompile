@@ -39,7 +39,7 @@ public sealed class DropCustomGear : Runnable
 
 	private Gear Load()
 	{
-		CustomGears.Property[] values = ((ReorderableArray<CustomGears.Property>)_customGears).values;
+		CustomGears.Property[] values = _customGears.values;
 		float num = Random.Range(0f, values.Sum((CustomGears.Property a) => a.weight));
 		for (int i = 0; i < values.Length; i++)
 		{

@@ -78,7 +78,7 @@ public class AbyssMeteor : CharacterOperation
 		for (int i = 0; i < count; i++)
 		{
 			Fire(owner, lookingDirection);
-			yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)owner.chronometer.animation, _fireInterval.value);
+			yield return owner.chronometer.animation.WaitForSeconds(_fireInterval.value);
 		}
 	}
 

@@ -51,11 +51,11 @@ public class AbyssOrb : CharacterOperation
 	private DirectionType _directionType;
 
 	[SerializeField]
-	private Reorderable _directions;
+	private CustomAngle.Reorderable _directions;
 
 	private IAttackDamage _attackDamage;
 
-	public CustomAngle[] directions => ((ReorderableArray<CustomAngle>)(object)_directions).values;
+	public CustomAngle[] directions => _directions.values;
 
 	public override void Initialize()
 	{
@@ -79,7 +79,7 @@ public class AbyssOrb : CharacterOperation
 		float num = (_scaleMax - _scaleMin) * _chargeAction.chargedPercent + _scaleMin;
 		float num2 = (_damageMultiplierMax - _damageMultiplierMin) * _chargeAction.chargedPercent + _damageMultiplierMin;
 		Projectile projectile = ((_chargeAction.chargedPercent < 1f) ? _incompleteProjectile : _completeProjectile);
-		CustomAngle[] values = ((ReorderableArray<CustomAngle>)(object)_directions).values;
+		CustomAngle[] values = _directions.values;
 		float attackDamage = _attackDamage.amount * num2;
 		bool flipX = false;
 		bool flipY = false;

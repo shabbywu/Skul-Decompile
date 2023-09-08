@@ -12,7 +12,7 @@ public class Range : Behaviour, IPattern
 	internal Collider2D trigger;
 
 	[SerializeField]
-	[Subcomponent(typeof(ActionAttack))]
+	[UnityEditor.Subcomponent(typeof(ActionAttack))]
 	private ActionAttack _attack;
 
 	public bool CanUse()

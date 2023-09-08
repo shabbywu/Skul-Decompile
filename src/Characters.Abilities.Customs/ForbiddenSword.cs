@@ -34,7 +34,7 @@ public class ForbiddenSword : Ability
 
 		private void OnOwnerKilled(ITarget target, ref Damage damage)
 		{
-			if (!((Object)(object)target.character == (Object)null) && ((EnumArray<Character.Type, bool>)ability._characterTypeFilter)[target.character.type])
+			if (!((Object)(object)target.character == (Object)null) && ability._characterTypeFilter[target.character.type])
 			{
 				ability.component.currentKillCount++;
 				if (!((float)ability.component.currentKillCount < ability._killCount) && !_changed)

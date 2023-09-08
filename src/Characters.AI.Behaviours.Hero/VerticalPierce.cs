@@ -8,15 +8,15 @@ namespace Characters.AI.Behaviours.Hero;
 public class VerticalPierce : SequentialCombo
 {
 	[SerializeField]
-	[Subcomponent(typeof(ChainAction))]
+	[UnityEditor.Subcomponent(typeof(ChainAction))]
 	private Action _readyAction;
 
-	[Subcomponent(typeof(ChainAction))]
+	[UnityEditor.Subcomponent(typeof(ChainAction))]
 	[SerializeField]
 	private Action _jumpAction;
 
 	[SerializeField]
-	[Subcomponent(typeof(ChainAction))]
+	[UnityEditor.Subcomponent(typeof(ChainAction))]
 	private Action _attackAction;
 
 	public override IEnumerator CRun(AIController controller)

@@ -60,10 +60,10 @@ public class StatBonusByMaxHealth : Ability
 
 		private void SetStat(int stack)
 		{
-			Stat.Value[] values = ((ReorderableArray<Stat.Value>)_stat).values;
+			Stat.Value[] values = _stat.values;
 			for (int i = 0; i < values.Length; i++)
 			{
-				values[i].value = ((ReorderableArray<Stat.Value>)ability._targetPerStack).values[i].value * (double)stack;
+				values[i].value = ability._targetPerStack.values[i].value * (double)stack;
 			}
 			owner.stat.SetNeedUpdate();
 		}

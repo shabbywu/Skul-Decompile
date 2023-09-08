@@ -26,7 +26,7 @@ public class IsReachToTarget : Conditional
 		//IL_0080: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0092: Unknown result type (might be due to invalid IL or missing references)
 		Character value = ((SharedVariable<Character>)_target).Value;
-		float num = _ownerValue.stat.GetInterpolatedMovementSpeed() * ((ChronometerBase)_ownerValue.chronometer.animation).deltaTime;
+		float num = _ownerValue.stat.GetInterpolatedMovementSpeed() * _ownerValue.chronometer.animation.deltaTime;
 		if (!((Object)(object)_ownerValue == (Object)null) && !((Object)(object)value == (Object)null))
 		{
 			if (((Component)_ownerValue).transform.position.x + num >= ((Component)value).transform.position.x && ((Component)_ownerValue).transform.position.x - num <= ((Component)value).transform.position.x)

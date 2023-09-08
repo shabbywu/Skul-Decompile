@@ -14,7 +14,7 @@ public class Dash : Behaviour
 	[MinMaxSlider(0f, 20f)]
 	private Vector2 _minMaxDistance;
 
-	[Subcomponent(typeof(MoveToDestination))]
+	[UnityEditor.Subcomponent(typeof(MoveToDestination))]
 	[SerializeField]
 	private MoveToDestination _moveToDestination;
 

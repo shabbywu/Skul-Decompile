@@ -7,10 +7,10 @@ namespace Runnables.Triggers;
 
 public abstract class Trigger : MonoBehaviour
 {
-	public class SubcomponentAttribute : SubcomponentAttribute
+	public class SubcomponentAttribute : UnityEditor.SubcomponentAttribute
 	{
 		public SubcomponentAttribute()
-			: base(true, types)
+			: base(allowCustom: true, Trigger.types)
 		{
 		}
 	}

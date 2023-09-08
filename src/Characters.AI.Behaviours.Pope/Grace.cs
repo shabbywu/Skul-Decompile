@@ -18,7 +18,7 @@ public sealed class Grace : Behaviour
 	private Action _end;
 
 	[SerializeField]
-	[Subcomponent(typeof(MoveHandler))]
+	[UnityEditor.Subcomponent(typeof(MoveHandler))]
 	private MoveHandler _moveHandler;
 
 	[MinMaxSlider(0f, 180f)]

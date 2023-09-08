@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using Characters;
 using GameResources;
 using Scenes;
@@ -27,9 +26,9 @@ public class NpcTalk : InteractiveObject
 
 	private string displayName => Localization.GetLocalizedString(_displayNameKey);
 
-	private string greeting => ExtensionMethods.Random<string>((IEnumerable<string>)Localization.GetLocalizedStringArray(_greetingKey));
+	private string greeting => Localization.GetLocalizedStringArray(_greetingKey).Random();
 
-	private string[] chat => ExtensionMethods.Random<string[]>((IEnumerable<string[]>)Localization.GetLocalizedStringArrays(_chatKey));
+	private string[] chat => Localization.GetLocalizedStringArrays(_chatKey).Random();
 
 	private void Start()
 	{

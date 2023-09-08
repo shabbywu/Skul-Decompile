@@ -22,11 +22,11 @@ public class CustomStageInfo : IStageInfo
 
 	private (PathNode node1, PathNode node2) GetPathAt(int pathIndex)
 	{
-		if (pathIndex >= ((ReorderableArray<SerializablePathNode>)_maps).values.Length)
+		if (pathIndex >= _maps.values.Length)
 		{
 			return (new PathNode(null, MapReward.Type.None, _lastGate), PathNode.none);
 		}
-		return (((ReorderableArray<SerializablePathNode>)_maps).values[pathIndex], PathNode.none);
+		return (_maps.values[pathIndex], PathNode.none);
 	}
 
 	public override void Reset()
@@ -42,11 +42,11 @@ public class CustomStageInfo : IStageInfo
 	{
 		base.nodeIndex = nodeIndex;
 		pathIndex++;
-		if (pathIndex >= ((ReorderableArray<SerializablePathNode>)_maps).values.Length)
+		if (pathIndex >= _maps.values.Length)
 		{
 			return null;
 		}
-		return ((ReorderableArray<SerializablePathNode>)_maps).values[pathIndex];
+		return _maps.values[pathIndex];
 	}
 
 	public override void UpdateReferences()

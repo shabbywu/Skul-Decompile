@@ -113,9 +113,9 @@ public sealed class Duel : InscriptionInstance
 
 		private void UpdateStack()
 		{
-			for (int i = 0; i < ((ReorderableArray<Stat.Value>)_stat).values.Length; i++)
+			for (int i = 0; i < _stat.values.Length; i++)
 			{
-				((ReorderableArray<Stat.Value>)_stat).values[i].value = ((ReorderableArray<Stat.Value>)statPerStack).values[i].GetStackedValue(_stacks);
+				_stat.values[i].value = statPerStack.values[i].GetStackedValue(_stacks);
 			}
 			_owner.stat.SetNeedUpdate();
 		}
@@ -168,7 +168,7 @@ public sealed class Duel : InscriptionInstance
 	protected override void Initialize()
 	{
 		_currentInstance = new StatBonus(_effect);
-		((ReorderableArray<Stat.Value>)_currentInstance.statPerStack).values[0].value = 1.0 + (double)_statValuePerStack * 0.01;
+		_currentInstance.statPerStack.values[0].value = 1.0 + (double)_statValuePerStack * 0.01;
 	}
 
 	public override void UpdateBonus(bool wasActive, bool wasOmen)
@@ -192,7 +192,7 @@ public sealed class Duel : InscriptionInstance
 	{
 		//IL_005a: Unknown result type (might be due to invalid IL or missing references)
 		//IL_00f5: Unknown result type (might be due to invalid IL or missing references)
-		if (keyword.step < 1 || (Object)(object)target.character == (Object)null || gaveDamage.attackType == Damage.AttackType.None || gaveDamage.attackType == Damage.AttackType.Additional || !((EnumArray<Character.Type, bool>)_characterTypes)[target.character.type] || !ExtensionMethods.Contains(_targetLayer.Evaluate(((Component)base.character).gameObject), ((Component)target.character).gameObject.layer))
+		if (keyword.step < 1 || (Object)(object)target.character == (Object)null || gaveDamage.attackType == Damage.AttackType.None || gaveDamage.attackType == Damage.AttackType.Additional || !_characterTypes[target.character.type] || !_targetLayer.Evaluate(((Component)base.character).gameObject).Contains(((Component)target.character).gameObject.layer))
 		{
 			return;
 		}

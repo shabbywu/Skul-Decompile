@@ -83,18 +83,16 @@ public class Time : ICooldown
 
 	public Time(int maxStack, int streakCount, float streakTimeout, float cooldownTime)
 	{
-		//IL_0044: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0049: Unknown result type (might be due to invalid IL or missing references)
 		this.cooldownTime = cooldownTime;
 		this.maxStack = maxStack;
 		streak = new Streak(streakCount, streakTimeout);
-		((CoroutineReference)(ref _updateReference)).Stop();
-		_updateReference = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)CoroutineProxy.instance, CUpdate());
+		_updateReference.Stop();
+		_updateReference = ((MonoBehaviour)(object)CoroutineProxy.instance).StartCoroutineWithReference(CUpdate());
 	}
 
 	private void OnDestroy()
 	{
-		((CoroutineReference)(ref _updateReference)).Stop();
+		_updateReference.Stop();
 	}
 
 	private IEnumerator CUpdate()
@@ -108,7 +106,7 @@ public class Time : ICooldown
 				{
 					remainTime = cooldownTime;
 				}
-				remainTime -= ((ChronometerBase)Chronometer.global).deltaTime * GetCooldownSpeed();
+				remainTime -= Chronometer.global.deltaTime * GetCooldownSpeed();
 				if (remainTime <= 0f)
 				{
 					remainTime = cooldownTime;

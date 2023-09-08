@@ -134,18 +134,18 @@ public class BlackMarCat : MonoBehaviour
 	private void OnDestroy()
 	{
 		Scene<GameBase>.instance.uiManager.npcConversation.Done();
-		PlayerInput.blocked.Detach((object)this);
+		PlayerInput.blocked.Detach(this);
 		Scene<GameBase>.instance.uiManager.headupDisplay.visible = true;
-		Singleton<Service>.Instance.levelManager.player.movement.blocked.Detach((object)this);
+		Singleton<Service>.Instance.levelManager.player.movement.blocked.Detach(this);
 	}
 
 	public void Activate()
 	{
-		PlayerInput.blocked.Attach((object)this);
+		PlayerInput.blocked.Attach(this);
 		Scene<GameBase>.instance.uiManager.headupDisplay.visible = false;
 		Character player = Singleton<Service>.Instance.levelManager.player;
 		player.ForceToLookAt(Character.LookingDirection.Right);
-		player.movement.blocked.Attach((object)this);
+		player.movement.blocked.Attach(this);
 		((MonoBehaviour)this).StartCoroutine(CActivate());
 	}
 
@@ -157,7 +157,7 @@ public class BlackMarCat : MonoBehaviour
 
 	private void Deactivate()
 	{
-		PlayerInput.blocked.Detach((object)this);
+		PlayerInput.blocked.Detach(this);
 		Scene<GameBase>.instance.uiManager.npcConversation.Done();
 		((MonoBehaviour)this).StartCoroutine(CDeactivate());
 		GameData.Progress.cutscene.SetData(Key.strangeCat, value: true);
@@ -166,8 +166,8 @@ public class BlackMarCat : MonoBehaviour
 	private IEnumerator CDeactivate()
 	{
 		yield return Scene<GameBase>.instance.uiManager.letterBox.CDisappear();
-		PlayerInput.blocked.Detach((object)this);
-		Singleton<Service>.Instance.levelManager.player.movement.blocked.Detach((object)this);
+		PlayerInput.blocked.Detach(this);
+		Singleton<Service>.Instance.levelManager.player.movement.blocked.Detach(this);
 		Scene<GameBase>.instance.uiManager.headupDisplay.visible = true;
 	}
 

@@ -17,7 +17,7 @@ public class OperationByTriggerComponent : AbilityComponent<OperationByTrigger>
 	public override void Initialize()
 	{
 		_ability.trigger = _triggerComponent;
-		_ability.operations = ((SubcomponentArray<CharacterOperation>)_operations).components;
+		_ability.operations = _operations.components;
 		base.Initialize();
 	}
 }

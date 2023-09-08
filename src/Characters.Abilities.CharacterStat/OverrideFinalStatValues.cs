@@ -15,13 +15,13 @@ public sealed class OverrideFinalStatValues : Ability
 
 		protected override void OnAttach()
 		{
-			owner.stat.onUpdated.Add(ability._priority, (Stat.OnUpdatedDelegate)HandleOnStatUpdated);
+			owner.stat.onUpdated.Add(ability._priority, HandleOnStatUpdated);
 		}
 
 		private double[] HandleOnStatUpdated(double[,] values)
 		{
 			double[] array = new double[Stat.Kind.values.Count];
-			Stat.Value[] values2 = ((ReorderableArray<Stat.Value>)ability._statValues).values;
+			Stat.Value[] values2 = ability._statValues.values;
 			for (int i = 0; i < Stat.Kind.values.Count; i++)
 			{
 				array[i] = values[Stat.Category.Final.index, i];
@@ -35,7 +35,7 @@ public sealed class OverrideFinalStatValues : Ability
 
 		protected override void OnDetach()
 		{
-			owner.stat.onUpdated.Remove((Stat.OnUpdatedDelegate)HandleOnStatUpdated);
+			owner.stat.onUpdated.Remove(HandleOnStatUpdated);
 		}
 	}
 

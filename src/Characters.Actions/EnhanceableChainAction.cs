@@ -25,9 +25,9 @@ public class EnhanceableChainAction : Action
 		{
 			if (!enhanced)
 			{
-				return ((SubcomponentArray<Motion>)_motions).components;
+				return _motions.components;
 			}
-			return ((SubcomponentArray<Motion>)_enhancedMotions).components;
+			return _enhancedMotions.components;
 		}
 	}
 
@@ -46,8 +46,8 @@ public class EnhanceableChainAction : Action
 	protected override void Awake()
 	{
 		base.Awake();
-		InitailizeMotionEvents(((SubcomponentArray<Motion>)_motions).components);
-		InitailizeMotionEvents(((SubcomponentArray<Motion>)_enhancedMotions).components);
+		InitailizeMotionEvents(_motions.components);
+		InitailizeMotionEvents(_enhancedMotions.components);
 	}
 
 	private void InitailizeMotionEvents(Motion[] motions)
@@ -87,11 +87,11 @@ public class EnhanceableChainAction : Action
 		base.Initialize(owner);
 		for (int i = 0; i < motions.Length; i++)
 		{
-			((SubcomponentArray<Motion>)_motions).components[i].Initialize(this);
+			_motions.components[i].Initialize(this);
 		}
 		for (int j = 0; j < motions.Length; j++)
 		{
-			((SubcomponentArray<Motion>)_enhancedMotions).components[j].Initialize(this);
+			_enhancedMotions.components[j].Initialize(this);
 		}
 	}
 

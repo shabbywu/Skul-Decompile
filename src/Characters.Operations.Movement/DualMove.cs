@@ -74,8 +74,6 @@ public class DualMove : CharacterOperation
 			//IL_0087: Unknown result type (might be due to invalid IL or missing references)
 			//IL_008c: Unknown result type (might be due to invalid IL or missing references)
 			//IL_0063: Unknown result type (might be due to invalid IL or missing references)
-			//IL_0069: Unknown result type (might be due to invalid IL or missing references)
-			//IL_006e: Unknown result type (might be due to invalid IL or missing references)
 			Vector2 val = force.Evaluate(owner);
 			if (_useDashDistanceStat)
 			{
@@ -83,8 +81,8 @@ public class DualMove : CharacterOperation
 			}
 			if (_curve1.duration > 0f)
 			{
-				((CoroutineReference)(ref coroutineReference)).Stop();
-				coroutineReference = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)owner, Move.CMove(owner, curve, val));
+				coroutineReference.Stop();
+				coroutineReference = ((MonoBehaviour)(object)owner).StartCoroutineWithReference(Move.CMove(owner, curve, val));
 			}
 			else
 			{
@@ -96,7 +94,7 @@ public class DualMove : CharacterOperation
 
 	public override void Stop()
 	{
-		((CoroutineReference)(ref _coroutineReference1)).Stop();
-		((CoroutineReference)(ref _coroutineReference2)).Stop();
+		_coroutineReference1.Stop();
+		_coroutineReference2.Stop();
 	}
 }

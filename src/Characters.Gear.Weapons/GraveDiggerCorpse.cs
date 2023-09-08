@@ -72,7 +72,7 @@ public class GraveDiggerCorpse : DestructibleObject
 
 	private void Update()
 	{
-		_remainLifetime -= ((ChronometerBase)Chronometer.global).deltaTime;
+		_remainLifetime -= Chronometer.global.deltaTime;
 		if (_remainLifetime <= 0f)
 		{
 			_minion.Despawn();
@@ -82,8 +82,6 @@ public class GraveDiggerCorpse : DestructibleObject
 	public override void Hit(Character from, ref Damage damage, Vector2 force)
 	{
 		//IL_0027: Unknown result type (might be due to invalid IL or missing references)
-		//IL_007a: Unknown result type (might be due to invalid IL or missing references)
-		//IL_007f: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0047: Unknown result type (might be due to invalid IL or missing references)
 		_remainHealth--;
 		if (_hitSound != null)
@@ -97,15 +95,15 @@ public class GraveDiggerCorpse : DestructibleObject
 		}
 		else
 		{
-			((CoroutineReference)(ref _cEaseColorReference)).Stop();
-			_cEaseColorReference = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)this, CEaseColor());
+			_cEaseColorReference.Stop();
+			_cEaseColorReference = ((MonoBehaviour)(object)this).StartCoroutineWithReference(CEaseColor());
 		}
 	}
 
 	private IEnumerator CEaseColor()
 	{
 		float duration = _hitColorCurve.duration;
-		for (float time = 0f; time < duration; time += ((ChronometerBase)Chronometer.global).deltaTime)
+		for (float time = 0f; time < duration; time += Chronometer.global.deltaTime)
 		{
 			_spriteRenderer.color = Color.Lerp(_startColor, _endColor, _hitColorCurve.Evaluate(time));
 			yield return null;

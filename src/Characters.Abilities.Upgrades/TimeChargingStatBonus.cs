@@ -48,7 +48,7 @@ public sealed class TimeChargingStatBonus : Ability
 
 		private void HandleOnGaveDamage(ITarget target, in Damage originalDamage, in Damage gaveDamage, double damageDealt)
 		{
-			if (_charging && ((EnumArray<Damage.MotionType, bool>)ability._motionFilter)[gaveDamage.motionType])
+			if (_charging && ability._motionFilter[gaveDamage.motionType])
 			{
 				_charging = false;
 				_remainDetachTime = ability._detachTime;
@@ -90,9 +90,9 @@ public sealed class TimeChargingStatBonus : Ability
 
 		public void UpdateStack()
 		{
-			for (int i = 0; i < ((ReorderableArray<Stat.Value>)_stat).values.Length; i++)
+			for (int i = 0; i < _stat.values.Length; i++)
 			{
-				((ReorderableArray<Stat.Value>)_stat).values[i].value = ((ReorderableArray<Stat.Value>)ability._statPerStack).values[i].GetStackedValue(ability._stack);
+				_stat.values[i].value = ability._statPerStack.values[i].GetStackedValue(ability._stack);
 			}
 			owner.stat.SetNeedUpdate();
 		}

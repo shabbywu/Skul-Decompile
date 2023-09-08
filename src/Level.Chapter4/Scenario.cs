@@ -34,7 +34,7 @@ public class Scenario : MonoBehaviour
 
 		public Transform GetRandomPlatform()
 		{
-			return ((Component)ExtensionMethods.Random<Platform>((IEnumerable<Platform>)_platforms)).transform;
+			return ((Component)_platforms.Random()).transform;
 		}
 
 		public Transform FindLastStandingPlatform()
@@ -161,7 +161,7 @@ public class Scenario : MonoBehaviour
 			{
 				break;
 			}
-			ExtensionMethods.Shuffle<Floor>((IList<Floor>)_floorPlatforms);
+			_floorPlatforms.Shuffle();
 			_targets.Clear();
 			Floor[] floorPlatforms = _floorPlatforms;
 			for (int i = 0; i < floorPlatforms.Length; i++)
@@ -192,7 +192,7 @@ public class Scenario : MonoBehaviour
 				}
 				if (_targets.Count >= 1)
 				{
-					Transform obj = ExtensionMethods.Random<Transform>((IEnumerable<Transform>)_targets);
+					Transform obj = _targets.Random();
 					bool flag = false;
 					Platform[] platforms = floor.platforms;
 					for (int j = 0; j < platforms.Length; j++)

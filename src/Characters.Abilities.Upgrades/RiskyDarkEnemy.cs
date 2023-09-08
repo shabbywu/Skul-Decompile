@@ -35,10 +35,8 @@ public sealed class RiskyDarkEnemy : Ability
 
 		private void HandleOnMapLoaded()
 		{
-			//IL_0018: Unknown result type (might be due to invalid IL or missing references)
-			//IL_001d: Unknown result type (might be due to invalid IL or missing references)
-			((CoroutineReference)(ref _applyReference)).Stop();
-			_applyReference = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)owner, Apply());
+			_applyReference.Stop();
+			_applyReference = ((MonoBehaviour)(object)owner).StartCoroutineWithReference(Apply());
 		}
 
 		private IEnumerator Apply()

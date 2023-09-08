@@ -76,14 +76,12 @@ public class Samurai2Passive : Ability, IAbilityInstance
 
 	public void UpdateTime(float deltaTime)
 	{
-		//IL_0051: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0056: Unknown result type (might be due to invalid IL or missing references)
 		_operationRemainTime -= deltaTime;
 		if (_operationRemainTime < 0f)
 		{
 			_operationRemainTime += _operationInterval;
-			((CoroutineReference)(ref _operationRunner)).Stop();
-			_operationRunner = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)owner, _operations.CRun(owner));
+			_operationRunner.Stop();
+			_operationRunner = ((MonoBehaviour)(object)owner).StartCoroutineWithReference(_operations.CRun(owner));
 		}
 	}
 

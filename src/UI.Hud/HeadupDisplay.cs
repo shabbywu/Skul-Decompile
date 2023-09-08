@@ -129,12 +129,10 @@ public class HeadupDisplay : MonoBehaviour
 
 	private void SpawnSwapReadyEffect()
 	{
-		//IL_001c: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0021: Unknown result type (might be due to invalid IL or missing references)
 		if (((Behaviour)this).isActiveAndEnabled)
 		{
-			((CoroutineReference)(ref _cPlaySwapReadyEffectReference)).Stop();
-			_cPlaySwapReadyEffectReference = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)this, CPlaySwapReadyEffect());
+			_cPlaySwapReadyEffectReference.Stop();
+			_cPlaySwapReadyEffectReference = ((MonoBehaviour)(object)this).StartCoroutineWithReference(CPlaySwapReadyEffect());
 		}
 	}
 
@@ -142,7 +140,7 @@ public class HeadupDisplay : MonoBehaviour
 	{
 		((Component)_swapReadyEffect).gameObject.SetActive(true);
 		_swapReadyEffect.Play(0, 0, 0f);
-		Global global = Chronometer.global;
+		Chronometer.Global global = Chronometer.global;
 		AnimatorStateInfo currentAnimatorStateInfo = _swapReadyEffect.GetCurrentAnimatorStateInfo(0);
 		yield return global.WaitForSeconds(((AnimatorStateInfo)(ref currentAnimatorStateInfo)).length);
 		((Component)_swapReadyEffect).gameObject.SetActive(false);

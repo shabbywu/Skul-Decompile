@@ -41,7 +41,7 @@ public class Revive : Ability
 			if (instanceByInstanceType == null || !instanceByInstanceType.canUse)
 			{
 				owner.health.onDie -= ReviveOwner;
-				((ChronometerBase)Chronometer.global).AttachTimeScale((object)this, 0.2f, 0.5f);
+				Chronometer.global.AttachTimeScale(this, 0.2f, 0.5f);
 				if (ability._percentHeal)
 				{
 					owner.health.PercentHeal((float)ability._percentHealAmount * 0.01f);
@@ -52,7 +52,7 @@ public class Revive : Ability
 				}
 				CommonResource.instance.reassembleParticle.Emit(Vector2.op_Implicit(((Component)owner).transform.position), ((Collider2D)owner.collider).bounds, owner.movement.push);
 				owner.CancelAction();
-				((ChronometerBase)owner.chronometer.master).AttachTimeScale((object)this, 0.01f, 0.5f);
+				owner.chronometer.master.AttachTimeScale(this, 0.01f, 0.5f);
 				owner.spriteEffectStack.Add(new ColorBlend(int.MaxValue, Color.clear, 0.5f));
 				GetInvulnerable getInvulnerable = new GetInvulnerable();
 				getInvulnerable.duration = 3f;

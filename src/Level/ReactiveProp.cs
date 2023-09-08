@@ -84,7 +84,7 @@ public class ReactiveProp : MonoBehaviour
 	{
 		float t = 0f;
 		_animator.Play("Fly");
-		for (; t < _curve.duration; t += ((ChronometerBase)Chronometer.global).deltaTime)
+		for (; t < _curve.duration; t += Chronometer.global.deltaTime)
 		{
 			float num = _curve.Evaluate(t);
 			((Component)this).transform.localPosition = Vector3.Lerp(_originPosition, _destination, num);

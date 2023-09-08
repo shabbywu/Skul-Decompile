@@ -31,7 +31,7 @@ public sealed class ManeOfBeastKing : Ability
 			protected override void OnAttach()
 			{
 				_canUse = true;
-				owner.health.onTakeDamage.Add(int.MinValue, (TakeDamageDelegate)OnTakeDamage);
+				owner.health.onTakeDamage.Add(int.MinValue, OnTakeDamage);
 				owner.health.onTookDamage += OnTookDamage;
 			}
 
@@ -63,7 +63,7 @@ public sealed class ManeOfBeastKing : Ability
 				//IL_0135: Unknown result type (might be due to invalid IL or missing references)
 				//IL_0145: Unknown result type (might be due to invalid IL or missing references)
 				//IL_014a: Unknown result type (might be due to invalid IL or missing references)
-				if (((EnumArray<Damage.AttackType, bool>)ability._attackType)[tookDamage.attackType] && ((EnumArray<Damage.MotionType, bool>)ability._motionType)[tookDamage.motionType] && ((EnumArray<Character.Type, bool>)ability._attackerType)[tookDamage.attacker.character.type])
+				if (ability._attackType[tookDamage.attackType] && ability._motionType[tookDamage.motionType] && ability._attackerType[tookDamage.attacker.character.type])
 				{
 					owner.health.onTookDamage -= OnTookDamage;
 					Character character = tookDamage.attacker.character;
@@ -78,7 +78,7 @@ public sealed class ManeOfBeastKing : Ability
 
 			protected override void OnDetach()
 			{
-				owner.health.onTakeDamage.Remove((TakeDamageDelegate)OnTakeDamage);
+				owner.health.onTakeDamage.Remove(OnTakeDamage);
 				owner.health.onTookDamage -= OnTookDamage;
 			}
 		}
@@ -140,7 +140,7 @@ public sealed class ManeOfBeastKing : Ability
 			Chronometer animationChronometer = owner.chronometer.animation;
 			while (dash.running)
 			{
-				if (((ChronometerBase)animationChronometer).timeScale > float.Epsilon)
+				if (animationChronometer.timeScale > float.Epsilon)
 				{
 					Vector2 val = Vector2.zero;
 					if ((Object)(object)owner.movement != (Object)null)

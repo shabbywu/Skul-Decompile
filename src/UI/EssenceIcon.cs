@@ -13,7 +13,7 @@ public class EssenceIcon : IconWithCooldown
 		if (constraints != null)
 		{
 			base.Update();
-			((Graphic)base.icon).material = ((((SubcomponentArray<Constraint>)constraints).components.Pass() && base.cooldown.canUse) ? null : MaterialResource.ui_grayScale);
+			((Graphic)base.icon).material = ((constraints.components.Pass() && base.cooldown.canUse) ? null : MaterialResource.ui_grayScale);
 		}
 	}
 }

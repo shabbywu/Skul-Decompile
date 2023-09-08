@@ -38,7 +38,7 @@ public class SkulWait : MonoBehaviour
 		while (true)
 		{
 			Movement movement = _weapon.owner.movement;
-			waitedTime += ((ChronometerBase)Chronometer.global).deltaTime;
+			waitedTime += Chronometer.global.deltaTime;
 			if (math.abs(movement.moved.x) > 0.0001f || math.abs(movement.moved.y) > 0.0001f)
 			{
 				waitedTime = 0f;

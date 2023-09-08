@@ -23,7 +23,7 @@ public class Attentiveness : Ability
 		protected override void OnAttach()
 		{
 			base.remainTime = ability.duration;
-			((ChronometerBase)owner.chronometer.animation).AttachTimeScale((object)this, 0f);
+			owner.chronometer.animation.AttachTimeScale(this, 0f);
 			owner.stat.AttachValues(ability._stat);
 			owner.health.onTookDamage += OnTookDamage;
 			_count = 0;
@@ -31,7 +31,7 @@ public class Attentiveness : Ability
 
 		private void OnTookDamage(in Damage originalDamage, in Damage tookDamage, double damageDealt)
 		{
-			if (((EnumArray<Damage.AttackType, bool>)ability._types)[originalDamage.attackType])
+			if (ability._types[originalDamage.attackType])
 			{
 				_count++;
 				if (_count >= _maxcount)
@@ -47,7 +47,7 @@ public class Attentiveness : Ability
 		{
 			owner.health.onTookDamage -= OnTookDamage;
 			owner.stat.DetachValues(ability._stat);
-			((ChronometerBase)owner.chronometer.animation).DetachTimeScale((object)this);
+			owner.chronometer.animation.DetachTimeScale(this);
 		}
 
 		public override void Refresh()

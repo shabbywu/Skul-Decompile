@@ -27,7 +27,7 @@ public sealed class Soar : InscriptionInstance
 	{
 		base.character.movement.onJump += OnJump;
 		base.character.movement.onGrounded += OnGrounded;
-		((PriorityList<GiveDamageDelegate>)base.character.onGiveDamage).Add(int.MaxValue, (GiveDamageDelegate)OnGiveDamage);
+		base.character.onGiveDamage.Add(int.MaxValue, OnGiveDamage);
 	}
 
 	private bool OnGiveDamage(ITarget target, ref Damage damage)
@@ -64,7 +64,7 @@ public sealed class Soar : InscriptionInstance
 	{
 		base.character.movement.onJump -= OnJump;
 		base.character.movement.onGrounded -= OnGrounded;
-		((PriorityList<GiveDamageDelegate>)base.character.onGiveDamage).Remove((GiveDamageDelegate)OnGiveDamage);
+		base.character.onGiveDamage.Remove(OnGiveDamage);
 		base.character.ability.Remove(_statBonus);
 	}
 }

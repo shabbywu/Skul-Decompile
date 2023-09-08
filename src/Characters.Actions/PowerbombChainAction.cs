@@ -25,7 +25,7 @@ public class PowerbombChainAction : Action
 
 	private Character.LookingDirection _lookingDirection;
 
-	public override Motion[] motions => ((SubcomponentArray<Motion>)_motions).components.Concat(((SubcomponentArray<Motion>)_landingMotions).components).ToArray();
+	public override Motion[] motions => _motions.components.Concat(_landingMotions.components).ToArray();
 
 	public override bool canUse
 	{
@@ -45,9 +45,9 @@ public class PowerbombChainAction : Action
 		bool blockLookBefore = false;
 		JoinMotion(_motions);
 		JoinMotion(_landingMotions);
-		if (((SubcomponentArray<Motion>)_motions).components.Length != 0)
+		if (_motions.components.Length != 0)
 		{
-			Motion obj = ((SubcomponentArray<Motion>)_motions).components[((SubcomponentArray<Motion>)_motions).components.Length - 1];
+			Motion obj = _motions.components[_motions.components.Length - 1];
 			obj.onStart += delegate
 			{
 				base.owner.movement.onGrounded += OnGrounded;
@@ -63,9 +63,9 @@ public class PowerbombChainAction : Action
 		}
 		void JoinMotion(Motion.Subcomponents subcomponents)
 		{
-			for (int i = 0; i < ((SubcomponentArray<Motion>)subcomponents).components.Length; i++)
+			for (int i = 0; i < subcomponents.components.Length; i++)
 			{
-				Motion motion = ((SubcomponentArray<Motion>)subcomponents).components[i];
+				Motion motion = subcomponents.components[i];
 				if (motion.blockLook)
 				{
 					if (blockLookBefore)
@@ -81,12 +81,12 @@ public class PowerbombChainAction : Action
 					};
 				}
 				blockLookBefore = motion.blockLook;
-				if (i + 1 < ((SubcomponentArray<Motion>)subcomponents).components.Length)
+				if (i + 1 < subcomponents.components.Length)
 				{
 					int cached = i + 1;
-					((SubcomponentArray<Motion>)subcomponents).components[i].onEnd += delegate
+					subcomponents.components[i].onEnd += delegate
 					{
-						DoMotion(((SubcomponentArray<Motion>)subcomponents).components[cached]);
+						DoMotion(subcomponents.components[cached]);
 					};
 				}
 			}
@@ -101,7 +101,7 @@ public class PowerbombChainAction : Action
 	private void OnGrounded()
 	{
 		((MonoBehaviour)this).StopAllCoroutines();
-		DoMotion(((SubcomponentArray<Motion>)_landingMotions).components[0]);
+		DoMotion(_landingMotions.components[0]);
 	}
 
 	public override void Initialize(Character owner)
@@ -122,11 +122,11 @@ public class PowerbombChainAction : Action
 		if (base.owner.movement.isGrounded && _doLandingMotionIfGrounded)
 		{
 			_lookingDirection = base.owner.lookingDirection;
-			DoAction(((SubcomponentArray<Motion>)_landingMotions).components[0]);
+			DoAction(_landingMotions.components[0]);
 		}
 		else
 		{
-			DoAction(((SubcomponentArray<Motion>)_motions).components[0]);
+			DoAction(_motions.components[0]);
 			((MonoBehaviour)this).StopAllCoroutines();
 			((MonoBehaviour)this).StartCoroutine(CExtraGroundCheck());
 		}
@@ -135,13 +135,13 @@ public class PowerbombChainAction : Action
 
 	private IEnumerator CExtraGroundCheck()
 	{
-		float speedMultiplier = GetSpeedMultiplier(((SubcomponentArray<Motion>)_motions).components[0]);
+		float speedMultiplier = GetSpeedMultiplier(_motions.components[0]);
 		yield return Chronometer.global.WaitForSeconds(_motionTimeout / speedMultiplier);
-		while (((SubcomponentArray<Motion>)_motions).components.Any((Motion m) => m.running))
+		while (_motions.components.Any((Motion m) => m.running))
 		{
 			if (base.owner.movement.isGrounded)
 			{
-				DoMotion(((SubcomponentArray<Motion>)_landingMotions).components[0]);
+				DoMotion(_landingMotions.components[0]);
 				break;
 			}
 			yield return null;

@@ -46,7 +46,7 @@ public class CastAttackInfo : MonoBehaviour
 	{
 		_operationsToOwner.Initialize();
 		_operationsToCharacter.Initialize();
-		TargetedOperationInfo[] components = ((SubcomponentArray<TargetedOperationInfo>)operationsToCharacter).components;
+		TargetedOperationInfo[] components = operationsToCharacter.components;
 		foreach (TargetedOperationInfo targetedOperationInfo in components)
 		{
 			if (targetedOperationInfo.operation is Knockback knockback)

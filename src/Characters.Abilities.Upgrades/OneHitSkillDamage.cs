@@ -17,7 +17,7 @@ public sealed class OneHitSkillDamage : Ability
 
 		protected override void OnAttach()
 		{
-			((PriorityList<GiveDamageDelegate>)owner.onGiveDamage).Add(int.MaxValue, (GiveDamageDelegate)OnGiveDamageDelegate);
+			owner.onGiveDamage.Add(int.MaxValue, OnGiveDamageDelegate);
 		}
 
 		private bool OnGiveDamageDelegate(ITarget target, ref Damage damage)
@@ -48,7 +48,7 @@ public sealed class OneHitSkillDamage : Ability
 
 		protected override void OnDetach()
 		{
-			((PriorityList<GiveDamageDelegate>)owner.onGiveDamage).Remove((GiveDamageDelegate)OnGiveDamageDelegate);
+			owner.onGiveDamage.Remove(OnGiveDamageDelegate);
 		}
 	}
 

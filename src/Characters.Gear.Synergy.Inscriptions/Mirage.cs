@@ -72,12 +72,12 @@ public class Mirage : InscriptionInstance
 
 		void IAbilityInstance.Attach()
 		{
-			_owner.health.onTakeDamage.Add(int.MinValue, (TakeDamageDelegate)OnTakeDamage);
+			_owner.health.onTakeDamage.Add(int.MinValue, OnTakeDamage);
 		}
 
 		void IAbilityInstance.Detach()
 		{
-			_owner.health.onTakeDamage.Remove((TakeDamageDelegate)OnTakeDamage);
+			_owner.health.onTakeDamage.Remove(OnTakeDamage);
 		}
 
 		private bool OnTakeDamage(ref Damage damage)

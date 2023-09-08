@@ -59,7 +59,7 @@ public class PartyRandomizer
 	{
 		Chapter currentChapter = Singleton<Service>.Instance.levelManager.currentChapter;
 		_random = new Random(GameData.Save.instance.randomSeed + 1020464638 + (int)currentChapter.type * 256 + currentChapter.stageIndex * 16 + currentChapter.currentStage.pathIndex);
-		ExtensionMethods.PseudoShuffle<AdventurerReference>((IList<AdventurerReference>)_adventurerReferences, _random);
+		_adventurerReferences.PseudoShuffle(_random);
 	}
 
 	private Character SpawnCharacter(AssetReference reference, Transform transform, Vector3 position)
@@ -148,8 +148,8 @@ public class PartyRandomizer
 		{
 			communicator.SetVariable<SharedBool>(_waveClearKey, (object)true);
 		};
-		int[] array = new int[2] { 0, 1 };
-		communicator.SetVariable<SharedInt>(_patternKey, (object)ExtensionMethods.Random<int>((IEnumerable<int>)array, _random));
+		int[] enumerable = new int[2] { 0, 1 };
+		communicator.SetVariable<SharedInt>(_patternKey, (object)enumerable.Random(_random));
 		return character2;
 	}
 

@@ -20,7 +20,7 @@ public class MoveEnemyBack : CharacterOperation
 	private static readonly NonAllocOverlapper _enemyOverlapper;
 
 	[SerializeField]
-	[Subcomponent(typeof(OperationInfo))]
+	[UnityEditor.Subcomponent(typeof(OperationInfo))]
 	private OperationInfo.Subcomponents _onSuccess;
 
 	static MoveEnemyBack()

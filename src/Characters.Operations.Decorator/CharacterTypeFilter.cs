@@ -9,7 +9,7 @@ public sealed class CharacterTypeFilter : CharacterOperation
 	private CharacterTypeBoolArray _characterType;
 
 	[SerializeField]
-	[Subcomponent(typeof(TargetedOperationInfo))]
+	[UnityEditor.Subcomponent(typeof(TargetedOperationInfo))]
 	private TargetedOperationInfo.Subcomponents _operations;
 
 	public override void Initialize()
@@ -19,7 +19,7 @@ public sealed class CharacterTypeFilter : CharacterOperation
 
 	public override void Run(Character owner)
 	{
-		if (((EnumArray<Character.Type, bool>)_characterType)[owner.type])
+		if (_characterType[owner.type])
 		{
 			Run(owner, owner);
 		}
@@ -27,7 +27,7 @@ public sealed class CharacterTypeFilter : CharacterOperation
 
 	public override void Run(Character owner, Character target)
 	{
-		if (((EnumArray<Character.Type, bool>)_characterType)[target.type])
+		if (_characterType[target.type])
 		{
 			((MonoBehaviour)this).StartCoroutine(_operations.CRun(owner, target));
 		}

@@ -64,7 +64,7 @@ public class OnGaveDamage : Trigger
 		//IL_0112: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0128: Unknown result type (might be due to invalid IL or missing references)
 		//IL_012e: Unknown result type (might be due to invalid IL or missing references)
-		if ((Object)(object)target.character == (Object)null || tookDamage.amount < _minDamage || tookDamage.amount < target.character.health.maximumHealth * _minDamagePercent || (_needCritical && !tookDamage.critical) || !((EnumArray<Damage.MotionType, bool>)_attackTypes)[tookDamage.motionType] || !((EnumArray<Damage.AttackType, bool>)_damageTypes)[tookDamage.attackType] || !((EnumArray<Character.Type, bool>)_targetType)[target.character.type] || (!string.IsNullOrWhiteSpace(_attackKey) && !tookDamage.key.Equals(_attackKey, StringComparison.OrdinalIgnoreCase)))
+		if ((Object)(object)target.character == (Object)null || tookDamage.amount < _minDamage || tookDamage.amount < target.character.health.maximumHealth * _minDamagePercent || (_needCritical && !tookDamage.critical) || !_attackTypes[tookDamage.motionType] || !_damageTypes[tookDamage.attackType] || !_targetType[target.character.type] || (!string.IsNullOrWhiteSpace(_attackKey) && !tookDamage.key.Equals(_attackKey, StringComparison.OrdinalIgnoreCase)))
 		{
 			return;
 		}

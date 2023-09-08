@@ -39,14 +39,14 @@ public class EnemyCharacterSpecificator : MonoBehaviour
 		{
 			if (_movementSpeedAttached)
 			{
-				((ReorderableArray<Stat.Value>)_statValue).values[0].value = 0.0;
+				_statValue.values[0].value = 0.0;
 				_movementSpeedAttached = false;
 				_character.stat.SetNeedUpdate();
 			}
 		}
 		else if (!_movementSpeedAttached)
 		{
-			((ReorderableArray<Stat.Value>)_statValue).values[0].value = _speedBonusAtChaseTarget;
+			_statValue.values[0].value = _speedBonusAtChaseTarget;
 			_movementSpeedAttached = true;
 			_character.stat.SetNeedUpdate();
 		}

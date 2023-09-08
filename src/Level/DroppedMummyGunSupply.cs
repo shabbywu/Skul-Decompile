@@ -79,7 +79,7 @@ public class DroppedMummyGunSupply : MonoBehaviour
 		do
 		{
 			yield return null;
-			((Component)this).transform.Translate(0f, (0f - _fallSpeed) * ((ChronometerBase)Chronometer.global).deltaTime, 0f);
+			((Component)this).transform.Translate(0f, (0f - _fallSpeed) * Chronometer.global.deltaTime, 0f);
 		}
 		while (!(((Component)this).transform.position.y < _targetY));
 		Vector3 position = ((Component)this).transform.position;

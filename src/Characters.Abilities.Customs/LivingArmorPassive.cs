@@ -86,14 +86,12 @@ public class LivingArmorPassive : Ability, IAbilityInstance
 
 	public void UpdateTime(float deltaTime)
 	{
-		//IL_0051: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0056: Unknown result type (might be due to invalid IL or missing references)
 		_attackOperationRemainTime -= deltaTime;
 		if (_attackOperationRemainTime < 0f)
 		{
 			_attackOperationRemainTime += _attackOperationInterval;
-			((CoroutineReference)(ref _attackOperationRunner)).Stop();
-			_attackOperationRunner = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)owner, _attackOperations.CRun(owner));
+			_attackOperationRunner.Stop();
+			_attackOperationRunner = ((MonoBehaviour)(object)owner).StartCoroutineWithReference(_attackOperations.CRun(owner));
 		}
 	}
 

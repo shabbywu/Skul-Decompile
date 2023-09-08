@@ -33,10 +33,10 @@ public class PillarOfLightContainerPool : MonoBehaviour
 
 	private IEnumerator CRun(Character owner)
 	{
-		PillarOfLightContainer selected = ExtensionMethods.Random<PillarOfLightContainer>((IEnumerable<PillarOfLightContainer>)_pool);
+		PillarOfLightContainer selected = _pool.Random();
 		((Component)selected).gameObject.SetActive(true);
 		selected.Sign(owner);
-		yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)owner.chronometer.master, _delay);
+		yield return owner.chronometer.master.WaitForSeconds(_delay);
 		selected.Attack(owner);
 	}
 }

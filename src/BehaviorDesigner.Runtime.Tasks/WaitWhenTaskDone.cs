@@ -61,7 +61,7 @@ public sealed class WaitWhenTaskDone : Action
 		}
 		if (flag)
 		{
-			_remainTime -= ((ChronometerBase)_choronometer).deltaTime;
+			_remainTime -= _choronometer.deltaTime;
 		}
 		if (!(_remainTime <= 0f))
 		{

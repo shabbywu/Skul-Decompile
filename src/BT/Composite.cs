@@ -6,7 +6,7 @@ namespace BT;
 public abstract class Composite : Node
 {
 	[SerializeField]
-	[Subcomponent(typeof(BehaviourTree))]
+	[UnityEditor.Subcomponent(typeof(BehaviourTree))]
 	protected BehaviourTree.Subcomponents _child;
 
 	protected override void DoReset(NodeState state)
@@ -16,9 +16,9 @@ public abstract class Composite : Node
 
 	private void ResetChild()
 	{
-		for (int i = 0; i < ((SubcomponentArray<BehaviourTree>)_child).components.Length; i++)
+		for (int i = 0; i < _child.components.Length; i++)
 		{
-			((SubcomponentArray<BehaviourTree>)_child).components[i].node.ResetState();
+			_child.components[i].node.ResetState();
 		}
 	}
 }

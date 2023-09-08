@@ -136,17 +136,15 @@ public sealed class Treasure : InscriptionInstance
 
 	private void AttachReward(Random seed)
 	{
-		//IL_0073: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0078: Unknown result type (might be due to invalid IL or missing references)
 		List<Character> allEnemies = Map.Instance.waveContainer.GetAllEnemies();
-		ExtensionMethods.PseudoShuffle<Character>((IList<Character>)allEnemies, seed);
+		allEnemies.PseudoShuffle(seed);
 		for (int i = 0; i < allEnemies.Count; i++)
 		{
 			Character character = allEnemies[i];
 			if (character.type == Character.Type.TrashMob && !((Object)(object)character.movement == (Object)null) && character.movement.baseConfig.type != Movement.Config.Type.AcceleratingFlying && character.movement.baseConfig.type != Movement.Config.Type.Flying)
 			{
-				((CoroutineReference)(ref _reference)).Stop();
-				_reference = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)this, CTryToAddAbility(character));
+				_reference.Stop();
+				_reference = ((MonoBehaviour)(object)this).StartCoroutineWithReference(CTryToAddAbility(character));
 				break;
 			}
 		}
@@ -190,7 +188,7 @@ public sealed class Treasure : InscriptionInstance
 
 	public override void Detach()
 	{
-		((CoroutineReference)(ref _reference)).Stop();
+		_reference.Stop();
 		Singleton<Service>.Instance.levelManager.onMapChangedAndFadedIn -= OnMapChangedAndFadeIn;
 	}
 }

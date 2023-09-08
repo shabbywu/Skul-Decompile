@@ -74,7 +74,7 @@ public sealed class Navigation : MonoBehaviour
 				break;
 			}
 			case Point.Tag.Inner:
-				destination = ((Component)ExtensionMethods.Random<Point>((IEnumerable<Point>)_inners)).transform;
+				destination = ((Component)_inners.Random()).transform;
 				break;
 			}
 		}

@@ -145,7 +145,7 @@ public class AbilityBuff : MonoBehaviour, IAbility, IAbilityInstance
 		owner = character;
 		((Component)this).transform.parent = ((Component)owner).transform;
 		((Component)this).transform.localPosition = Vector3.zero;
-		if (((SubcomponentArray<AbilityAttacher>)_abilityAttacher).components.Length == 0)
+		if (_abilityAttacher.components.Length == 0)
 		{
 			return;
 		}

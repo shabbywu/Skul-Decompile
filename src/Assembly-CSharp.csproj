@@ -13,7 +13,9 @@
   <ItemGroup>
     <Reference Include="UnityEngine.UI" />
     <Reference Include="UnityEngine.CoreModule" />
-    <Reference Include="Plugins.Common" />
+    <Reference Include="Plugins.Common">
+      <HintPath>../Plugins.Common.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.Physics2DModule" />
     <Reference Include="Unity.RenderPipelines.Universal.Runtime" />
     <Reference Include="Plugins.PhysicsUtils" />
@@ -24,15 +26,21 @@
     <Reference Include="Tilemap" />
     <Reference Include="Plugins.ObjectPool" />
     <Reference Include="InControl" />
-    <Reference Include="Plugins.Singletons" />
-    <Reference Include="Assembly-CSharp-firstpass" />
+    <Reference Include="Plugins.Singletons">
+      <HintPath>../Plugins.Singletons.dll</HintPath>
+    </Reference>
+    <Reference Include="Assembly-CSharp-firstpass">
+      <HintPath>../Assembly-CSharp-firstpass.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Addressables" />
     <Reference Include="Unity.TextMeshPro" />
     <Reference Include="System.Core">
       <HintPath>../../../opt/bitnami/dotnet-sdk/bin/shared/Microsoft.NETCore.App/6.0.21/System.Core.dll</HintPath>
     </Reference>
     <Reference Include="Platforms" />
-    <Reference Include="Plugins.Data" />
+    <Reference Include="Plugins.Data">
+      <HintPath>../Plugins.Data.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.ParticleSystemModule" />
     <Reference Include="Unity.Mathematics" />
     <Reference Include="Platforms.Common" />
