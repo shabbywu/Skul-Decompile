@@ -7,13 +7,13 @@ namespace Characters.AI.Behaviours;
 public class TeleportBehind : Behaviour
 {
 	[SerializeField]
-	[Subcomponent(typeof(Teleport))]
+	[UnityEditor.Subcomponent(typeof(Teleport))]
 	private Teleport _teleport;
 
 	[SerializeField]
 	private Transform _destinationTransform;
 
-	[Information(/*Could not decode attribute arguments.*/)]
+	[Information("Hide의 최소 시간 이하", InformationAttribute.InformationType.Info, false)]
 	[SerializeField]
 	private float _destinationSettingDelay;
 
@@ -37,7 +37,7 @@ public class TeleportBehind : Behaviour
 	{
 		Character target = controller.target;
 		float amount = Random.Range(_distance.x, _distance.y);
-		yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)controller.character.chronometer.master, _destinationSettingDelay);
+		yield return controller.character.chronometer.master.WaitForSeconds(_destinationSettingDelay);
 		float num = ((target.lookingDirection == Character.LookingDirection.Right) ? (amount * -1f) : amount);
 		float num2 = ((Component)target).transform.position.x + num;
 		Collider2D collider;

@@ -7,10 +7,10 @@ namespace Characters.Gear.Quintessences.Constraints;
 public abstract class Constraint : MonoBehaviour
 {
 	[AttributeUsage(AttributeTargets.Field)]
-	public class SubcomponentAttribute : SubcomponentAttribute
+	public class SubcomponentAttribute : UnityEditor.SubcomponentAttribute
 	{
 		public SubcomponentAttribute()
-			: base(true, types)
+			: base(allowCustom: true, Constraint.types)
 		{
 		}
 	}
@@ -30,6 +30,6 @@ public abstract class Constraint : MonoBehaviour
 
 	public override string ToString()
 	{
-		return ExtensionMethods.GetAutoName((object)this);
+		return this.GetAutoName();
 	}
 }

@@ -76,27 +76,27 @@ public sealed class PlayerStatElement : MonoBehaviour
 		double result3;
 		if (!double.TryParse(_percent.text, out var result))
 		{
-			_percent.text = $"{((ReorderableArray<Stat.Value>)_stat).values[0].value:0}";
-			_percentPoint.text = $"{((ReorderableArray<Stat.Value>)_stat).values[1].value:0}";
-			_constant.text = $"{((ReorderableArray<Stat.Value>)_stat).values[2].value:0}";
+			_percent.text = $"{_stat.values[0].value:0}";
+			_percentPoint.text = $"{_stat.values[1].value:0}";
+			_constant.text = $"{_stat.values[2].value:0}";
 		}
 		else if (!double.TryParse(_percentPoint.text, out result2))
 		{
-			_percent.text = $"{((ReorderableArray<Stat.Value>)_stat).values[0].value:0}";
-			_percentPoint.text = $"{((ReorderableArray<Stat.Value>)_stat).values[1].value:0}";
-			_constant.text = $"{((ReorderableArray<Stat.Value>)_stat).values[2].value:0}";
+			_percent.text = $"{_stat.values[0].value:0}";
+			_percentPoint.text = $"{_stat.values[1].value:0}";
+			_constant.text = $"{_stat.values[2].value:0}";
 		}
 		else if (!double.TryParse(_constant.text, out result3))
 		{
-			_percent.text = $"{((ReorderableArray<Stat.Value>)_stat).values[0].value:0}";
-			_percentPoint.text = $"{((ReorderableArray<Stat.Value>)_stat).values[1].value:0}";
-			_constant.text = $"{((ReorderableArray<Stat.Value>)_stat).values[2].value:0}";
+			_percent.text = $"{_stat.values[0].value:0}";
+			_percentPoint.text = $"{_stat.values[1].value:0}";
+			_constant.text = $"{_stat.values[2].value:0}";
 		}
 		else
 		{
-			((ReorderableArray<Stat.Value>)_stat).values[0].value = result;
-			((ReorderableArray<Stat.Value>)_stat).values[1].value = result2;
-			((ReorderableArray<Stat.Value>)_stat).values[2].value = result3;
+			_stat.values[0].value = result;
+			_stat.values[1].value = result2;
+			_stat.values[2].value = result3;
 			player.stat.Update();
 			UpdateFinal();
 		}

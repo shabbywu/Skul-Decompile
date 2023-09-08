@@ -13,7 +13,7 @@ public sealed class StartMovingGrabbedTarget : CharacterOperation
 	[SerializeField]
 	private GrabBoard _grabBoard;
 
-	[Information(/*Could not decode attribute arguments.*/)]
+	[Information("끌고가는 주체, 비어있으면 캐릭터", InformationAttribute.InformationType.Info, false)]
 	[SerializeField]
 	private Transform _grabber;
 
@@ -21,7 +21,7 @@ public sealed class StartMovingGrabbedTarget : CharacterOperation
 	private float _duration;
 
 	[Header("Destination")]
-	[Information(/*Could not decode attribute arguments.*/)]
+	[Information("둘 중 하나만, 범위가 우선순위가 높음", InformationAttribute.InformationType.Info, false)]
 	[SerializeField]
 	private Collider2D _targetPlace;
 
@@ -47,7 +47,7 @@ public sealed class StartMovingGrabbedTarget : CharacterOperation
 	private SmashAttackVisualEffect.Subcomponents _effect;
 
 	[SerializeField]
-	[Subcomponent(typeof(TargetedOperationInfo))]
+	[UnityEditor.Subcomponent(typeof(TargetedOperationInfo))]
 	private TargetedOperationInfo.Subcomponents _onCollide;
 
 	private IAttackDamage _attackDamage;
@@ -101,7 +101,7 @@ public sealed class StartMovingGrabbedTarget : CharacterOperation
 				Vector2 force = ((!((Object)(object)_targetPlace != (Object)null)) ? (Vector2.op_Implicit(_targetTransform.position) - Vector2.op_Implicit(((Component)target).transform.position)) : (Vector2.op_Implicit(_grabber.position) + _relatedDirectionDict[target] - Vector2.op_Implicit(((Component)target).transform.position)));
 				target.character.movement.push.ApplySmash(owner, force, _curve, _ignoreOtherForce, _expireOnGround, OnEnd);
 			}
-			elapsed += ((ChronometerBase)Chronometer.global).deltaTime;
+			elapsed += Chronometer.global.deltaTime;
 			yield return null;
 		}
 		Dispose();

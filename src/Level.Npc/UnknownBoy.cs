@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using Characters;
 using FX;
 using GameResources;
@@ -64,7 +63,7 @@ public class UnknownBoy : InteractiveObject
 
 	private string[] rewardScripts => Localization.GetLocalizedStringArray("npc/essence/unknownboy/reward/0");
 
-	private string[] chatScripts => ExtensionMethods.Random<string[]>((IEnumerable<string[]>)Localization.GetLocalizedStringArrays("npc/essence/unknownboy/chat"));
+	private string[] chatScripts => Localization.GetLocalizedStringArrays("npc/essence/unknownboy/chat").Random();
 
 	protected override void Awake()
 	{
@@ -78,7 +77,6 @@ public class UnknownBoy : InteractiveObject
 
 	private void Start()
 	{
-		//IL_0011: Unknown result type (might be due to invalid IL or missing references)
 		_essenceRequest = Singleton<Service>.Instance.gearManager.GetQuintessenceToTake(_essencePossibilities.Evaluate()).LoadAsync();
 	}
 
@@ -162,14 +160,14 @@ public class UnknownBoy : InteractiveObject
 	private IEnumerator CChat()
 	{
 		LetterBox.instance.Appear();
-		yield return _npcConversation.CConversation(ExtensionMethods.Random<string>((IEnumerable<string>)chatScripts));
+		yield return _npcConversation.CConversation(chatScripts.Random());
 		LetterBox.instance.Disappear();
 	}
 
 	private IEnumerator CRewardConversation()
 	{
 		LetterBox.instance.Appear();
-		yield return _npcConversation.CConversation(ExtensionMethods.Random<string>((IEnumerable<string>)rewardScripts));
+		yield return _npcConversation.CConversation(rewardScripts.Random());
 		LetterBox.instance.Disappear();
 		while (!_essenceRequest.isDone)
 		{

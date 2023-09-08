@@ -101,7 +101,7 @@ public sealed class DarkEnemySelector : ScriptableObject
 			Debug.LogError((object)$"검은적이 배치되어 있지 않습니다. 하드모드 : {GameData.HardmodeProgress.hardmode}, 레벨 {GameData.HardmodeProgress.hardmodeLevel}");
 			return;
 		}
-		Character target = ExtensionMethods.Random<Character>(candidates.Where((Character candidate) => candidate.key != Key.Hound), _mapRandom);
+		Character target = candidates.Where((Character candidate) => candidate.key != Key.Hound).Random(_mapRandom);
 		_constructors[Singleton<HardmodeManager>.Instance.currentLevel].Provide(target);
 		_remainsInStage--;
 		_remainInMap--;

@@ -20,7 +20,7 @@ public class NavigationManager : PersistentSingleton<NavigationManager>
 		_navigatables.Push(navigatable);
 		if (_navigatables.Count == 1)
 		{
-			PlayerInput.blocked.Attach((object)this);
+			PlayerInput.blocked.Attach(this);
 		}
 	}
 
@@ -29,7 +29,7 @@ public class NavigationManager : PersistentSingleton<NavigationManager>
 		_navigatables.Pop();
 		if (_navigatables.Count == 0)
 		{
-			PlayerInput.blocked.Detach((object)this);
+			PlayerInput.blocked.Detach(this);
 		}
 	}
 

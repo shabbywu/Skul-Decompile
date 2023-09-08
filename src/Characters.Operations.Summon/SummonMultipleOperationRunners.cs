@@ -80,12 +80,12 @@ public class SummonMultipleOperationRunners : CharacterOperation
 
 	private IEnumerator CRun(Character owner)
 	{
-		Vector3[] preloadedPositions = (Vector3[])(object)new Vector3[((ReorderableArray<SummonOption>)_summonOptions).values.Length];
+		Vector3[] preloadedPositions = (Vector3[])(object)new Vector3[_summonOptions.values.Length];
 		if (_preloadPosition)
 		{
 			for (int i = 0; i < preloadedPositions.Length; i++)
 			{
-				Transform spawnPosition = ((ReorderableArray<SummonOption>)_summonOptions).values[i].spawnPosition;
+				Transform spawnPosition = _summonOptions.values[i].spawnPosition;
 				if ((Object)(object)spawnPosition == (Object)null)
 				{
 					preloadedPositions[i] = ((Component)this).transform.position;
@@ -98,7 +98,7 @@ public class SummonMultipleOperationRunners : CharacterOperation
 		}
 		int optionIndex = 0;
 		float time = 0f;
-		SummonOption[] options = ((ReorderableArray<SummonOption>)_summonOptions).values;
+		SummonOption[] options = _summonOptions.values;
 		if (_attackGroup)
 		{
 			_hitHistoryManager.Clear();
@@ -163,7 +163,7 @@ public class SummonMultipleOperationRunners : CharacterOperation
 				}
 			}
 			yield return null;
-			time = ((!_timeIndependant) ? (time + ((ChronometerBase)owner.chronometer.animation).deltaTime) : (time + ((ChronometerBase)Chronometer.global).deltaTime));
+			time = ((!_timeIndependant) ? (time + owner.chronometer.animation.deltaTime) : (time + Chronometer.global.deltaTime));
 		}
 	}
 

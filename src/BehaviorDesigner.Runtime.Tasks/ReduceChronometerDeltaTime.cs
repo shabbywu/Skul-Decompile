@@ -16,7 +16,7 @@ public sealed class ReduceChronometerDeltaTime : Action
 	public override TaskStatus OnUpdate()
 	{
 		Character value = ((SharedVariable<Character>)_owner).Value;
-		((SharedVariable)_time).SetValue((object)(((SharedVariable<float>)_time).Value - ((ChronometerBase)value.chronometer.master).deltaTime));
+		((SharedVariable)_time).SetValue((object)(((SharedVariable<float>)_time).Value - value.chronometer.master.deltaTime));
 		return (TaskStatus)2;
 	}
 }

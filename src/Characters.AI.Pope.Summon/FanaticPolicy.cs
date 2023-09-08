@@ -8,9 +8,9 @@ namespace Characters.AI.Pope.Summon;
 public abstract class FanaticPolicy : MonoBehaviour
 {
 	[AttributeUsage(AttributeTargets.Field)]
-	public class SubcomponentAttribute : SubcomponentAttribute
+	public class SubcomponentAttribute : UnityEditor.SubcomponentAttribute
 	{
-		public static readonly Type[] types = new Type[3]
+		public new static readonly Type[] types = new Type[3]
 		{
 			typeof(RandomFanaticPolicy),
 			typeof(WeightedFanaticPolicy),

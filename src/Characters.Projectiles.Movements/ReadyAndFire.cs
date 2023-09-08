@@ -34,7 +34,7 @@ public class ReadyAndFire : Movement
 
 	private IEnumerator CReadyAndFire()
 	{
-		yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)base.projectile.owner.chronometer.master, _readyTime);
+		yield return base.projectile.owner.chronometer.master.WaitForSeconds(_readyTime);
 		Vector2 val = default(Vector2);
 		((Vector2)(ref val))._002Ector(0f - base.directionVector.x, base.directionVector.y);
 		base.directionVector = ((base.projectile.owner.lookingDirection == _initialLookingDirection) ? base.directionVector : val);

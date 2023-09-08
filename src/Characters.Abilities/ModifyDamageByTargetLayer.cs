@@ -15,18 +15,18 @@ public class ModifyDamageByTargetLayer : Ability
 
 		protected override void OnAttach()
 		{
-			((PriorityList<GiveDamageDelegate>)owner.onGiveDamage).Add(0, (GiveDamageDelegate)OnOwnerGiveDamage);
+			owner.onGiveDamage.Add(0, OnOwnerGiveDamage);
 		}
 
 		protected override void OnDetach()
 		{
-			((PriorityList<GiveDamageDelegate>)owner.onGiveDamage).Remove((GiveDamageDelegate)OnOwnerGiveDamage);
+			owner.onGiveDamage.Remove(OnOwnerGiveDamage);
 		}
 
 		private bool OnOwnerGiveDamage(ITarget target, ref Damage damage)
 		{
 			//IL_0016: Unknown result type (might be due to invalid IL or missing references)
-			if (ExtensionMethods.Contains(ability._targetLayer.Evaluate(((Component)owner).gameObject), ((Component)target.character).gameObject.layer))
+			if (ability._targetLayer.Evaluate(((Component)owner).gameObject).Contains(((Component)target.character).gameObject.layer))
 			{
 				damage.percentMultiplier *= ability._damagePercent;
 				damage.multiplier += ability._damagePercentPoint;

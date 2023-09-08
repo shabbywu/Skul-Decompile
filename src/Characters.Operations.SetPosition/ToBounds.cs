@@ -66,20 +66,20 @@ public class ToBounds : Policy
 		{
 			return val;
 		}
-		int num = 0;
+		int index = 0;
 		RaycastHit2D val2 = results[0];
-		float num2 = ((RaycastHit2D)(ref val2)).distance;
+		float num = ((RaycastHit2D)(ref val2)).distance;
 		for (int i = 1; i < results.Count; i++)
 		{
 			val2 = results[i];
 			float distance2 = ((RaycastHit2D)(ref val2)).distance;
-			if (distance2 < num2)
+			if (distance2 < num)
 			{
-				num2 = distance2;
-				num = i;
+				num = distance2;
+				index = i;
 			}
 		}
-		val2 = results[num];
+		val2 = results[index];
 		return ((RaycastHit2D)(ref val2)).point;
 	}
 }

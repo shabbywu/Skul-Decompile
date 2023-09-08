@@ -89,9 +89,9 @@ public class StatBonusByKill : Ability
 
 		public void UpdateStack()
 		{
-			for (int i = 0; i < ((ReorderableArray<Stat.Value>)_stat).values.Length; i++)
+			for (int i = 0; i < _stat.values.Length; i++)
 			{
-				((ReorderableArray<Stat.Value>)_stat).values[i].value = ((ReorderableArray<Stat.Value>)ability._statPerStack).values[i].GetStackedValue(stacks);
+				_stat.values[i].value = ability._statPerStack.values[i].GetStackedValue(stacks);
 			}
 			owner.stat.SetNeedUpdate();
 		}
@@ -99,7 +99,7 @@ public class StatBonusByKill : Ability
 		private void OnCharacterKilled(ITarget target, ref Damage damage)
 		{
 			Character character = target.character;
-			if (!((Object)(object)character == (Object)null) && ((EnumArray<Character.Type, bool>)ability._characterTypeFilter)[target.character.type] && (!((EnumArray<Character.Type, bool>)ability._characterTypeFilter)[Character.Type.Boss] || character.type != Character.Type.Boss || (target.character.key != Key.FirstHero1 && target.character.key != Key.FirstHero2 && target.character.key != 0)) && ((EnumArray<Damage.MotionType, bool>)ability._motionTypeFilter)[damage.motionType] && ((EnumArray<Damage.AttackType, bool>)ability._attackTypeFilter)[damage.attackType] && (string.IsNullOrWhiteSpace(ability._attackKey) || damage.key.Equals(ability._attackKey, StringComparison.OrdinalIgnoreCase)))
+			if (!((Object)(object)character == (Object)null) && ability._characterTypeFilter[target.character.type] && (!ability._characterTypeFilter[Character.Type.Boss] || character.type != Character.Type.Boss || (target.character.key != Key.FirstHero1 && target.character.key != Key.FirstHero2 && target.character.key != 0)) && ability._motionTypeFilter[damage.motionType] && ability._attackTypeFilter[damage.attackType] && (string.IsNullOrWhiteSpace(ability._attackKey) || damage.key.Equals(ability._attackKey, StringComparison.OrdinalIgnoreCase)))
 			{
 				AddStack();
 			}

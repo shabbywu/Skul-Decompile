@@ -51,6 +51,6 @@ public class ShotInfo : MonoBehaviour
 		{
 			return _tag;
 		}
-		return ExtensionMethods.GetAutoName((object)this);
+		return this.GetAutoName();
 	}
 }

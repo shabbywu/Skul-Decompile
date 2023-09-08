@@ -28,8 +28,6 @@ public sealed class DropByRarity : CharacterOperation
 
 	public override void Initialize()
 	{
-		//IL_0073: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0078: Unknown result type (might be due to invalid IL or missing references)
 		base.Initialize();
 		Chapter currentChapter = Singleton<Service>.Instance.levelManager.currentChapter;
 		_extraSeed++;
@@ -39,7 +37,6 @@ public sealed class DropByRarity : CharacterOperation
 
 	private void Load()
 	{
-		//IL_0023: Unknown result type (might be due to invalid IL or missing references)
 		_itemRequest?.Release();
 		do
 		{

@@ -33,6 +33,6 @@ public class SequenceInfo : MonoBehaviour
 		{
 			return _tag;
 		}
-		return ExtensionMethods.GetAutoName((object)this);
+		return this.GetAutoName();
 	}
 }

@@ -39,11 +39,9 @@ public class Time : Basic
 
 	internal override void Initialize(Character character)
 	{
-		//IL_001e: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0023: Unknown result type (might be due to invalid IL or missing references)
 		base.Initialize(character);
-		((CoroutineReference)(ref _updateReference)).Stop();
-		_updateReference = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)CoroutineProxy.instance, CUpdate());
+		_updateReference.Stop();
+		_updateReference = ((MonoBehaviour)(object)CoroutineProxy.instance).StartCoroutineWithReference(CUpdate());
 	}
 
 	protected override void Awake()
@@ -61,7 +59,7 @@ public class Time : Basic
 
 	private void OnDestroy()
 	{
-		((CoroutineReference)(ref _updateReference)).Stop();
+		_updateReference.Stop();
 	}
 
 	private IEnumerator CUpdate()
@@ -71,7 +69,7 @@ public class Time : Basic
 			yield return null;
 			if (!((Object)(object)_character == (Object)null) && base.stacks != _maxStacks && _remainStreaks <= 0)
 			{
-				remainTime -= ((ChronometerBase)_character.chronometer.master).deltaTime;
+				remainTime -= _character.chronometer.master.deltaTime;
 				if (remainTime <= 0f)
 				{
 					remainTime = _cooldownTime;

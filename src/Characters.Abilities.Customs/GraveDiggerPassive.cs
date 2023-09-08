@@ -71,7 +71,7 @@ public class GraveDiggerPassive : Ability
 				return;
 			}
 			List<Character> allEnemies = Map.Instance.waveContainer.GetAllEnemies();
-			ExtensionMethods.PseudoShuffle<Character>((IList<Character>)allEnemies);
+			allEnemies.PseudoShuffle();
 			float num = math.min((float)allEnemies.Count, ability._corpseCountOnMap.value);
 			for (int i = 0; (float)i < num; i++)
 			{
@@ -87,7 +87,7 @@ public class GraveDiggerPassive : Ability
 			//IL_0085: Unknown result type (might be due to invalid IL or missing references)
 			//IL_0086: Unknown result type (might be due to invalid IL or missing references)
 			Character character = target.character;
-			if (!((Object)(object)character == (Object)null) && MMMaths.PercentChance(ability._chanceToSpawnCorpseByKill) && ((EnumArray<Character.Type, bool>)ability._characterTypeFilter)[character.type] && !((Object)(object)Singleton<Service>.Instance.levelManager.player.playerComponents.inventory.weapon.polymorphOrCurrent != (Object)(object)ability._weapon) && FindGroundSpawnPosition(character, out var position))
+			if (!((Object)(object)character == (Object)null) && MMMaths.PercentChance(ability._chanceToSpawnCorpseByKill) && ability._characterTypeFilter[character.type] && !((Object)(object)Singleton<Service>.Instance.levelManager.player.playerComponents.inventory.weapon.polymorphOrCurrent != (Object)(object)ability._weapon) && FindGroundSpawnPosition(character, out var position))
 			{
 				ability.SpawnCorpse(Vector2.op_Implicit(position));
 			}

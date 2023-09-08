@@ -32,9 +32,9 @@ public sealed class TimeGradientStatBonus : Ability
 		public override void Refresh()
 		{
 			base.Refresh();
-			for (int i = 0; i < ((ReorderableArray<Stat.Value>)_stat).values.Length; i++)
+			for (int i = 0; i < _stat.values.Length; i++)
 			{
-				((ReorderableArray<Stat.Value>)_stat).values[i].value = ((ReorderableArray<Stat.Value>)ability._startStat).values[i].value;
+				_stat.values[i].value = ability._startStat.values[i].value;
 			}
 		}
 
@@ -51,9 +51,9 @@ public sealed class TimeGradientStatBonus : Ability
 
 		private void UpdateStat()
 		{
-			for (int i = 0; i < ((ReorderableArray<Stat.Value>)_stat).values.Length; i++)
+			for (int i = 0; i < _stat.values.Length; i++)
 			{
-				((ReorderableArray<Stat.Value>)_stat).values[i].value += ability._delta * 0.01f;
+				_stat.values[i].value += ability._delta * 0.01f;
 			}
 			owner.stat.SetNeedUpdate();
 		}

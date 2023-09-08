@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using Characters.Abilities;
 using TMPro;
 using UnityEngine;
@@ -78,7 +77,7 @@ public class Dummy : MonoBehaviour
 		}
 		else
 		{
-			_dpsText.text = ExtensionMethods.Random<string>((IEnumerable<string>)tauntScripts);
+			_dpsText.text = tauntScripts.Random();
 		}
 	}
 
@@ -136,14 +135,9 @@ public class Dummy : MonoBehaviour
 				((MonoBehaviour)this).StartCoroutine(CMesure());
 			}
 			_totalDamage += tookDamage.amount;
-			EnumArray<Damage.Attribute, double> damageByAttribute = _damageByAttribute;
-			Damage.Attribute attribute = tookDamage.attribute;
-			damageByAttribute[attribute] += tookDamage.amount;
+			_damageByAttribute[tookDamage.attribute] += tookDamage.amount;
 			_totalAttackCount++;
-			EnumArray<Damage.Attribute, int> attackCountByAttribute = _attackCountByAttribute;
-			attribute = tookDamage.attribute;
-			int num = attackCountByAttribute[attribute];
-			attackCountByAttribute[attribute] = num + 1;
+			_attackCountByAttribute[tookDamage.attribute]++;
 			if (_character.health.currentHealth == 0.0)
 			{
 				Initialize();
@@ -156,7 +150,7 @@ public class Dummy : MonoBehaviour
 		while (true)
 		{
 			yield return null;
-			_time += ((ChronometerBase)Chronometer.global).deltaTime;
+			_time += Chronometer.global.deltaTime;
 			_timeText.text = $"{_time:0.00}s";
 			string dpsTextByAttribute = GetDpsTextByAttribute(Damage.Attribute.Physical, _time);
 			string dpsTextByAttribute2 = GetDpsTextByAttribute(Damage.Attribute.Magic, _time);

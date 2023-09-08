@@ -10,22 +10,22 @@ namespace Characters.AI.Behaviours.Hero;
 public class Grab : Behaviour, IFinish, IComboable
 {
 	[SerializeField]
-	[Subcomponent(typeof(ChainAction))]
+	[UnityEditor.Subcomponent(typeof(ChainAction))]
 	private Characters.Actions.Action _startAction;
 
 	[SerializeField]
-	[Subcomponent(typeof(ChainAction))]
+	[UnityEditor.Subcomponent(typeof(ChainAction))]
 	private Characters.Actions.Action _attackAction;
 
-	[Subcomponent(typeof(ChainAction))]
+	[UnityEditor.Subcomponent(typeof(ChainAction))]
 	[SerializeField]
 	private Characters.Actions.Action _grapFailAction;
 
 	[SerializeField]
-	[Subcomponent(typeof(SkipableIdle))]
+	[UnityEditor.Subcomponent(typeof(SkipableIdle))]
 	private SkipableIdle _skipableIdle;
 
-	[Subcomponent(typeof(Throwing))]
+	[UnityEditor.Subcomponent(typeof(Throwing))]
 	[SerializeField]
 	private Throwing _throwing;
 

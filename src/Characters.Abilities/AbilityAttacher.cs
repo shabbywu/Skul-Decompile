@@ -7,11 +7,11 @@ namespace Characters.Abilities;
 
 public abstract class AbilityAttacher : MonoBehaviour
 {
-	public class SubcomponentAttribute : SubcomponentAttribute
+	public class SubcomponentAttribute : UnityEditor.SubcomponentAttribute
 	{
-		public static readonly Type[] types;
+		public new static readonly Type[] types;
 
-		public static readonly string[] names;
+		public new static readonly string[] names;
 
 		static SubcomponentAttribute()
 		{
@@ -70,7 +70,7 @@ public abstract class AbilityAttacher : MonoBehaviour
 		}
 
 		public SubcomponentAttribute()
-			: base(true, types, names)
+			: base(allowCustom: true, types, names)
 		{
 		}
 	}
@@ -80,25 +80,25 @@ public abstract class AbilityAttacher : MonoBehaviour
 	{
 		public void Initialize(Character character)
 		{
-			for (int i = 0; i < base._components.Length; i++)
+			for (int i = 0; i < _components.Length; i++)
 			{
-				base._components[i].Initialize(character);
+				_components[i].Initialize(character);
 			}
 		}
 
 		public void StartAttach()
 		{
-			for (int i = 0; i < base._components.Length; i++)
+			for (int i = 0; i < _components.Length; i++)
 			{
-				base._components[i].StartAttach();
+				_components[i].StartAttach();
 			}
 		}
 
 		public void StopAttach()
 		{
-			for (int i = 0; i < base._components.Length; i++)
+			for (int i = 0; i < _components.Length; i++)
 			{
-				base._components[i].StopAttach();
+				_components[i].StopAttach();
 			}
 		}
 	}

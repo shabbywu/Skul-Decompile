@@ -56,7 +56,7 @@ public class BoneOfSpeed : Ability
 			//IL_009a: Unknown result type (might be due to invalid IL or missing references)
 			//IL_00d5: Unknown result type (might be due to invalid IL or missing references)
 			//IL_00f8: Unknown result type (might be due to invalid IL or missing references)
-			if (((EnumArray<Damage.MotionType, bool>)ability._motionTypeFilter)[gaveDamage.motionType] && ((EnumArray<Damage.AttackType, bool>)ability._damageTypeFilter)[gaveDamage.attackType] && !(_remainCooldown > 0f))
+			if (ability._motionTypeFilter[gaveDamage.motionType] && ability._damageTypeFilter[gaveDamage.attackType] && !(_remainCooldown > 0f))
 			{
 				_remainCooldown = ability._cooldownTime;
 				ability._hitInfo.ChangeAdaptiveDamageAttribute(owner);

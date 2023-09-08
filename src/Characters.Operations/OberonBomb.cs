@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using Characters.Gear.Synergy.Inscriptions.FairyTaleSummon;
 using UnityEngine;
 
@@ -34,9 +33,9 @@ public class OberonBomb : CharacterOperation
 
 	private IEnumerator CRun(Character owner)
 	{
-		ExtensionMethods.Shuffle<OberonBombOrb>((IList<OberonBombOrb>)_orbs);
+		_orbs.Shuffle();
 		yield return CActivate(owner);
-		yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)owner.chronometer.master, _bombDelay);
+		yield return owner.chronometer.master.WaitForSeconds(_bombDelay);
 		Deactivate(owner);
 	}
 
@@ -46,7 +45,7 @@ public class OberonBomb : CharacterOperation
 		for (int i = 0; i < orbs.Length; i++)
 		{
 			orbs[i].Activate(owner);
-			yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)owner.chronometer.master, _activateInterval);
+			yield return owner.chronometer.master.WaitForSeconds(_activateInterval);
 		}
 	}
 

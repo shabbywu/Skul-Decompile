@@ -86,7 +86,7 @@ public class EscortOrb : MonoBehaviour
 		//IL_007c: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0081: Unknown result type (might be due to invalid IL or missing references)
 		Vector3 val = ((Component)_pivot).transform.position - ((Component)_character).transform.position;
-		_elapsed += _speed * ((ChronometerBase)_character.chronometer.master).deltaTime;
+		_elapsed += _speed * _character.chronometer.master.deltaTime;
 		_character.movement.MoveHorizontal(Vector2.op_Implicit(val) + new Vector2(Mathf.Cos(_elapsed), Mathf.Sin(_elapsed)) * radius);
 	}
 

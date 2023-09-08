@@ -49,10 +49,7 @@ public class FireProjectileInBounds : CharacterOperation
 	private Transform _rotationReference;
 
 	[SerializeField]
-	private Reorderable _directions = new Reorderable((CustomAngle[])(object)new CustomAngle[1]
-	{
-		new CustomAngle(0f)
-	});
+	private CustomAngle.Reorderable _directions = new CustomAngle.Reorderable(new CustomAngle(0f));
 
 	private IAttackDamage _attackDamage;
 
@@ -84,7 +81,7 @@ public class FireProjectileInBounds : CharacterOperation
 		//IL_0114: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0124: Unknown result type (might be due to invalid IL or missing references)
 		//IL_016e: Unknown result type (might be due to invalid IL or missing references)
-		CustomAngle[] values = ((ReorderableArray<CustomAngle>)(object)_directions).values;
+		CustomAngle[] values = _directions.values;
 		bool flipX = false;
 		bool flipY = false;
 		for (int i = 0; i < values.Length; i++)

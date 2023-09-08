@@ -143,11 +143,11 @@ public sealed class CastAttack : CharacterOperation, IAttack
 	private CollisionDetector _collisionDetector;
 
 	[SerializeField]
-	[Subcomponent(typeof(OperationInfo))]
+	[UnityEditor.Subcomponent(typeof(OperationInfo))]
 	private OperationInfo.Subcomponents _onTerrainHit;
 
 	[SerializeField]
-	[Subcomponent(typeof(CastAttackInfoSequence))]
+	[UnityEditor.Subcomponent(typeof(CastAttackInfoSequence))]
 	private CastAttackInfoSequence.Subcomponents _attackAndEffect;
 
 	private IAttackDamage _attackDamage;
@@ -179,7 +179,7 @@ public sealed class CastAttack : CharacterOperation, IAttack
 			//IL_001b: Unknown result type (might be due to invalid IL or missing references)
 			//IL_001c: Unknown result type (might be due to invalid IL or missing references)
 			//IL_001e: Unknown result type (might be due to invalid IL or missing references)
-			CastAttackInfoSequence[] components = ((SubcomponentArray<CastAttackInfoSequence>)_attackAndEffect).components;
+			CastAttackInfoSequence[] components = _attackAndEffect.components;
 			foreach (CastAttackInfoSequence castAttackInfoSequence in components)
 			{
 				Attack(castAttackInfoSequence.attackInfo, origin, direction, distance, raycastHit, target);
@@ -249,7 +249,7 @@ public sealed class CastAttack : CharacterOperation, IAttack
 			if (target.character.liveAndActive && !((Object)(object)target.character == (Object)(object)owner) && !target.character.cinematic.value)
 			{
 				attackInfo.ApplyChrono(owner, target.character);
-				if (((SubcomponentArray<OperationInfo>)attackInfo.operationsToOwner).components.Length != 0)
+				if (attackInfo.operationsToOwner.components.Length != 0)
 				{
 					((MonoBehaviour)owner).StartCoroutine(attackInfo.operationsToOwner.CRun(owner));
 				}
@@ -293,19 +293,19 @@ public sealed class CastAttack : CharacterOperation, IAttack
 		//IL_0025: Unknown result type (might be due to invalid IL or missing references)
 		int index = 0;
 		float time = 0f;
-		while ((Object)(object)this != (Object)null && index < ((SubcomponentArray<CastAttackInfoSequence>)_attackAndEffect).components.Length)
+		while ((Object)(object)this != (Object)null && index < _attackAndEffect.components.Length)
 		{
-			for (; index < ((SubcomponentArray<CastAttackInfoSequence>)_attackAndEffect).components.Length; index++)
+			for (; index < _attackAndEffect.components.Length; index++)
 			{
 				CastAttackInfoSequence castAttackInfoSequence;
-				if (!(time >= (castAttackInfoSequence = ((SubcomponentArray<CastAttackInfoSequence>)_attackAndEffect).components[index]).timeToTrigger))
+				if (!(time >= (castAttackInfoSequence = _attackAndEffect.components[index]).timeToTrigger))
 				{
 					break;
 				}
 				Attack(castAttackInfoSequence.attackInfo, origin, direction, distance, raycastHit, target);
 			}
 			yield return null;
-			time += ((ChronometerBase)owner.chronometer.animation).deltaTime;
+			time += owner.chronometer.animation.deltaTime;
 		}
 	}
 }

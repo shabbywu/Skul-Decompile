@@ -6,10 +6,10 @@ namespace Characters.Gear.Upgrades;
 
 public abstract class UpgradeAbility : MonoBehaviour
 {
-	public class SubcomponentAttribute : SubcomponentAttribute
+	public class SubcomponentAttribute : UnityEditor.SubcomponentAttribute
 	{
 		public SubcomponentAttribute()
-			: base(true, types)
+			: base(allowCustom: true, UpgradeAbility.types)
 		{
 		}
 	}

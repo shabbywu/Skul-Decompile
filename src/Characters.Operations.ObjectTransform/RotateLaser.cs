@@ -28,7 +28,7 @@ public sealed class RotateLaser : CharacterOperation
 		while (time < _curve.duration)
 		{
 			_laser.Activate(owner, startDirection + directionDistance * _curve.Evaluate(time));
-			time += ((ChronometerBase)owner.chronometer.master).deltaTime;
+			time += owner.chronometer.master.deltaTime;
 			yield return null;
 		}
 		_laser.Activate(owner, _targetDirection);

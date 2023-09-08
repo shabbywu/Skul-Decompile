@@ -26,19 +26,7 @@ public sealed class GrimReaperSentence3 : TargetedCharacterOperation
 			Custom
 		}
 
-		private static readonly EnumArray<Pivot, Vector2> _pivotValues = new EnumArray<Pivot, Vector2>((Vector2[])(object)new Vector2[10]
-		{
-			new Vector2(0f, 0f),
-			new Vector2(-0.5f, 0.5f),
-			new Vector2(0f, 0.5f),
-			new Vector2(0.5f, 0.5f),
-			new Vector2(-0.5f, 0f),
-			new Vector2(0f, 0.5f),
-			new Vector2(-0.5f, -0.5f),
-			new Vector2(0f, -0.5f),
-			new Vector2(0.5f, -0.5f),
-			new Vector2(0f, 0f)
-		});
+		private static readonly EnumArray<Pivot, Vector2> _pivotValues = new EnumArray<Pivot, Vector2>(new Vector2(0f, 0f), new Vector2(-0.5f, 0.5f), new Vector2(0f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(-0.5f, 0f), new Vector2(0f, 0.5f), new Vector2(-0.5f, -0.5f), new Vector2(0f, -0.5f), new Vector2(0.5f, -0.5f), new Vector2(0f, 0f));
 
 		[SerializeField]
 		private Pivot _pivot;
@@ -159,7 +147,7 @@ public sealed class GrimReaperSentence3 : TargetedCharacterOperation
 
 	private IEnumerator CWaitForDurationAndSummon(Action summonClosure, Character target)
 	{
-		yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)target.chronometer.master, _duration);
+		yield return target.chronometer.master.WaitForSeconds(_duration);
 		if (!target.health.dead)
 		{
 			summonClosure?.Invoke();

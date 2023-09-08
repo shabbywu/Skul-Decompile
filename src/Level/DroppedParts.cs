@@ -31,7 +31,7 @@ public class DroppedParts : DestructibleObject, IPoolObjectCopiable<DroppedParts
 	private bool _collideWithTerrain = true;
 
 	[SerializeField]
-	[Information(/*Could not decode attribute arguments.*/)]
+	[Information("0이면 영구지속", InformationAttribute.InformationType.Info, false)]
 	private float _duration;
 
 	[SerializeField]
@@ -223,7 +223,7 @@ public class DroppedParts : DestructibleObject, IPoolObjectCopiable<DroppedParts
 		yield return Chronometer.global.WaitForSeconds(_duration);
 		if (_fadeOut.length > 0)
 		{
-			yield return poolObject.CFadeOut(_spriteRenderer, (ChronometerBase)(object)Chronometer.global, _fadeOut, _duration);
+			yield return poolObject.CFadeOut(_spriteRenderer, Chronometer.global, _fadeOut, _duration);
 		}
 		poolObject.Despawn();
 	}

@@ -68,18 +68,18 @@ public sealed class PurchasedMaxHealth : IAbility, IAbilityInstance, ISavableAbi
 
 	void IAbilityInstance.Attach()
 	{
-		for (int i = 0; i < ((ReorderableArray<Stat.Value>)_buff).values.Length; i++)
+		for (int i = 0; i < _buff.values.Length; i++)
 		{
-			((ReorderableArray<Stat.Value>)_buff).values[i].value = _currentValue;
+			_buff.values[i].value = _currentValue;
 		}
 		_owner.stat.AttachValues(_buff);
 	}
 
 	void IAbilityInstance.Refresh()
 	{
-		for (int i = 0; i < ((ReorderableArray<Stat.Value>)_buff).values.Length; i++)
+		for (int i = 0; i < _buff.values.Length; i++)
 		{
-			((ReorderableArray<Stat.Value>)_buff).values[i].value = _currentValue;
+			_buff.values[i].value = _currentValue;
 		}
 		_owner.stat.SetNeedUpdate();
 	}

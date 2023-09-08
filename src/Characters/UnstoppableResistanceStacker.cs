@@ -86,15 +86,15 @@ public sealed class UnstoppableResistanceStacker : MonoBehaviour
 
 		private void ReduceValue()
 		{
-			for (int i = 0; i < ((ReorderableArray<Stat.Value>)_stackableStat).values.Length; i++)
+			for (int i = 0; i < _stackableStat.values.Length; i++)
 			{
-				float num = Mathf.Clamp((float)((ReorderableArray<Stat.Value>)_stackableStat).values[i].value + _reduceValue, _statValueMinMax.x, _statValueMinMax.y);
+				float num = Mathf.Clamp((float)_stackableStat.values[i].value + _reduceValue, _statValueMinMax.x, _statValueMinMax.y);
 				if (_cacheValue == num)
 				{
 					return;
 				}
 				_cacheValue = num;
-				((ReorderableArray<Stat.Value>)_stackableStat).values[i].value = num;
+				_stackableStat.values[i].value = num;
 			}
 			_owner.stat.SetNeedUpdate();
 		}
@@ -111,15 +111,15 @@ public sealed class UnstoppableResistanceStacker : MonoBehaviour
 		{
 			_remainMaintainTime = _maintainTime;
 			_remainRefreshTime = refreshTime;
-			for (int i = 0; i < ((ReorderableArray<Stat.Value>)_stackableStat).values.Length; i++)
+			for (int i = 0; i < _stackableStat.values.Length; i++)
 			{
-				float num = Mathf.Clamp((float)((ReorderableArray<Stat.Value>)_stackableStat).values[i].value - _increaseValue, _statValueMinMax.x, _statValueMinMax.y);
+				float num = Mathf.Clamp((float)_stackableStat.values[i].value - _increaseValue, _statValueMinMax.x, _statValueMinMax.y);
 				if (_cacheValue == num)
 				{
 					return;
 				}
 				_cacheValue = num;
-				((ReorderableArray<Stat.Value>)_stackableStat).values[i].value = num;
+				_stackableStat.values[i].value = num;
 			}
 			_owner.stat.SetNeedUpdate();
 		}
@@ -143,7 +143,7 @@ public sealed class UnstoppableResistanceStacker : MonoBehaviour
 
 	private void Update()
 	{
-		_freezeController.UpdateTime(((ChronometerBase)_owner.chronometer.master).deltaTime);
-		_stunController.UpdateTime(((ChronometerBase)_owner.chronometer.master).deltaTime);
+		_freezeController.UpdateTime(_owner.chronometer.master.deltaTime);
+		_stunController.UpdateTime(_owner.chronometer.master.deltaTime);
 	}
 }

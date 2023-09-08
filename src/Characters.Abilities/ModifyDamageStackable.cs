@@ -36,7 +36,7 @@ public class ModifyDamageStackable : Ability
 		protected override void OnAttach()
 		{
 			_remainCount = ability._applyCount;
-			((PriorityList<GiveDamageDelegate>)owner.onGiveDamage).Add(0, (GiveDamageDelegate)OnOwnerGiveDamage);
+			owner.onGiveDamage.Add(0, OnOwnerGiveDamage);
 			if (ability._maxStack == 0)
 			{
 				ability._maxStack = int.MaxValue;
@@ -46,7 +46,7 @@ public class ModifyDamageStackable : Ability
 
 		protected override void OnDetach()
 		{
-			((PriorityList<GiveDamageDelegate>)owner.onGiveDamage).Remove((GiveDamageDelegate)OnOwnerGiveDamage);
+			owner.onGiveDamage.Remove(OnOwnerGiveDamage);
 		}
 
 		public override void UpdateTime(float deltaTime)
@@ -67,11 +67,11 @@ public class ModifyDamageStackable : Ability
 			{
 				return false;
 			}
-			if (!((EnumArray<Damage.MotionType, bool>)ability._attackTypes)[damage.motionType])
+			if (!ability._attackTypes[damage.motionType])
 			{
 				return false;
 			}
-			if (!((EnumArray<Damage.AttackType, bool>)ability._damageTypes)[damage.attackType])
+			if (!ability._damageTypes[damage.attackType])
 			{
 				return false;
 			}
@@ -107,11 +107,11 @@ public class ModifyDamageStackable : Ability
 	private float _cooldownTime;
 
 	[SerializeField]
-	[Information(/*Could not decode attribute arguments.*/)]
+	[Information("base *= (1 + damagePercent * stack)", InformationAttribute.InformationType.Info, false)]
 	private float _damagePercentByStack = 0.1f;
 
 	[SerializeField]
-	[Information(/*Could not decode attribute arguments.*/)]
+	[Information(" multiplier += damagePercentPoint * stack", InformationAttribute.InformationType.Info, false)]
 	private float _damagePercentPoint;
 
 	[SerializeField]

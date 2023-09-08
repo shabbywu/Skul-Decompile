@@ -10,7 +10,7 @@ public class Smash : CharacterHitOperation
 	[SerializeField]
 	private PushInfo _pushInfo = new PushInfo(ignoreOtherForce: true);
 
-	[Subcomponent(typeof(TargetedOperationInfo))]
+	[UnityEditor.Subcomponent(typeof(TargetedOperationInfo))]
 	[SerializeField]
 	private TargetedOperationInfo.Subcomponents _onCollide;
 

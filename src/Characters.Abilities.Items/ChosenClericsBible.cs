@@ -64,16 +64,14 @@ public sealed class ChosenClericsBible : Ability
 
 		private void UpdateAttachedTime(float deltatime)
 		{
-			//IL_005e: Unknown result type (might be due to invalid IL or missing references)
-			//IL_0063: Unknown result type (might be due to invalid IL or missing references)
 			if (_buffAttached)
 			{
 				_remainAttackTime -= deltatime;
 				if (!(_remainAttackTime > 0f))
 				{
 					_remainAttackTime = ability._onAttachBuffAttackInterval;
-					((CoroutineReference)(ref _cOnAttachBuffOperations)).Stop();
-					_cOnAttachBuffOperations = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)owner, ability._onAttachBuff.CRun(owner));
+					_cOnAttachBuffOperations.Stop();
+					_cOnAttachBuffOperations = ((MonoBehaviour)(object)owner).StartCoroutineWithReference(ability._onAttachBuff.CRun(owner));
 				}
 			}
 		}
@@ -81,7 +79,7 @@ public sealed class ChosenClericsBible : Ability
 		private void HandleOnKilled(ITarget target, ref Damage damage)
 		{
 			Character character = target.character;
-			if (!((Object)(object)character == (Object)null) && ((EnumArray<Character.Type, bool>)ability._targetFilter)[character.type])
+			if (!((Object)(object)character == (Object)null) && ability._targetFilter[character.type])
 			{
 				_remainKillCount--;
 				if (_remainKillCount <= 0)

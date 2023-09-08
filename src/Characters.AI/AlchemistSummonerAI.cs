@@ -32,7 +32,7 @@ public sealed class AlchemistSummonerAI : AIController
 	private void Awake()
 	{
 		base.behaviours = new List<Behaviour> { _checkWithinSight };
-		character.status.unstoppable.Attach((object)this);
+		character.status.unstoppable.Attach(this);
 	}
 
 	protected override void OnEnable()

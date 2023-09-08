@@ -43,7 +43,7 @@ public class YggdrasillAnimationController : MonoBehaviour
 		if (_phase1Mapper.TryGetValue(tag, out var value) || _phase2Mapper.TryGetValue(tag, out value))
 		{
 			_owner.animationController.Play(value, _speed);
-			yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)_owner.chronometer.animation, value.dictionary["Behind"].length);
+			yield return _owner.chronometer.animation.WaitForSeconds(value.dictionary["Behind"].length);
 		}
 	}
 

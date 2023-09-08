@@ -17,7 +17,7 @@ public class SpawnThiefGoldOnTookDamage : Ability
 
 		protected override void OnAttach()
 		{
-			if (((EnumArray<Character.Type, bool>)ability._characterTypeFilter)[owner.type])
+			if (ability._characterTypeFilter[owner.type])
 			{
 				owner.health.onTookDamage += OnCharacterTookDamage;
 			}
@@ -25,7 +25,7 @@ public class SpawnThiefGoldOnTookDamage : Ability
 
 		protected override void OnDetach()
 		{
-			if (((EnumArray<Character.Type, bool>)ability._characterTypeFilter)[owner.type])
+			if (ability._characterTypeFilter[owner.type])
 			{
 				owner.health.onTookDamage -= OnCharacterTookDamage;
 			}
@@ -35,7 +35,7 @@ public class SpawnThiefGoldOnTookDamage : Ability
 		{
 			//IL_004e: Unknown result type (might be due to invalid IL or missing references)
 			//IL_0053: Unknown result type (might be due to invalid IL or missing references)
-			if (!(tookDamage.amount < ability._minDamage) && ((EnumArray<Damage.MotionType, bool>)ability._motionTypeFilter)[tookDamage.motionType] && ((EnumArray<Damage.AttackType, bool>)ability._attackTypeFilter)[tookDamage.attackType])
+			if (!(tookDamage.amount < ability._minDamage) && ability._motionTypeFilter[tookDamage.motionType] && ability._attackTypeFilter[tookDamage.attackType])
 			{
 				SpawnGold(Vector2.op_Implicit(tookDamage.hitPoint));
 			}

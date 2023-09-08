@@ -41,9 +41,9 @@ public class ComboAction : Action
 
 	protected int _current;
 
-	internal ActionInfo current => ((ReorderableArray<ActionInfo>)_actionInfo).values[_current];
+	internal ActionInfo current => _actionInfo.values[_current];
 
-	public override Motion[] motions => ((ReorderableArray<ActionInfo>)_actionInfo).values.Select((ActionInfo m) => m.motion).ToArray();
+	public override Motion[] motions => _actionInfo.values.Select((ActionInfo m) => m.motion).ToArray();
 
 	public override bool canUse
 	{
@@ -65,12 +65,12 @@ public class ComboAction : Action
 			{
 				_cancelReserved = false;
 				int num = _current + 1;
-				if (num >= ((ReorderableArray<ActionInfo>)_actionInfo).values.Length)
+				if (num >= _actionInfo.values.Length)
 				{
 					num = _cycleOffset;
 				}
 				_current = num;
-				DoAction(((ReorderableArray<ActionInfo>)_actionInfo).values[num].motion);
+				DoAction(_actionInfo.values[num].motion);
 			}
 			yield return null;
 		}
@@ -79,9 +79,9 @@ public class ComboAction : Action
 	public override void Initialize(Character owner)
 	{
 		base.Initialize(owner);
-		for (int i = 0; i < ((ReorderableArray<ActionInfo>)_actionInfo).values.Length; i++)
+		for (int i = 0; i < _actionInfo.values.Length; i++)
 		{
-			((ReorderableArray<ActionInfo>)_actionInfo).values[i].motion.Initialize(this);
+			_actionInfo.values[i].motion.Initialize(this);
 		}
 	}
 

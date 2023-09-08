@@ -38,7 +38,7 @@ public class CameraZoom : CharacterOperation
 	{
 		CameraController cameraController = Scene<GameBase>.instance.cameraController;
 		cameraController.Zoom(_percent, _zoomSpeed);
-		yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)chronometer, _duration);
+		yield return chronometer.WaitForSeconds(_duration);
 		cameraController.Zoom(1f, _restoreSpeed);
 	}
 }

@@ -29,7 +29,7 @@ public sealed class RunTargetOperationOnGaveDamage : Ability
 
 		private void OnGaveDamage(ITarget target, in Damage originalDamage, in Damage gaveDamage, double damageDealt)
 		{
-			if (!((Object)(object)target.character == (Object)null) && ((EnumArray<Character.Type, bool>)ability._characterType)[target.character.type] && ((EnumArray<Damage.AttackType, bool>)ability._attackType)[gaveDamage.attackType] && ((EnumArray<Damage.MotionType, bool>)ability._motionType)[gaveDamage.motionType])
+			if (!((Object)(object)target.character == (Object)null) && ability._characterType[target.character.type] && ability._attackType[gaveDamage.attackType] && ability._motionType[gaveDamage.motionType])
 			{
 				((MonoBehaviour)owner).StartCoroutine(ability._operations.CRun(owner, target.character));
 			}

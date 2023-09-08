@@ -58,7 +58,7 @@ public class SaplingTarget : MonoBehaviour
 	{
 		if (!(_spawnableCool <= 0f))
 		{
-			_spawnableCool -= ((ChronometerBase)Chronometer.global).deltaTime;
+			_spawnableCool -= Chronometer.global.deltaTime;
 		}
 	}
 }

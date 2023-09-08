@@ -74,17 +74,11 @@ public sealed class DroppedRandomItem : DroppedPurchasableReward
 
 	private void EvaluateGearRarity()
 	{
-		//IL_000c: Unknown result type (might be due to invalid IL or missing references)
-		//IL_001c: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0021: Unknown result type (might be due to invalid IL or missing references)
 		_gearRarity = Settings.instance.containerPossibilities[_rarity].Evaluate(_random);
 	}
 
 	private void Load()
 	{
-		//IL_0031: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0036: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0053: Unknown result type (might be due to invalid IL or missing references)
 		_itemRequest?.Release();
 		do
 		{

@@ -74,7 +74,7 @@ public sealed class FireCannonBall : CharacterOperation
 	private FireProjectile.DirectionType _directionType;
 
 	[SerializeField]
-	private Reorderable _directions;
+	private CustomAngle.Reorderable _directions;
 
 	private IAttackDamage _attackDamage;
 
@@ -97,7 +97,7 @@ public sealed class FireCannonBall : CharacterOperation
 		//IL_0132: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0142: Unknown result type (might be due to invalid IL or missing references)
 		//IL_00c4: Unknown result type (might be due to invalid IL or missing references)
-		CustomAngle[] values = ((ReorderableArray<CustomAngle>)(object)_directions).values;
+		CustomAngle[] values = _directions.values;
 		bool flipX = false;
 		bool flipY = false;
 		Projectile projectile = _selector.GetProjectile(_passive);

@@ -8,9 +8,9 @@ namespace Characters.AI.Pope.Summon;
 public abstract class LadderPolicy : MonoBehaviour
 {
 	[AttributeUsage(AttributeTargets.Field)]
-	public class SubcomponentAttribute : SubcomponentAttribute
+	public class SubcomponentAttribute : UnityEditor.SubcomponentAttribute
 	{
-		public static readonly Type[] types = new Type[1] { typeof(RandomLadderPolicy) };
+		public new static readonly Type[] types = new Type[1] { typeof(RandomLadderPolicy) };
 
 		public SubcomponentAttribute(bool allowCustom = true)
 			: base(allowCustom, types)

@@ -176,7 +176,7 @@ public class FighterPassive : Ability, IAbilityInstance
 
 	public void Attach()
 	{
-		((PriorityList<GiveDamageDelegate>)owner.onGiveDamage).Add(int.MaxValue, (GiveDamageDelegate)HandleOnGiveDamage);
+		owner.onGiveDamage.Add(int.MaxValue, HandleOnGiveDamage);
 	}
 
 	private bool HandleOnGiveDamage(ITarget target, ref Damage damage)
@@ -199,7 +199,7 @@ public class FighterPassive : Ability, IAbilityInstance
 
 	public void Detach()
 	{
-		((PriorityList<GiveDamageDelegate>)owner.onGiveDamage).Remove((GiveDamageDelegate)HandleOnGiveDamage);
+		owner.onGiveDamage.Remove(HandleOnGiveDamage);
 		DetachRage();
 	}
 
@@ -212,8 +212,8 @@ public class FighterPassive : Ability, IAbilityInstance
 			remainTime = base.duration;
 			_buffAttached = true;
 			owner.stat.AttachValues(_stat);
-			((ChronometerBase)Chronometer.global).AttachTimeScale((object)this, _timeScale);
-			((ChronometerBase)owner.chronometer.master).AttachTimeScale((object)this, 1f / _timeScale);
+			Chronometer.global.AttachTimeScale(this, _timeScale);
+			owner.chronometer.master.AttachTimeScale(this, 1f / _timeScale);
 			_loopEffectInstance = ((base.loopEffect == null) ? null : base.loopEffect.Spawn(((Component)owner).transform.position, owner));
 			base.effectOnAttach.Spawn(((Component)owner).transform.position);
 			for (int i = 0; i < _actions.Length; i++)
@@ -235,8 +235,8 @@ public class FighterPassive : Ability, IAbilityInstance
 			remainTime = _cooldownTime;
 			_buffAttached = false;
 			owner.stat.DetachValues(_stat);
-			((ChronometerBase)Chronometer.global).DetachTimeScale((object)this);
-			((ChronometerBase)owner.chronometer.master).DetachTimeScale((object)this);
+			Chronometer.global.DetachTimeScale(this);
+			owner.chronometer.master.DetachTimeScale(this);
 			if ((Object)(object)_loopEffectInstance != (Object)null)
 			{
 				_loopEffectInstance.Stop();

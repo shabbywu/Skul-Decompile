@@ -31,7 +31,7 @@ public class FadeInOut : Sequence
 		float elapsed = 0f;
 		while (elapsed < _duration)
 		{
-			elapsed += ((ChronometerBase)Chronometer.global).deltaTime;
+			elapsed += Chronometer.global.deltaTime;
 			((Graphic)_image).color = startColor + different * (elapsed / _duration);
 			yield return null;
 		}

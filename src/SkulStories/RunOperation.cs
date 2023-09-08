@@ -8,7 +8,7 @@ namespace SkulStories;
 
 public class RunOperation : Sequence
 {
-	[Subcomponent(typeof(OperationInfo))]
+	[UnityEditor.Subcomponent(typeof(OperationInfo))]
 	[SerializeField]
 	private OperationInfo.Subcomponents _operations;
 

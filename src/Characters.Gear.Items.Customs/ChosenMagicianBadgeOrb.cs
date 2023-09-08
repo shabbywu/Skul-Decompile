@@ -71,7 +71,7 @@ public sealed class ChosenMagicianBadgeOrb : MonoBehaviour
 		//IL_008c: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0091: Unknown result type (might be due to invalid IL or missing references)
 		Vector3 val = ((Component)_pivot).transform.position - ((Component)this).transform.position;
-		_elapsed += _speed * ((ChronometerBase)_character.chronometer.master).deltaTime;
+		_elapsed += _speed * _character.chronometer.master.deltaTime;
 		Vector2 val2 = Vector2.op_Implicit(val) + new Vector2(Mathf.Cos(_elapsed), Mathf.Sin(_elapsed)) * radius;
 		((Component)this).transform.position = Vector2.op_Implicit(Vector2.op_Implicit(((Component)this).transform.position) + val2);
 	}

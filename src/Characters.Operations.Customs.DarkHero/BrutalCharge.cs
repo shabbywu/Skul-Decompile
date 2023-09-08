@@ -144,9 +144,9 @@ public sealed class BrutalCharge : CharacterOperation
 			_points[j - 1].rotation = Quaternion.Euler(0f, 0f, num);
 			_sign.Spawn(_points[j - 1].position, owner, num);
 			beforePoint = val;
-			yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)owner.chronometer.master, 0.1f);
+			yield return owner.chronometer.master.WaitForSeconds(0.1f);
 		}
-		yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)owner.chronometer.master, 0.5f);
+		yield return owner.chronometer.master.WaitForSeconds(0.5f);
 		for (int j = 0; j < count - 1; j++)
 		{
 			float num2 = Vector2.Distance(MMMaths.Vector3ToVector2(_points[j].position), MMMaths.Vector3ToVector2(_points[j + 1].position));
@@ -163,7 +163,7 @@ public sealed class BrutalCharge : CharacterOperation
 			Vector3 position3 = _points[j].position;
 			rotation = _points[j].rotation;
 			flame.Spawn(position3, owner, ((Quaternion)(ref rotation)).eulerAngles.z);
-			yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)owner.chronometer.master, 0.1f);
+			yield return owner.chronometer.master.WaitForSeconds(0.1f);
 		}
 	}
 

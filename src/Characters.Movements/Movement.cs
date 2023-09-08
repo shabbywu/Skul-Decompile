@@ -83,7 +83,7 @@ public class Movement : MonoBehaviour
 
 	public readonly SumInt airJumpCount = new SumInt(1);
 
-	public readonly TrueOnlyLogicalSumList ignoreGravity = new TrueOnlyLogicalSumList(false);
+	public readonly TrueOnlyLogicalSumList ignoreGravity = new TrueOnlyLogicalSumList();
 
 	[NonSerialized]
 	public int currentAirJumpCount;
@@ -92,7 +92,7 @@ public class Movement : MonoBehaviour
 	public bool binded;
 
 	[NonSerialized]
-	public TrueOnlyLogicalSumList blocked = new TrueOnlyLogicalSumList(false);
+	public TrueOnlyLogicalSumList blocked = new TrueOnlyLogicalSumList();
 
 	[NonSerialized]
 	public Vector2 move;
@@ -452,7 +452,7 @@ public class Movement : MonoBehaviour
 			_character.animationController.parameter.ySpeed = 0f;
 			return;
 		}
-		float num = ChronometerExtension.DeltaTime((ChronometerBase)(object)_character.chronometer.animation);
+		float num = _character.chronometer.animation.DeltaTime();
 		if (num == 0f)
 		{
 			return;
@@ -632,20 +632,20 @@ public class Movement : MonoBehaviour
 		{
 			return false;
 		}
-		int num = 0;
+		int index = 0;
 		RaycastHit2D val = results[0];
-		float num2 = ((RaycastHit2D)(ref val)).distance;
+		float num = ((RaycastHit2D)(ref val)).distance;
 		for (int i = 1; i < results.Count; i++)
 		{
 			val = results[i];
 			float distance2 = ((RaycastHit2D)(ref val)).distance;
-			if (distance2 < num2)
+			if (distance2 < num)
 			{
-				num2 = distance2;
-				num = i;
+				num = distance2;
+				index = i;
 			}
 		}
-		point = results[num];
+		point = results[index];
 		return true;
 	}
 
@@ -675,20 +675,20 @@ public class Movement : MonoBehaviour
 			collider = null;
 			return false;
 		}
-		int num = 0;
+		int index = 0;
 		RaycastHit2D val2 = results[0];
-		float num2 = ((RaycastHit2D)(ref val2)).distance;
+		float num = ((RaycastHit2D)(ref val2)).distance;
 		for (int i = 1; i < results.Count; i++)
 		{
 			val2 = results[i];
 			float distance2 = ((RaycastHit2D)(ref val2)).distance;
-			if (distance2 < num2)
+			if (distance2 < num)
 			{
-				num2 = distance2;
-				num = i;
+				num = distance2;
+				index = i;
 			}
 		}
-		val2 = results[num];
+		val2 = results[index];
 		collider = ((RaycastHit2D)(ref val2)).collider;
 		return true;
 	}
@@ -717,7 +717,7 @@ public class Movement : MonoBehaviour
 		{
 			return;
 		}
-		float num = velocity.x * ((ChronometerBase)_character.chronometer.master).deltaTime;
+		float num = velocity.x * _character.chronometer.master.deltaTime;
 		Bounds bounds = ((Collider2D)_character.collider).bounds;
 		float num2 = ((Bounds)(ref bounds)).max.x + num + 0.5f;
 		bounds = lastStandingCollider.bounds;

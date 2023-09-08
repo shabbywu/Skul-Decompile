@@ -28,10 +28,10 @@ public sealed class PlayerAttack : CharacterOperation
 	private ChronoInfo _chronoToTarget;
 
 	[SerializeField]
-	[Subcomponent(typeof(OperationInfo))]
+	[UnityEditor.Subcomponent(typeof(OperationInfo))]
 	private OperationInfo.Subcomponents _ownerWhenHit;
 
-	[Subcomponent(typeof(TargetedOperationInfo))]
+	[UnityEditor.Subcomponent(typeof(TargetedOperationInfo))]
 	[SerializeField]
 	private TargetedOperationInfo.Subcomponents _targetWhenHit;
 
@@ -45,7 +45,7 @@ public sealed class PlayerAttack : CharacterOperation
 
 	private void Awake()
 	{
-		Array.Sort(((SubcomponentArray<TargetedOperationInfo>)_targetWhenHit).components, (TargetedOperationInfo x, TargetedOperationInfo y) => x.timeToTrigger.CompareTo(y.timeToTrigger));
+		Array.Sort(_targetWhenHit.components, (TargetedOperationInfo x, TargetedOperationInfo y) => x.timeToTrigger.CompareTo(y.timeToTrigger));
 	}
 
 	public override void Run(Character owner)
@@ -59,7 +59,7 @@ public sealed class PlayerAttack : CharacterOperation
 		_attackDamage = ((Component)this).GetComponentInParent<IAttackDamage>();
 		_ownerWhenHit.Initialize();
 		_targetWhenHit.Initialize();
-		TargetedOperationInfo[] components = ((SubcomponentArray<TargetedOperationInfo>)_targetWhenHit).components;
+		TargetedOperationInfo[] components = _targetWhenHit.components;
 		foreach (TargetedOperationInfo targetedOperationInfo in components)
 		{
 			if (targetedOperationInfo.operation is Knockback knockback)
@@ -131,7 +131,7 @@ public sealed class PlayerAttack : CharacterOperation
 		{
 			_chronoToGlobe.ApplyGlobe();
 			_chronoToOwner.ApplyTo(owner);
-			if (((SubcomponentArray<OperationInfo>)_ownerWhenHit).components.Length != 0)
+			if (_ownerWhenHit.components.Length != 0)
 			{
 				((MonoBehaviour)this).StartCoroutine(_ownerWhenHit.CRun(owner));
 			}

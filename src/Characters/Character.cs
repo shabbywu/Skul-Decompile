@@ -70,15 +70,15 @@ public class Character : MonoBehaviour
 
 	public Action<Characters.Actions.Action> onCancelCharging;
 
-	public readonly TrueOnlyLogicalSumList cinematic = new TrueOnlyLogicalSumList(false);
+	public readonly TrueOnlyLogicalSumList cinematic = new TrueOnlyLogicalSumList();
 
-	public readonly TrueOnlyLogicalSumList invulnerable = new TrueOnlyLogicalSumList(false);
+	public readonly TrueOnlyLogicalSumList invulnerable = new TrueOnlyLogicalSumList();
 
-	public readonly TrueOnlyLogicalSumList evasion = new TrueOnlyLogicalSumList(false);
+	public readonly TrueOnlyLogicalSumList evasion = new TrueOnlyLogicalSumList();
 
-	public readonly TrueOnlyLogicalSumList blockLook = new TrueOnlyLogicalSumList(false);
+	public readonly TrueOnlyLogicalSumList blockLook = new TrueOnlyLogicalSumList();
 
-	public readonly TrueOnlyLogicalSumList stealth = new TrueOnlyLogicalSumList(false);
+	public readonly TrueOnlyLogicalSumList stealth = new TrueOnlyLogicalSumList();
 
 	public readonly Stat stat;
 
@@ -284,16 +284,6 @@ public class Character : MonoBehaviour
 
 	private Character()
 	{
-		//IL_000d: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0017: Expected O, but got Unknown
-		//IL_0019: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0023: Expected O, but got Unknown
-		//IL_0025: Unknown result type (might be due to invalid IL or missing references)
-		//IL_002f: Expected O, but got Unknown
-		//IL_0031: Unknown result type (might be due to invalid IL or missing references)
-		//IL_003b: Expected O, but got Unknown
-		//IL_003d: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0047: Expected O, but got Unknown
 		stat = new Stat(this);
 	}
 
@@ -305,7 +295,7 @@ public class Character : MonoBehaviour
 		//IL_006d: Expected O, but got Unknown
 		if ((Object)(object)hit == (Object)null)
 		{
-			cinematic.Attach((object)this);
+			cinematic.Attach(this);
 		}
 		if ((Object)(object)_attach == (Object)null)
 		{
@@ -334,11 +324,11 @@ public class Character : MonoBehaviour
 			_health.SetMaximumHealth(stat.Get(Stat.Category.Final, Stat.Kind.Health));
 			_health.ResetToMaximumHealth();
 			_health.onDie += OnDie;
-			_health.onTakeDamage.Add(0, (TakeDamageDelegate)delegate(ref Damage damage)
+			_health.onTakeDamage.Add(0, delegate(ref Damage damage)
 			{
 				return stat.ApplyDefense(ref damage);
 			});
-			_health.onTakeDamage.Add(int.MaxValue, (TakeDamageDelegate)CancelDamage);
+			_health.onTakeDamage.Add(int.MaxValue, CancelDamage);
 		}
 		if (type == Type.Player)
 		{
@@ -388,7 +378,7 @@ public class Character : MonoBehaviour
 		//IL_00b8: Unknown result type (might be due to invalid IL or missing references)
 		//IL_00bd: Unknown result type (might be due to invalid IL or missing references)
 		//IL_00d5: Unknown result type (might be due to invalid IL or missing references)
-		float deltaTime = ((ChronometerBase)chronometer.master).deltaTime;
+		float deltaTime = chronometer.master.deltaTime;
 		stat.TakeTime(deltaTime);
 		playerComponents?.Update(deltaTime);
 		if ((Object)(object)_health == (Object)null)
@@ -520,8 +510,6 @@ public class Character : MonoBehaviour
 
 	public void DoAction(Motion motion, float speedMultiplier, bool triggerOnStartAction)
 	{
-		//IL_0078: Unknown result type (might be due to invalid IL or missing references)
-		//IL_007d: Unknown result type (might be due to invalid IL or missing references)
 		Motion motion2 = this.motion;
 		if ((Object)(object)motion2 != (Object)null && motion2.running)
 		{
@@ -530,10 +518,10 @@ public class Character : MonoBehaviour
 		DoMotion(motion, speedMultiplier);
 		if ((Object)(object)motion.action != (Object)null)
 		{
-			((CoroutineReference)(ref _cWaitForEndOfAction)).Stop();
+			_cWaitForEndOfAction.Stop();
 			if (((Behaviour)this).isActiveAndEnabled)
 			{
-				_cWaitForEndOfAction = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)this, CWaitForEndOfAction(motion.action));
+				_cWaitForEndOfAction = ((MonoBehaviour)(object)this).StartCoroutineWithReference(CWaitForEndOfAction(motion.action));
 			}
 			else
 			{
@@ -577,12 +565,8 @@ public class Character : MonoBehaviour
 			else
 			{
 				_animationController.StopAll();
-				Movement obj = movement;
-				if (obj != null)
-				{
-					obj.blocked.Detach((object)this);
-				}
-				blockLook.Detach((object)this);
+				movement?.blocked.Detach(this);
+				blockLook.Detach(this);
 				motion2.CancelBehaviour();
 			}
 		}
@@ -596,21 +580,21 @@ public class Character : MonoBehaviour
 		{
 			_animationController.Play(motion.animationInfo, motion.length / num, num);
 		}
-		blockLook.Detach((object)this);
+		blockLook.Detach(this);
 		lookingDirection = desiringLookingDirection;
 		motion.StartBehaviour(num);
 		this.onStartMotion?.Invoke(motion, num);
 		if ((Object)(object)movement != (Object)null)
 		{
-			movement.blocked.Detach((object)this);
+			movement.blocked.Detach(this);
 			if (motion.blockMovement && motion.length > 0f)
 			{
-				movement.blocked.Attach((object)this);
+				movement.blocked.Attach(this);
 			}
 		}
 		if (motion.blockLook)
 		{
-			blockLook.Attach((object)this);
+			blockLook.Attach(this);
 		}
 	}
 
@@ -629,17 +613,13 @@ public class Character : MonoBehaviour
 		if (!((Object)(object)motion == (Object)null))
 		{
 			_animationController.StopAll();
-			((CoroutineReference)(ref _cWaitForEndOfAction)).Stop();
+			_cWaitForEndOfAction.Stop();
 			if (this.onCancelAction != null && (Object)(object)motion.action != (Object)null)
 			{
 				this.onCancelAction(motion.action);
 			}
-			Movement obj = movement;
-			if (obj != null)
-			{
-				obj.blocked.Detach((object)this);
-			}
-			blockLook.Detach((object)this);
+			movement?.blocked.Detach(this);
+			blockLook.Detach(this);
 			motion.CancelBehaviour();
 		}
 	}
@@ -673,12 +653,8 @@ public class Character : MonoBehaviour
 
 	private void OnAnimationExpire()
 	{
-		Movement obj = movement;
-		if (obj != null)
-		{
-			obj.blocked.Detach((object)this);
-		}
-		blockLook.Detach((object)this);
+		movement?.blocked.Detach(this);
+		blockLook.Detach(this);
 		motion?.EndBehaviour();
 	}
 }

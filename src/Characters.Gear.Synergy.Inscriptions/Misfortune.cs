@@ -35,20 +35,20 @@ public sealed class Misfortune : SimpleStatBonusKeyword
 			{
 				Character character = owner;
 				character.onGaveDamage = (GaveDamageDelegate)Delegate.Remove(character.onGaveDamage, new GaveDamageDelegate(HandleOnGaveDamage));
-				((PriorityList<GiveDamageDelegate>)owner.onGiveDamage).Remove((GiveDamageDelegate)OnGiveDamage);
+				owner.onGiveDamage.Remove(OnGiveDamage);
 				OnDetachBuff();
 			}
 
 			protected override void OnAttachBuff()
 			{
 				base.OnAttachBuff();
-				((PriorityList<GiveDamageDelegate>)owner.onGiveDamage).Add(int.MinValue, (GiveDamageDelegate)OnGiveDamage);
+				owner.onGiveDamage.Add(int.MinValue, OnGiveDamage);
 			}
 
 			protected override void OnDetachBuff()
 			{
 				base.OnDetachBuff();
-				((PriorityList<GiveDamageDelegate>)owner.onGiveDamage).Remove((GiveDamageDelegate)OnGiveDamage);
+				owner.onGiveDamage.Remove(OnGiveDamage);
 			}
 
 			private bool OnGiveDamage(ITarget target, ref Damage damage)

@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Characters.Abilities.Constraints;
 using GameResources;
 using UnityEngine;
@@ -52,7 +51,7 @@ public class NpcLineText : MonoBehaviour
 			_elapsed = 0f;
 			return;
 		}
-		string text = ExtensionMethods.Random<string>((IEnumerable<string>)localizedStringArray);
+		string text = localizedStringArray.Random();
 		_lineText.Display(text, _duration);
 		_cooltime = Random.Range(_coolTimeRange.x, _coolTimeRange.y);
 		_elapsed = 0f;
@@ -69,7 +68,7 @@ public class NpcLineText : MonoBehaviour
 	{
 		if (_constraints == null || _constraints.Pass())
 		{
-			_elapsed += ((ChronometerBase)Chronometer.global).deltaTime;
+			_elapsed += Chronometer.global.deltaTime;
 			if (_elapsed > _cooltime)
 			{
 				_canRun = true;

@@ -9,15 +9,15 @@ namespace Characters.AI.Behaviours.Pope;
 
 public sealed class Purification : Behaviour
 {
-	[Subcomponent(typeof(ActionAttack))]
+	[UnityEditor.Subcomponent(typeof(ActionAttack))]
 	[SerializeField]
 	private ActionAttack _ready;
 
 	[SerializeField]
-	[Subcomponent(typeof(ActionAttack))]
+	[UnityEditor.Subcomponent(typeof(ActionAttack))]
 	private ActionAttack _attack;
 
-	[Subcomponent(typeof(MoveHandler))]
+	[UnityEditor.Subcomponent(typeof(MoveHandler))]
 	[SerializeField]
 	private MoveHandler _moveHandler;
 

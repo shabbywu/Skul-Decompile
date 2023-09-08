@@ -78,7 +78,7 @@ public class HealEnemy : CharacterOperation
 		for (int i = 0; (float)i < _count; i++)
 		{
 			target.health.Heal(GetAmount(target));
-			yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)owner.chronometer.master, _delay);
+			yield return owner.chronometer.master.WaitForSeconds(_delay);
 		}
 	}
 
@@ -102,7 +102,7 @@ public class HealEnemy : CharacterOperation
 		switch (_targetType)
 		{
 		case TargetType.Random:
-			return ExtensionMethods.Random<Character>((IEnumerable<Character>)list);
+			return list.Random();
 		case TargetType.LowestHealth:
 		{
 			Character character = owner;

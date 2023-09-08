@@ -19,12 +19,7 @@ public class BoneOfManaComponent : AbilityComponent<BoneOfMana>
 
 	public override void Initialize()
 	{
-		_ability.operationsByCount = new CharacterOperation[3][]
-		{
-			((SubcomponentArray<CharacterOperation>)_operation0).components,
-			((SubcomponentArray<CharacterOperation>)_operation1).components,
-			((SubcomponentArray<CharacterOperation>)_operation2).components
-		};
+		_ability.operationsByCount = new CharacterOperation[3][] { _operation0.components, _operation1.components, _operation2.components };
 		base.Initialize();
 	}
 }

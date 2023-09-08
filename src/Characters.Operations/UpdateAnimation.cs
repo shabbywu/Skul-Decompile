@@ -73,7 +73,7 @@ public class UpdateAnimation : CharacterOperation
 
 	private IEnumerator CExpire(Chronometer chronometer)
 	{
-		yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)chronometer, _duration);
+		yield return chronometer.WaitForSeconds(_duration);
 		Stop();
 	}
 }

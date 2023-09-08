@@ -14,12 +14,12 @@ public class GetLockout : Ability
 
 		protected override void OnAttach()
 		{
-			owner.status.unstoppable.Attach((object)this);
+			owner.status.unstoppable.Attach(this);
 		}
 
 		protected override void OnDetach()
 		{
-			owner.status.unstoppable.Detach((object)this);
+			owner.status.unstoppable.Detach(this);
 		}
 	}
 

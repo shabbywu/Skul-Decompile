@@ -35,7 +35,7 @@ public class OverrideMovementConfig : CharacterOperation
 
 	private IEnumerator CRun()
 	{
-		yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)_owner.chronometer.master, _duration);
+		yield return _owner.chronometer.master.WaitForSeconds(_duration);
 		Remove();
 	}
 

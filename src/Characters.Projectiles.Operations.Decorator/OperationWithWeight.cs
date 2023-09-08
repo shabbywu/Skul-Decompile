@@ -12,13 +12,13 @@ public class OperationWithWeight : MonoBehaviour
 		public void RunWeightedRandom(IProjectile projectile)
 		{
 			Operation operation = null;
-			float num = Random.Range(0f, base._components.Sum((OperationWithWeight c) => c._weight));
-			for (int i = 0; i < base._components.Length; i++)
+			float num = Random.Range(0f, _components.Sum((OperationWithWeight c) => c._weight));
+			for (int i = 0; i < _components.Length; i++)
 			{
-				num -= base._components[i]._weight;
+				num -= _components[i]._weight;
 				if (num <= 0f)
 				{
-					operation = base._components[i]._operation;
+					operation = _components[i]._operation;
 					break;
 				}
 			}

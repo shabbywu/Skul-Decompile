@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using Characters.Actions;
 using Characters.Operations;
 using Services;
@@ -64,10 +63,10 @@ public class Soulmate : MonoBehaviour
 				yield return null;
 				continue;
 			}
-			_buffElapsed += ((ChronometerBase)_owner.chronometer.master).deltaTime;
+			_buffElapsed += _owner.chronometer.master.deltaTime;
 			if (_buffElapsed >= _buffInterval)
 			{
-				ExtensionMethods.Random<AttachAbility>((IEnumerable<AttachAbility>)_buffs).Run(_owner);
+				_buffs.Random().Run(_owner);
 				_buffElapsed = 0f;
 			}
 			yield return null;
@@ -113,7 +112,7 @@ public class Soulmate : MonoBehaviour
 			}
 			if ((Object)(object)lastStandingCollider != (Object)(object)lastStandingCollider2)
 			{
-				_timeAwayfromOwner += ((ChronometerBase)_owner.chronometer.master).deltaTime;
+				_timeAwayfromOwner += _owner.chronometer.master.deltaTime;
 				if (_timeAwayfromOwner > _timeToChase)
 				{
 					yield return CTeleport();

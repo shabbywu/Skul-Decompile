@@ -63,7 +63,7 @@ public abstract class Task : MonoBehaviour
 	{
 		if (_option.blockInput)
 		{
-			PlayerInput.blocked.Attach((object)this);
+			PlayerInput.blocked.Attach(this);
 		}
 		if (_option.letterBox)
 		{

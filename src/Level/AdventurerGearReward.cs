@@ -231,7 +231,7 @@ public sealed class AdventurerGearReward : InteractiveObject
 		Vector3 originPosition = ((Component)_body).transform.localPosition;
 		while (elapsed <= _curve.duration)
 		{
-			float deltaTime = ((ChronometerBase)Chronometer.global).deltaTime;
+			float deltaTime = Chronometer.global.deltaTime;
 			elapsed += deltaTime;
 			intervalElapsed -= deltaTime;
 			shakeVector -= 60f * deltaTime * shakeVector;

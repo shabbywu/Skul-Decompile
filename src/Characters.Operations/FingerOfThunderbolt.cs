@@ -21,7 +21,7 @@ public class FingerOfThunderbolt : CharacterOperation
 	[SerializeField]
 	private Transform _thunderboltPosition;
 
-	[Subcomponent(typeof(OperationInfo))]
+	[UnityEditor.Subcomponent(typeof(OperationInfo))]
 	[SerializeField]
 	private OperationInfo.Subcomponents _operations;
 
@@ -77,12 +77,12 @@ public class FingerOfThunderbolt : CharacterOperation
 		((ContactFilter2D)(ref _overlapper.contactFilter)).SetLayerMask(_layer.Evaluate(((Component)owner).gameObject));
 		((Behaviour)_searchRange).enabled = true;
 		_overlapper.OverlapCollider(_searchRange);
-		List<Target> components = GetComponentExtension.GetComponents<Collider2D, Target>((IEnumerable<Collider2D>)_overlapper.results, true);
+		List<Target> components = ((IEnumerable<Collider2D>)_overlapper.results).GetComponents<Collider2D, Target>(clearList: true);
 		if (components.Count == 0)
 		{
 			((ContactFilter2D)(ref _overlapper.contactFilter)).SetLayerMask(LayerMask.op_Implicit(2048));
 			_overlapper.OverlapCollider(_searchRange);
-			components = GetComponentExtension.GetComponents<Collider2D, Target>((IEnumerable<Collider2D>)_overlapper.results, true);
+			components = ((IEnumerable<Collider2D>)_overlapper.results).GetComponents<Collider2D, Target>(clearList: true);
 			if (components.Count == 0)
 			{
 				((Behaviour)_searchRange).enabled = false;
@@ -90,7 +90,7 @@ public class FingerOfThunderbolt : CharacterOperation
 			}
 		}
 		((Behaviour)_searchRange).enabled = false;
-		Target target = ExtensionMethods.Random<Target>((IEnumerable<Target>)components);
+		Target target = components.Random();
 		((Caster)_groundFinder).origin = Vector2.op_Implicit(((Component)target).transform.position);
 		RaycastHit2D val = ((Caster)_groundFinder).SingleCast();
 		if (RaycastHit2D.op_Implicit(val))

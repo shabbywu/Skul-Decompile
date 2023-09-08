@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using Characters.AI;
 using Characters.Projectiles;
 using UnityEngine;
@@ -50,7 +49,7 @@ public sealed class FlameStorm : CharacterOperation
 		//IL_0024: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0029: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0040: Unknown result type (might be due to invalid IL or missing references)
-		ExtensionMethods.Shuffle<int>((IList<int>)_numbers);
+		_numbers.Shuffle();
 		for (int i = 0; i < _spawnPointContainer.childCount - _emptyCount; i++)
 		{
 			int num = _numbers[i];

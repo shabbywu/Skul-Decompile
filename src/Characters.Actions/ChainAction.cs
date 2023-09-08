@@ -11,7 +11,7 @@ public class ChainAction : Action
 
 	private Character.LookingDirection _lookingDirection;
 
-	public override Motion[] motions => ((SubcomponentArray<Motion>)_motions).components;
+	public override Motion[] motions => _motions.components;
 
 	public override bool canUse
 	{
@@ -29,9 +29,9 @@ public class ChainAction : Action
 	{
 		base.Awake();
 		bool flag = false;
-		for (int i = 0; i < ((SubcomponentArray<Motion>)_motions).components.Length; i++)
+		for (int i = 0; i < _motions.components.Length; i++)
 		{
-			Motion motion = ((SubcomponentArray<Motion>)_motions).components[i];
+			Motion motion = _motions.components[i];
 			if (motion.blockLook)
 			{
 				if (flag)

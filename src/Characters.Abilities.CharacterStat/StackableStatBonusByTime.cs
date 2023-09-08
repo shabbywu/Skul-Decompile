@@ -75,9 +75,9 @@ public class StackableStatBonusByTime : Ability
 
 		private void UpdateStack()
 		{
-			for (int i = 0; i < ((ReorderableArray<Stat.Value>)_stat).values.Length; i++)
+			for (int i = 0; i < _stat.values.Length; i++)
 			{
-				((ReorderableArray<Stat.Value>)_stat).values[i].value = ((ReorderableArray<Stat.Value>)ability._statPerStack).values[i].GetStackedValue(_stacks);
+				_stat.values[i].value = ability._statPerStack.values[i].GetStackedValue(_stacks);
 			}
 			owner.stat.SetNeedUpdate();
 		}

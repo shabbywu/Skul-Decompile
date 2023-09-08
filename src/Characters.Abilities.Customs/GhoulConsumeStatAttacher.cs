@@ -17,7 +17,7 @@ public class GhoulConsumeStatAttacher : AbilityAttacher
 
 		public string key;
 
-		[Subcomponent(typeof(StackableStatBonusComponent))]
+		[UnityEditor.Subcomponent(typeof(StackableStatBonusComponent))]
 		public StackableStatBonusComponent statBonus;
 	}
 
@@ -46,11 +46,11 @@ public class GhoulConsumeStatAttacher : AbilityAttacher
 
 	private void OnOwnerGaveDamage(ITarget target, in Damage originalDamage, in Damage gaveDamage, double damageDealt)
 	{
-		if ((Object)(object)target.character == (Object)null || !((EnumArray<Damage.MotionType, bool>)_motionTypeFilter)[gaveDamage.motionType] || !((EnumArray<Damage.AttackType, bool>)_attackTypeFilter)[gaveDamage.attackType] || !((EnumArray<Character.Type, bool>)_characterTypeFilter)[target.character.type] || string.IsNullOrWhiteSpace(gaveDamage.key))
+		if ((Object)(object)target.character == (Object)null || !_motionTypeFilter[gaveDamage.motionType] || !_attackTypeFilter[gaveDamage.attackType] || !_characterTypeFilter[target.character.type] || string.IsNullOrWhiteSpace(gaveDamage.key))
 		{
 			return;
 		}
-		KeyMap[] values = ((ReorderableArray<KeyMap>)_keyMaps).values;
+		KeyMap[] values = _keyMaps.values;
 		foreach (KeyMap keyMap in values)
 		{
 			if (gaveDamage.key.Equals(keyMap.key, StringComparison.OrdinalIgnoreCase))
@@ -67,7 +67,7 @@ public class GhoulConsumeStatAttacher : AbilityAttacher
 		{
 			Character character = base.owner;
 			character.onGaveDamage = (GaveDamageDelegate)Delegate.Remove(character.onGaveDamage, new GaveDamageDelegate(OnOwnerGaveDamage));
-			KeyMap[] values = ((ReorderableArray<KeyMap>)_keyMaps).values;
+			KeyMap[] values = _keyMaps.values;
 			foreach (KeyMap keyMap in values)
 			{
 				base.owner.ability.Remove(keyMap.statBonus.ability);

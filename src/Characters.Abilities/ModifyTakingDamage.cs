@@ -39,7 +39,7 @@ public class ModifyTakingDamage : Ability
 			{
 				_remainCount = ability._applyCount;
 			}
-			owner.health.onTakeDamage.Add(0, (TakeDamageDelegate)HandleOnTakeDamage);
+			owner.health.onTakeDamage.Add(0, HandleOnTakeDamage);
 		}
 
 		private bool HandleOnTakeDamage(ref Damage damage)
@@ -48,15 +48,15 @@ public class ModifyTakingDamage : Ability
 			{
 				return false;
 			}
-			if ((Object)(object)damage.attacker.character != (Object)null && !((EnumArray<Character.Type, bool>)ability._characterTypes)[damage.attacker.character.type])
+			if ((Object)(object)damage.attacker.character != (Object)null && !ability._characterTypes[damage.attacker.character.type])
 			{
 				return false;
 			}
-			if (!((EnumArray<Damage.MotionType, bool>)ability._attackTypes)[damage.motionType])
+			if (!ability._attackTypes[damage.motionType])
 			{
 				return false;
 			}
-			if (!((EnumArray<Damage.AttackType, bool>)ability._damageTypes)[damage.attackType])
+			if (!ability._damageTypes[damage.attackType])
 			{
 				return false;
 			}
@@ -80,7 +80,7 @@ public class ModifyTakingDamage : Ability
 
 		protected override void OnDetach()
 		{
-			owner.health.onTakeDamage.Remove((TakeDamageDelegate)HandleOnTakeDamage);
+			owner.health.onTakeDamage.Remove(HandleOnTakeDamage);
 		}
 
 		public override void UpdateTime(float deltaTime)

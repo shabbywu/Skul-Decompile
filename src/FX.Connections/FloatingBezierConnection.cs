@@ -64,7 +64,7 @@ public class FloatingBezierConnection : Connection
 				middlePosition += GetFloatingOffset(floatingTime, randomOffsets[j]);
 				middleCurrents[j] = GetTrackingVector(middleCurrents[j], middlePosition, _middleTrackingSpeed);
 			}
-			floatingTime += _floatingSpeed * 360f * ((ChronometerBase)Chronometer.global).deltaTime;
+			floatingTime += _floatingSpeed * 360f * Chronometer.global.deltaTime;
 			_bezierCurve.SetStart(Vector2.op_Implicit(startCurrent));
 			_bezierCurve.SetEnd(Vector2.op_Implicit(endCurrent));
 			for (int k = 0; k < middleCount; k++)
@@ -87,7 +87,7 @@ public class FloatingBezierConnection : Connection
 		//IL_0029: Unknown result type (might be due to invalid IL or missing references)
 		//IL_002a: Unknown result type (might be due to invalid IL or missing references)
 		//IL_002b: Unknown result type (might be due to invalid IL or missing references)
-		Vector2 val = (target - current) * Mathf.Min(1f, ((ChronometerBase)Chronometer.global).deltaTime * 6f * speed);
+		Vector2 val = (target - current) * Mathf.Min(1f, Chronometer.global.deltaTime * 6f * speed);
 		return current + val;
 	}
 

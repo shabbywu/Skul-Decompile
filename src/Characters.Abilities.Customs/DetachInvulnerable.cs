@@ -15,12 +15,12 @@ public class DetachInvulnerable : Ability
 
 		protected override void OnAttach()
 		{
-			owner.invulnerable.Detach((object)ability._key);
+			owner.invulnerable.Detach(ability._key);
 		}
 
 		protected override void OnDetach()
 		{
-			owner.invulnerable.Attach((object)ability._key);
+			owner.invulnerable.Attach(ability._key);
 		}
 	}
 

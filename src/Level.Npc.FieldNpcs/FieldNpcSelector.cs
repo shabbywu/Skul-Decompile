@@ -55,7 +55,7 @@ public class FieldNpcSelector : MonoBehaviour
 		Random random = new Random(GameData.Save.instance.randomSeed + 699075432 + (int)currentChapter.type * 256 + currentChapter.stageIndex * 16 + currentChapter.currentStage.pathIndex);
 		_cage = ((Component)this).GetComponentInParent<Cage>();
 		FieldNpc fieldNpc = null;
-		Npcs.Property[] values = ((ReorderableArray<Npcs.Property>)_npcs).values;
+		Npcs.Property[] values = _npcs.values;
 		double num = random.NextDouble() * (double)values.Sum((Npcs.Property a) => a.weight);
 		foreach (Npcs.Property property in values)
 		{

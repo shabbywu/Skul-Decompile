@@ -61,13 +61,13 @@ public class Gate : InteractiveObject
 
 		public GateGraphicSetting(params GateProperty[] gateProperties)
 		{
-			base.values = gateProperties;
+			values = gateProperties;
 		}
 
 		public GateProperty GetPropertyOf(Type type)
 		{
-			GateProperty[] values = base.values;
-			foreach (GateProperty gateProperty in values)
+			GateProperty[] array = values;
+			foreach (GateProperty gateProperty in array)
 			{
 				if (gateProperty.type.Equals(type))
 				{
@@ -79,12 +79,12 @@ public class Gate : InteractiveObject
 
 		public void Dispose()
 		{
-			for (int i = 0; i < base.values.Length; i++)
+			for (int i = 0; i < values.Length; i++)
 			{
-				base.values[i].Dispose();
-				base.values[i] = null;
+				values[i].Dispose();
+				values[i] = null;
 			}
-			base.values = null;
+			values = null;
 		}
 	}
 

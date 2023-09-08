@@ -42,7 +42,7 @@ public sealed class RecklessPosture : Ability
 
 		private void HandleOnTookDamage(in Damage originalDamage, in Damage tookDamage, double damageDealt)
 		{
-			if (((EnumArray<Damage.AttackType, bool>)ability._attackTypeFilter)[tookDamage.attackType])
+			if (ability._attackTypeFilter[tookDamage.attackType])
 			{
 				MultiplyStat();
 			}
@@ -56,9 +56,9 @@ public sealed class RecklessPosture : Ability
 				_loopEffect.Stop();
 				_loopEffect = null;
 			}
-			for (int i = 0; i < ((ReorderableArray<Stat.Value>)_stat).values.Length; i++)
+			for (int i = 0; i < _stat.values.Length; i++)
 			{
-				((ReorderableArray<Stat.Value>)_stat).values[i].value = ((ReorderableArray<Stat.Value>)ability._baseStat).values[i].value;
+				_stat.values[i].value = ability._baseStat.values[i].value;
 			}
 			owner.stat.SetNeedUpdate();
 		}
@@ -70,9 +70,9 @@ public sealed class RecklessPosture : Ability
 			_remainBuffTime = ability._buffDuration;
 			_buffAttached = true;
 			_loopEffect = ((ability._buffLoopEffect == null) ? null : ability._buffLoopEffect.Spawn(((Component)owner).transform.position, owner));
-			for (int i = 0; i < ((ReorderableArray<Stat.Value>)_stat).values.Length; i++)
+			for (int i = 0; i < _stat.values.Length; i++)
 			{
-				((ReorderableArray<Stat.Value>)_stat).values[i].value = ((ReorderableArray<Stat.Value>)ability._baseStat).values[i].GetStackedValue(ability._multiplierWhenHit);
+				_stat.values[i].value = ability._baseStat.values[i].GetStackedValue(ability._multiplierWhenHit);
 			}
 			owner.stat.SetNeedUpdate();
 			PersistentSingleton<SoundManager>.Instance.PlaySound(ability._buffAttachAudioClipInfo, ((Component)owner).transform.position);

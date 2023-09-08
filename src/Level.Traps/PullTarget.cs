@@ -23,7 +23,7 @@ public class PullTarget : Trap
 		while (true)
 		{
 			yield return null;
-			if (!((Object)(object)_controller.target == (Object)null) && ((ChronometerBase)Chronometer.global).timeScale != 0f)
+			if (!((Object)(object)_controller.target == (Object)null) && Chronometer.global.timeScale != 0f)
 			{
 				_controller.target.movement.push.ApplyKnockback(_controller.character, _pushInfo);
 			}

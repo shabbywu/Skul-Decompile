@@ -15,7 +15,7 @@ public class ActionAttack : Attack
 	[SerializeField]
 	protected float chanceOfDelayAffterAttack;
 
-	[Subcomponent(typeof(Idle))]
+	[UnityEditor.Subcomponent(typeof(Idle))]
 	[SerializeField]
 	protected Idle idle;
 

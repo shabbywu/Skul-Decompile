@@ -4,7 +4,7 @@ namespace Characters;
 
 public sealed class Silence
 {
-	private TrueOnlyLogicalSumList _trueOnlyLogicalSumList = new TrueOnlyLogicalSumList(false);
+	private TrueOnlyLogicalSumList _trueOnlyLogicalSumList = new TrueOnlyLogicalSumList();
 
 	private Character _owner;
 
@@ -12,8 +12,6 @@ public sealed class Silence
 
 	public Silence(Character owner)
 	{
-		//IL_0002: Unknown result type (might be due to invalid IL or missing references)
-		//IL_000c: Expected O, but got Unknown
 		_owner = owner;
 	}
 

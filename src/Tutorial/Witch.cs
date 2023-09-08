@@ -33,7 +33,7 @@ public class Witch : NPC
 		if (!_done)
 		{
 			_done = true;
-			PlayerInput.blocked.Attach((object)this);
+			PlayerInput.blocked.Attach(this);
 			Scene<GameBase>.instance.uiManager.letterBox.Appear(1f);
 			((MonoBehaviour)this).StartCoroutine(Converse());
 		}
@@ -48,18 +48,18 @@ public class Witch : NPC
 		yield return Chronometer.global.WaitForSeconds(2f);
 		_effetctSpawnPoint.position = ((Component)_player).transform.position;
 		_messageBox.sprite = _messages[0];
-		yield return Chronometer.global.WaitForSeconds((float)_duration[0]);
+		yield return Chronometer.global.WaitForSeconds(_duration[0]);
 		_messageBox.sprite = _messages[1];
 		_attack.TryStart();
 		Scene<GameBase>.instance.cameraController.Shake(1.3f, 0.5f);
-		yield return Chronometer.global.WaitForSeconds((float)_duration[1]);
+		yield return Chronometer.global.WaitForSeconds(_duration[1]);
 		_messageBox.sprite = _messages[2];
-		yield return Chronometer.global.WaitForSeconds((float)_duration[2]);
+		yield return Chronometer.global.WaitForSeconds(_duration[2]);
 		_messageBox.sprite = _messages[3];
-		yield return Chronometer.global.WaitForSeconds((float)_duration[3]);
+		yield return Chronometer.global.WaitForSeconds(_duration[3]);
 		_messageBox.sprite = _messages[4];
-		yield return Chronometer.global.WaitForSeconds((float)_duration[4]);
-		PlayerInput.blocked.Detach((object)this);
+		yield return Chronometer.global.WaitForSeconds(_duration[4]);
+		PlayerInput.blocked.Detach(this);
 		Scene<GameBase>.instance.uiManager.letterBox.Disappear(0.5f);
 		_heal.TryStart();
 		_player.health.Heal(9999.0);

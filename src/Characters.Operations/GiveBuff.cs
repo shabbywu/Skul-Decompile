@@ -8,7 +8,7 @@ namespace Characters.Operations;
 
 public class GiveBuff : CharacterOperation
 {
-	[Subcomponent(typeof(AttachAbility))]
+	[UnityEditor.Subcomponent(typeof(AttachAbility))]
 	[SerializeField]
 	private AttachAbility _attachAbility;
 
@@ -54,7 +54,7 @@ public class GiveBuff : CharacterOperation
 			return list;
 		}
 		int count = Mathf.Min(list.Count, 1);
-		ExtensionMethods.PseudoShuffle<Character>((IList<Character>)list);
+		list.PseudoShuffle();
 		return list.GetRange(0, count);
 	}
 

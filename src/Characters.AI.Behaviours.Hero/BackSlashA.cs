@@ -8,7 +8,7 @@ namespace Characters.AI.Behaviours.Hero;
 public class BackSlashA : Behaviour
 {
 	[SerializeField]
-	[Subcomponent(typeof(ChainAction))]
+	[UnityEditor.Subcomponent(typeof(ChainAction))]
 	private Action _attackAction;
 
 	public override IEnumerator CRun(AIController controller)

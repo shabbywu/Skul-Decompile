@@ -11,7 +11,7 @@ public class ArchlichSoulLootingPassiveComponent : AbilityComponent<ArchlichSoul
 
 	public override void Initialize()
 	{
-		_ability.operationsOnStacked = ((SubcomponentArray<CharacterOperation>)_operations).components;
+		_ability.operationsOnStacked = _operations.components;
 		base.Initialize();
 	}
 }

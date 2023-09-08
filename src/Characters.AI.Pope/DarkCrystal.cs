@@ -29,7 +29,7 @@ public sealed class DarkCrystal : MonoBehaviour
 				//IL_0076: Unknown result type (might be due to invalid IL or missing references)
 				//IL_007b: Unknown result type (might be due to invalid IL or missing references)
 				//IL_0093: Unknown result type (might be due to invalid IL or missing references)
-				owner.invulnerable.Attach((object)this);
+				owner.invulnerable.Attach(this);
 				((Component)ability._front).gameObject.SetActive(true);
 				((Component)ability._behind).gameObject.SetActive(true);
 				Color color = ability._frontRenderer.color;
@@ -44,7 +44,7 @@ public sealed class DarkCrystal : MonoBehaviour
 
 			protected override void OnDetach()
 			{
-				owner.invulnerable.Detach((object)this);
+				owner.invulnerable.Detach(this);
 				((MonoBehaviour)owner).StartCoroutine(CFadeOut());
 			}
 
@@ -55,7 +55,7 @@ public sealed class DarkCrystal : MonoBehaviour
 				while (elapsed < (float)duration)
 				{
 					yield return null;
-					elapsed += ((ChronometerBase)owner.chronometer.master).deltaTime;
+					elapsed += owner.chronometer.master.deltaTime;
 					Color color = ability._frontRenderer.color;
 					color.a = Mathf.Lerp(1f, 0f, elapsed / (float)duration);
 					ability._frontRenderer.color = color;
@@ -164,7 +164,7 @@ public sealed class DarkCrystal : MonoBehaviour
 		float elapsed = _doubleAbilityInterval;
 		while (!_other.owner.health.dead)
 		{
-			elapsed += ((ChronometerBase)Chronometer.global).deltaTime;
+			elapsed += Chronometer.global.deltaTime;
 			if (elapsed >= _doubleAbilityInterval)
 			{
 				elapsed -= _doubleAbilityInterval;
@@ -186,7 +186,7 @@ public sealed class DarkCrystal : MonoBehaviour
 		float elapsed = 0f;
 		while (!owner.health.dead)
 		{
-			elapsed += ((ChronometerBase)Chronometer.global).deltaTime;
+			elapsed += Chronometer.global.deltaTime;
 			if (elapsed >= _singleAbilityInterval)
 			{
 				elapsed -= _singleAbilityInterval;

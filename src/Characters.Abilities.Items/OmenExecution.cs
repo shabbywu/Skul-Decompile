@@ -37,7 +37,7 @@ public sealed class OmenExecution : Ability
 			_effectInstance = ((_effect == null) ? null : _effect.Spawn(((Component)owner).transform.position, owner));
 			Character character = owner;
 			character.onGaveDamage = (GaveDamageDelegate)Delegate.Combine(character.onGaveDamage, new GaveDamageDelegate(HandleOnGaveDamage));
-			((PriorityList<GiveDamageDelegate>)owner.onGiveDamage).Add(int.MinValue, (GiveDamageDelegate)OnGiveDamage);
+			owner.onGiveDamage.Add(int.MinValue, OnGiveDamage);
 			owner.onStartAction += HandleOnStartAction;
 		}
 
@@ -85,7 +85,7 @@ public sealed class OmenExecution : Ability
 		private void HandleOnGaveDamage(ITarget target, in Damage originalDamage, in Damage gaveDamage, double damageDealt)
 		{
 			Character character = target.character;
-			if (!((Object)(object)character == (Object)null) && ((EnumArray<Character.Type, bool>)ability._targetType)[character.type])
+			if (!((Object)(object)character == (Object)null) && ability._targetType[character.type])
 			{
 				_totalDamage += (float)damageDealt;
 				UpdateStep();
@@ -119,7 +119,7 @@ public sealed class OmenExecution : Ability
 			}
 			Character character = owner;
 			character.onGaveDamage = (GaveDamageDelegate)Delegate.Remove(character.onGaveDamage, new GaveDamageDelegate(HandleOnGaveDamage));
-			((PriorityList<GiveDamageDelegate>)owner.onGiveDamage).Remove((GiveDamageDelegate)OnGiveDamage);
+			owner.onGiveDamage.Remove(OnGiveDamage);
 			owner.onStartAction -= HandleOnStartAction;
 		}
 	}
@@ -149,7 +149,7 @@ public sealed class OmenExecution : Ability
 	private int _enhancedDamageBossHealthPercent;
 
 	[SerializeField]
-	[Information(/*Could not decode attribute arguments.*/)]
+	[Information("percentPoint", InformationAttribute.InformationType.Info, false)]
 	private float _enhancedDamageMultiplier;
 
 	[Header("단두대")]

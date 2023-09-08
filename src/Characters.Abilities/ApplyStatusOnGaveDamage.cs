@@ -47,7 +47,7 @@ public class ApplyStatusOnGaveDamage : Ability
 
 		private void OnGaveDamage(ITarget target, in Damage originalDamage, in Damage tookDamage, double damageDealt)
 		{
-			if (!(_remainTime > 0f) && !((Object)(object)target.character == (Object)null) && !((Object)(object)target.character == (Object)(object)owner) && (!ability._onCritical || tookDamage.critical) && ((EnumArray<Damage.MotionType, bool>)ability._attackTypes)[tookDamage.motionType] && ((EnumArray<Damage.AttackType, bool>)ability._types)[tookDamage.attackType] && MMMaths.PercentChance(ability._chance) && (string.IsNullOrWhiteSpace(ability._attackKey) || tookDamage.key.Equals(ability._attackKey, StringComparison.OrdinalIgnoreCase)) && owner.GiveStatus(target.character, ability._status))
+			if (!(_remainTime > 0f) && !((Object)(object)target.character == (Object)null) && !((Object)(object)target.character == (Object)(object)owner) && (!ability._onCritical || tookDamage.critical) && ability._attackTypes[tookDamage.motionType] && ability._types[tookDamage.attackType] && MMMaths.PercentChance(ability._chance) && (string.IsNullOrWhiteSpace(ability._attackKey) || tookDamage.key.Equals(ability._attackKey, StringComparison.OrdinalIgnoreCase)) && owner.GiveStatus(target.character, ability._status))
 			{
 				_remainTime = ability._cooldownTime;
 			}

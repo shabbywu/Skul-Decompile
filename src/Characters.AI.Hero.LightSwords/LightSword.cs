@@ -55,10 +55,8 @@ public class LightSword : MonoBehaviour
 		//IL_0002: Unknown result type (might be due to invalid IL or missing references)
 		//IL_000c: Unknown result type (might be due to invalid IL or missing references)
 		//IL_000d: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0014: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0019: Unknown result type (might be due to invalid IL or missing references)
 		float degree = AngleBetween(source, destination);
-		_moveCoroutine = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)this, CMove(source, destination, degree));
+		_moveCoroutine = ((MonoBehaviour)(object)this).StartCoroutineWithReference(CMove(source, destination, degree));
 		active = true;
 	}
 

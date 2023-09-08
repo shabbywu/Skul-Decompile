@@ -50,7 +50,7 @@ public sealed class HotTag : Ability
 
 		private void OnTookDamage(in Damage originalDamage, in Damage tookDamage, double damageDealt)
 		{
-			if (((EnumArray<Damage.AttackType, bool>)ability._attackType)[tookDamage.attackType])
+			if (ability._attackType[tookDamage.attackType])
 			{
 				AddStack();
 			}
@@ -58,7 +58,7 @@ public sealed class HotTag : Ability
 
 		private void OnGaveDamage(ITarget target, in Damage originalDamage, in Damage gaveDamage, double damageDealt)
 		{
-			if (((EnumArray<Damage.AttackType, bool>)ability._attackType)[gaveDamage.attackType])
+			if (ability._attackType[gaveDamage.attackType])
 			{
 				AddStack();
 			}

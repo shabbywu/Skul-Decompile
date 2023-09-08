@@ -61,7 +61,7 @@ public class CountingRandomSelector : Composite
 
 	private bool TryTakeOne(out int index)
 	{
-		ExtensionMethods.Shuffle<(int, int)>((IList<(int, int)>)_childIndics);
+		_childIndics.Shuffle();
 		for (int i = 0; i < _childIndics.Count; i++)
 		{
 			if (_childIndics[i].Item2 > 0)

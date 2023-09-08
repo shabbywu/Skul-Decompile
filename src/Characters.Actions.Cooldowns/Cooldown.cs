@@ -6,10 +6,10 @@ namespace Characters.Actions.Cooldowns;
 
 public abstract class Cooldown : MonoBehaviour
 {
-	public class SubcomponentAttribute : SubcomponentAttribute
+	public class SubcomponentAttribute : UnityEditor.SubcomponentAttribute
 	{
 		public SubcomponentAttribute()
-			: base(typeof(Time), types)
+			: base(typeof(Time), Cooldown.types)
 		{
 		}
 	}
@@ -73,6 +73,6 @@ public abstract class Cooldown : MonoBehaviour
 
 	public override string ToString()
 	{
-		return ExtensionMethods.GetAutoName((object)this);
+		return this.GetAutoName();
 	}
 }

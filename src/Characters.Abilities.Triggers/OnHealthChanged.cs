@@ -57,7 +57,7 @@ public class OnHealthChanged : Trigger
 
 	private void OnCharacterTookDamage(in Damage originalDamage, in Damage tookDamage, double damageDealt)
 	{
-		if (!(tookDamage.amount < _minDamage) && (!_onCritical || tookDamage.critical) && ((EnumArray<Damage.MotionType, bool>)_attackTypes)[tookDamage.motionType] && ((EnumArray<Damage.AttackType, bool>)_damageTypes)[tookDamage.attackType] && CheckHealthCondition())
+		if (!(tookDamage.amount < _minDamage) && (!_onCritical || tookDamage.critical) && _attackTypes[tookDamage.motionType] && _damageTypes[tookDamage.attackType] && CheckHealthCondition())
 		{
 			Invoke();
 		}

@@ -49,7 +49,7 @@ public class TakeAimContinuously : CharacterOperation
 			Vector3 val = new Vector3(targetTransform.position.x, targetTransform.position.y + targetHalfHeight) - ((Component)_centerAxisPosition).transform.position;
 			float num = Mathf.Atan2(val.y, val.x) * 57.29578f;
 			_centerAxisPosition.rotation = Quaternion.Euler(0f, 0f, _originalDirection + num);
-			elapsed += ((ChronometerBase)owner.chronometer.master).deltaTime;
+			elapsed += owner.chronometer.master.deltaTime;
 		}
 	}
 

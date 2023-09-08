@@ -81,7 +81,7 @@ public sealed class CaerleonAssassinAI : AIController
 				_chaseTeleportAttack = true;
 				yield return _chaseTelport.CRun(this);
 				character.ForceToLookAt(((Component)base.target).transform.position.x);
-				yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)character.chronometer.master, 0.3f);
+				yield return character.chronometer.master.WaitForSeconds(0.3f);
 				yield return _attack.CRun(this);
 				yield return _confusing.CRun(this);
 				_chaseTeleportAttack = false;

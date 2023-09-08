@@ -31,8 +31,6 @@ public class HandlePlayerDeath : MonoBehaviour
 	private void OnPlayerDied()
 	{
 		//IL_0081: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0118: Unknown result type (might be due to invalid IL or missing references)
-		//IL_011d: Unknown result type (might be due to invalid IL or missing references)
 		GameData.Progress.deaths++;
 		GameData.Save.instance.hasSave = false;
 		GameData.Progress.SaveAll();
@@ -48,13 +46,13 @@ public class HandlePlayerDeath : MonoBehaviour
 		_gameBase.cameraController.StartTrack(((Component)component).transform);
 		_gameBase.cameraController.Zoom(0.8f);
 		((MonoBehaviour)CoroutineProxy.instance).StartCoroutine(CWaitForGameResult());
-		_slowMotionReference = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)CoroutineProxy.instance, CSlowMotion());
+		_slowMotionReference = ((MonoBehaviour)(object)CoroutineProxy.instance).StartCoroutineWithReference(CSlowMotion());
 	}
 
 	private IEnumerator CWaitForGameResult()
 	{
 		_gameBase.uiManager.pauseEventSystem.PushEmpty();
-		PlayerInput.blocked.Attach((object)this);
+		PlayerInput.blocked.Attach(this);
 		yield return (object)new WaitForSecondsRealtime(2f);
 		_gameBase.uiManager.gameResult.Show();
 		while (!_gameBase.uiManager.gameResult.animationFinished || (!((OneAxisInputControl)KeyMapper.Map.Attack).WasPressed && !((OneAxisInputControl)KeyMapper.Map.Submit).WasPressed))
@@ -63,10 +61,10 @@ public class HandlePlayerDeath : MonoBehaviour
 		}
 		yield return Singleton<Service>.Instance.fadeInOut.CFadeOut();
 		_gameBase.uiManager.gameResult.Hide();
-		PlayerInput.blocked.Detach((object)this);
+		PlayerInput.blocked.Detach(this);
 		_gameBase.uiManager.pauseEventSystem.PopEvent();
-		((CoroutineReference)(ref _slowMotionReference)).Stop();
-		((ChronometerBase)Chronometer.global).DetachTimeScale((object)this);
+		_slowMotionReference.Stop();
+		Chronometer.global.DetachTimeScale(this);
 		if (GameData.HardmodeProgress.hardmode)
 		{
 			ExtensionMethods.Set((Type)63);
@@ -76,16 +74,16 @@ public class HandlePlayerDeath : MonoBehaviour
 
 	private IEnumerator CSlowMotion()
 	{
-		((ChronometerBase)Chronometer.global).AttachTimeScale((object)this, 0.1f);
+		Chronometer.global.AttachTimeScale(this, 0.1f);
 		yield return Chronometer.global.WaitForSeconds(0.2f);
-		((ChronometerBase)Chronometer.global).AttachTimeScale((object)this, 0.3f);
+		Chronometer.global.AttachTimeScale(this, 0.3f);
 		yield return Chronometer.global.WaitForSeconds(0.2f);
-		((ChronometerBase)Chronometer.global).AttachTimeScale((object)this, 0.5f);
+		Chronometer.global.AttachTimeScale(this, 0.5f);
 		yield return Chronometer.global.WaitForSeconds(0.2f);
-		((ChronometerBase)Chronometer.global).AttachTimeScale((object)this, 0.7f);
+		Chronometer.global.AttachTimeScale(this, 0.7f);
 		yield return Chronometer.global.WaitForSeconds(0.2f);
-		((ChronometerBase)Chronometer.global).AttachTimeScale((object)this, 0.9f);
+		Chronometer.global.AttachTimeScale(this, 0.9f);
 		yield return Chronometer.global.WaitForSeconds(0.2f);
-		((ChronometerBase)Chronometer.global).DetachTimeScale((object)this);
+		Chronometer.global.DetachTimeScale(this);
 	}
 }

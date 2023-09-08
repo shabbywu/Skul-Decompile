@@ -138,8 +138,6 @@ public sealed class SoundManager : PersistentSingleton<SoundManager>
 
 	public void PlayBackgroundMusic(AudioClip music, float volume = 1f, bool fade = true, bool loop = true, bool usePlayHistory = false)
 	{
-		//IL_00a3: Unknown result type (might be due to invalid IL or missing references)
-		//IL_00a8: Unknown result type (might be due to invalid IL or missing references)
 		if ((Object)(object)_backgroundMusic == (Object)null || (_backgroundMusic.isPlaying && (Object)(object)_targetBackgroundClip == (Object)(object)music))
 		{
 			return;
@@ -152,11 +150,11 @@ public sealed class SoundManager : PersistentSingleton<SoundManager>
 			_backgroundMusic.clip = music;
 			return;
 		}
-		((CoroutineReference)(ref _fadeBackgroundMusicReference)).Stop();
+		_fadeBackgroundMusicReference.Stop();
 		_backgroundMusic.volume = musicVolume * masterVolume * volume;
 		if (fade && Object.op_Implicit((Object)(object)_backgroundMusic.clip))
 		{
-			_fadeBackgroundMusicReference = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)this, CFadeBackgroundMusic(music, 1f, usePlayHistory));
+			_fadeBackgroundMusicReference = ((MonoBehaviour)(object)this).StartCoroutineWithReference(CFadeBackgroundMusic(music, 1f, usePlayHistory));
 			return;
 		}
 		_backgroundMusic.clip = music;
@@ -344,17 +342,15 @@ public sealed class SoundManager : PersistentSingleton<SoundManager>
 
 	public void SetInternalMusicVolume(float volume)
 	{
-		((CoroutineReference)(ref _coroutine)).Stop();
+		_coroutine.Stop();
 		_internalMusicVolume = volume;
 		UpdateMusicVolume();
 	}
 
 	public void SetInternalMusicVolume(float volume, float easeTime, AnimationCurve easeCurve)
 	{
-		//IL_0016: Unknown result type (might be due to invalid IL or missing references)
-		//IL_001b: Unknown result type (might be due to invalid IL or missing references)
-		((CoroutineReference)(ref _coroutine)).Stop();
-		_coroutine = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)this, CFadeMusicVolume(volume, easeTime, easeCurve));
+		_coroutine.Stop();
+		_coroutine = ((MonoBehaviour)(object)this).StartCoroutineWithReference(CFadeMusicVolume(volume, easeTime, easeCurve));
 	}
 
 	private IEnumerator CFadeMusicVolume(float volume, float easeTime, AnimationCurve easeCurve)

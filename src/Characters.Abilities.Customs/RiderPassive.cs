@@ -44,7 +44,7 @@ public class RiderPassive : Ability
 		{
 			double num = Math.Min(owner.stat.GetPercentPoint(Stat.Kind.MovementSpeed) * (double)ability._criticalChancePerSpeed, (double)ability._maxCriticalChance * 0.01);
 			_criticalChanceStack = (int)(num * 100.0);
-			((ReorderableArray<Stat.Value>)ability._stat).values[0].value = num;
+			ability._stat.values[0].value = num;
 			owner.stat.SetNeedUpdate();
 		}
 	}

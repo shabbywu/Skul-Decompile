@@ -42,7 +42,7 @@ public class MakeNoiseToContainer : CharacterOperation
 
 	private IEnumerator CRestore(Chronometer chronometer)
 	{
-		yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)chronometer, _restoreTime);
+		yield return chronometer.WaitForSeconds(_restoreTime);
 		Restore();
 	}
 

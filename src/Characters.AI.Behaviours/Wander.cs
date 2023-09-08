@@ -8,9 +8,9 @@ namespace Characters.AI.Behaviours;
 public class Wander : Behaviour
 {
 	[AttributeUsage(AttributeTargets.Field)]
-	public new class SubcomponentAttribute : SubcomponentAttribute
+	public new class SubcomponentAttribute : UnityEditor.SubcomponentAttribute
 	{
-		public static readonly Type[] types = new Type[3]
+		public new static readonly Type[] types = new Type[3]
 		{
 			typeof(Wander),
 			typeof(RangeWander),
@@ -28,7 +28,7 @@ public class Wander : Behaviour
 	protected Move _move;
 
 	[SerializeField]
-	[Subcomponent(typeof(Idle))]
+	[UnityEditor.Subcomponent(typeof(Idle))]
 	protected Idle _idleWhenEndWander;
 
 	[SerializeField]

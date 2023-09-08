@@ -35,7 +35,7 @@ public class ShufflePositions : MonoBehaviour
 	public void Shuffle()
 	{
 		//IL_0027: Unknown result type (might be due to invalid IL or missing references)
-		ExtensionMethods.Shuffle<Vector3>((IList<Vector3>)_positions);
+		_positions.Shuffle();
 		for (int i = 0; i < _childs.Count; i++)
 		{
 			((Component)_childs[i]).transform.position = _positions[i];

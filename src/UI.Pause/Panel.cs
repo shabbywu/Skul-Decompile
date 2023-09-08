@@ -60,7 +60,7 @@ public class Panel : Dialogue
 
 	private void Awake()
 	{
-		_statePanels = new EnumArray<State, Dialogue>(new Dialogue[3] { _menu, _controls, _settings });
+		_statePanels = new EnumArray<State, Dialogue>(_menu, _controls, _settings);
 		Selectable[] componentsInChildren = ((Component)this).GetComponentsInChildren<Selectable>(true);
 		for (int i = 0; i < componentsInChildren.Length; i++)
 		{
@@ -74,8 +74,8 @@ public class Panel : Dialogue
 		base.OnEnable();
 		state = State.Menu;
 		PersistentSingleton<SoundManager>.Instance.PlaySound(_openSound, Vector3.zero);
-		PlayerInput.blocked.Attach((object)this);
-		((ChronometerBase)Chronometer.global).AttachTimeScale((object)this, 0f);
+		PlayerInput.blocked.Attach(this);
+		Chronometer.global.AttachTimeScale(this, 0f);
 	}
 
 	protected override void OnDisable()
@@ -86,8 +86,8 @@ public class Panel : Dialogue
 			base.OnDisable();
 			PersistentSingleton<SoundManager>.Instance.PlaySound(_closeSound, Vector3.zero);
 			_statePanels[_state].Close();
-			PlayerInput.blocked.Detach((object)this);
-			((ChronometerBase)Chronometer.global).DetachTimeScale((object)this);
+			PlayerInput.blocked.Detach(this);
+			Chronometer.global.DetachTimeScale(this);
 		}
 	}
 

@@ -10,6 +10,6 @@ public class CameraShakeCurve : CharacterOperation
 
 	public override void Run(Character owner)
 	{
-		Scene<GameBase>.instance.cameraController.shake.Attach((object)this, _curve);
+		Scene<GameBase>.instance.cameraController.shake.Attach(this, _curve);
 	}
 }

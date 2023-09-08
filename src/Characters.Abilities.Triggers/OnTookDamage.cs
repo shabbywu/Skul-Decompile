@@ -34,19 +34,19 @@ public class OnTookDamage : Trigger
 	public override void Attach(Character character)
 	{
 		_character = character;
-		_character.health.onTakeDamage.Add(-2147483647, (TakeDamageDelegate)OnCharacterTakeDamage);
+		_character.health.onTakeDamage.Add(-2147483647, OnCharacterTakeDamage);
 		_character.health.onTookDamage += OnCharacterTookDamage;
 	}
 
 	public override void Detach()
 	{
-		_character.health.onTakeDamage.Remove((TakeDamageDelegate)OnCharacterTakeDamage);
+		_character.health.onTakeDamage.Remove(OnCharacterTakeDamage);
 		_character.health.onTookDamage -= OnCharacterTookDamage;
 	}
 
 	private void OnCharacterTookDamage(in Damage originalDamage, in Damage tookDamage, double damageDealt)
 	{
-		if ((_onCritical && !tookDamage.critical) || !((EnumArray<Damage.MotionType, bool>)_attackTypes)[tookDamage.motionType] || !((EnumArray<Damage.AttackType, bool>)_damageTypes)[tookDamage.attackType])
+		if ((_onCritical && !tookDamage.critical) || !_attackTypes[tookDamage.motionType] || !_damageTypes[tookDamage.attackType])
 		{
 			return;
 		}

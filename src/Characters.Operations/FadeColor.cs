@@ -26,7 +26,7 @@ public class FadeColor : CharacterOperation
 		float time = 0f;
 		while (time < _duration)
 		{
-			time += ((ChronometerBase)owner.chronometer.master).deltaTime;
+			time += owner.chronometer.master.deltaTime;
 			_sprite.color = startColor + different * (time / _duration);
 			yield return null;
 		}

@@ -11,7 +11,7 @@ public class SpriteFadeOut : MonoBehaviour
 	private float _duration;
 
 	[SerializeField]
-	private Method _easingMehtod;
+	private EasingFunction.Method _easingMehtod;
 
 	private void OnEnable()
 	{
@@ -21,12 +21,12 @@ public class SpriteFadeOut : MonoBehaviour
 	private IEnumerator CFadeOut()
 	{
 		Color color = Color.white;
-		Function easeFunction = EasingFunction.GetEasingFunction(_easingMehtod);
+		EasingFunction.Function easeFunction = EasingFunction.GetEasingFunction(_easingMehtod);
 		float t = 0f;
 		while (t <= _duration)
 		{
 			t += Time.deltaTime;
-			color.a = easeFunction.Invoke(1f, 0f, t);
+			color.a = easeFunction(1f, 0f, t);
 			_spriteRenderer.color = color;
 			yield return null;
 		}

@@ -31,7 +31,7 @@ public sealed class InstantAttack : CharacterOperation, IAttack
 	private ChronoInfo _chronoToTarget;
 
 	[SerializeField]
-	[Subcomponent(typeof(OperationInfo))]
+	[UnityEditor.Subcomponent(typeof(OperationInfo))]
 	internal OperationInfo.Subcomponents _operationToOwnerWhenHitInfo;
 
 	[SerializeField]
@@ -49,7 +49,7 @@ public sealed class InstantAttack : CharacterOperation, IAttack
 	private bool _optimizedCollider = true;
 
 	[SerializeField]
-	[Subcomponent(typeof(TargetedOperationInfo))]
+	[UnityEditor.Subcomponent(typeof(TargetedOperationInfo))]
 	private TargetedOperationInfo.Subcomponents _operationInfo;
 
 	[SerializeField]
@@ -77,7 +77,7 @@ public sealed class InstantAttack : CharacterOperation, IAttack
 	private void Awake()
 	{
 		//IL_0080: Unknown result type (might be due to invalid IL or missing references)
-		Array.Sort(((SubcomponentArray<TargetedOperationInfo>)_operationInfo).components, (TargetedOperationInfo x, TargetedOperationInfo y) => x.timeToTrigger.CompareTo(y.timeToTrigger));
+		Array.Sort(_operationInfo.components, (TargetedOperationInfo x, TargetedOperationInfo y) => x.timeToTrigger.CompareTo(y.timeToTrigger));
 		if (_optimizedCollider && (Object)(object)_collider != (Object)null)
 		{
 			((Behaviour)_collider).enabled = false;
@@ -91,7 +91,7 @@ public sealed class InstantAttack : CharacterOperation, IAttack
 		base.Initialize();
 		_attackDamage = ((Component)this).GetComponentInParent<IAttackDamage>();
 		_operationInfo.Initialize();
-		TargetedOperationInfo[] components = ((SubcomponentArray<TargetedOperationInfo>)_operationInfo).components;
+		TargetedOperationInfo[] components = _operationInfo.components;
 		foreach (TargetedOperationInfo targetedOperationInfo in components)
 		{
 			if (targetedOperationInfo.operation is Knockback knockback)
@@ -165,10 +165,10 @@ public sealed class InstantAttack : CharacterOperation, IAttack
 				continue;
 			}
 			Bounds bounds2 = component.collider.bounds;
-			Bounds val = default(Bounds);
-			((Bounds)(ref val)).min = Vector2.op_Implicit(MMMaths.Max(Vector2.op_Implicit(((Bounds)(ref bounds)).min), Vector2.op_Implicit(((Bounds)(ref bounds2)).min)));
-			((Bounds)(ref val)).max = Vector2.op_Implicit(MMMaths.Min(Vector2.op_Implicit(((Bounds)(ref bounds)).max), Vector2.op_Implicit(((Bounds)(ref bounds2)).max)));
-			Vector2 hitPoint = MMMaths.RandomPointWithinBounds(val);
+			Bounds bounds3 = default(Bounds);
+			((Bounds)(ref bounds3)).min = Vector2.op_Implicit(MMMaths.Max(Vector2.op_Implicit(((Bounds)(ref bounds)).min), Vector2.op_Implicit(((Bounds)(ref bounds2)).min)));
+			((Bounds)(ref bounds3)).max = Vector2.op_Implicit(MMMaths.Min(Vector2.op_Implicit(((Bounds)(ref bounds)).max), Vector2.op_Implicit(((Bounds)(ref bounds2)).max)));
+			Vector2 hitPoint = MMMaths.RandomPointWithinBounds(bounds3);
 			Vector2 force = Vector2.zero;
 			if (_pushInfo != null)
 			{
@@ -188,14 +188,14 @@ public sealed class InstantAttack : CharacterOperation, IAttack
 					Damage damage = owner.stat.GetDamage(_attackDamage.amount, hitPoint, _hitInfo);
 					if (_hitInfo.attackType != 0)
 					{
-						CommonResource.instance.hitParticle.Emit(Vector2.op_Implicit(((Component)component).transform.position), val, force);
+						CommonResource.instance.hitParticle.Emit(Vector2.op_Implicit(((Component)component).transform.position), bounds3, force);
 					}
 					flag = owner.TryAttackCharacter(component, ref damage);
 					if (flag)
 					{
 						((MonoBehaviour)this).StartCoroutine(_operationInfo.CRun(owner, component.character));
 						this.onHit?.Invoke(component, ref damage);
-						_effect.Spawn(owner, val, in damage, component);
+						_effect.Spawn(owner, bounds3, in damage, component);
 					}
 				}
 			}
@@ -204,8 +204,8 @@ public sealed class InstantAttack : CharacterOperation, IAttack
 				Damage damage2 = owner.stat.GetDamage(_attackDamage.amount, hitPoint, _hitInfo);
 				if (component.damageable.spawnEffectOnHit && _hitInfo.attackType != 0)
 				{
-					CommonResource.instance.hitParticle.Emit(Vector2.op_Implicit(((Component)component).transform.position), val, force);
-					_effect.Spawn(owner, val, in damage2, component);
+					CommonResource.instance.hitParticle.Emit(Vector2.op_Implicit(((Component)component).transform.position), bounds3, force);
+					_effect.Spawn(owner, bounds3, in damage2, component);
 				}
 				if (_hitInfo.attackType == Damage.AttackType.None)
 				{
@@ -223,7 +223,7 @@ public sealed class InstantAttack : CharacterOperation, IAttack
 		{
 			_chronoToGlobe.ApplyGlobe();
 			_chronoToOwner.ApplyTo(owner);
-			if (((SubcomponentArray<OperationInfo>)_operationToOwnerWhenHitInfo).components.Length != 0)
+			if (_operationToOwnerWhenHitInfo.components.Length != 0)
 			{
 				((MonoBehaviour)this).StartCoroutine(_operationToOwnerWhenHitInfo.CRun(owner));
 			}

@@ -21,7 +21,7 @@ public sealed class Brave : SimpleStatBonusKeyword
 
 			protected override void OnAttach()
 			{
-				((PriorityList<GiveDamageDelegate>)owner.onGiveDamage).Add(int.MaxValue, (GiveDamageDelegate)HandleOnGiveDamage);
+				owner.onGiveDamage.Add(int.MaxValue, HandleOnGiveDamage);
 				ChangeIconFillToBuffTime();
 			}
 
@@ -48,7 +48,7 @@ public sealed class Brave : SimpleStatBonusKeyword
 			protected override void OnDetach()
 			{
 				OnDetachBuff();
-				((PriorityList<GiveDamageDelegate>)owner.onGiveDamage).Remove((GiveDamageDelegate)HandleOnGiveDamage);
+				owner.onGiveDamage.Remove(HandleOnGiveDamage);
 			}
 
 			protected override void OnDetachBuff()

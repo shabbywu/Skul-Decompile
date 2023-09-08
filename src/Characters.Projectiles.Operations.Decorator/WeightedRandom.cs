@@ -6,7 +6,7 @@ namespace Characters.Projectiles.Operations.Decorator;
 public class WeightedRandom : Operation
 {
 	[SerializeField]
-	[Subcomponent(typeof(OperationWithWeight))]
+	[UnityEditor.Subcomponent(typeof(OperationWithWeight))]
 	private OperationWithWeight.Subcomponents _toRandom;
 
 	public override void Run(IProjectile projectile)

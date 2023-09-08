@@ -13,10 +13,9 @@ public class EnableBDAfterWaiting : IBDCharacterSetting
 
 	public void ApplyTo(Character character)
 	{
-		//IL_0016: Unknown result type (might be due to invalid IL or missing references)
 		BehaviorTree component = ((Component)character).GetComponent<BehaviorTree>();
 		((Behaviour)component).enabled = false;
-		CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)character, CWaitAndThenEnable(component));
+		((MonoBehaviour)(object)character).StartCoroutineWithReference(CWaitAndThenEnable(component));
 	}
 
 	private IEnumerator CWaitAndThenEnable(BehaviorTree behaviorDesigner)

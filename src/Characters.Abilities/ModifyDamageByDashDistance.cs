@@ -104,9 +104,9 @@ public sealed class ModifyDamageByDashDistance : Ability
 		{
 			float num = Mathf.Abs(_start - _end);
 			_attachedValue = Mathf.Lerp(0f, ability._maxStatBonusValue, num / ability._maxDistance);
-			for (int i = 0; i < ((ReorderableArray<Stat.Value>)_stats).values.Length; i++)
+			for (int i = 0; i < _stats.values.Length; i++)
 			{
-				((ReorderableArray<Stat.Value>)_stats).values[i].value = _attachedValue;
+				_stats.values[i].value = _attachedValue;
 			}
 			owner.stat.AttachOrUpdateValues(_stats);
 			_attached = true;
@@ -127,7 +127,7 @@ public sealed class ModifyDamageByDashDistance : Ability
 	private float _maxDistance;
 
 	[SerializeField]
-	[Information(/*Could not decode attribute arguments.*/)]
+	[Information("Percent, 100% = 100", InformationAttribute.InformationType.Info, false)]
 	private float _maxStatBonusValue;
 
 	public override IAbilityInstance CreateInstance(Character owner)

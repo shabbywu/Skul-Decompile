@@ -11,9 +11,9 @@ public class OperationWithWeight : MonoBehaviour
 	{
 		internal void Initialize()
 		{
-			for (int i = 0; i < base._components.Length; i++)
+			for (int i = 0; i < _components.Length; i++)
 			{
-				OperationWithWeight operationWithWeight = base._components[i];
+				OperationWithWeight operationWithWeight = _components[i];
 				if (!((Object)(object)operationWithWeight._operation == (Object)null))
 				{
 					operationWithWeight._operation.Initialize();
@@ -24,13 +24,13 @@ public class OperationWithWeight : MonoBehaviour
 		public void RunWeightedRandom(Character owner)
 		{
 			CharacterOperation characterOperation = null;
-			float num = Random.Range(0f, base._components.Sum((OperationWithWeight c) => c._weight));
-			for (int i = 0; i < base._components.Length; i++)
+			float num = Random.Range(0f, _components.Sum((OperationWithWeight c) => c._weight));
+			for (int i = 0; i < _components.Length; i++)
 			{
-				num -= base._components[i]._weight;
+				num -= _components[i]._weight;
 				if (num <= 0f)
 				{
-					characterOperation = base._components[i]._operation;
+					characterOperation = _components[i]._operation;
 					break;
 				}
 			}
@@ -44,7 +44,7 @@ public class OperationWithWeight : MonoBehaviour
 		{
 			for (int i = 0; i < base.components.Length; i++)
 			{
-				OperationWithWeight operationWithWeight = base._components[i];
+				OperationWithWeight operationWithWeight = _components[i];
 				if (!((Object)(object)operationWithWeight._operation == (Object)null))
 				{
 					operationWithWeight._operation.Stop();

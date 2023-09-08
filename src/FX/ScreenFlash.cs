@@ -167,7 +167,7 @@ public class ScreenFlash : MonoBehaviour
 				color.a = alpha * Mathf.LerpUnclamped(0f, 1f, curve.Evaluate(_fadedPercent));
 				_spriteRenderer.color = color;
 				yield return null;
-				_fadedPercent += ((ChronometerBase)Chronometer.global).deltaTime / duration;
+				_fadedPercent += Chronometer.global.deltaTime / duration;
 			}
 		}
 		_fadedPercent = 1f;
@@ -186,7 +186,7 @@ public class ScreenFlash : MonoBehaviour
 				color.a = alpha * Mathf.LerpUnclamped(0f, 1f, curve.Evaluate(_fadedPercent));
 				_spriteRenderer.color = color;
 				yield return null;
-				_fadedPercent -= ((ChronometerBase)Chronometer.global).deltaTime / duration;
+				_fadedPercent -= Chronometer.global.deltaTime / duration;
 			}
 		}
 		_fadedPercent = 0f;

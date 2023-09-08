@@ -138,7 +138,7 @@ public sealed class CheckRaySight : Node
 			{
 				RaycastHit2D val = results[0];
 				Target component = ((Component)((RaycastHit2D)(ref val)).collider).GetComponent<Target>();
-				if (!((Object)(object)component == (Object)null) && !((Object)(object)component.character == (Object)null) && ((EnumArray<Character.Type, bool>)_characterTypeFilter)[component.character.type])
+				if (!((Object)(object)component == (Object)null) && !((Object)(object)component.character == (Object)null) && _characterTypeFilter[component.character.type])
 				{
 					return component.character;
 				}
@@ -166,7 +166,7 @@ public sealed class CheckRaySight : Node
 			{
 				RaycastHit2D val = results[0];
 				Target component = ((Component)((RaycastHit2D)(ref val)).collider).GetComponent<Target>();
-				if (!((Object)(object)component == (Object)null) && !((Object)(object)component.character == (Object)null) && ((EnumArray<Character.Type, bool>)_characterTypeFilter)[component.character.type])
+				if (!((Object)(object)component == (Object)null) && !((Object)(object)component.character == (Object)null) && _characterTypeFilter[component.character.type])
 				{
 					return component.character;
 				}

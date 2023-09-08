@@ -5,13 +5,13 @@ namespace Level.Waves;
 
 public class Selector : Decorator
 {
-	[Subcomponent(typeof(SpawnConditionInfo))]
+	[UnityEditor.Subcomponent(typeof(SpawnConditionInfo))]
 	[SerializeField]
 	private SpawnConditionInfo.Subcomponents _conditions;
 
 	protected override bool Check(EnemyWave wave)
 	{
-		SpawnConditionInfo[] components = ((SubcomponentArray<SpawnConditionInfo>)_conditions).components;
+		SpawnConditionInfo[] components = _conditions.components;
 		for (int i = 0; i < components.Length; i++)
 		{
 			if (components[i].IsSatisfied(wave))

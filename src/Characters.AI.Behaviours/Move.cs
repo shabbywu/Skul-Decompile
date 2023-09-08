@@ -8,9 +8,9 @@ namespace Characters.AI.Behaviours;
 public abstract class Move : Behaviour
 {
 	[AttributeUsage(AttributeTargets.Field)]
-	public new class SubcomponentAttribute : SubcomponentAttribute
+	public new class SubcomponentAttribute : UnityEditor.SubcomponentAttribute
 	{
-		public static readonly Type[] types = new Type[6]
+		public new static readonly Type[] types = new Type[6]
 		{
 			typeof(MoveForDuration),
 			typeof(MoveToDestination),
@@ -30,7 +30,7 @@ public abstract class Move : Behaviour
 	public Vector2 direction;
 
 	[SerializeField]
-	[Subcomponent(typeof(Idle))]
+	[UnityEditor.Subcomponent(typeof(Idle))]
 	protected Behaviour idle;
 
 	[SerializeField]

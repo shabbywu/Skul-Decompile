@@ -42,9 +42,7 @@ public class LerpCollider : CharacterOperation
 
 	public override void Run(Character owner)
 	{
-		//IL_0009: Unknown result type (might be due to invalid IL or missing references)
-		//IL_000e: Unknown result type (might be due to invalid IL or missing references)
-		_coroutineReference = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)this, CRun(owner));
+		_coroutineReference = ((MonoBehaviour)(object)this).StartCoroutineWithReference(CRun(owner));
 	}
 
 	private IEnumerator CRun(Character owner)
@@ -57,7 +55,7 @@ public class LerpCollider : CharacterOperation
 		yield return CLerp(owner.chronometer.master, _sourceToDestCurve, source, sourceOffset, dest, destOffset);
 		if (_bounce)
 		{
-			yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)owner.chronometer.master, _term);
+			yield return owner.chronometer.master.WaitForSeconds(_term);
 			yield return CLerp(owner.chronometer.master, _destToSourceCurve, dest, destOffset, source, sourceOffset);
 		}
 	}
@@ -72,7 +70,7 @@ public class LerpCollider : CharacterOperation
 		//IL_002d: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0033: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0035: Unknown result type (might be due to invalid IL or missing references)
-		for (float elapsed = 0f; elapsed < curve.duration; elapsed += ((ChronometerBase)chronometer).deltaTime)
+		for (float elapsed = 0f; elapsed < curve.duration; elapsed += chronometer.deltaTime)
 		{
 			yield return null;
 			_source.size = Vector2.Lerp(source, dest, curve.Evaluate(elapsed));
@@ -88,6 +86,6 @@ public class LerpCollider : CharacterOperation
 		//IL_0018: Unknown result type (might be due to invalid IL or missing references)
 		_source.size = _originSize;
 		((Collider2D)_source).offset = _originOffset;
-		((CoroutineReference)(ref _coroutineReference)).Stop();
+		_coroutineReference.Stop();
 	}
 }

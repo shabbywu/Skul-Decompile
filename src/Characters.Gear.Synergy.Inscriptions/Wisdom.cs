@@ -21,7 +21,7 @@ public sealed class Wisdom : SimpleStatBonusKeyword
 
 			protected override void OnAttach()
 			{
-				((PriorityList<GiveDamageDelegate>)owner.onGiveDamage).Add(int.MaxValue, (GiveDamageDelegate)HandleOnGiveDamage);
+				owner.onGiveDamage.Add(int.MaxValue, HandleOnGiveDamage);
 				ChangeIconFillToBuffTime();
 			}
 
@@ -48,7 +48,7 @@ public sealed class Wisdom : SimpleStatBonusKeyword
 			protected override void OnDetach()
 			{
 				owner.stat.DetachValues(_buffs._statValues);
-				((PriorityList<GiveDamageDelegate>)owner.onGiveDamage).Remove((GiveDamageDelegate)HandleOnGiveDamage);
+				owner.onGiveDamage.Remove(HandleOnGiveDamage);
 				OnDetachBuff();
 			}
 

@@ -19,13 +19,13 @@ public class EssenceRecruitPassive : Ability
 
 		protected override void OnAttach()
 		{
-			owner.health.onTakeDamage.Add(int.MaxValue, (TakeDamageDelegate)OnTakeDamage);
+			owner.health.onTakeDamage.Add(int.MaxValue, OnTakeDamage);
 			owner.stat.AttachValues(ability._stat);
 		}
 
 		protected override void OnDetach()
 		{
-			owner.health.onTakeDamage.Remove((TakeDamageDelegate)OnTakeDamage);
+			owner.health.onTakeDamage.Remove(OnTakeDamage);
 			owner.stat.DetachValues(ability._stat);
 		}
 

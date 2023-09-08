@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using Characters;
 using UnityEngine;
 
@@ -26,19 +25,19 @@ public class DarkEnemyCandidate
 			{
 				Debug.LogError((object)"target count is 0");
 			}
-			return ExtensionMethods.Random<Character>((IEnumerable<Character>)_lowTargets, random);
+			return _lowTargets.Random(random);
 		case Tier.Middle:
 			if (_middleTargets.Length == 0)
 			{
 				Debug.LogError((object)"target count is 0");
 			}
-			return ExtensionMethods.Random<Character>((IEnumerable<Character>)_middleTargets, random);
+			return _middleTargets.Random(random);
 		case Tier.High:
 			if (_highTargets.Length == 0)
 			{
 				Debug.LogError((object)"target count is 0");
 			}
-			return ExtensionMethods.Random<Character>((IEnumerable<Character>)_highTargets, random);
+			return _highTargets.Random(random);
 		default:
 			return null;
 		}

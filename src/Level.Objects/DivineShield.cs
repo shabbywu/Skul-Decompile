@@ -103,7 +103,7 @@ public class DivineShield : MonoBehaviour
 			Debug.LogError((object)"대상이 2명 이상입니다");
 			yield break;
 		}
-		_target = ExtensionMethods.Random<Character>((IEnumerable<Character>)characters);
+		_target = characters.Random();
 		Initialize();
 		AttachShield();
 	}
@@ -154,7 +154,7 @@ public class DivineShield : MonoBehaviour
 			_spawnedLoopEffect = _smallEffect.Spawn(((Component)_target).transform.position, _target);
 			break;
 		}
-		_target.health.onTakeDamage.Add(int.MaxValue, (TakeDamageDelegate)OnTakeDamage);
+		_target.health.onTakeDamage.Add(int.MaxValue, OnTakeDamage);
 		_prop.onDestroy += DetachShield;
 		_target.onDie += InstantDestroy;
 	}
@@ -169,7 +169,7 @@ public class DivineShield : MonoBehaviour
 				_spawnedLoopEffect = null;
 			}
 			_target.ability.Remove(_smallShield.ability);
-			_target.health.onTakeDamage.Remove((TakeDamageDelegate)OnTakeDamage);
+			_target.health.onTakeDamage.Remove(OnTakeDamage);
 		}
 	}
 

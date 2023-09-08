@@ -24,16 +24,14 @@ public sealed class MaxStatStackAbilityAttacher : AbilityAttacher
 
 	public override void StartAttach()
 	{
-		//IL_0008: Unknown result type (might be due to invalid IL or missing references)
-		//IL_000d: Unknown result type (might be due to invalid IL or missing references)
-		_cUpdateReference = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)this, CUpdate());
+		_cUpdateReference = ((MonoBehaviour)(object)this).StartCoroutineWithReference(CUpdate());
 	}
 
 	public override void StopAttach()
 	{
 		if (!((Object)(object)base.owner == (Object)null))
 		{
-			((CoroutineReference)(ref _cUpdateReference)).Stop();
+			_cUpdateReference.Stop();
 			base.owner.ability.Remove(_abilityComponent.ability);
 		}
 	}
@@ -61,6 +59,6 @@ public sealed class MaxStatStackAbilityAttacher : AbilityAttacher
 
 	public override string ToString()
 	{
-		return ExtensionMethods.GetAutoName((object)this);
+		return this.GetAutoName();
 	}
 }

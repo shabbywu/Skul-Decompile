@@ -106,7 +106,7 @@ public class LightSwordStuck : MonoBehaviour
 	private IEnumerator CEaseColor()
 	{
 		float duration = _hitColorCurve.duration;
-		for (float time = 0f; time < duration; time += ((ChronometerBase)Chronometer.global).deltaTime)
+		for (float time = 0f; time < duration; time += Chronometer.global.deltaTime)
 		{
 			_body.color = Color.Lerp(_startColor, _endColor, _hitColorCurve.Evaluate(time));
 			yield return null;

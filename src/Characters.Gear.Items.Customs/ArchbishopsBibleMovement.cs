@@ -32,13 +32,11 @@ public sealed class ArchbishopsBibleMovement : MonoBehaviour
 
 	public void StartMove(OperationInfos operationInfos)
 	{
-		//IL_002b: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0030: Unknown result type (might be due to invalid IL or missing references)
 		_owner = operationInfos.owner;
 		FindTarget();
 		FindPlatform();
-		((CoroutineReference)(ref _chaseReference)).Stop();
-		_chaseReference = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)this, CChase());
+		_chaseReference.Stop();
+		_chaseReference = ((MonoBehaviour)(object)this).StartCoroutineWithReference(CChase());
 	}
 
 	private void FindTarget()
@@ -100,7 +98,7 @@ public sealed class ArchbishopsBibleMovement : MonoBehaviour
 		//IL_00d7: Unknown result type (might be due to invalid IL or missing references)
 		//IL_00dc: Unknown result type (might be due to invalid IL or missing references)
 		//IL_00df: Unknown result type (might be due to invalid IL or missing references)
-		float deltaTime = ((ChronometerBase)Chronometer.global).deltaTime;
+		float deltaTime = Chronometer.global.deltaTime;
 		float x = ((Component)_target).transform.position.x;
 		Bounds bounds = _platform.bounds;
 		Vector2 val = default(Vector2);
@@ -131,7 +129,7 @@ public sealed class ArchbishopsBibleMovement : MonoBehaviour
 		while (true)
 		{
 			yield return null;
-			_remainFindTime -= ((ChronometerBase)Chronometer.global).deltaTime;
+			_remainFindTime -= Chronometer.global.deltaTime;
 			if (_remainFindTime <= 0f)
 			{
 				FindTarget();

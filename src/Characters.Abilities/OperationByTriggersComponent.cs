@@ -11,7 +11,7 @@ public sealed class OperationByTriggersComponent : AbilityComponent<OperationByT
 
 	public override void Initialize()
 	{
-		_ability.operations = ((SubcomponentArray<CharacterOperation>)_operations).components;
+		_ability.operations = _operations.components;
 		base.Initialize();
 	}
 }

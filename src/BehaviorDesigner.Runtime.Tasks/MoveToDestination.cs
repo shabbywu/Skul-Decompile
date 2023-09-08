@@ -90,7 +90,7 @@ public class MoveToDestination : Action
 				{
 					Vector3 val = _destinationTransformValue.position - ((Component)_ownerValue).transform.position;
 					Vector2 val2 = Vector2.op_Implicit(((Vector3)(ref val)).normalized);
-					float num = _ownerValue.stat.GetInterpolatedMovementSpeed() * ((ChronometerBase)_ownerValue.chronometer.master).deltaTime;
+					float num = _ownerValue.stat.GetInterpolatedMovementSpeed() * _ownerValue.chronometer.master.deltaTime;
 					Vector2 val3 = val2 * num;
 					float num2 = Vector2.Distance(Vector2.op_Implicit(_destinationTransformValue.position), Vector2.op_Implicit(((Component)_ownerValue).transform.position));
 					float num3 = Vector2.Distance(Vector2.op_Implicit(_destinationTransformValue.position), Vector2.op_Implicit(((Component)_ownerValue).transform.position) + val3);

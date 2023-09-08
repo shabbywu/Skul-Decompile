@@ -37,8 +37,8 @@ public sealed class AngrySight : Ability
 
 		protected override void OnAttach()
 		{
-			owner.health.onTakeDamage.Add(0, (TakeDamageDelegate)HandleOnTakeDamage);
-			((PriorityList<GiveDamageDelegate>)owner.onGiveDamage).Add(0, (GiveDamageDelegate)HandleOnGiveDamage);
+			owner.health.onTakeDamage.Add(0, HandleOnTakeDamage);
+			owner.onGiveDamage.Add(0, HandleOnGiveDamage);
 			_spotLight = ((Component)owner).GetComponent<CharacterSpotLight>();
 		}
 
@@ -86,7 +86,7 @@ public sealed class AngrySight : Ability
 		private void DetachInvulnerable()
 		{
 			//IL_0038: Unknown result type (might be due to invalid IL or missing references)
-			owner.invulnerable.Detach((object)this);
+			owner.invulnerable.Detach(this);
 			_spotLight.Activate();
 			PersistentSingleton<SoundManager>.Instance.PlaySound(ability._attachAudioClipInfo, ((Component)owner).transform.position);
 		}
@@ -94,16 +94,16 @@ public sealed class AngrySight : Ability
 		private void Down()
 		{
 			//IL_0037: Unknown result type (might be due to invalid IL or missing references)
-			owner.invulnerable.Attach((object)this);
+			owner.invulnerable.Attach(this);
 			_spotLight.Deactivate();
 			PersistentSingleton<SoundManager>.Instance.PlaySound(ability._detachAudioClipInfo, ((Component)owner).transform.position);
 		}
 
 		protected override void OnDetach()
 		{
-			owner.health.onTakeDamage.Remove((TakeDamageDelegate)HandleOnTakeDamage);
-			((PriorityList<GiveDamageDelegate>)owner.onGiveDamage).Remove((GiveDamageDelegate)HandleOnGiveDamage);
-			owner.invulnerable.Detach((object)this);
+			owner.health.onTakeDamage.Remove(HandleOnTakeDamage);
+			owner.onGiveDamage.Remove(HandleOnGiveDamage);
+			owner.invulnerable.Detach(this);
 			_spotLight.Deactivate();
 		}
 	}

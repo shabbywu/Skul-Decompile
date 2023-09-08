@@ -66,7 +66,7 @@ public sealed class FirstAttackAbilityAttacher : AbilityAttacher
 	private void HandleOnGaveDamage(ITarget target, in Damage originalDamage, in Damage gaveDamage, double damageDealt)
 	{
 		Character character = target.character;
-		if (!((Object)(object)character == (Object)null) && ((EnumArray<Character.Type, bool>)_targetTypeFilter)[character.type] && ((EnumArray<Damage.MotionType, bool>)_motionTypeFilter)[gaveDamage.motionType] && ((EnumArray<Damage.AttackType, bool>)_attackTypeFilter)[gaveDamage.attackType] && ((EnumArray<Damage.Attribute, bool>)_attributeFilter)[gaveDamage.attribute] && !character.ability.Contains(_mark))
+		if (!((Object)(object)character == (Object)null) && _targetTypeFilter[character.type] && _motionTypeFilter[gaveDamage.motionType] && _attackTypeFilter[gaveDamage.attackType] && _attributeFilter[gaveDamage.attribute] && !character.ability.Contains(_mark))
 		{
 			character.ability.Add(_mark);
 			base.owner.ability.Add(_abilityComponent.ability);
@@ -85,6 +85,6 @@ public sealed class FirstAttackAbilityAttacher : AbilityAttacher
 
 	public override string ToString()
 	{
-		return ExtensionMethods.GetAutoName((object)this);
+		return this.GetAutoName();
 	}
 }

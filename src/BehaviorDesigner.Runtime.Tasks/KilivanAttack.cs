@@ -47,7 +47,7 @@ public sealed class KilivanAttack : Action
 		{
 			_throw.TryStart();
 		}
-		if (_kilivanFinish.UpdateMove(((ChronometerBase)Chronometer.global).deltaTime, _destination))
+		if (_kilivanFinish.UpdateMove(Chronometer.global.deltaTime, _destination))
 		{
 			return (TaskStatus)3;
 		}

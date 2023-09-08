@@ -26,10 +26,10 @@ public class KeepDistance : Behaviour
 	private Vector2 _distance;
 
 	[SerializeField]
-	[Subcomponent(typeof(MoveToDestination))]
+	[UnityEditor.Subcomponent(typeof(MoveToDestination))]
 	private MoveToDestination _moveToDestination;
 
-	[Subcomponent(typeof(BackStep))]
+	[UnityEditor.Subcomponent(typeof(BackStep))]
 	[SerializeField]
 	private BackStep _backStep;
 
@@ -121,7 +121,7 @@ public class KeepDistance : Behaviour
 
 	private IEnumerator CCheckMoveCoolDown(Chronometer chronometer)
 	{
-		yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)chronometer, _moveCooldownTime);
+		yield return chronometer.WaitForSeconds(_moveCooldownTime);
 		_moveCanUse = true;
 	}
 

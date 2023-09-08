@@ -45,16 +45,16 @@ public sealed class FanaticLadder : MonoBehaviour
 			float speed = 6f;
 			while (elapsed2 < 0.4f)
 			{
-				transform.Translate(Vector2.op_Implicit(Vector2.up * speed * elapsed2 * ((ChronometerBase)Chronometer.global).deltaTime));
-				elapsed2 += ((ChronometerBase)Chronometer.global).deltaTime;
-				speed -= ((ChronometerBase)Chronometer.global).deltaTime;
+				transform.Translate(Vector2.op_Implicit(Vector2.up * speed * elapsed2 * Chronometer.global.deltaTime));
+				elapsed2 += Chronometer.global.deltaTime;
+				speed -= Chronometer.global.deltaTime;
 				yield return null;
 			}
 			elapsed2 = 0f;
 			while (elapsed2 < 3f)
 			{
-				transform.Translate(Vector2.op_Implicit(Vector2.down * 5f * (1f + elapsed2) * ((ChronometerBase)Chronometer.global).deltaTime));
-				elapsed2 += ((ChronometerBase)Chronometer.global).deltaTime;
+				transform.Translate(Vector2.op_Implicit(Vector2.down * 5f * (1f + elapsed2) * Chronometer.global.deltaTime));
+				elapsed2 += Chronometer.global.deltaTime;
 				yield return null;
 			}
 		}

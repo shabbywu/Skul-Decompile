@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using Characters;
 using Characters.Gear;
 using Data;
@@ -36,14 +35,10 @@ public class TombRaider : Npc
 
 	private Random _random;
 
-	public string submitLine => ExtensionMethods.Random<string>((IEnumerable<string>)Localization.GetLocalizedStringArray("npc/TombRaider/submit/line"));
+	public string submitLine => Localization.GetLocalizedStringArray("npc/TombRaider/submit/line").Random();
 
 	private void Start()
 	{
-		//IL_0054: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0059: Unknown result type (might be due to invalid IL or missing references)
-		//IL_006b: Unknown result type (might be due to invalid IL or missing references)
-		//IL_00b1: Unknown result type (might be due to invalid IL or missing references)
 		Chapter currentChapter = Singleton<Service>.Instance.levelManager.currentChapter;
 		SettingsByStage marketSettings = currentChapter.currentStage.marketSettings;
 		_random = new Random(GameData.Save.instance.randomSeed + 1485841739 + (int)currentChapter.type * 16 + currentChapter.stageIndex);

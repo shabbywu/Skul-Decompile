@@ -193,8 +193,8 @@ public class CombatAction : MonoBehaviour
 
 	private void Update()
 	{
-		_mightyBlow.Update(((ChronometerBase)_character.chronometer.master).deltaTime);
-		_massacre.Update(((ChronometerBase)_character.chronometer.master).deltaTime);
+		_mightyBlow.Update(_character.chronometer.master.deltaTime);
+		_massacre.Update(_character.chronometer.master.deltaTime);
 	}
 
 	private void onGaveDamage(ITarget target, in Damage originalDamage, in Damage tookDamage, double damageDealt)

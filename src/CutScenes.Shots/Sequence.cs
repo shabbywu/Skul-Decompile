@@ -9,10 +9,10 @@ namespace CutScenes.Shots;
 
 public abstract class Sequence : CRunnable
 {
-	public class SubcomponentAttribute : SubcomponentAttribute
+	public class SubcomponentAttribute : UnityEditor.SubcomponentAttribute
 	{
 		public SubcomponentAttribute()
-			: base(true, CRunnable.types.Concat(types).ToArray())
+			: base(allowCustom: true, CRunnable.types.Concat(Sequence.types).ToArray())
 		{
 		}
 	}

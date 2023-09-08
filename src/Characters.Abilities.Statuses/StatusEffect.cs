@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using FX;
 using FX.SpriteEffects;
@@ -448,15 +447,11 @@ public sealed class StatusEffect
 
 		public Burn(Character character)
 		{
-			//IL_000b: Unknown result type (might be due to invalid IL or missing references)
-			//IL_0015: Expected O, but got Unknown
 			Initialize(character);
 		}
 
 		public Burn(Burn copyFrom, Character character)
 		{
-			//IL_000b: Unknown result type (might be due to invalid IL or missing references)
-			//IL_0015: Expected O, but got Unknown
 			_range = copyFrom._range;
 			_scale = copyFrom._scale;
 			Initialize(character);
@@ -464,12 +459,6 @@ public sealed class StatusEffect
 
 		public override void Initialize(Character character)
 		{
-			//IL_0041: Unknown result type (might be due to invalid IL or missing references)
-			//IL_004b: Expected O, but got Unknown
-			//IL_007c: Unknown result type (might be due to invalid IL or missing references)
-			//IL_0086: Expected O, but got Unknown
-			//IL_0091: Unknown result type (might be due to invalid IL or missing references)
-			//IL_009b: Expected O, but got Unknown
 			_character = character;
 			if ((Object)(object)_range == (Object)null)
 			{
@@ -581,15 +570,11 @@ public sealed class StatusEffect
 
 		public Poison(Character character)
 		{
-			//IL_000b: Unknown result type (might be due to invalid IL or missing references)
-			//IL_0015: Expected O, but got Unknown
 			Initialize(character);
 		}
 
 		public Poison(Poison copyFrom, Character character)
 		{
-			//IL_000b: Unknown result type (might be due to invalid IL or missing references)
-			//IL_0015: Expected O, but got Unknown
 			_scale = copyFrom._scale;
 			_range = copyFrom._range;
 			Initialize(character);
@@ -631,7 +616,7 @@ public sealed class StatusEffect
 			//IL_001b: Unknown result type (might be due to invalid IL or missing references)
 			//IL_004c: Unknown result type (might be due to invalid IL or missing references)
 			//IL_005c: Unknown result type (might be due to invalid IL or missing references)
-			EffectPoolInstance effectPoolInstance = ExtensionMethods.Random<EffectInfo>((IEnumerable<EffectInfo>)_effects).Spawn(Vector2.op_Implicit(MMMaths.RandomPointWithinBounds(_range.bounds)));
+			EffectPoolInstance effectPoolInstance = _effects.Random().Spawn(Vector2.op_Implicit(MMMaths.RandomPointWithinBounds(_range.bounds)));
 			if (MMMaths.RandomBool())
 			{
 				((Component)effectPoolInstance).transform.localScale = new Vector3(-1f, 1f, 1f) * _scale.value;
@@ -725,23 +710,11 @@ public sealed class StatusEffect
 
 		public Wound(Character character)
 		{
-			//IL_000b: Unknown result type (might be due to invalid IL or missing references)
-			//IL_0015: Expected O, but got Unknown
-			//IL_0020: Unknown result type (might be due to invalid IL or missing references)
-			//IL_002a: Expected O, but got Unknown
-			//IL_0035: Unknown result type (might be due to invalid IL or missing references)
-			//IL_003f: Expected O, but got Unknown
 			Initialize(character);
 		}
 
 		public Wound(Wound copyFrom, Character character)
 		{
-			//IL_000b: Unknown result type (might be due to invalid IL or missing references)
-			//IL_0015: Expected O, but got Unknown
-			//IL_0020: Unknown result type (might be due to invalid IL or missing references)
-			//IL_002a: Expected O, but got Unknown
-			//IL_0035: Unknown result type (might be due to invalid IL or missing references)
-			//IL_003f: Expected O, but got Unknown
 			_range = copyFrom._range;
 			_loopEffectScale = copyFrom._loopEffectScale;
 			_loopEffectImpactScale = copyFrom._loopEffectImpactScale;
@@ -751,12 +724,6 @@ public sealed class StatusEffect
 
 		public override void Initialize(Character character)
 		{
-			//IL_002c: Unknown result type (might be due to invalid IL or missing references)
-			//IL_0036: Expected O, but got Unknown
-			//IL_0041: Unknown result type (might be due to invalid IL or missing references)
-			//IL_004b: Expected O, but got Unknown
-			//IL_0056: Unknown result type (might be due to invalid IL or missing references)
-			//IL_0060: Expected O, but got Unknown
 			_character = character;
 			if ((Object)(object)_range == (Object)null)
 			{
@@ -803,7 +770,7 @@ public sealed class StatusEffect
 			_loopEffectImpactRemainTime -= deltaTime;
 			if (_loopEffectRemainTime < 0f)
 			{
-				EffectInfo effectInfo = ExtensionMethods.Random<EffectInfo>((IEnumerable<EffectInfo>)_loopEffects);
+				EffectInfo effectInfo = _loopEffects.Random();
 				effectInfo.flipX = MMMaths.RandomBool();
 				effectInfo.Spawn(Vector2.op_Implicit(MMMaths.RandomPointWithinBounds(_range.bounds)));
 				_loopEffectRemainTime += _loopEffectInterval.value;

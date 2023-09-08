@@ -138,13 +138,13 @@ public class BombSkulPassive : Ability, IAbilityInstance
 		_riskyUpgrade.cooldown.stacks = _upgradablecount;
 		_gauge.defaultBarColor = _defaultGaugeColor;
 		ResetGauge();
-		((PriorityList<GiveDamageDelegate>)owner.onGiveDamage).Remove((GiveDamageDelegate)OnGiveDamage);
+		owner.onGiveDamage.Remove(OnGiveDamage);
 		Singleton<Service>.Instance.levelManager.onMapLoaded += RemoveAllSmallBombs;
 	}
 
 	public void Detach()
 	{
-		((PriorityList<GiveDamageDelegate>)owner.onGiveDamage).Remove((GiveDamageDelegate)OnGiveDamage);
+		owner.onGiveDamage.Remove(OnGiveDamage);
 		Singleton<Service>.Instance.levelManager.onMapLoaded -= RemoveAllSmallBombs;
 		RemoveAllSmallBombs();
 	}
@@ -182,14 +182,14 @@ public class BombSkulPassive : Ability, IAbilityInstance
 	public void Explode()
 	{
 		_gauge.Clear();
-		((PriorityList<GiveDamageDelegate>)owner.onGiveDamage).Add(0, (GiveDamageDelegate)OnGiveDamage);
+		owner.onGiveDamage.Add(0, OnGiveDamage);
 		_operations.Run(owner);
 		foreach (OperationRunner smallBomb in _smallBombs)
 		{
 			smallBomb.operationInfos.Run(owner);
 		}
 		_smallBombs.Clear();
-		((PriorityList<GiveDamageDelegate>)owner.onGiveDamage).Remove((GiveDamageDelegate)OnGiveDamage);
+		owner.onGiveDamage.Remove(OnGiveDamage);
 		owner.playerComponents.inventory.weapon.NextWeapon(force: true);
 	}
 

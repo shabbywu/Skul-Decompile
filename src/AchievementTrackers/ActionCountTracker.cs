@@ -34,7 +34,7 @@ public class ActionCountTracker : MonoBehaviour
 
 	private IEnumerator CTimeout()
 	{
-		yield return Chronometer.global.WaitForSeconds((float)_timeout);
+		yield return Chronometer.global.WaitForSeconds(_timeout);
 		_currentCount = 0;
 	}
 }

@@ -50,7 +50,7 @@ public class Skeleton_SwordPassive : Ability
 
 		private void OnGaveDamage(ITarget target, in Damage originalDamage, in Damage gaveDamage, double damageDealt)
 		{
-			if (!((Object)(object)target.character == (Object)null) && !target.character.health.dead && ((EnumArray<Damage.MotionType, bool>)ability._motionTypeFilter)[gaveDamage.motionType] && ((EnumArray<Damage.AttackType, bool>)ability._damageTypeFilter)[gaveDamage.attackType] && MMMaths.PercentChance((_remainBonusTime < 0f) ? ability._chance : ability._chanceWithBonus))
+			if (!((Object)(object)target.character == (Object)null) && !target.character.health.dead && ability._motionTypeFilter[gaveDamage.motionType] && ability._damageTypeFilter[gaveDamage.attackType] && MMMaths.PercentChance((_remainBonusTime < 0f) ? ability._chance : ability._chanceWithBonus))
 			{
 				owner.GiveStatus(target.character, ability._status);
 			}

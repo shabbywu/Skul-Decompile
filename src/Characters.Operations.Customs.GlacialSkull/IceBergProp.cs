@@ -99,16 +99,14 @@ public class IceBergProp : DestructibleObject
 		//IL_0028: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0031: Unknown result type (might be due to invalid IL or missing references)
 		//IL_004c: Unknown result type (might be due to invalid IL or missing references)
-		//IL_006a: Unknown result type (might be due to invalid IL or missing references)
-		//IL_006f: Unknown result type (might be due to invalid IL or missing references)
 		if (damage.motionType == Damage.MotionType.Basic && owner.type == Character.Type.Player)
 		{
 			damage.Evaluate(immuneToCritical: false);
 			this.onDidHit?.Invoke(owner, in damage, force);
 			FireProjectile(owner, damage.hitPoint);
 			PersistentSingleton<SoundManager>.Instance.PlaySound(_hitSound, ((Component)this).transform.position);
-			((CoroutineReference)(ref _cEaseColorReference)).Stop();
-			_cEaseColorReference = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)this, CEaseColor());
+			_cEaseColorReference.Stop();
+			_cEaseColorReference = ((MonoBehaviour)(object)this).StartCoroutineWithReference(CEaseColor());
 		}
 	}
 
@@ -129,7 +127,7 @@ public class IceBergProp : DestructibleObject
 	private IEnumerator CEaseColor()
 	{
 		float duration = _hitColorCurve.duration;
-		for (float time = 0f; time < duration; time += ((ChronometerBase)Chronometer.global).deltaTime)
+		for (float time = 0f; time < duration; time += Chronometer.global.deltaTime)
 		{
 			_spriteRenderer.color = Color.Lerp(_startColor, _endColor, _hitColorCurve.Evaluate(time));
 			yield return null;

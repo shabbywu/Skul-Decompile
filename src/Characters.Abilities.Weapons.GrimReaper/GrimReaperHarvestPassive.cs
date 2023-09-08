@@ -86,7 +86,7 @@ public class GrimReaperHarvestPassive : Ability, IAbilityInstance
 		//IL_005c: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0061: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0064: Unknown result type (might be due to invalid IL or missing references)
-		if (!((Object)(object)target.character == (Object)null) && ((EnumArray<Character.Type, bool>)_characterType)[target.character.type] && gaveDamage.key.Equals(_attackKey, StringComparison.OrdinalIgnoreCase) && MMMaths.PercentChance(_possibility))
+		if (!((Object)(object)target.character == (Object)null) && _characterType[target.character.type] && gaveDamage.key.Equals(_attackKey, StringComparison.OrdinalIgnoreCase) && MMMaths.PercentChance(_possibility))
 		{
 			GrimReaperSoul grimReaperSoul = _grimReaperSoul;
 			Bounds bounds = ((Collider2D)target.character.collider).bounds;
@@ -122,9 +122,9 @@ public class GrimReaperHarvestPassive : Ability, IAbilityInstance
 
 	private void UpdateStack()
 	{
-		for (int i = 0; i < ((ReorderableArray<Stat.Value>)_stat).values.Length; i++)
+		for (int i = 0; i < _stat.values.Length; i++)
 		{
-			((ReorderableArray<Stat.Value>)_stat).values[i].value = ((ReorderableArray<Stat.Value>)_statPerStack).values[i].GetStackedValue(_stack);
+			_stat.values[i].value = _statPerStack.values[i].GetStackedValue(_stack);
 		}
 		owner.stat.SetNeedUpdate();
 	}

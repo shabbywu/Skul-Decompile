@@ -8,7 +8,7 @@ namespace Characters.AI.Behaviours;
 public class EscapeTeleport : Behaviour
 {
 	[SerializeField]
-	[Subcomponent(typeof(Teleport))]
+	[UnityEditor.Subcomponent(typeof(Teleport))]
 	private Teleport _teleport;
 
 	[SerializeField]

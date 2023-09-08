@@ -33,7 +33,7 @@ public class LightSwordProjectile : MonoBehaviour
 		while (elapsed < _duration)
 		{
 			yield return null;
-			elapsed += ((ChronometerBase)Chronometer.global).deltaTime;
+			elapsed += Chronometer.global.deltaTime;
 			((Component)this).transform.position = Vector2.op_Implicit(Vector2.Lerp(src, dest, elapsed / _duration));
 		}
 		((Component)this).transform.position = Vector2.op_Implicit(dest);

@@ -25,7 +25,7 @@ public sealed class WisdomAI : AIController
 
 	private void Awake()
 	{
-		character.status.unstoppable.Attach((object)this);
+		character.status.unstoppable.Attach(this);
 		base.behaviours = new List<Behaviour> { _checkWithinSight, _attack };
 	}
 

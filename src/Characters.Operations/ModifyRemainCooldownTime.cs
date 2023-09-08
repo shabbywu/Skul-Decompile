@@ -15,7 +15,7 @@ public sealed class ModifyRemainCooldownTime : CharacterOperation
 	{
 		foreach (Action action in owner.actions)
 		{
-			if ((action.cooldown.time != null || action.type == Action.Type.Swap) && ((EnumArray<Action.Type, bool>)_type)[action.type])
+			if ((action.cooldown.time != null || action.type == Action.Type.Swap) && _type[action.type])
 			{
 				if (action.type == Action.Type.Swap)
 				{

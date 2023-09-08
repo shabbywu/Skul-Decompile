@@ -25,6 +25,6 @@ public class CloseToPlayer : MonoBehaviour
 		//IL_0050: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0055: Unknown result type (might be due to invalid IL or missing references)
 		float num = Mathf.Sign(_player.position.x - ((Component)this).transform.position.x);
-		((Component)this).transform.Translate(Vector2.op_Implicit(new Vector2(num * ((ChronometerBase)_owner.chronometer.master).deltaTime * _speed, 0f)));
+		((Component)this).transform.Translate(Vector2.op_Implicit(new Vector2(num * _owner.chronometer.master.deltaTime * _speed, 0f)));
 	}
 }

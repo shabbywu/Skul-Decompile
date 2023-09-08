@@ -7,9 +7,9 @@ namespace Level.Waves;
 public abstract class SpawnCondition : MonoBehaviour
 {
 	[AttributeUsage(AttributeTargets.Field)]
-	public class SubcomponentAttribute : SubcomponentAttribute
+	public class SubcomponentAttribute : UnityEditor.SubcomponentAttribute
 	{
-		public static readonly Type[] types = new Type[9]
+		public new static readonly Type[] types = new Type[9]
 		{
 			typeof(Always),
 			typeof(EnterZone),

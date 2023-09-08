@@ -20,10 +20,10 @@ public class TripleDance : Behaviour
 	private Behaviour _strike;
 
 	[SerializeField]
-	[Subcomponent(typeof(OperationInfos))]
+	[UnityEditor.Subcomponent(typeof(OperationInfos))]
 	private OperationInfos _throwGhost;
 
-	[Subcomponent(typeof(OperationInfos))]
+	[UnityEditor.Subcomponent(typeof(OperationInfos))]
 	[SerializeField]
 	private OperationInfos _slashGhost;
 

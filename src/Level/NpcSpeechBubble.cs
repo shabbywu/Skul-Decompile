@@ -25,7 +25,7 @@ public class NpcSpeechBubble : MonoBehaviour
 
 	public void Show()
 	{
-		_text.text = ExtensionMethods.Random<string>((IEnumerable<string>)_scripts);
+		_text.text = _scripts.Random();
 		((Component)this).gameObject.SetActive(true);
 	}
 

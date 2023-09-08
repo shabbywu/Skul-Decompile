@@ -36,19 +36,19 @@ public class WitchBonus
 		{
 			get
 			{
-				return ((Data<int>)(object)_data).value;
+				return _data.value;
 			}
 			set
 			{
-				if (value == 0 && ((Data<int>)(object)_data).value > 0)
+				if (value == 0 && _data.value > 0)
 				{
 					Detach();
 				}
-				else if (value > 0 && ((Data<int>)(object)_data).value == 0)
+				else if (value > 0 && _data.value == 0)
 				{
 					Attach();
 				}
-				((Data<int>)(object)_data).value = value;
+				_data.value = value;
 				Update();
 			}
 		}
@@ -138,15 +138,15 @@ public class WitchBonus
 			base.Update();
 			if (Stat.Kind.values[_statPerLevel.kindIndex].valueForm == Stat.Kind.ValueForm.Product)
 			{
-				((ReorderableArray<Stat.Value>)stat).values[0].value = 1.0 - (double)base.level * _statPerLevel.value;
+				stat.values[0].value = 1.0 - (double)base.level * _statPerLevel.value;
 			}
 			else if (_statPerLevel.categoryIndex == Stat.Category.Percent.index)
 			{
-				((ReorderableArray<Stat.Value>)stat).values[0].value = 1.0 + (double)base.level * _statPerLevel.value;
+				stat.values[0].value = 1.0 + (double)base.level * _statPerLevel.value;
 			}
 			else
 			{
-				((ReorderableArray<Stat.Value>)stat).values[0].value = (double)base.level * _statPerLevel.value;
+				stat.values[0].value = (double)base.level * _statPerLevel.value;
 			}
 			_owner.stat.SetNeedUpdate();
 		}
@@ -195,12 +195,12 @@ public class WitchBonus
 		protected override void Update()
 		{
 			base.Update();
-			for (int i = 0; i < ((ReorderableArray<Stat.Value>)stat).values.Length; i++)
+			for (int i = 0; i < stat.values.Length; i++)
 			{
-				Stat.Value value = ((ReorderableArray<Stat.Value>)stat).values[i];
+				Stat.Value value = stat.values[i];
 				if (_owner.playerComponents.inventory.weapon.current.category == _weaponCategory)
 				{
-					Stat.Value value2 = ((ReorderableArray<Stat.Value>)_statPerLevel).values[i];
+					Stat.Value value2 = _statPerLevel.values[i];
 					if (Stat.Kind.values[value2.kindIndex].valueForm == Stat.Kind.ValueForm.Product)
 					{
 						value.value = 1.0 - (double)base.level * value2.value;
@@ -228,7 +228,7 @@ public class WitchBonus
 
 		public override string GetDescription(int level)
 		{
-			object[] args = ((IEnumerable<Stat.Value>)((ReorderableArray<Stat.Value>)_statPerLevel).values).Select((Func<Stat.Value, object>)((Stat.Value stat) => stat.value * (double)level)).ToArray();
+			object[] args = ((IEnumerable<Stat.Value>)_statPerLevel.values).Select((Func<Stat.Value, object>)((Stat.Value stat) => stat.value * (double)level)).ToArray();
 			return string.Format(Localization.GetLocalizedString(_key + "/desc"), args);
 		}
 
@@ -409,18 +409,16 @@ public class WitchBonus
 			//IL_01d6: Unknown result type (might be due to invalid IL or missing references)
 			//IL_01db: Unknown result type (might be due to invalid IL or missing references)
 			//IL_0249: Unknown result type (might be due to invalid IL or missing references)
-			//IL_0271: Unknown result type (might be due to invalid IL or missing references)
-			//IL_027d: Expected O, but got Unknown
 			if (GameData.Progress.reassembleUsed || _owner.ability.GetInstance<Revive>() != null)
 			{
 				return;
 			}
-			((ChronometerBase)Chronometer.global).AttachTimeScale((object)this, 0.2f, 0.5f);
+			Chronometer.global.AttachTimeScale(this, 0.2f, 0.5f);
 			_owner.health.FixedAmountHeal(_owner.health.maximumHealth * (double)_remainhealthPercent * (double)base.level);
 			GameData.Progress.reassembleUsed = true;
 			CommonResource.instance.reassembleParticle.Emit(Vector2.op_Implicit(((Component)_owner).transform.position), ((Collider2D)_owner.collider).bounds, _owner.movement.push);
 			_owner.CancelAction();
-			((ChronometerBase)_owner.chronometer.master).AttachTimeScale((object)this, 0.01f, 0.5f);
+			_owner.chronometer.master.AttachTimeScale(this, 0.01f, 0.5f);
 			_owner.spriteEffectStack.Add(new ColorBlend(int.MaxValue, Color.clear, 0.5f));
 			GetInvulnerable getInvulnerable = new GetInvulnerable();
 			getInvulnerable.duration = 2 + base.level;
@@ -432,7 +430,7 @@ public class WitchBonus
 				radius = 8f
 			};
 			((ContactFilter2D)(ref ((Caster)val).contactFilter)).SetLayerMask(_layer.Evaluate(((Component)_owner).gameObject));
-			List<Target> components = GetComponentExtension.GetComponents<Target>((IEnumerable<RaycastHit2D>)((Caster)val).Cast(), true);
+			List<Target> components = ((Caster)val).Cast().GetComponents<Target>();
 			for (int i = 0; i < components.Count; i++)
 			{
 				Character character = components[i].character;
@@ -504,7 +502,7 @@ public class WitchBonus
 
 		public override string GetDescription(int level)
 		{
-			return string.Format(Localization.GetLocalizedString(_key + "/desc"), _itemRarityGoldsPerLevel[(Rarity)3] * level);
+			return string.Format(Localization.GetLocalizedString(_key + "/desc"), _itemRarityGoldsPerLevel[Rarity.Legendary] * level);
 		}
 
 		public override void Attach()
@@ -517,13 +515,11 @@ public class WitchBonus
 
 		public int GetGoldByDiscard(Item item)
 		{
-			//IL_0007: Unknown result type (might be due to invalid IL or missing references)
 			return _itemRarityGoldsPerLevel[item.rarity] * base.level;
 		}
 
 		public int GetGoldByDiscard(Quintessence essence)
 		{
-			//IL_0007: Unknown result type (might be due to invalid IL or missing references)
 			return _eseenceRarityGoldsPerLevel[essence.rarity] * base.level;
 		}
 	}
@@ -610,29 +606,13 @@ public class WitchBonus
 
 		public Soul(Character owner)
 		{
-			//IL_01bc: Unknown result type (might be due to invalid IL or missing references)
-			//IL_01fb: Unknown result type (might be due to invalid IL or missing references)
-			//IL_0205: Expected O, but got Unknown
-			//IL_0205: Expected O, but got Unknown
 			soulAcceleration = new StatBonus("witch/soul/0", owner, GameData.Progress.witch.soul[0], WitchSettings.instance.영혼가속_비용, new Stat.Value(Stat.Category.PercentPoint, Stat.Kind.CriticalChance, WitchSettings.instance.영혼가속_치명타확률p * 0.01f));
 			soulAcceleration.Initialize();
 			willOfAncestor = new StatBonus("witch/soul/1", owner, GameData.Progress.witch.soul[1], WitchSettings.instance.선조의의지_비용, new Stat.Value(Stat.Category.PercentPoint, Stat.Kind.EssenceCooldownSpeed, (float)WitchSettings.instance.선조의의지_정수쿨다운가속p * 0.01f));
 			willOfAncestor.Initialize();
 			fatalMind = new StatBonusByWeaponCategory("witch/soul/2", owner, GameData.Progress.witch.soul[2], WitchSettings.instance.날카로운정신_비용, Weapon.Category.Speed, new Stat.Values(new Stat.Value(Stat.Category.PercentPoint, Stat.Kind.BasicAttackSpeed, (float)WitchSettings.instance.날카로운정신_공격속도p * 0.01f), new Stat.Value(Stat.Category.PercentPoint, Stat.Kind.SkillAttackSpeed, (float)WitchSettings.instance.날카로운정신_공격속도p * 0.01f), new Stat.Value(Stat.Category.PercentPoint, Stat.Kind.MovementSpeed, (float)WitchSettings.instance.날카로운정신_이동속도p * 0.01f)));
 			fatalMind.Initialize();
-			ancientAlchemy = new Alchemy("witch/soul/3", owner, GameData.Progress.witch.soul[3], WitchSettings.instance.고대연금술_비용, new RarityPrices(new int[4]
-			{
-				WitchSettings.instance.고대연금술_골드량_커먼,
-				WitchSettings.instance.고대연금술_골드량_레어,
-				WitchSettings.instance.고대연금술_골드량_유니크,
-				WitchSettings.instance.고대연금술_골드량_레전더리
-			}), new RarityPrices(new int[4]
-			{
-				WitchSettings.instance.고대연금술_골드량_정수_커먼,
-				WitchSettings.instance.고대연금술_골드량_정수_레어,
-				WitchSettings.instance.고대연금술_골드량_정수_유니크,
-				WitchSettings.instance.고대연금술_골드량_정수_레전더리
-			}));
+			ancientAlchemy = new Alchemy("witch/soul/3", owner, GameData.Progress.witch.soul[3], WitchSettings.instance.고대연금술_비용, new RarityPrices(WitchSettings.instance.고대연금술_골드량_커먼, WitchSettings.instance.고대연금술_골드량_레어, WitchSettings.instance.고대연금술_골드량_유니크, WitchSettings.instance.고대연금술_골드량_레전더리), new RarityPrices(WitchSettings.instance.고대연금술_골드량_정수_커먼, WitchSettings.instance.고대연금술_골드량_정수_레어, WitchSettings.instance.고대연금술_골드량_정수_유니크, WitchSettings.instance.고대연금술_골드량_정수_레전더리));
 			ancientAlchemy.Initialize();
 			base.list = new ReadOnlyCollection<Bonus>(new Bonus[4] { soulAcceleration, willOfAncestor, fatalMind, ancientAlchemy });
 			InitializeTreeIndex();

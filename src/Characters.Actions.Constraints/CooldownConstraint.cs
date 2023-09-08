@@ -13,7 +13,7 @@ public class CooldownConstraint : Constraint
 	[Cooldown.Subcomponent]
 	private Cooldown _cooldown;
 
-	[Subcomponent(typeof(OperationInfo))]
+	[UnityEditor.Subcomponent(typeof(OperationInfo))]
 	[SerializeField]
 	private OperationInfo.Subcomponents _operationsWhenReady;
 

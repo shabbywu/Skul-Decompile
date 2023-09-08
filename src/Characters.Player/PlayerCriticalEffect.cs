@@ -25,8 +25,8 @@ public class PlayerCriticalEffect : MonoBehaviour
 	{
 		if (!((Object)(object)target.character == (Object)null) && !(tookDamage.amount <= 0.0) && tookDamage.critical)
 		{
-			((ChronometerBase)Chronometer.global).AttachTimeScale((object)this, 0.2f, 0.1f);
-			((ChronometerBase)_character.chronometer.master).AttachTimeScale((object)this, 5f, 0.1f);
+			Chronometer.global.AttachTimeScale(this, 0.2f, 0.1f);
+			_character.chronometer.master.AttachTimeScale(this, 5f, 0.1f);
 			_vignette.Run(_character);
 		}
 	}

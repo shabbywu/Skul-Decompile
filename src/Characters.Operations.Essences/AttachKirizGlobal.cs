@@ -7,7 +7,7 @@ namespace Characters.Operations.Essences;
 
 public class AttachKirizGlobal : CharacterOperation
 {
-	[Subcomponent(typeof(KirizComponent))]
+	[UnityEditor.Subcomponent(typeof(KirizComponent))]
 	[SerializeField]
 	private KirizComponent _abilityComponent;
 
@@ -41,6 +41,6 @@ public class AttachKirizGlobal : CharacterOperation
 
 	public override string ToString()
 	{
-		return ExtensionMethods.GetAutoName((object)this);
+		return this.GetAutoName();
 	}
 }

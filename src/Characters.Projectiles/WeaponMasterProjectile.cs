@@ -247,9 +247,9 @@ public class WeaponMasterProjectile : MonoBehaviour, IProjectile, IMonoBehaviour
 			if (!((Object)(object)target.character == (Object)null) && target.character.liveAndActive && !target.character.invulnerable.value)
 			{
 				owner.Attack(target, ref damage);
-				for (int i = 0; i < ((SubcomponentArray<Characters.Projectiles.Operations.CharacterHitOperation>)_onCharacterHit).components.Length; i++)
+				for (int i = 0; i < _onCharacterHit.components.Length; i++)
 				{
-					((SubcomponentArray<Characters.Projectiles.Operations.CharacterHitOperation>)_onCharacterHit).components[i].Run(this, raycastHit, target.character);
+					_onCharacterHit.components[i].Run(this, raycastHit, target.character);
 				}
 				_effect.Spawn(this, origin, direction, distance, raycastHit, damage, target);
 			}
@@ -260,13 +260,13 @@ public class WeaponMasterProjectile : MonoBehaviour, IProjectile, IMonoBehaviour
 	{
 		while (delay > 0f)
 		{
-			delay -= (((Object)(object)owner != (Object)null) ? ((ChronometerBase)owner.chronometer.projectile).deltaTime : ((ChronometerBase)Chronometer.global).deltaTime);
+			delay -= (((Object)(object)owner != (Object)null) ? owner.chronometer.projectile.deltaTime : Chronometer.global.deltaTime);
 			yield return null;
 		}
 		_time = 0f;
 		while (_time <= _maxLifeTime)
 		{
-			float num = (((Object)(object)owner != (Object)null) ? ((ChronometerBase)owner.chronometer.projectile).deltaTime : ((ChronometerBase)Chronometer.global).deltaTime);
+			float num = (((Object)(object)owner != (Object)null) ? owner.chronometer.projectile.deltaTime : Chronometer.global.deltaTime);
 			_time += num;
 			(Vector2, float) tuple = _movement.GetSpeed(_time, num);
 			(firedDirection, speed) = tuple;

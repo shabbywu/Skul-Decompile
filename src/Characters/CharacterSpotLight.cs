@@ -39,10 +39,6 @@ public sealed class CharacterSpotLight : MonoBehaviour
 		//IL_004c: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0051: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0097: Unknown result type (might be due to invalid IL or missing references)
-		//IL_00fd: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0102: Unknown result type (might be due to invalid IL or missing references)
-		//IL_00d1: Unknown result type (might be due to invalid IL or missing references)
-		//IL_00d6: Unknown result type (might be due to invalid IL or missing references)
 		if (!activated)
 		{
 			return;
@@ -68,24 +64,22 @@ public sealed class CharacterSpotLight : MonoBehaviour
 				return;
 			}
 			_constranitsFade = false;
-			((CoroutineReference)(ref _fadeCoroutine)).Stop();
-			_fadeCoroutine = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)this, CActivate());
+			_fadeCoroutine.Stop();
+			_fadeCoroutine = ((MonoBehaviour)(object)this).StartCoroutineWithReference(CActivate());
 		}
 		if (!_constranitsFade)
 		{
 			_constranitsFade = true;
-			((CoroutineReference)(ref _fadeCoroutine)).Stop();
-			_fadeCoroutine = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)this, CDeactivate());
+			_fadeCoroutine.Stop();
+			_fadeCoroutine = ((MonoBehaviour)(object)this).StartCoroutineWithReference(CDeactivate());
 		}
 	}
 
 	public void Activate()
 	{
-		//IL_001a: Unknown result type (might be due to invalid IL or missing references)
-		//IL_001f: Unknown result type (might be due to invalid IL or missing references)
 		activated = true;
-		((CoroutineReference)(ref _fadeCoroutine)).Stop();
-		_fadeCoroutine = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)this, CActivate());
+		_fadeCoroutine.Stop();
+		_fadeCoroutine = ((MonoBehaviour)(object)this).StartCoroutineWithReference(CActivate());
 	}
 
 	private IEnumerator CActivate()
@@ -101,11 +95,9 @@ public sealed class CharacterSpotLight : MonoBehaviour
 
 	public void Deactivate()
 	{
-		//IL_001a: Unknown result type (might be due to invalid IL or missing references)
-		//IL_001f: Unknown result type (might be due to invalid IL or missing references)
 		activated = false;
-		((CoroutineReference)(ref _fadeCoroutine)).Stop();
-		_fadeCoroutine = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)this, CDeactivate());
+		_fadeCoroutine.Stop();
+		_fadeCoroutine = ((MonoBehaviour)(object)this).StartCoroutineWithReference(CDeactivate());
 	}
 
 	private IEnumerator CDeactivate()

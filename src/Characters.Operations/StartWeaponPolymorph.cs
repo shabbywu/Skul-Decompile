@@ -70,7 +70,7 @@ public class StartWeaponPolymorph : CharacterOperation
 
 	private void ApplySkillMap()
 	{
-		if (((ReorderableArray<SkillMap>)_skillMaps).values.Length == 0)
+		if (_skillMaps.values.Length == 0)
 		{
 			return;
 		}
@@ -82,7 +82,7 @@ public class StartWeaponPolymorph : CharacterOperation
 		{
 			_matchedSkillInfos.Clear();
 		}
-		SkillMap[] values = ((ReorderableArray<SkillMap>)_skillMaps).values;
+		SkillMap[] values = _skillMaps.values;
 		foreach (SkillMap skillMap in values)
 		{
 			SkillInfo[] skills = _weaponInstance.skills;

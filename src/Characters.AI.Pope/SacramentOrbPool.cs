@@ -10,7 +10,7 @@ public class SacramentOrbPool : MonoBehaviour
 	[SerializeField]
 	private SacramentOrb _orbPrefab;
 
-	[Information(/*Could not decode attribute arguments.*/)]
+	[Information("홀수", InformationAttribute.InformationType.Info, false)]
 	[SerializeField]
 	private int _width = 5;
 

@@ -58,35 +58,29 @@ public sealed class HealthScreeningsMachine : Ability
 
 		public void UpdateStack()
 		{
-			for (int i = 0; i < ((ReorderableArray<Stat.Value>)_stat).values.Length; i++)
+			for (int i = 0; i < _stat.values.Length; i++)
 			{
-				((ReorderableArray<Stat.Value>)_stat).values[i].value = ((ReorderableArray<Stat.Value>)ability._statPerStack).values[i].GetStackedValue(ability._stack);
+				_stat.values[i].value = ability._statPerStack.values[i].GetStackedValue(ability._stack);
 			}
 			owner.stat.SetNeedUpdate();
 		}
 
 		private IEnumerator CCheckWithinRange()
 		{
-			UsingCollider val = default(UsingCollider);
 			while (base.attached)
 			{
-				((UsingCollider)(ref val))._002Ector(ability._range, true);
-				try
+				using (new UsingCollider(ability._range, optimize: true))
 				{
 					ability._overlapper.OverlapCollider(ability._range);
 				}
-				finally
-				{
-					((IDisposable)(UsingCollider)(ref val)).Dispose();
-				}
-				IEnumerable<Collider2D> source = ((IEnumerable<Collider2D>)ability._overlapper.results).Where(delegate(Collider2D result)
+				IEnumerable<Collider2D> source = ability._overlapper.results.Where(delegate(Collider2D result)
 				{
 					Character component = ((Component)result).GetComponent<Character>();
 					if ((Object)(object)component == (Object)null)
 					{
 						return false;
 					}
-					return ((EnumArray<Character.Type, bool>)ability._characterTypes)[component.type] && component.status.hasAny;
+					return ability._characterTypes[component.type] && component.status.hasAny;
 				});
 				ability._stack = Mathf.Min(ability._maxStack, source.Count());
 				UpdateStack();

@@ -75,7 +75,7 @@ public class BossAppearnaceText : MonoBehaviour
 			((Graphic)_subname).color = color;
 			if (!(elapsed > duration))
 			{
-				elapsed += ((ChronometerBase)Chronometer.global).deltaTime;
+				elapsed += Chronometer.global.deltaTime;
 				continue;
 			}
 			break;
@@ -102,7 +102,7 @@ public class BossAppearnaceText : MonoBehaviour
 			{
 				break;
 			}
-			elapsed += ((ChronometerBase)Chronometer.global).deltaTime;
+			elapsed += Chronometer.global.deltaTime;
 		}
 		visible = false;
 	}

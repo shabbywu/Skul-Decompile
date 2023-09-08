@@ -169,6 +169,6 @@ public abstract class Ability : IAbility
 
 	public override string ToString()
 	{
-		return ExtensionMethods.GetAutoName((object)this);
+		return this.GetAutoName();
 	}
 }

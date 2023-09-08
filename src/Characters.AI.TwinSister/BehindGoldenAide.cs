@@ -95,7 +95,7 @@ public class BehindGoldenAide : MonoBehaviour
 			yield return null;
 			Vector2 val = Vector2.Lerp(Vector2.op_Implicit(source), Vector2.op_Implicit(dest), elapsed / duration);
 			((Component)_character).transform.position = Vector2.op_Implicit(val);
-			elapsed += ((ChronometerBase)_character.chronometer.master).deltaTime;
+			elapsed += _character.chronometer.master.deltaTime;
 			if (elapsed > duration)
 			{
 				_character.CancelAction();

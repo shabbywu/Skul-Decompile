@@ -116,9 +116,7 @@ public sealed class Artifact : SimpleStatBonusKeyword
 
 		public void Attach()
 		{
-			//IL_000d: Unknown result type (might be due to invalid IL or missing references)
-			//IL_0012: Unknown result type (might be due to invalid IL or missing references)
-			_coroutineReference = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)_owner, CStartAttackLoop());
+			_coroutineReference = ((MonoBehaviour)(object)_owner).StartCoroutineWithReference(CStartAttackLoop());
 		}
 
 		public IAbilityInstance CreateInstance(Character owner)
@@ -134,7 +132,7 @@ public sealed class Artifact : SimpleStatBonusKeyword
 
 		public void Detach()
 		{
-			((CoroutineReference)(ref _coroutineReference)).Stop();
+			_coroutineReference.Stop();
 		}
 
 		public void Initialize()
@@ -159,7 +157,7 @@ public sealed class Artifact : SimpleStatBonusKeyword
 				{
 					if (_constraints.Pass())
 					{
-						_remainCooldownTime -= ((ChronometerBase)_owner.chronometer.master).deltaTime;
+						_remainCooldownTime -= _owner.chronometer.master.deltaTime;
 					}
 					yield return null;
 				}
@@ -174,24 +172,18 @@ public sealed class Artifact : SimpleStatBonusKeyword
 					{
 						break;
 					}
-					yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)_owner.chronometer.master, 0.3f);
+					yield return _owner.chronometer.master.WaitForSeconds(0.3f);
 				}
 			}
 		}
 
 		private bool Fire(int count)
 		{
-			UsingCollider val = default(UsingCollider);
-			((UsingCollider)(ref val))._002Ector(_range, true);
-			try
+			using (new UsingCollider(_range, optimize: true))
 			{
 				_overlapper.OverlapCollider(_range);
 			}
-			finally
-			{
-				((IDisposable)(UsingCollider)(ref val)).Dispose();
-			}
-			IEnumerable<Collider2D> source = ((IEnumerable<Collider2D>)_overlapper.results).Where(delegate(Collider2D result)
+			IEnumerable<Collider2D> source = _overlapper.results.Where(delegate(Collider2D result)
 			{
 				Target component = ((Component)result).GetComponent<Target>();
 				if ((Object)(object)component == (Object)null)
@@ -203,14 +195,14 @@ public sealed class Artifact : SimpleStatBonusKeyword
 				{
 					return false;
 				}
-				return !character.health.dead && ((EnumArray<Character.Type, bool>)_targetTypes)[character.type];
+				return !character.health.dead && _targetTypes[character.type];
 			});
 			if (source.Count() == 0)
 			{
 				return false;
 			}
 			Collider2D[] array = source.ToArray();
-			ExtensionMethods.PseudoShuffle<Collider2D>((IList<Collider2D>)array);
+			array.PseudoShuffle();
 			((MonoBehaviour)_owner).StartCoroutine(CFireWithDelay(count, array));
 			return true;
 		}
@@ -246,7 +238,7 @@ public sealed class Artifact : SimpleStatBonusKeyword
 				((Component)projectile.reusable.Spawn(Vector2.op_Implicit(val2), true)).GetComponent<Projectile>().Fire(_owner, _attackDamage.amount, direction);
 				index = (index + 1) % targets.Length;
 				remain--;
-				yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)character.chronometer.master, _firingInterval.value);
+				yield return character.chronometer.master.WaitForSeconds(_firingInterval.value);
 			}
 		}
 

@@ -4,7 +4,7 @@ namespace Characters.Operations.ObjectTransform;
 
 public sealed class SpreadTransformToPlatform : CharacterOperation
 {
-	[Information(/*Could not decode attribute arguments.*/)]
+	[Information("부모를 Map으로", InformationAttribute.InformationType.Warning, true)]
 	[SerializeField]
 	private Transform _target;
 

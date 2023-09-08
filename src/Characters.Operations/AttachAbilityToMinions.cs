@@ -157,7 +157,7 @@ public class AttachAbilityToMinions : CharacterOperation
 	{
 		int num = 0;
 		Minion[] array = enumerable.ToArray();
-		ExtensionMethods.Shuffle<Minion>((IList<Minion>)array);
+		array.Shuffle();
 		enumerable = array;
 		foreach (Minion item in enumerable)
 		{
@@ -215,6 +215,6 @@ public class AttachAbilityToMinions : CharacterOperation
 
 	public override string ToString()
 	{
-		return ExtensionMethods.GetAutoName((object)this);
+		return this.GetAutoName();
 	}
 }

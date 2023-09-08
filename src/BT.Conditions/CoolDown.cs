@@ -31,8 +31,8 @@ public class CoolDown : Condition
 	private IEnumerator CCoolDown()
 	{
 		_success = false;
-		float num = ((_time == 0f) ? _timeOverrideValue.value : _time);
-		yield return Chronometer.global.WaitForSeconds(num);
+		float seconds = ((_time == 0f) ? _timeOverrideValue.value : _time);
+		yield return Chronometer.global.WaitForSeconds(seconds);
 		_success = true;
 	}
 }

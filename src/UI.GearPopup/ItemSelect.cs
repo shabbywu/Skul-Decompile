@@ -116,8 +116,8 @@ public class ItemSelect : Dialogue
 		//IL_0011: Unknown result type (might be due to invalid IL or missing references)
 		base.OnEnable();
 		PersistentSingleton<SoundManager>.Instance.PlaySound(_openSound, Vector3.zero);
-		PlayerInput.blocked.Attach((object)this);
-		((ChronometerBase)Chronometer.global).AttachTimeScale((object)this, 0f);
+		PlayerInput.blocked.Attach(this);
+		Chronometer.global.AttachTimeScale(this, 0f);
 	}
 
 	protected override void OnDisable()
@@ -125,8 +125,8 @@ public class ItemSelect : Dialogue
 		//IL_0011: Unknown result type (might be due to invalid IL or missing references)
 		base.OnDisable();
 		PersistentSingleton<SoundManager>.Instance.PlaySound(_closeSound, Vector3.zero);
-		PlayerInput.blocked.Detach((object)this);
-		((ChronometerBase)Chronometer.global).DetachTimeScale((object)this);
+		PlayerInput.blocked.Detach(this);
+		Chronometer.global.DetachTimeScale(this);
 	}
 
 	private void OnItemSelected(int index)
@@ -134,40 +134,30 @@ public class ItemSelect : Dialogue
 		Item item = _itemInventory.items[index];
 		SetInventoryGear(item);
 		EnumArray<Inscription.Key, int> delta = new EnumArray<Inscription.Key, int>();
-		EnumArray<Inscription.Key, int> val = new EnumArray<Inscription.Key, int>();
-		Inscription.Key keyword;
-		int num;
+		EnumArray<Inscription.Key, int> enumArray = new EnumArray<Inscription.Key, int>();
 		foreach (Item item2 in _itemInventory.items)
 		{
 			if (!((Object)(object)item2 == (Object)null) && !((Object)(object)item2 == (Object)(object)item))
 			{
-				keyword = item2.keyword1;
-				num = val[keyword];
-				val[keyword] = num + 1;
-				keyword = item2.keyword2;
-				num = val[keyword];
-				val[keyword] = num + 1;
+				enumArray[item2.keyword1]++;
+				enumArray[item2.keyword2]++;
 			}
 		}
-		keyword = _fieldItem.keyword1;
-		num = val[keyword];
-		val[keyword] = num + 1;
-		keyword = _fieldItem.keyword2;
-		num = val[keyword];
-		val[keyword] = num + 1;
+		enumArray[_fieldItem.keyword1]++;
+		enumArray[_fieldItem.keyword2]++;
 		foreach (Item item3 in _itemInventory.items)
 		{
 			if (!((Object)(object)item3 == (Object)null) && !((Object)(object)item3 == (Object)(object)item))
 			{
-				item3.EvaluateBonusKeyword(val);
+				item3.EvaluateBonusKeyword(enumArray);
 			}
 		}
-		_fieldItem.EvaluateBonusKeyword(val);
+		_fieldItem.EvaluateBonusKeyword(enumArray);
 		foreach (Inscription.Key key in Inscription.keys)
 		{
-			delta[key] = val[key] + _synergy.inscriptions[key].bonusCount - _synergy.inscriptions[key].count;
+			delta[key] = enumArray[key] + _synergy.inscriptions[key].bonusCount - _synergy.inscriptions[key].count;
 		}
-		KeyValuePair<Inscription.Key, int>[] array = (from pair in val.ToKeyValuePairs()
+		KeyValuePair<Inscription.Key, int>[] array = (from pair in enumArray.ToKeyValuePairs()
 			where pair.Value > 0 || delta[pair.Key] != 0
 			select pair).OrderByDescending(delegate(KeyValuePair<Inscription.Key, int> keywordCount)
 		{
@@ -179,25 +169,25 @@ public class ItemSelect : Dialogue
 			return (keywordCount.Value >= steps[1]) ? 1 : 0;
 		}).ThenByDescending((KeyValuePair<Inscription.Key, int> keywordCount) => keywordCount.Value).ToArray();
 		KeywordElement[] keywordElements = _keywordElements;
-		for (num = 0; num < keywordElements.Length; num++)
+		for (int i = 0; i < keywordElements.Length; i++)
 		{
-			((Component)keywordElements[num]).gameObject.SetActive(false);
+			((Component)keywordElements[i]).gameObject.SetActive(false);
 		}
-		int num2 = 0;
+		int num = 0;
 		if (array.Length <= 12)
 		{
 			_moreinscriptionFrame.SetActive(false);
-			num2 = 12;
+			num = 12;
 		}
 		else
 		{
 			_moreinscriptionFrame.SetActive(true);
 		}
-		int num3 = Math.Min(array.Length, _keywordElements.Length);
-		for (int i = 0; i < num3; i++)
+		int num2 = Math.Min(array.Length, _keywordElements.Length);
+		for (int j = 0; j < num2; j++)
 		{
-			((Component)_keywordElements[i + num2]).gameObject.SetActive(true);
-			_keywordElements[i + num2].Set(array[i].Key, delta[array[i].Key]);
+			((Component)_keywordElements[j + num]).gameObject.SetActive(true);
+			_keywordElements[j + num].Set(array[j].Key, delta[array[j].Key]);
 		}
 	}
 

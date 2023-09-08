@@ -22,7 +22,7 @@ public class Synergy : MonoBehaviour
 		for (int i = 0; i < inscriptions.Count; i++)
 		{
 			inscriptions.Array[i] = new Inscription();
-			ref InscriptionSettings reference = ref ((EnumArray<Inscription.Key, InscriptionSettings>)_synergySettings.settings).Array[i];
+			ref InscriptionSettings reference = ref _synergySettings.settings.Array[i];
 			inscriptions.Array[i].Initialize(inscriptions.Keys[i], reference, character);
 		}
 	}

@@ -17,7 +17,7 @@ public class ModifyVerticalVelocity : CharacterOperation
 	[SerializeField]
 	private Method _method;
 
-	[Information(/*Could not decode attribute arguments.*/)]
+	[Information("For Add method only", InformationAttribute.InformationType.Info, false)]
 	[SerializeField]
 	private Curve _curve;
 
@@ -27,20 +27,16 @@ public class ModifyVerticalVelocity : CharacterOperation
 
 	public override void Run(Character owner)
 	{
-		//IL_0031: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0036: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0045: Unknown result type (might be due to invalid IL or missing references)
-		//IL_004a: Unknown result type (might be due to invalid IL or missing references)
 		_owner = owner;
 		if (_curve.duration > 0f)
 		{
 			switch (_method)
 			{
 			case Method.Add:
-				_coroutineReference = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)owner, CRun(owner));
+				_coroutineReference = ((MonoBehaviour)(object)owner).StartCoroutineWithReference(CRun(owner));
 				break;
 			case Method.Set:
-				_coroutineReference = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)owner, CRunWithIgnoreGravity(owner));
+				_coroutineReference = ((MonoBehaviour)(object)owner).StartCoroutineWithReference(CRunWithIgnoreGravity(owner));
 				break;
 			}
 		}
@@ -60,16 +56,16 @@ public class ModifyVerticalVelocity : CharacterOperation
 
 	private IEnumerator CRunWithIgnoreGravity(Character character)
 	{
-		character.movement.ignoreGravity.Attach((object)this);
+		character.movement.ignoreGravity.Attach(this);
 		yield return CRun(character);
-		character.movement.ignoreGravity.Detach((object)this);
+		character.movement.ignoreGravity.Detach(this);
 	}
 
 	private IEnumerator CRun(Character character)
 	{
 		float t = 0f;
 		float normAmountBefore = 0f;
-		for (; t < _curve.duration; t += ((ChronometerBase)character.chronometer.animation).deltaTime)
+		for (; t < _curve.duration; t += character.chronometer.animation.deltaTime)
 		{
 			float num = _curve.Evaluate(t);
 			switch (_method)
@@ -88,17 +84,13 @@ public class ModifyVerticalVelocity : CharacterOperation
 
 	public override void Stop()
 	{
-		if ((Object)(object)_owner == (Object)(object)((CoroutineReference)(ref _coroutineReference)).monoBehaviour)
+		if ((Object)(object)_owner == (Object)(object)_coroutineReference.monoBehaviour)
 		{
-			((CoroutineReference)(ref _coroutineReference)).Stop();
+			_coroutineReference.Stop();
 		}
 		if (_method == Method.Set)
 		{
-			Character owner = _owner;
-			if (owner != null)
-			{
-				owner.movement.ignoreGravity.Detach((object)this);
-			}
+			_owner?.movement.ignoreGravity.Detach(this);
 		}
 	}
 }

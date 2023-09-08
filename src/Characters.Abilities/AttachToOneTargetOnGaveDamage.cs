@@ -48,7 +48,7 @@ public sealed class AttachToOneTargetOnGaveDamage : Ability, IAbilityInstance
 	{
 		if (_onGiveDamage)
 		{
-			((PriorityList<GiveDamageDelegate>)owner.onGiveDamage).Add(int.MaxValue, (GiveDamageDelegate)TryAttachAbility);
+			owner.onGiveDamage.Add(int.MaxValue, TryAttachAbility);
 			return;
 		}
 		Character character = owner;
@@ -123,7 +123,7 @@ public sealed class AttachToOneTargetOnGaveDamage : Ability, IAbilityInstance
 	{
 		if (_onGiveDamage)
 		{
-			((PriorityList<GiveDamageDelegate>)owner.onGiveDamage).Remove((GiveDamageDelegate)TryAttachAbility);
+			owner.onGiveDamage.Remove(TryAttachAbility);
 		}
 		else
 		{

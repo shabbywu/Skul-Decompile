@@ -17,12 +17,12 @@ public class CriticalToMaximumHealth : Ability
 
 		protected override void OnAttach()
 		{
-			((PriorityList<GiveDamageDelegate>)owner.onGiveDamage).Add(0, (GiveDamageDelegate)OnGiveDamage);
+			owner.onGiveDamage.Add(0, OnGiveDamage);
 		}
 
 		protected override void OnDetach()
 		{
-			((PriorityList<GiveDamageDelegate>)owner.onGiveDamage).Remove((GiveDamageDelegate)OnGiveDamage);
+			owner.onGiveDamage.Remove(OnGiveDamage);
 		}
 
 		private bool OnGiveDamage(ITarget target, ref Damage damage)

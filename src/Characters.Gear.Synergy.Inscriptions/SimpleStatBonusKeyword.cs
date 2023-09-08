@@ -76,7 +76,7 @@ public abstract class SimpleStatBonusKeyword : InscriptionInstance
 
 		public void UpdateStat()
 		{
-			((ReorderableArray<Stat.Value>)stat).values[0].value = currentStatBonus;
+			stat.values[0].value = currentStatBonus;
 			_owner.stat.SetNeedUpdate();
 		}
 	}
@@ -110,8 +110,8 @@ public abstract class SimpleStatBonusKeyword : InscriptionInstance
 		{
 			_statBonus.currentStatBonus *= 0.01;
 		}
-		((ReorderableArray<Stat.Value>)_statBonus.stat).values[0].categoryIndex = statCategory.index;
-		((ReorderableArray<Stat.Value>)_statBonus.stat).values[0].kindIndex = statKind.index;
+		_statBonus.stat.values[0].categoryIndex = statCategory.index;
+		_statBonus.stat.values[0].kindIndex = statKind.index;
 		_statBonus.UpdateStat();
 	}
 

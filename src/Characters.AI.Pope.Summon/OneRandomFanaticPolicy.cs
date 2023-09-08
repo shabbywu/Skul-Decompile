@@ -16,7 +16,7 @@ public class OneRandomFanaticPolicy : FanaticPolicy
 	protected override void GetToSummons(ref List<FanaticFactory.SummonType> results, int count)
 	{
 		results.Clear();
-		FanaticFactory.SummonType item = ExtensionMethods.Random<FanaticFactory.SummonType>((IEnumerable<FanaticFactory.SummonType>)_summonTypes);
+		FanaticFactory.SummonType item = _summonTypes.Random();
 		for (int i = 0; i < count; i++)
 		{
 			results.Add(item);

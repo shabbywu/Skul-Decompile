@@ -29,7 +29,7 @@ public sealed class GlobalAttack : CharacterOperation, IAttack
 	private ChronoInfo _chronoToTarget;
 
 	[SerializeField]
-	[Subcomponent(typeof(OperationInfo))]
+	[UnityEditor.Subcomponent(typeof(OperationInfo))]
 	internal OperationInfo.Subcomponents _operationToOwnerWhenHitInfo;
 
 	[SerializeField]
@@ -37,7 +37,7 @@ public sealed class GlobalAttack : CharacterOperation, IAttack
 	private int _maxHits = 512;
 
 	[SerializeField]
-	[Subcomponent(typeof(TargetedOperationInfo))]
+	[UnityEditor.Subcomponent(typeof(TargetedOperationInfo))]
 	private TargetedOperationInfo.Subcomponents _operationInfo;
 
 	[SerializeField]
@@ -52,7 +52,7 @@ public sealed class GlobalAttack : CharacterOperation, IAttack
 
 	private void Awake()
 	{
-		Array.Sort(((SubcomponentArray<TargetedOperationInfo>)_operationInfo).components, (TargetedOperationInfo x, TargetedOperationInfo y) => x.timeToTrigger.CompareTo(y.timeToTrigger));
+		Array.Sort(_operationInfo.components, (TargetedOperationInfo x, TargetedOperationInfo y) => x.timeToTrigger.CompareTo(y.timeToTrigger));
 	}
 
 	public override void Initialize()
@@ -60,7 +60,7 @@ public sealed class GlobalAttack : CharacterOperation, IAttack
 		base.Initialize();
 		_attackDamage = ((Component)this).GetComponentInParent<IAttackDamage>();
 		_operationInfo.Initialize();
-		TargetedOperationInfo[] components = ((SubcomponentArray<TargetedOperationInfo>)_operationInfo).components;
+		TargetedOperationInfo[] components = _operationInfo.components;
 		foreach (TargetedOperationInfo targetedOperationInfo in components)
 		{
 			if (targetedOperationInfo.operation is Knockback knockback)
@@ -90,7 +90,7 @@ public sealed class GlobalAttack : CharacterOperation, IAttack
 
 	private IEnumerator CRun(Character owner, List<Character> enemies)
 	{
-		yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)owner.chronometer.master, _delay);
+		yield return owner.chronometer.master.WaitForSeconds(_delay);
 		Attack(owner, enemies);
 	}
 
@@ -161,7 +161,7 @@ public sealed class GlobalAttack : CharacterOperation, IAttack
 		{
 			_chronoToGlobe.ApplyGlobe();
 			_chronoToOwner.ApplyTo(owner);
-			if (((SubcomponentArray<OperationInfo>)_operationToOwnerWhenHitInfo).components.Length != 0)
+			if (_operationToOwnerWhenHitInfo.components.Length != 0)
 			{
 				((MonoBehaviour)this).StartCoroutine(_operationToOwnerWhenHitInfo.CRun(owner));
 			}

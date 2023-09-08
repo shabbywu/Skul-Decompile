@@ -6,10 +6,10 @@ namespace Characters.Projectiles.Operations;
 
 public abstract class HitOperation : CharacterHitOperation
 {
-	public new class SubcomponentAttribute : SubcomponentAttribute
+	public new class SubcomponentAttribute : UnityEditor.SubcomponentAttribute
 	{
 		public SubcomponentAttribute()
-			: base(true, types)
+			: base(allowCustom: true, HitOperation.types)
 		{
 		}
 	}

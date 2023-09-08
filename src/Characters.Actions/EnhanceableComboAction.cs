@@ -51,7 +51,7 @@ public class EnhanceableComboAction : Action
 
 	private ActionInfo current => _currentActionInfo[_current];
 
-	public override Motion[] motions => ((ReorderableArray<ActionInfo>)_actionInfo).values.Select((ActionInfo m) => m.motion).ToArray();
+	public override Motion[] motions => _actionInfo.values.Select((ActionInfo m) => m.motion).ToArray();
 
 	private ActionInfo[] _currentActionInfo
 	{
@@ -59,9 +59,9 @@ public class EnhanceableComboAction : Action
 		{
 			if (!enhanced)
 			{
-				return ((ReorderableArray<ActionInfo>)_actionInfo).values;
+				return _actionInfo.values;
 			}
-			return ((ReorderableArray<ActionInfo>)_enhancedActionInfo).values;
+			return _enhancedActionInfo.values;
 		}
 	}
 
@@ -81,12 +81,12 @@ public class EnhanceableComboAction : Action
 	{
 		while (_cancelReserved)
 		{
-			Motion motion = ((ReorderableArray<ActionInfo>)_actionInfo).values[_current].motion;
-			Motion motion2 = ((ReorderableArray<ActionInfo>)_enhancedActionInfo).values[_current].motion;
+			Motion motion = _actionInfo.values[_current].motion;
+			Motion motion2 = _enhancedActionInfo.values[_current].motion;
 			ActionInfo actionInfo;
 			if ((Object)(object)_owner.runningMotion == (Object)(object)motion)
 			{
-				actionInfo = ((ReorderableArray<ActionInfo>)_actionInfo).values[_current];
+				actionInfo = _actionInfo.values[_current];
 			}
 			else
 			{
@@ -94,7 +94,7 @@ public class EnhanceableComboAction : Action
 				{
 					break;
 				}
-				actionInfo = ((ReorderableArray<ActionInfo>)_enhancedActionInfo).values[_current];
+				actionInfo = _enhancedActionInfo.values[_current];
 			}
 			if (MMMaths.Range(actionInfo.motion.time, actionInfo.cancel) && (_cancelReserved || MMMaths.Range(actionInfo.motion.time, actionInfo.input)))
 			{
@@ -114,9 +114,9 @@ public class EnhanceableComboAction : Action
 	public override void Initialize(Character owner)
 	{
 		base.Initialize(owner);
-		for (int i = 0; i < ((ReorderableArray<ActionInfo>)_actionInfo).values.Length; i++)
+		for (int i = 0; i < _actionInfo.values.Length; i++)
 		{
-			((ReorderableArray<ActionInfo>)_actionInfo).values[i].motion.Initialize(this);
+			_actionInfo.values[i].motion.Initialize(this);
 		}
 	}
 
@@ -135,12 +135,12 @@ public class EnhanceableComboAction : Action
 			{
 				return false;
 			}
-			Motion motion = ((ReorderableArray<ActionInfo>)_actionInfo).values[_current].motion;
-			Motion motion2 = ((ReorderableArray<ActionInfo>)_enhancedActionInfo).values[_current].motion;
+			Motion motion = _actionInfo.values[_current].motion;
+			Motion motion2 = _enhancedActionInfo.values[_current].motion;
 			ActionInfo actionInfo;
 			if ((Object)(object)_owner.runningMotion == (Object)(object)motion)
 			{
-				actionInfo = ((ReorderableArray<ActionInfo>)_actionInfo).values[_current];
+				actionInfo = _actionInfo.values[_current];
 			}
 			else
 			{
@@ -148,7 +148,7 @@ public class EnhanceableComboAction : Action
 				{
 					return false;
 				}
-				actionInfo = ((ReorderableArray<ActionInfo>)_enhancedActionInfo).values[_current];
+				actionInfo = _enhancedActionInfo.values[_current];
 			}
 			if (actionInfo.input.x == actionInfo.input.y)
 			{

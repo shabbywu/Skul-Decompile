@@ -68,10 +68,10 @@ public class AttachAbilityWithinCollider : CharacterOperation
 
 	public override void Stop()
 	{
-		((CoroutineReference)(ref _cCheckReference)).Stop();
+		_cCheckReference.Stop();
 		foreach (Character item in _charactersWithinCollider.Current)
 		{
-			AbilityComponent[] components = ((SubcomponentArray<AbilityComponent>)_abilityComponents).components;
+			AbilityComponent[] components = _abilityComponents.components;
 			foreach (AbilityComponent abilityComponent in components)
 			{
 				item.ability.Remove(abilityComponent.ability);
@@ -82,10 +82,10 @@ public class AttachAbilityWithinCollider : CharacterOperation
 
 	private IEnumerator CRun(Character owner)
 	{
-		((CoroutineReference)(ref _cCheckReference)).Stop();
-		_cCheckReference = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)this, CCheck(owner));
+		_cCheckReference.Stop();
+		_cCheckReference = ((MonoBehaviour)(object)this).StartCoroutineWithReference(CCheck(owner));
 		yield return (object)new WaitForSeconds(_duration);
-		((CoroutineReference)(ref _cCheckReference)).Stop();
+		_cCheckReference.Stop();
 	}
 
 	private IEnumerator CCheck(Character owner)
@@ -106,7 +106,7 @@ public class AttachAbilityWithinCollider : CharacterOperation
 				if ((Object)(object)component == (Object)null)
 				{
 					Minion component2 = ((Component)_sharedOverlapper.results[i]).GetComponent<Minion>();
-					if ((Object)(object)component2 == (Object)null || !((EnumArray<Character.Type, bool>)_characterTypeFilter)[Character.Type.PlayerMinion])
+					if ((Object)(object)component2 == (Object)null || !_characterTypeFilter[Character.Type.PlayerMinion])
 					{
 						continue;
 					}
@@ -114,7 +114,7 @@ public class AttachAbilityWithinCollider : CharacterOperation
 				}
 				else
 				{
-					if ((Object)(object)component.character == (Object)null || !((EnumArray<Character.Type, bool>)_characterTypeFilter)[component.character.type])
+					if ((Object)(object)component.character == (Object)null || !_characterTypeFilter[component.character.type])
 					{
 						continue;
 					}
@@ -131,17 +131,17 @@ public class AttachAbilityWithinCollider : CharacterOperation
 					_charactersWithinCollider.Current.RemoveAt(num);
 					continue;
 				}
-				for (int j = 0; j < ((SubcomponentArray<AbilityComponent>)_abilityComponents).components.Length; j++)
+				for (int j = 0; j < _abilityComponents.components.Length; j++)
 				{
-					character.ability.Add(((SubcomponentArray<AbilityComponent>)_abilityComponents).components[j].ability);
+					character.ability.Add(_abilityComponents.components[j].ability);
 				}
 			}
 			for (int k = 0; k < _charactersWithinCollider.Current.Count; k++)
 			{
 				Character character2 = _charactersWithinCollider.Current[k];
-				for (int l = 0; l < ((SubcomponentArray<AbilityComponent>)_abilityComponents).components.Length; l++)
+				for (int l = 0; l < _abilityComponents.components.Length; l++)
 				{
-					character2.ability.Remove(((SubcomponentArray<AbilityComponent>)_abilityComponents).components[l].ability);
+					character2.ability.Remove(_abilityComponents.components[l].ability);
 				}
 			}
 			_charactersWithinCollider.Current.Clear();

@@ -59,7 +59,7 @@ public class LivingArmor2PassiveAttacher : AbilityAttacher
 
 	public override string ToString()
 	{
-		return ExtensionMethods.GetAutoName((object)this);
+		return this.GetAutoName();
 	}
 
 	private void OnGaugeValueChanged(float oldValue, float newValue)

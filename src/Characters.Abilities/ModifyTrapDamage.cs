@@ -17,12 +17,12 @@ public class ModifyTrapDamage : Ability
 
 		protected override void OnAttach()
 		{
-			owner.health.onTakeDamage.Add(int.MaxValue, (TakeDamageDelegate)OnOwnerTakeDamage);
+			owner.health.onTakeDamage.Add(int.MaxValue, OnOwnerTakeDamage);
 		}
 
 		protected override void OnDetach()
 		{
-			owner.health.onTakeDamage.Remove((TakeDamageDelegate)OnOwnerTakeDamage);
+			owner.health.onTakeDamage.Remove(OnOwnerTakeDamage);
 		}
 
 		private bool OnOwnerTakeDamage(ref Damage damage)

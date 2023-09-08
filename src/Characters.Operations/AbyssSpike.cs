@@ -52,10 +52,7 @@ public class AbyssSpike : CharacterOperation
 	private DirectionType _directionType;
 
 	[SerializeField]
-	private Reorderable _directions = new Reorderable((CustomAngle[])(object)new CustomAngle[1]
-	{
-		new CustomAngle(0f)
-	});
+	private CustomAngle.Reorderable _directions = new CustomAngle.Reorderable(new CustomAngle(0f));
 
 	private IAttackDamage _attackDamage;
 
@@ -81,7 +78,7 @@ public class AbyssSpike : CharacterOperation
 		for (int i = 0; i < count; i++)
 		{
 			Fire(owner, projectile, bounds, lookingDirection);
-			yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)owner.chronometer.animation, _fireInterval.value);
+			yield return owner.chronometer.animation.WaitForSeconds(_fireInterval.value);
 		}
 	}
 
@@ -98,7 +95,7 @@ public class AbyssSpike : CharacterOperation
 		//IL_0168: Unknown result type (might be due to invalid IL or missing references)
 		//IL_00af: Unknown result type (might be due to invalid IL or missing references)
 		//IL_00b4: Unknown result type (might be due to invalid IL or missing references)
-		CustomAngle[] values = ((ReorderableArray<CustomAngle>)(object)_directions).values;
+		CustomAngle[] values = _directions.values;
 		List<Vector2> list = new List<Vector2>(values.Length);
 		for (int i = 0; i < values.Length; i++)
 		{

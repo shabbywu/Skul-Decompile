@@ -38,8 +38,8 @@ public class FighterPassiveAttacher : AbilityAttacher
 			if (!_storingTime)
 			{
 				_storingTime = true;
-				((ChronometerBase)Chronometer.global).DetachTimeScale((object)_fighterPassive);
-				((ChronometerBase)base.owner.chronometer.master).DetachTimeScale((object)_fighterPassive);
+				Chronometer.global.DetachTimeScale(_fighterPassive);
+				base.owner.chronometer.master.DetachTimeScale(_fighterPassive);
 			}
 		}
 		else if (_storingTime)
@@ -47,8 +47,8 @@ public class FighterPassiveAttacher : AbilityAttacher
 			_storingTime = false;
 			if (_fighterPassive.buffAttached)
 			{
-				((ChronometerBase)Chronometer.global).AttachTimeScale((object)_fighterPassive, _fighterPassive.timeScale);
-				((ChronometerBase)base.owner.chronometer.master).AttachTimeScale((object)_fighterPassive, 1f / _fighterPassive.timeScale);
+				Chronometer.global.AttachTimeScale(_fighterPassive, _fighterPassive.timeScale);
+				base.owner.chronometer.master.AttachTimeScale(_fighterPassive, 1f / _fighterPassive.timeScale);
 			}
 		}
 	}
@@ -60,6 +60,6 @@ public class FighterPassiveAttacher : AbilityAttacher
 
 	public override string ToString()
 	{
-		return ExtensionMethods.GetAutoName((object)this);
+		return this.GetAutoName();
 	}
 }

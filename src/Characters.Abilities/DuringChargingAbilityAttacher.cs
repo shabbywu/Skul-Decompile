@@ -51,7 +51,7 @@ public class DuringChargingAbilityAttacher : AbilityAttacher
 	{
 		while (true)
 		{
-			_remainCooldown -= ((ChronometerBase)base.owner.chronometer.master).deltaTime;
+			_remainCooldown -= base.owner.chronometer.master.deltaTime;
 			yield return null;
 		}
 	}
@@ -68,7 +68,7 @@ public class DuringChargingAbilityAttacher : AbilityAttacher
 
 	public override string ToString()
 	{
-		return ExtensionMethods.GetAutoName((object)this);
+		return this.GetAutoName();
 	}
 
 	private void OnStartCharging(Characters.Actions.Action action)

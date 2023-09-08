@@ -17,12 +17,8 @@ public class GearInfo : MonoBehaviour
 
 	private void Awake()
 	{
-		//IL_0018: Unknown result type (might be due to invalid IL or missing references)
-		//IL_001d: Unknown result type (might be due to invalid IL or missing references)
 		_gear = ((Component)this).GetComponentInParent<Gear>();
-		Text rarity = _rarity;
-		Rarity rarity2 = _gear.rarity;
-		rarity.text = ((object)(Rarity)(ref rarity2)).ToString();
+		_rarity.text = _gear.rarity.ToString();
 		_name.text = _gear.displayName;
 		_icon.sprite = ((Component)_gear.dropped).GetComponent<SpriteRenderer>().sprite;
 	}

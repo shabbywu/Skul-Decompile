@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -19,7 +18,7 @@ public class Area : MonoBehaviour
 
 	public void Initialize()
 	{
-		_room = Object.Instantiate<Room>(ExtensionMethods.Random<Room>((IEnumerable<Room>)_roomsForThisArea), ((Component)this).transform);
+		_room = Object.Instantiate<Room>(_roomsForThisArea.Random(), ((Component)this).transform);
 		_room.Initialize(_baseTilemap, _machine);
 	}
 

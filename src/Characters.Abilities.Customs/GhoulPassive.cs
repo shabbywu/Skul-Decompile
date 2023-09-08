@@ -159,9 +159,9 @@ public class GhoulPassive : Ability, IAbilityInstance
 
 	private void UpdateStack()
 	{
-		for (int i = 0; i < ((ReorderableArray<Stat.Value>)_stat).values.Length; i++)
+		for (int i = 0; i < _stat.values.Length; i++)
 		{
-			((ReorderableArray<Stat.Value>)_stat).values[i].value = ((ReorderableArray<Stat.Value>)_statPerStack).values[i].GetStackedValue(_stacks);
+			_stat.values[i].value = _statPerStack.values[i].GetStackedValue(_stacks);
 		}
 		owner.stat.SetNeedUpdate();
 	}

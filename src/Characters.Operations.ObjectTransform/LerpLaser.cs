@@ -45,7 +45,7 @@ public sealed class LerpLaser : CharacterOperation
 		{
 			float direction = Mathf.Lerp(_fromValue, _toValue, _curve.Evaluate(elapsed));
 			_laser.Activate(owner, direction);
-			elapsed += ((ChronometerBase)owner.chronometer.master).deltaTime;
+			elapsed += owner.chronometer.master.deltaTime;
 			yield return null;
 		}
 		_laser.Deactivate();

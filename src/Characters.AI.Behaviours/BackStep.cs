@@ -10,7 +10,7 @@ public class BackStep : Behaviour
 	[SerializeField]
 	private Action _jump;
 
-	[Subcomponent(typeof(Idle))]
+	[UnityEditor.Subcomponent(typeof(Idle))]
 	[SerializeField]
 	private Idle _idle;
 

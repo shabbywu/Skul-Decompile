@@ -95,10 +95,8 @@ public sealed class CurrencyBag : InteractiveObject, IPurchasable
 
 	public override void OnActivate()
 	{
-		//IL_0007: Unknown result type (might be due to invalid IL or missing references)
-		//IL_000d: Invalid comparison between Unknown and I4
 		base.OnActivate();
-		if ((int)rarity == 3 && (Object)(object)_droppedEffect != (Object)null)
+		if (rarity == Rarity.Legendary && (Object)(object)_droppedEffect != (Object)null)
 		{
 			_droppedEffect.SpawnLegendaryEffect();
 		}

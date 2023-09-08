@@ -212,8 +212,8 @@ public class Panel : Dialogue
 			((Selectable)obj10).navigation = navigation;
 		}
 		PersistentSingleton<SoundManager>.Instance.PlaySound(_openSound, Vector3.zero);
-		PlayerInput.blocked.Attach((object)this);
-		((ChronometerBase)Chronometer.global).AttachTimeScale((object)this, 0f);
+		PlayerInput.blocked.Attach(this);
+		Chronometer.global.AttachTimeScale(this, 0f);
 		_ = Singleton<Service>.Instance.levelManager.player.playerComponents.inventory.weapon;
 		UpdateGearInfo();
 	}
@@ -373,8 +373,8 @@ public class Panel : Dialogue
 		//IL_0011: Unknown result type (might be due to invalid IL or missing references)
 		base.OnDisable();
 		PersistentSingleton<SoundManager>.Instance.PlaySound(_closeSound, Vector3.zero);
-		PlayerInput.blocked.Detach((object)this);
-		((ChronometerBase)Chronometer.global).DetachTimeScale((object)this);
+		PlayerInput.blocked.Detach(this);
+		Chronometer.global.DetachTimeScale(this);
 	}
 
 	protected override void Update()

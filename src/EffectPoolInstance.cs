@@ -135,7 +135,7 @@ public sealed class EffectPoolInstance : MonoBehaviour
 
 	public void UpdateEffect()
 	{
-		float deltaTime = ChronometerExtension.DeltaTime(chronometer);
+		float deltaTime = chronometer.DeltaTime();
 		switch (state)
 		{
 		case State.Delaying:

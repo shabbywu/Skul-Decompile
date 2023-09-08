@@ -34,13 +34,13 @@ public class BoneOfBrave : Ability
 
 		protected override void OnAttach()
 		{
-			((PriorityList<GiveDamageDelegate>)owner.onGiveDamage).Add(0, (GiveDamageDelegate)OnOwnerGiveDamage);
+			owner.onGiveDamage.Add(0, OnOwnerGiveDamage);
 			_weaponInventory.onChanged += OnWeaponChanged;
 		}
 
 		protected override void OnDetach()
 		{
-			((PriorityList<GiveDamageDelegate>)owner.onGiveDamage).Remove((GiveDamageDelegate)OnOwnerGiveDamage);
+			owner.onGiveDamage.Remove(OnOwnerGiveDamage);
 			_weaponInventory.onChanged -= OnWeaponChanged;
 		}
 
@@ -67,15 +67,15 @@ public class BoneOfBrave : Ability
 		private bool OnOwnerGiveDamage(ITarget target, ref Damage damage)
 		{
 			//IL_008a: Unknown result type (might be due to invalid IL or missing references)
-			if (!((EnumArray<Damage.MotionType, bool>)ability._motionTypeFilter)[damage.motionType])
+			if (!ability._motionTypeFilter[damage.motionType])
 			{
 				return false;
 			}
-			if (!((EnumArray<Damage.AttackType, bool>)ability._damageTypeFilter)[damage.attackType])
+			if (!ability._damageTypeFilter[damage.attackType])
 			{
 				return false;
 			}
-			if (!((EnumArray<Damage.Attribute, bool>)ability._attributeFilter)[damage.attribute])
+			if (!ability._attributeFilter[damage.attribute])
 			{
 				return false;
 			}

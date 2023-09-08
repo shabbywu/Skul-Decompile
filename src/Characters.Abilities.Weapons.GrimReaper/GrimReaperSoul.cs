@@ -98,7 +98,7 @@ public sealed class GrimReaperSoul : MonoBehaviour
 			{
 				Despawn();
 			}
-			float deltaTime = ((ChronometerBase)Chronometer.global).deltaTime;
+			float deltaTime = Chronometer.global.deltaTime;
 			_elapsed += deltaTime;
 			if (_elapsed >= _delay)
 			{

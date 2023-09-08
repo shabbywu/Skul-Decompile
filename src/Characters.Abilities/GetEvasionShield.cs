@@ -19,7 +19,7 @@ public sealed class GetEvasionShield : Ability
 		protected override void OnAttach()
 		{
 			_remainAmount = ability._amount;
-			owner.evasion.Attach((object)this);
+			owner.evasion.Attach(this);
 			owner.onEvade += OnEvade;
 		}
 
@@ -36,7 +36,7 @@ public sealed class GetEvasionShield : Ability
 		protected override void OnDetach()
 		{
 			ability._onBroken.Run(owner);
-			owner.evasion.Detach((object)this);
+			owner.evasion.Detach(this);
 			owner.onEvade -= OnEvade;
 		}
 	}

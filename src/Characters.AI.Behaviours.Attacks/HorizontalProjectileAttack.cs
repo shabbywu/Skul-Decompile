@@ -50,7 +50,7 @@ public class HorizontalProjectileAttack : ActionAttack
 			if (!gaveDamage)
 			{
 				base.result = Result.Success;
-				yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)character.chronometer.animation, 1.5f);
+				yield return character.chronometer.animation.WaitForSeconds(1.5f);
 			}
 			else
 			{

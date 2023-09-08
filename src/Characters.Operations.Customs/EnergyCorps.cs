@@ -32,7 +32,7 @@ public class EnergyCorps : CharacterOperation
 		internal DirectionType directionType;
 
 		[SerializeField]
-		internal Reorderable directions;
+		internal CustomAngle.Reorderable directions;
 	}
 
 	[SerializeField]
@@ -90,7 +90,7 @@ public class EnergyCorps : CharacterOperation
 			val.rotation = Quaternion.Euler(0f, 0f, num2);
 			((Component)val).gameObject.SetActive(false);
 			FireProjectile(owner, val);
-			yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)owner.chronometer.master, _interval);
+			yield return owner.chronometer.master.WaitForSeconds(_interval);
 		}
 	}
 
@@ -103,7 +103,7 @@ public class EnergyCorps : CharacterOperation
 		//IL_006c: Unknown result type (might be due to invalid IL or missing references)
 		//IL_011b: Unknown result type (might be due to invalid IL or missing references)
 		//IL_00bc: Unknown result type (might be due to invalid IL or missing references)
-		CustomAngle[] values = ((ReorderableArray<CustomAngle>)(object)_fireEnergyCrops.directions).values;
+		CustomAngle[] values = _fireEnergyCrops.directions.values;
 		if (_fireEnergyCrops.directionType == FireEnergyCrops.DirectionType.RotationOfFirePosition)
 		{
 			for (int i = 0; i < values.Length; i++)

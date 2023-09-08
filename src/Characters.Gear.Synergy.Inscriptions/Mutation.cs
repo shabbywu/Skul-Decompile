@@ -22,19 +22,18 @@ public class Mutation : SimpleStatBonusKeyword
 	public override void UpdateBonus(bool wasActive, bool wasOmen)
 	{
 		UpdateStat();
-		if (keyword.step == _statBonusByStep.Length - 1 && !((PriorityList<GiveDamageDelegate>)base.character.onGiveDamage).Contains((GiveDamageDelegate)OnGiveDamage))
+		if (keyword.step == _statBonusByStep.Length - 1 && !base.character.onGiveDamage.Contains(OnGiveDamage))
 		{
-			((PriorityList<GiveDamageDelegate>)base.character.onGiveDamage).Add(int.MaxValue, (GiveDamageDelegate)OnGiveDamage);
+			base.character.onGiveDamage.Add(int.MaxValue, OnGiveDamage);
 		}
 		else
 		{
-			((PriorityList<GiveDamageDelegate>)base.character.onGiveDamage).Remove((GiveDamageDelegate)OnGiveDamage);
+			base.character.onGiveDamage.Remove(OnGiveDamage);
 		}
 	}
 
 	private bool OnGiveDamage(ITarget target, ref Damage damage)
 	{
-		//IL_003d: Unknown result type (might be due to invalid IL or missing references)
 		if (damage.motionType != Damage.MotionType.Swap)
 		{
 			return false;
@@ -52,6 +51,6 @@ public class Mutation : SimpleStatBonusKeyword
 	public override void Detach()
 	{
 		base.Detach();
-		((PriorityList<GiveDamageDelegate>)base.character.onGiveDamage).Remove((GiveDamageDelegate)OnGiveDamage);
+		base.character.onGiveDamage.Remove(OnGiveDamage);
 	}
 }

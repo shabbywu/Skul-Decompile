@@ -359,6 +359,6 @@ public class Health : MonoBehaviour
 		this.onChanged = null;
 		this.onConsumeShield = null;
 		this.onHealed = null;
-		((PriorityList<TakeDamageDelegate>)_onTakeDamage).Clear();
+		_onTakeDamage.Clear();
 	}
 }

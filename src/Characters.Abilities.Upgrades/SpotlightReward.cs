@@ -30,14 +30,14 @@ public class SpotlightReward : Ability
 			//IL_0070: Unknown result type (might be due to invalid IL or missing references)
 			//IL_0093: Unknown result type (might be due to invalid IL or missing references)
 			Character character = target.character;
-			if (!((Object)(object)character == (Object)null) && ((EnumArray<Character.Type, bool>)ability._characterTypes)[character.type])
+			if (!((Object)(object)character == (Object)null) && ability._characterTypes[character.type])
 			{
 				GameData.Currency.Type type = (MMMaths.RandomBool() ? GameData.Currency.Type.Bone : GameData.Currency.Type.Gold);
 				Vector2Int goldrewardAmount = Singleton<Service>.Instance.levelManager.currentChapter.currentStage.goldrewardAmount;
 				int x = ((Vector2Int)(ref goldrewardAmount)).x;
 				goldrewardAmount = Singleton<Service>.Instance.levelManager.currentChapter.currentStage.goldrewardAmount;
 				int amount = Random.Range(x, ((Vector2Int)(ref goldrewardAmount)).y);
-				Singleton<Service>.Instance.levelManager.DropCurrencyBag(type, (Rarity)2, amount, 16, ((Component)character).transform.position);
+				Singleton<Service>.Instance.levelManager.DropCurrencyBag(type, Rarity.Unique, amount, 16, ((Component)character).transform.position);
 			}
 		}
 

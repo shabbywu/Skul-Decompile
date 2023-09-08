@@ -72,16 +72,16 @@ public class FloatingTextSpawner : MonoBehaviour
 		{
 			FloatingText floatingText = Spawn(amount.ToString("0"), Vector2.op_Implicit(position + new Vector2(0f, 0.5f)));
 			floatingText.color = _playerTakingDamageColor;
-			GameObjectModifier.Modify((MonoBehaviour)(object)floatingText, GameObjectModifier.TranslateBySpeedAndAcc(9f, -12f, 2.5f));
+			((MonoBehaviour)(object)floatingText).Modify(GameObjectModifier.TranslateBySpeedAndAcc(9f, -12f, 2.5f));
 			floatingText.sortingOrder = 500;
 			((Component)floatingText).transform.localScale = _playerTakingDamageScale;
 			if (MMMaths.RandomBool())
 			{
-				GameObjectModifier.Modify((MonoBehaviour)(object)floatingText, GameObjectModifier.TranslateUniformMotion(0.2f, 0f, 0f));
+				((MonoBehaviour)(object)floatingText).Modify(GameObjectModifier.TranslateUniformMotion(0.2f, 0f, 0f));
 			}
 			else
 			{
-				GameObjectModifier.Modify((MonoBehaviour)(object)floatingText, GameObjectModifier.TranslateUniformMotion(-0.2f, 0f, 0f));
+				((MonoBehaviour)(object)floatingText).Modify(GameObjectModifier.TranslateUniformMotion(-0.2f, 0f, 0f));
 			}
 			floatingText.Despawn(0.6f);
 		}
@@ -120,7 +120,7 @@ public class FloatingTextSpawner : MonoBehaviour
 		}
 		if (damage.critical)
 		{
-			GameObjectModifier.Modify((MonoBehaviour)(object)floatingText, GameObjectModifier.LerpScale(1.4f, 1.6f, 0.4f));
+			((MonoBehaviour)(object)floatingText).Modify(GameObjectModifier.LerpScale(1.4f, 1.6f, 0.4f));
 			switch (damage.attribute)
 			{
 			case Damage.Attribute.Physical:
@@ -133,14 +133,14 @@ public class FloatingTextSpawner : MonoBehaviour
 				break;
 			}
 		}
-		GameObjectModifier.Modify((MonoBehaviour)(object)floatingText, GameObjectModifier.TranslateBySpeedAndAcc(10f, -17f, 3f));
+		((MonoBehaviour)(object)floatingText).Modify(GameObjectModifier.TranslateBySpeedAndAcc(10f, -17f, 3f));
 		if (MMMaths.RandomBool())
 		{
-			GameObjectModifier.Modify((MonoBehaviour)(object)floatingText, GameObjectModifier.TranslateUniformMotion(0.2f, 0f, 0f));
+			((MonoBehaviour)(object)floatingText).Modify(GameObjectModifier.TranslateUniformMotion(0.2f, 0f, 0f));
 		}
 		else
 		{
-			GameObjectModifier.Modify((MonoBehaviour)(object)floatingText, GameObjectModifier.TranslateUniformMotion(-0.2f, 0f, 0f));
+			((MonoBehaviour)(object)floatingText).Modify(GameObjectModifier.TranslateUniformMotion(-0.2f, 0f, 0f));
 		}
 		floatingText.Despawn(0.5f);
 	}
@@ -153,16 +153,16 @@ public class FloatingTextSpawner : MonoBehaviour
 		{
 			FloatingText floatingText = Spawn(amount.ToString("0"), position);
 			floatingText.color = _healColor;
-			GameObjectModifier.Modify((MonoBehaviour)(object)floatingText, GameObjectModifier.Scale(1.1f));
-			GameObjectModifier.Modify((MonoBehaviour)(object)floatingText, GameObjectModifier.TranslateBySpeedAndAcc(7.5f, -7.5f, 1f));
+			((MonoBehaviour)(object)floatingText).Modify(GameObjectModifier.Scale(1.1f));
+			((MonoBehaviour)(object)floatingText).Modify(GameObjectModifier.TranslateBySpeedAndAcc(7.5f, -7.5f, 1f));
 			floatingText.sortingOrder = 1;
 			if (MMMaths.RandomBool())
 			{
-				GameObjectModifier.Modify((MonoBehaviour)(object)floatingText, GameObjectModifier.TranslateUniformMotion(0.2f, 0f, 0f));
+				((MonoBehaviour)(object)floatingText).Modify(GameObjectModifier.TranslateUniformMotion(0.2f, 0f, 0f));
 			}
 			else
 			{
-				GameObjectModifier.Modify((MonoBehaviour)(object)floatingText, GameObjectModifier.TranslateUniformMotion(-0.2f, 0f, 0f));
+				((MonoBehaviour)(object)floatingText).Modify(GameObjectModifier.TranslateUniformMotion(-0.2f, 0f, 0f));
 			}
 			floatingText.Despawn(0.5f);
 		}
@@ -197,7 +197,7 @@ public class FloatingTextSpawner : MonoBehaviour
 			FloatingText floatingText = Spawn(text, position);
 			floatingText.color = color;
 			floatingText.sortingOrder = 1;
-			GameObjectModifier.Modify((MonoBehaviour)(object)floatingText, GameObjectModifier.Scale(0.75f));
+			((MonoBehaviour)(object)floatingText).Modify(GameObjectModifier.Scale(0.75f));
 			((MonoBehaviour)this).StartCoroutine(CMove(((Component)floatingText).transform, 0.5f, 1f));
 			((MonoBehaviour)this).StartCoroutine(CFadeOut(floatingText, 0.5f, 0.5f));
 			floatingText.Despawn(1f);
@@ -215,7 +215,7 @@ public class FloatingTextSpawner : MonoBehaviour
 			FloatingText floatingText = Spawn(text, position);
 			floatingText.color = color;
 			floatingText.sortingOrder = 1;
-			GameObjectModifier.Modify((MonoBehaviour)(object)floatingText, GameObjectModifier.Scale(1f));
+			((MonoBehaviour)(object)floatingText).Modify(GameObjectModifier.Scale(1f));
 			((MonoBehaviour)this).StartCoroutine(CMove(((Component)floatingText).transform, 0.5f, 1f));
 			((MonoBehaviour)this).StartCoroutine(CFadeOut(floatingText, 0.5f, 0.5f));
 			floatingText.Despawn(1f);
@@ -246,7 +246,7 @@ public class FloatingTextSpawner : MonoBehaviour
 		float speed = distance / duration;
 		while (elapsed <= duration)
 		{
-			float deltaTime = ((ChronometerBase)Chronometer.global).deltaTime;
+			float deltaTime = Chronometer.global.deltaTime;
 			float num = speed * deltaTime;
 			elapsed += deltaTime;
 			transform.Translate(Vector2.op_Implicit(Vector2.up * num));

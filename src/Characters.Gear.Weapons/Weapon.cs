@@ -70,7 +70,7 @@ public sealed class Weapon : Gear
 	[SerializeField]
 	private int _skillSlots = 1;
 
-	[Information(/*Could not decode attribute arguments.*/)]
+	[Information("0이면 콜라이더 크기 따라감", InformationAttribute.InformationType.Info, false)]
 	[SerializeField]
 	private float _customWidth;
 
@@ -97,7 +97,6 @@ public sealed class Weapon : Gear
 	{
 		get
 		{
-			//IL_0021: Unknown result type (might be due to invalid IL or missing references)
 			if (base.dropped.price <= 0 && destructible)
 			{
 				return Settings.instance.bonesByDiscard[base.rarity];
@@ -155,10 +154,6 @@ public sealed class Weapon : Gear
 		//IL_00e0: Unknown result type (might be due to invalid IL or missing references)
 		//IL_00e3: Unknown result type (might be due to invalid IL or missing references)
 		//IL_00be: Unknown result type (might be due to invalid IL or missing references)
-		//IL_010d: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0112: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0114: Unknown result type (might be due to invalid IL or missing references)
-		//IL_012b: Expected I4, but got Unknown
 		if (Service.quitting)
 		{
 			return;
@@ -195,19 +190,18 @@ public sealed class Weapon : Gear
 		int count = 1;
 		if (currencyByDiscard > 0)
 		{
-			Rarity val = base.rarity;
-			switch ((int)val)
+			switch (base.rarity)
 			{
-			case 0:
+			case Rarity.Common:
 				count = 4;
 				break;
-			case 1:
+			case Rarity.Rare:
 				count = 7;
 				break;
-			case 2:
+			case Rarity.Unique:
 				count = 13;
 				break;
-			case 3:
+			case Rarity.Legendary:
 				count = 20;
 				break;
 			}
@@ -222,10 +216,10 @@ public sealed class Weapon : Gear
 		new List<Characters.Actions.Action>();
 		new List<Characters.Actions.Action>();
 		Characters.Actions.Action[] componentsInChildren = ((Component)this).GetComponentsInChildren<Characters.Actions.Action>(true);
-		EnumArray<Characters.Actions.Action.Type, List<Characters.Actions.Action>> val = new EnumArray<Characters.Actions.Action.Type, List<Characters.Actions.Action>>();
-		for (int i = 0; i < val.Keys.Count; i++)
+		EnumArray<Characters.Actions.Action.Type, List<Characters.Actions.Action>> enumArray = new EnumArray<Characters.Actions.Action.Type, List<Characters.Actions.Action>>();
+		for (int i = 0; i < enumArray.Keys.Count; i++)
 		{
-			val.Array[i] = new List<Characters.Actions.Action>();
+			enumArray.Array[i] = new List<Characters.Actions.Action>();
 		}
 		Characters.Actions.Action[] array = componentsInChildren;
 		foreach (Characters.Actions.Action action in array)
@@ -238,11 +232,11 @@ public sealed class Weapon : Gear
 			{
 				this.onEndAction?.Invoke(action);
 			};
-			val[action.type].Add(action);
+			enumArray[action.type].Add(action);
 		}
-		for (int k = 0; k < val.Keys.Count; k++)
+		for (int k = 0; k < enumArray.Keys.Count; k++)
 		{
-			actionsByType.Array[k] = val.Array[k].ToArray();
+			actionsByType.Array[k] = enumArray.Array[k].ToArray();
 		}
 	}
 
@@ -322,7 +316,7 @@ public sealed class Weapon : Gear
 			List<SkillInfo> excepts = new List<SkillInfo>(currentSkills.Where((SkillInfo info) => !info.hasAlways));
 			if (excepts.Count > 1)
 			{
-				excepts.RemoveAt(ExtensionMethods.RandomIndex<SkillInfo>((IEnumerable<SkillInfo>)excepts));
+				excepts.RemoveAt(excepts.RandomIndex());
 			}
 			List<SkillInfo> from = lookup[false].Where((SkillInfo info) => info.weight > 0 && !excepts.Contains(info)).ToList();
 			int i;
@@ -545,7 +539,7 @@ public sealed class Weapon : Gear
 	{
 		if (currentSkills.Count >= 2)
 		{
-			ExtensionMethods.Swap<SkillInfo>((IList<SkillInfo>)currentSkills, 0, 1);
+			currentSkills.Swap(0, 1);
 			SetSkillButtons();
 		}
 	}

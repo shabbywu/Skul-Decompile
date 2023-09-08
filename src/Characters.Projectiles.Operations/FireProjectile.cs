@@ -31,9 +31,9 @@ public class FireProjectile : Operation
 	private DirectionType _directionType;
 
 	[SerializeField]
-	private Reorderable _directions;
+	private CustomAngle.Reorderable _directions;
 
-	public CustomAngle[] directions => ((ReorderableArray<CustomAngle>)(object)_directions).values;
+	public CustomAngle[] directions => _directions.values;
 
 	private void Awake()
 	{
@@ -56,7 +56,7 @@ public class FireProjectile : Operation
 		//IL_007f: Unknown result type (might be due to invalid IL or missing references)
 		//IL_00c9: Unknown result type (might be due to invalid IL or missing references)
 		Character owner = projectile.owner;
-		CustomAngle[] values = ((ReorderableArray<CustomAngle>)(object)_directions).values;
+		CustomAngle[] values = _directions.values;
 		float attackDamage = projectile.baseDamage * _damageMultiplier.value;
 		HitHistoryManager hitHistoryManager = (_group ? new HitHistoryManager(15) : null);
 		for (int i = 0; i < values.Length; i++)

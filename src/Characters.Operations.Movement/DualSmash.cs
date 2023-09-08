@@ -5,7 +5,7 @@ namespace Characters.Operations.Movement;
 
 public class DualSmash : TargetedCharacterOperation
 {
-	[Information(/*Could not decode attribute arguments.*/)]
+	[Information("Obsolete", InformationAttribute.InformationType.Warning, true)]
 	[SerializeField]
 	private PushForce _pushForce1;
 
@@ -19,7 +19,7 @@ public class DualSmash : TargetedCharacterOperation
 	private Curve _curve2;
 
 	[SerializeField]
-	[Subcomponent(typeof(TargetedOperationInfo))]
+	[UnityEditor.Subcomponent(typeof(TargetedOperationInfo))]
 	private TargetedOperationInfo.Subcomponents _onCollide;
 
 	public override void Run(Character owner, Character target)

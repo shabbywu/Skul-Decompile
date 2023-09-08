@@ -7,10 +7,10 @@ namespace FX.CastAttackVisualEffect;
 
 public abstract class CastAttackVisualEffect : VisualEffect
 {
-	public class SubcomponentAttribute : SubcomponentAttribute
+	public class SubcomponentAttribute : UnityEditor.SubcomponentAttribute
 	{
 		public SubcomponentAttribute()
-			: base(true, types)
+			: base(allowCustom: true, CastAttackVisualEffect.types)
 		{
 		}
 	}
@@ -21,9 +21,9 @@ public abstract class CastAttackVisualEffect : VisualEffect
 		public void Spawn(Vector3 position)
 		{
 			//IL_000c: Unknown result type (might be due to invalid IL or missing references)
-			for (int i = 0; i < base._components.Length; i++)
+			for (int i = 0; i < _components.Length; i++)
 			{
-				base._components[i].Spawn(position);
+				_components[i].Spawn(position);
 			}
 		}
 
@@ -32,9 +32,9 @@ public abstract class CastAttackVisualEffect : VisualEffect
 			//IL_000e: Unknown result type (might be due to invalid IL or missing references)
 			//IL_000f: Unknown result type (might be due to invalid IL or missing references)
 			//IL_0013: Unknown result type (might be due to invalid IL or missing references)
-			for (int i = 0; i < base._components.Length; i++)
+			for (int i = 0; i < _components.Length; i++)
 			{
-				base._components[i].Spawn(owner, collider, origin, direction, distance, raycastHit);
+				_components[i].Spawn(owner, collider, origin, direction, distance, raycastHit);
 			}
 		}
 
@@ -43,9 +43,9 @@ public abstract class CastAttackVisualEffect : VisualEffect
 			//IL_000e: Unknown result type (might be due to invalid IL or missing references)
 			//IL_000f: Unknown result type (might be due to invalid IL or missing references)
 			//IL_0013: Unknown result type (might be due to invalid IL or missing references)
-			for (int i = 0; i < base._components.Length; i++)
+			for (int i = 0; i < _components.Length; i++)
 			{
-				base._components[i].Spawn(owner, collider, origin, direction, distance, raycastHit, damage, target);
+				_components[i].Spawn(owner, collider, origin, direction, distance, raycastHit, damage, target);
 			}
 		}
 	}

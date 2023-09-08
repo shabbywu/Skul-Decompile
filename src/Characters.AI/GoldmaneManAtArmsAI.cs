@@ -137,7 +137,7 @@ public sealed class GoldmaneManAtArmsAI : AIController
 		float elapsed = 0f;
 		while (elapsed < 1f)
 		{
-			elapsed += ((ChronometerBase)character.chronometer.animation).deltaTime;
+			elapsed += character.chronometer.animation.deltaTime;
 			yield return null;
 		}
 		if (base.stuned)
@@ -169,7 +169,7 @@ public sealed class GoldmaneManAtArmsAI : AIController
 			_goldenWave.Run(character);
 			_goldenWaveSound.Run(character);
 			_cameraShake.Run(character);
-			yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)character.chronometer.master, _goldenWaveTerm);
+			yield return character.chronometer.master.WaitForSeconds(_goldenWaveTerm);
 			if (base.stuned)
 			{
 				break;

@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Level;
 using UnityEngine;
 
@@ -25,7 +24,7 @@ public class SummonBDRandomCharacter : Operation
 		//IL_002e: Unknown result type (might be due to invalid IL or missing references)
 		if (_characterPrefabs.Length != 0)
 		{
-			Character character = ((!((Object)(object)_position != (Object)null)) ? Object.Instantiate<Character>(ExtensionMethods.Random<Character>((IEnumerable<Character>)_characterPrefabs)) : Object.Instantiate<Character>(ExtensionMethods.Random<Character>((IEnumerable<Character>)_characterPrefabs), _position.position, Quaternion.identity, ((Component)Map.Instance).transform));
+			Character character = ((!((Object)(object)_position != (Object)null)) ? Object.Instantiate<Character>(_characterPrefabs.Random()) : Object.Instantiate<Character>(_characterPrefabs.Random(), _position.position, Quaternion.identity, ((Component)Map.Instance).transform));
 			if (_containInWave)
 			{
 				Map.Instance.waveContainer.Attach(character);

@@ -8,9 +8,9 @@ namespace Characters.AI.Behaviours;
 public class FlyWander : Behaviour
 {
 	[AttributeUsage(AttributeTargets.Field)]
-	public new class SubcomponentAttribute : SubcomponentAttribute
+	public new class SubcomponentAttribute : UnityEditor.SubcomponentAttribute
 	{
-		public static readonly Type[] types = new Type[1] { typeof(FlyWander) };
+		public new static readonly Type[] types = new Type[1] { typeof(FlyWander) };
 
 		public SubcomponentAttribute(bool allowCustom = true)
 			: base(allowCustom, types)
@@ -22,7 +22,7 @@ public class FlyWander : Behaviour
 	[SerializeField]
 	protected Move _move;
 
-	[Subcomponent(typeof(Idle))]
+	[UnityEditor.Subcomponent(typeof(Idle))]
 	[SerializeField]
 	protected Idle _idleWhenEndWander;
 

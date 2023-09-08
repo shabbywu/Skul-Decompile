@@ -39,7 +39,7 @@ public class BoneOfMana : Ability
 
 		private void OnOwnerStartAction(Characters.Actions.Action action)
 		{
-			if (((EnumArray<Characters.Actions.Action.Type, bool>)ability._actionTypeFilter).GetOrDefault(action.type) && !action.cooldown.usedByStreak)
+			if (ability._actionTypeFilter.GetOrDefault(action.type) && !action.cooldown.usedByStreak)
 			{
 				CharacterOperation[] array = ability.operationsByCount[_balanceHeadCount];
 				for (int i = 0; i < array.Length; i++)

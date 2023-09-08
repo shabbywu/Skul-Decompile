@@ -45,7 +45,7 @@ public static class Effects
 
 		public void FadeOut(Chronometer chronometer, AnimationCurve curve, float duration)
 		{
-			poolObject.FadeOut(spriteRenderer, (ChronometerBase)(object)chronometer, curve, duration);
+			poolObject.FadeOut(spriteRenderer, (ChronometerBase)chronometer, curve, duration);
 		}
 	}
 
@@ -67,7 +67,7 @@ public static class Effects
 		while (t < 1f)
 		{
 			yield return null;
-			t += ChronometerExtension.DeltaTime(chronometer) * multiplier;
+			t += chronometer.DeltaTime() * multiplier;
 			color.a = alpha * (1f - curve.Evaluate(t));
 			spriteRenderer.color = color;
 		}
@@ -91,7 +91,7 @@ public static class Effects
 		while (t < 1f)
 		{
 			yield return null;
-			t += ChronometerExtension.DeltaTime(chronometer) * multiplier;
+			t += chronometer.DeltaTime() * multiplier;
 			for (int j = 0; j < colorArray.Length; j++)
 			{
 				colorArray[j].a = alphaArray[j] * (1f - curve.Evaluate(t));

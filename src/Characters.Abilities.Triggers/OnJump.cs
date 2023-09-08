@@ -29,7 +29,7 @@ public class OnJump : Trigger
 
 	private void OnCharacterJump(Movement.JumpType jumpType, float jumpHeight)
 	{
-		if (((EnumArray<Movement.JumpType, bool>)_types)[jumpType])
+		if (_types[jumpType])
 		{
 			Invoke();
 		}

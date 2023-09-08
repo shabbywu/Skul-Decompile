@@ -22,7 +22,7 @@ public sealed class DamageAttributeChange : Ability
 
 		private bool CheckMotion(HitInfo hitInfo)
 		{
-			if (!((EnumArray<Damage.MotionType, bool>)ability._motionType)[hitInfo.motionType])
+			if (!ability._motionType[hitInfo.motionType])
 			{
 				return false;
 			}

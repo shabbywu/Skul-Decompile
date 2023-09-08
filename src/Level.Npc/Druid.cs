@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using Characters;
 using Data;
 using GameResources;
@@ -23,13 +22,13 @@ public class Druid : InteractiveObject
 
 	public string displayName => Localization.GetLocalizedString($"npc/{NpcType.Druid}/name");
 
-	public string greeting => ExtensionMethods.Random<string>((IEnumerable<string>)Localization.GetLocalizedStringArray($"npc/{NpcType.Druid}/greeting"));
+	public string greeting => Localization.GetLocalizedStringArray($"npc/{NpcType.Druid}/greeting").Random();
 
-	public string[] chat => ExtensionMethods.Random<string[]>((IEnumerable<string[]>)Localization.GetLocalizedStringArrays($"npc/{NpcType.Druid}/chat"));
+	public string[] chat => Localization.GetLocalizedStringArrays($"npc/{NpcType.Druid}/chat").Random();
 
 	public string changeProphecyLabel => Localization.GetLocalizedString($"npc/{NpcType.Druid}/ChangeProphecy/label");
 
-	public string[] changeProphecyNoMoney => ExtensionMethods.Random<string[]>((IEnumerable<string[]>)Localization.GetLocalizedStringArrays($"npc/{NpcType.Druid}/ChangeProphecy/NoMoney"));
+	public string[] changeProphecyNoMoney => Localization.GetLocalizedStringArrays($"npc/{NpcType.Druid}/ChangeProphecy/NoMoney").Random();
 
 	protected override void Awake()
 	{

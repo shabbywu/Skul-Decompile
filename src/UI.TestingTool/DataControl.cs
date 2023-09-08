@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Characters.Gear;
 using Characters.Gear.Upgrades;
@@ -218,7 +217,7 @@ public sealed class DataControl : MonoBehaviour
 
 	private IEnumerator CEquip()
 	{
-		ItemReference itemReference = ExtensionMethods.Random<ItemReference>((IEnumerable<ItemReference>)GearResource.instance.items);
+		ItemReference itemReference = GearResource.instance.items.Random();
 		ItemRequest request = itemReference.LoadAsync();
 		while (!request.isDone)
 		{

@@ -40,12 +40,12 @@ public sealed class ModifyDamageByAirTIme : Ability
 			_wasGrounded = owner.movement.controller.isGrounded;
 			owner.movement.onJump += OnJump;
 			owner.movement.onGrounded += OnGrounded;
-			((PriorityList<GiveDamageDelegate>)owner.onGiveDamage).Add(0, (GiveDamageDelegate)OnGiveDamage);
+			owner.onGiveDamage.Add(0, OnGiveDamage);
 		}
 
 		private bool OnGiveDamage(ITarget target, ref Damage damage)
 		{
-			if (!((EnumArray<Damage.MotionType, bool>)ability._motionType)[damage.motionType] || !((EnumArray<Damage.AttackType, bool>)ability._attachkType)[damage.attackType])
+			if (!ability._motionType[damage.motionType] || !ability._attachkType[damage.attackType])
 			{
 				return false;
 			}
@@ -61,7 +61,7 @@ public sealed class ModifyDamageByAirTIme : Ability
 		{
 			owner.movement.onJump -= OnJump;
 			owner.movement.onGrounded -= OnGrounded;
-			((PriorityList<GiveDamageDelegate>)owner.onGiveDamage).Remove((GiveDamageDelegate)OnGiveDamage);
+			owner.onGiveDamage.Remove(OnGiveDamage);
 			if ((Object)(object)ability._gauge != (Object)null)
 			{
 				ability._gauge.Set(0f);

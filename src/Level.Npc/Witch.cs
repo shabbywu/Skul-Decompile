@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using Characters;
 using CutScenes;
 using Data;
@@ -51,11 +50,11 @@ public class Witch : InteractiveObject
 
 	public string displayName => Localization.GetLocalizedString($"npc/{NpcType.Witch}/name");
 
-	public string greeting => ExtensionMethods.Random<string>((IEnumerable<string>)Localization.GetLocalizedStringArray($"npc/{NpcType.Witch}/greeting"));
+	public string greeting => Localization.GetLocalizedStringArray($"npc/{NpcType.Witch}/greeting").Random();
 
-	public string[] chat => ExtensionMethods.Random<string[]>((IEnumerable<string[]>)Localization.GetLocalizedStringArrays($"npc/{NpcType.Witch}/chat"));
+	public string[] chat => Localization.GetLocalizedStringArrays($"npc/{NpcType.Witch}/chat").Random();
 
-	public string masteriesScript => ExtensionMethods.Random<string>((IEnumerable<string>)Localization.GetLocalizedStringArray($"npc/{NpcType.Witch}/Masteries"));
+	public string masteriesScript => Localization.GetLocalizedStringArray($"npc/{NpcType.Witch}/Masteries").Random();
 
 	public string masteriesLabel => Localization.GetLocalizedString($"npc/{NpcType.Witch}/Masteries/label");
 

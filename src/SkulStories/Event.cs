@@ -6,10 +6,10 @@ namespace SkulStories;
 
 public abstract class Event : MonoBehaviour
 {
-	public class SubcomponentAttribute : SubcomponentAttribute
+	public class SubcomponentAttribute : UnityEditor.SubcomponentAttribute
 	{
 		public SubcomponentAttribute()
-			: base(true, types)
+			: base(allowCustom: true, Event.types)
 		{
 		}
 	}

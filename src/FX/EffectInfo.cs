@@ -29,19 +29,7 @@ public class EffectInfo : IDisposable
 			Custom
 		}
 
-		private static readonly EnumArray<Pivot, Vector2> _pivotValues = new EnumArray<Pivot, Vector2>((Vector2[])(object)new Vector2[10]
-		{
-			new Vector2(0f, 0f),
-			new Vector2(-0.5f, 0.5f),
-			new Vector2(0f, 0.5f),
-			new Vector2(0.5f, 0.5f),
-			new Vector2(-0.5f, 0f),
-			new Vector2(0f, 0.5f),
-			new Vector2(-0.5f, -0.5f),
-			new Vector2(0f, -0.5f),
-			new Vector2(0.5f, -0.5f),
-			new Vector2(0f, 0f)
-		});
+		private static readonly EnumArray<Pivot, Vector2> _pivotValues = new EnumArray<Pivot, Vector2>(new Vector2(0f, 0f), new Vector2(-0.5f, 0.5f), new Vector2(0f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(-0.5f, 0f), new Vector2(0f, 0.5f), new Vector2(-0.5f, -0.5f), new Vector2(0f, -0.5f), new Vector2(0.5f, -0.5f), new Vector2(0f, 0f));
 
 		[SerializeField]
 		internal bool _attach;
@@ -177,14 +165,6 @@ public class EffectInfo : IDisposable
 	{
 		//IL_0001: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0006: Unknown result type (might be due to invalid IL or missing references)
-		//IL_005a: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0064: Expected O, but got Unknown
-		//IL_006a: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0074: Expected O, but got Unknown
-		//IL_007a: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0084: Expected O, but got Unknown
-		//IL_008a: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0094: Expected O, but got Unknown
 		//IL_00a0: Unknown result type (might be due to invalid IL or missing references)
 		//IL_00a5: Unknown result type (might be due to invalid IL or missing references)
 		attachInfo = new AttachInfo();
@@ -205,14 +185,6 @@ public class EffectInfo : IDisposable
 	{
 		//IL_0001: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0006: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0061: Unknown result type (might be due to invalid IL or missing references)
-		//IL_006b: Expected O, but got Unknown
-		//IL_0071: Unknown result type (might be due to invalid IL or missing references)
-		//IL_007b: Expected O, but got Unknown
-		//IL_0081: Unknown result type (might be due to invalid IL or missing references)
-		//IL_008b: Expected O, but got Unknown
-		//IL_0091: Unknown result type (might be due to invalid IL or missing references)
-		//IL_009b: Expected O, but got Unknown
 		//IL_00a7: Unknown result type (might be due to invalid IL or missing references)
 		//IL_00ac: Unknown result type (might be due to invalid IL or missing references)
 		this.effect = effect;
@@ -234,21 +206,13 @@ public class EffectInfo : IDisposable
 	{
 		//IL_0001: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0006: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0092: Unknown result type (might be due to invalid IL or missing references)
-		//IL_009c: Expected O, but got Unknown
-		//IL_00a2: Unknown result type (might be due to invalid IL or missing references)
-		//IL_00ac: Expected O, but got Unknown
-		//IL_00b2: Unknown result type (might be due to invalid IL or missing references)
-		//IL_00bc: Expected O, but got Unknown
-		//IL_00c2: Unknown result type (might be due to invalid IL or missing references)
-		//IL_00cc: Expected O, but got Unknown
 		//IL_00d8: Unknown result type (might be due to invalid IL or missing references)
 		//IL_00dd: Unknown result type (might be due to invalid IL or missing references)
 		this.animation = animation;
 		animationBySize = new SizeForEffectAndAnimatorArray();
-		for (int i = 0; i < ((EnumArray<Character.SizeForEffect, RuntimeAnimatorController>)animationBySize).Array.Length; i++)
+		for (int i = 0; i < animationBySize.Array.Length; i++)
 		{
-			((EnumArray<Character.SizeForEffect, RuntimeAnimatorController>)animationBySize).Array[i] = animation;
+			animationBySize.Array[i] = animation;
 		}
 		attachInfo = new AttachInfo();
 		scale = new CustomFloat(1f);
@@ -268,14 +232,6 @@ public class EffectInfo : IDisposable
 	{
 		//IL_0001: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0006: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0068: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0072: Expected O, but got Unknown
-		//IL_0078: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0082: Expected O, but got Unknown
-		//IL_0088: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0092: Expected O, but got Unknown
-		//IL_0098: Unknown result type (might be due to invalid IL or missing references)
-		//IL_00a2: Expected O, but got Unknown
 		//IL_00ae: Unknown result type (might be due to invalid IL or missing references)
 		//IL_00b3: Unknown result type (might be due to invalid IL or missing references)
 		this.animation = animation;
@@ -417,7 +373,7 @@ public class EffectInfo : IDisposable
 			_ => MaterialResource.effect, 
 		});
 		((Renderer)effect.renderer).sharedMaterial = sharedMaterial;
-		effect.chronometer = (ChronometerBase)(object)chronometer;
+		effect.chronometer = chronometer;
 		if (trackChildren)
 		{
 			_children.Add(effect);
@@ -460,7 +416,7 @@ public class EffectInfo : IDisposable
 		}
 		else
 		{
-			val = ((EnumArray<Character.SizeForEffect, RuntimeAnimatorController>)animationBySize)?[target.sizeForEffect];
+			val = animationBySize?[target.sizeForEffect];
 			if ((Object)(object)val == (Object)null)
 			{
 				val = animation;
@@ -471,7 +427,7 @@ public class EffectInfo : IDisposable
 		{
 			return null;
 		}
-		effectPoolInstance.chronometer = (ChronometerBase)(object)target.chronometer.effect;
+		effectPoolInstance.chronometer = target.chronometer.effect;
 		if (attachInfo.attach)
 		{
 			((Component)effectPoolInstance).transform.parent = (flipXByOwnerDirection ? target.attachWithFlip.transform : target.attach.transform);

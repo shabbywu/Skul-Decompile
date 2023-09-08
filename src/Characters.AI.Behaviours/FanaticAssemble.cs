@@ -21,7 +21,7 @@ public sealed class FanaticAssemble : Behaviour
 	[SerializeField]
 	private Action _action;
 
-	[Subcomponent(typeof(Sacrifice))]
+	[UnityEditor.Subcomponent(typeof(Sacrifice))]
 	[SerializeField]
 	private Sacrifice _sacrifice;
 
@@ -47,7 +47,7 @@ public sealed class FanaticAssemble : Behaviour
 		float delay = 0f;
 		while (delay < _spawnDelay)
 		{
-			delay += ((ChronometerBase)controller.character.chronometer.master).deltaTime;
+			delay += controller.character.chronometer.master.deltaTime;
 			yield return null;
 		}
 		_waveToSpawn.Spawn(effect: false);

@@ -62,7 +62,7 @@ public class RotatingBody : MonoBehaviour
 		if (!((Object)(object)_bTRunner.context.Get<Character>(BT.Key.OwnerCharacter) == (Object)null))
 		{
 			float radious = _bTRunner.context.Get<float>("radius");
-			float amount = _bTRunner.context.Get<float>("speed") * ((ChronometerBase)_owner.chronometer.master).deltaTime;
+			float amount = _bTRunner.context.Get<float>("speed") * _owner.chronometer.master.deltaTime;
 			Orb[] child = _child;
 			for (int i = 0; i < child.Length; i++)
 			{

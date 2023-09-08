@@ -69,7 +69,7 @@ public sealed class Masterpiece : InscriptionInstance
 	public override void Detach()
 	{
 		base.character.playerComponents.inventory.item.onChanged -= EnhanceItems;
-		((PriorityList<GiveDamageDelegate>)base.character.onGiveDamage).Remove((GiveDamageDelegate)OnGiveDamageDelegate);
+		base.character.onGiveDamage.Remove(OnGiveDamageDelegate);
 	}
 
 	public override void UpdateBonus(bool wasActive, bool wasOmen)
@@ -80,14 +80,14 @@ public sealed class Masterpiece : InscriptionInstance
 		}
 		if (keyword.step >= 1)
 		{
-			if (!((PriorityList<GiveDamageDelegate>)base.character.onGiveDamage).Contains((GiveDamageDelegate)OnGiveDamageDelegate))
+			if (!base.character.onGiveDamage.Contains(OnGiveDamageDelegate))
 			{
-				((PriorityList<GiveDamageDelegate>)base.character.onGiveDamage).Add(int.MinValue, (GiveDamageDelegate)OnGiveDamageDelegate);
+				base.character.onGiveDamage.Add(int.MinValue, OnGiveDamageDelegate);
 			}
 		}
 		else
 		{
-			((PriorityList<GiveDamageDelegate>)base.character.onGiveDamage).Remove((GiveDamageDelegate)OnGiveDamageDelegate);
+			base.character.onGiveDamage.Remove(OnGiveDamageDelegate);
 		}
 	}
 
@@ -106,7 +106,7 @@ public sealed class Masterpiece : InscriptionInstance
 	{
 		if (keyword.step >= 1)
 		{
-			_remainCooldownTime -= ((ChronometerBase)base.character.chronometer.master).deltaTime;
+			_remainCooldownTime -= base.character.chronometer.master.deltaTime;
 			if (_remainCooldownTime < 0f)
 			{
 				_canUse = true;

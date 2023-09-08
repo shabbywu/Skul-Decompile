@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using Characters.Abilities.CharacterStat;
 using Characters.Gear.Weapons.Gauges;
@@ -240,7 +239,7 @@ public class PrisonerPassive : Ability, IAbilityInstance
 	{
 		//IL_009f: Unknown result type (might be due to invalid IL or missing references)
 		//IL_00a4: Unknown result type (might be due to invalid IL or missing references)
-		if (!((EnumArray<Damage.MotionType, bool>)_motionTypes)[gaveDamage.motionType] || !((EnumArray<Damage.AttackType, bool>)_attackTypes)[gaveDamage.attackType] || !((EnumArray<Damage.Attribute, bool>)_attributes)[gaveDamage.attribute] || (Object)(object)target.character == (Object)null || target.character.type == Character.Type.Dummy || target.character.type == Character.Type.Trap)
+		if (!_motionTypes[gaveDamage.motionType] || !_attackTypes[gaveDamage.attackType] || !_attributes[gaveDamage.attribute] || (Object)(object)target.character == (Object)null || target.character.type == Character.Type.Dummy || target.character.type == Character.Type.Trap)
 		{
 			return;
 		}
@@ -274,7 +273,7 @@ public class PrisonerPassive : Ability, IAbilityInstance
 			}
 		}
 		Debug.LogError((object)"Scroll index is exceeded!");
-		return ExtensionMethods.Random<Scroll>((IEnumerable<Scroll>)_scrolls);
+		return _scrolls.Random();
 	}
 
 	private void OnGaugeChanged(float oldValue, float newValue)

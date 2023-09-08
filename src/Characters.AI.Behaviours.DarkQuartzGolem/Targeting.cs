@@ -9,7 +9,7 @@ namespace Characters.AI.Behaviours.DarkQuartzGolem;
 public class Targeting : Behaviour, IPattern
 {
 	[SerializeField]
-	[Subcomponent(typeof(ActionAttack))]
+	[UnityEditor.Subcomponent(typeof(ActionAttack))]
 	private ActionAttack _attack;
 
 	public bool CanUse()

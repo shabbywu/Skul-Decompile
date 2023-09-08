@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using Data;
 using Level;
 using Services;
@@ -27,10 +26,10 @@ public class SeedRandom : CharacterOperation
 
 	public override void Run(Character owner)
 	{
-		CharacterOperation[] components = ((SubcomponentArray<CharacterOperation>)_toRandom).components;
+		CharacterOperation[] components = _toRandom.components;
 		if (components.Length != 0)
 		{
-			ExtensionMethods.PseudoShuffle<CharacterOperation>((IList<CharacterOperation>)components, _random);
+			components.PseudoShuffle(_random);
 			if (!((Object)(object)components[0] == (Object)null))
 			{
 				components[0].Run(owner);

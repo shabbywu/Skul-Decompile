@@ -66,7 +66,7 @@ public class Platform : MonoBehaviour, IPurification, IDivineCrossHelp
 		tentacleAlives = true;
 		((Component)_operations).gameObject.SetActive(true);
 		_operations.Run(owner);
-		yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)owner.chronometer.master, _duration);
+		yield return owner.chronometer.master.WaitForSeconds(_duration);
 		void OnDied()
 		{
 			tentacleAlives = false;

@@ -15,11 +15,9 @@ public sealed class Cinematic : CharacterOperation
 
 	public override void Run(Character owner)
 	{
-		//IL_001b: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0020: Unknown result type (might be due to invalid IL or missing references)
 		_owner = owner;
-		((CoroutineReference)(ref _runReference)).Stop();
-		_runReference = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)owner, CRun(owner));
+		_runReference.Stop();
+		_runReference = ((MonoBehaviour)(object)owner).StartCoroutineWithReference(CRun(owner));
 	}
 
 	private IEnumerator CRun(Character character)
@@ -28,16 +26,16 @@ public sealed class Cinematic : CharacterOperation
 		{
 			_duration = 2.1474836E+09f;
 		}
-		character.cinematic.Attach((object)this);
-		yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)character.chronometer.master, _duration);
-		character.cinematic.Detach((object)this);
+		character.cinematic.Attach(this);
+		yield return character.chronometer.master.WaitForSeconds(_duration);
+		character.cinematic.Detach(this);
 	}
 
 	public override void Stop()
 	{
 		if ((Object)(object)_owner != (Object)null)
 		{
-			_owner.cinematic.Detach((object)this);
+			_owner.cinematic.Detach(this);
 		}
 	}
 }

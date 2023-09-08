@@ -231,11 +231,11 @@ public class Oberon : MonoBehaviour
 		while (true)
 		{
 			yield return null;
-			if (((SubcomponentArray<Constraint>)_constraints).components.Pass())
+			if (_constraints.components.Pass())
 			{
-				_remainAttackCooldown -= ((ChronometerBase)_owner.chronometer.master).deltaTime;
-				_remainThunderCooldown -= ((ChronometerBase)_owner.chronometer.master).deltaTime;
-				_remainBombCooldown -= ((ChronometerBase)_owner.chronometer.master).deltaTime;
+				_remainAttackCooldown -= _owner.chronometer.master.deltaTime;
+				_remainThunderCooldown -= _owner.chronometer.master.deltaTime;
+				_remainBombCooldown -= _owner.chronometer.master.deltaTime;
 			}
 		}
 	}
@@ -247,7 +247,7 @@ public class Oberon : MonoBehaviour
 		float remain = length;
 		while (remain > float.Epsilon)
 		{
-			float deltaTime = ((ChronometerBase)Chronometer.global).deltaTime;
+			float deltaTime = Chronometer.global.deltaTime;
 			_animator.Update(deltaTime);
 			remain -= deltaTime;
 			yield return null;
@@ -263,7 +263,7 @@ public class Oberon : MonoBehaviour
 		{
 			_animator.Play(_idleHash);
 			yield return null;
-			Move(((ChronometerBase)_owner.chronometer.master).deltaTime);
+			Move(_owner.chronometer.master.deltaTime);
 			if (_remainAttackCooldown < 0f)
 			{
 				if (FindAttackTarget(out var target, _attackDetectRange))
@@ -319,7 +319,7 @@ public class Oberon : MonoBehaviour
 		((Behaviour)collider).enabled = true;
 		_overlapper.OverlapCollider(collider);
 		((Behaviour)collider).enabled = false;
-		List<Target> components = GetComponentExtension.GetComponents<Collider2D, Target>((IEnumerable<Collider2D>)_overlapper.results, true);
+		List<Target> components = ((IEnumerable<Collider2D>)_overlapper.results).GetComponents<Collider2D, Target>(clearList: true);
 		if (components.Count == 0)
 		{
 			target = null;
@@ -348,7 +348,7 @@ public class Oberon : MonoBehaviour
 		((Behaviour)_thunderDetectRange).enabled = true;
 		_overlapper.OverlapCollider(_thunderDetectRange);
 		((Behaviour)_thunderDetectRange).enabled = false;
-		List<Target> components = GetComponentExtension.GetComponents<Collider2D, Target>((IEnumerable<Collider2D>)_overlapper.results, true);
+		List<Target> components = ((IEnumerable<Collider2D>)_overlapper.results).GetComponents<Collider2D, Target>(clearList: true);
 		if (components.Count == 0)
 		{
 			return false;

@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Characters.AI;
 using Level;
 using Services;
@@ -30,7 +29,7 @@ public sealed class SpawnRandomCharacter : CharacterOperation
 		//IL_00bf: Unknown result type (might be due to invalid IL or missing references)
 		if (_characterPrefabs.Length != 0)
 		{
-			Character character = ExtensionMethods.Random<Character>((IEnumerable<Character>)_characterPrefabs);
+			Character character = _characterPrefabs.Random();
 			Character character2;
 			if (_containInWave)
 			{

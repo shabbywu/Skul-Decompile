@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using GameResources;
 using UnityEngine;
 
@@ -39,7 +38,7 @@ public sealed class ShowLineText : Runnable
 			string[] localizedStringArray = Localization.GetLocalizedStringArray(_textKey);
 			if (localizedStringArray.Length != 0)
 			{
-				string text = ExtensionMethods.Random<string>((IEnumerable<string>)localizedStringArray);
+				string text = localizedStringArray.Random();
 				Vector3 position = _spawnPosition.position;
 				((Component)_lineText).transform.position = position;
 				_lineText.Display(text, _duration);

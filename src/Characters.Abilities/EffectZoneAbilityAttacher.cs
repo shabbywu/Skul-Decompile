@@ -40,18 +40,16 @@ public class EffectZoneAbilityAttacher : AbilityAttacher
 
 	public override void StartAttach()
 	{
-		//IL_0013: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0018: Unknown result type (might be due to invalid IL or missing references)
-		((CoroutineReference)(ref _cCheckReference)).Stop();
-		_cCheckReference = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)this, CCheck());
+		_cCheckReference.Stop();
+		_cCheckReference = ((MonoBehaviour)(object)this).StartCoroutineWithReference(CCheck());
 	}
 
 	public override void StopAttach()
 	{
-		((CoroutineReference)(ref _cCheckReference)).Stop();
+		_cCheckReference.Stop();
 		if (!((Object)(object)base.owner == (Object)null))
 		{
-			AbilityComponent[] components = ((SubcomponentArray<AbilityComponent>)_abilityComponents).components;
+			AbilityComponent[] components = _abilityComponents.components;
 			foreach (AbilityComponent abilityComponent in components)
 			{
 				base.owner.ability.Remove(abilityComponent.ability);
@@ -69,18 +67,18 @@ public class EffectZoneAbilityAttacher : AbilityAttacher
 			{
 				if (!_attached)
 				{
-					for (int i = 0; i < ((SubcomponentArray<AbilityComponent>)_abilityComponents).components.Length; i++)
+					for (int i = 0; i < _abilityComponents.components.Length; i++)
 					{
-						base.owner.ability.Add(((SubcomponentArray<AbilityComponent>)_abilityComponents).components[i].ability);
+						base.owner.ability.Add(_abilityComponents.components[i].ability);
 					}
 					_attached = true;
 				}
 			}
 			else
 			{
-				for (int j = 0; j < ((SubcomponentArray<AbilityComponent>)_abilityComponents).components.Length; j++)
+				for (int j = 0; j < _abilityComponents.components.Length; j++)
 				{
-					base.owner.ability.Remove(((SubcomponentArray<AbilityComponent>)_abilityComponents).components[j].ability);
+					base.owner.ability.Remove(_abilityComponents.components[j].ability);
 				}
 				_attached = false;
 			}

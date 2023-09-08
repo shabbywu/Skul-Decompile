@@ -43,7 +43,7 @@ public sealed class ToRandomEnemyBased : Policy
 		//IL_002d: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0032: Unknown result type (might be due to invalid IL or missing references)
 		List<Character> allEnemies = Map.Instance.waveContainer.GetAllEnemies();
-		ExtensionMethods.PseudoShuffle<Character>((IList<Character>)allEnemies);
+		allEnemies.PseudoShuffle();
 		Character character = SelectTargetFromCondition(allEnemies);
 		if ((Object)(object)character == (Object)null)
 		{

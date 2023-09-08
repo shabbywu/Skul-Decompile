@@ -15,12 +15,12 @@ public class AddAirJumpCount : Ability
 
 		protected override void OnAttach()
 		{
-			owner.movement.airJumpCount.Add((object)this, ability._count);
+			owner.movement.airJumpCount.Add(this, ability._count);
 		}
 
 		protected override void OnDetach()
 		{
-			((Sum<int>)(object)owner.movement.airJumpCount).Remove((object)this);
+			owner.movement.airJumpCount.Remove(this);
 		}
 	}
 

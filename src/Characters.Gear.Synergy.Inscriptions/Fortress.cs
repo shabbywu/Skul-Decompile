@@ -16,7 +16,7 @@ public sealed class Fortress : InscriptionInstance
 	[SerializeField]
 	private int _refreshInterval;
 
-	[Information(/*Could not decode attribute arguments.*/)]
+	[Information("duration은 _refreshInterval + 1로 설정하는 것을 권장", InformationAttribute.InformationType.Info, false)]
 	[SerializeField]
 	private Characters.Abilities.Shield _shield;
 
@@ -68,7 +68,7 @@ public sealed class Fortress : InscriptionInstance
 			}
 			base.character.ability.Add(_shield);
 			base.character.ability.Add(_cooldownAbility);
-			yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)base.character.chronometer.master, _cooldownAbility.duration);
+			yield return base.character.chronometer.master.WaitForSeconds(_cooldownAbility.duration);
 		}
 	}
 
@@ -90,7 +90,7 @@ public sealed class Fortress : InscriptionInstance
 			{
 				base.character.ability.Remove(_statBonus);
 			}
-			yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)base.character.chronometer.master, 0.1f);
+			yield return base.character.chronometer.master.WaitForSeconds(0.1f);
 		}
 	}
 }

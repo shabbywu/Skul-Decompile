@@ -23,7 +23,7 @@ public class BattleTutorial : Tutorial
 
 	private void Awake()
 	{
-		_ogre.character.cinematic.Attach((object)this);
+		_ogre.character.cinematic.Attach(this);
 		Scene<GameBase>.instance.uiManager.headupDisplay.bossHealthBar.CloseAll();
 	}
 
@@ -50,13 +50,13 @@ public class BattleTutorial : Tutorial
 		_bossNameDisplay.HideAppearanceText();
 		Deactivate();
 		_witch.follow = false;
-		_ogre.character.cinematic.Detach((object)this);
+		_ogre.character.cinematic.Detach(this);
 		_ogre.target = _player;
 	}
 
 	protected override void OnDisable()
 	{
 		base.OnDisable();
-		_ogre.character.cinematic.Detach((object)this);
+		_ogre.character.cinematic.Detach(this);
 	}
 }

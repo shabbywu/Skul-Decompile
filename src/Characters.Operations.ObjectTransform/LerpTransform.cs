@@ -21,9 +21,7 @@ public sealed class LerpTransform : CharacterOperation
 
 	public override void Run(Character owner)
 	{
-		//IL_0013: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0018: Unknown result type (might be due to invalid IL or missing references)
-		_reference = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)this, CLerp(owner.chronometer.master));
+		_reference = ((MonoBehaviour)(object)this).StartCoroutineWithReference(CLerp(owner.chronometer.master));
 	}
 
 	private IEnumerator CLerp(Chronometer chronometer)
@@ -32,7 +30,7 @@ public sealed class LerpTransform : CharacterOperation
 		_target.position = _source.position;
 		_target.rotation = _source.rotation;
 		_target.localScale = _source.localScale;
-		for (; elapsed < _curve.duration; elapsed += ((ChronometerBase)chronometer).deltaTime)
+		for (; elapsed < _curve.duration; elapsed += chronometer.deltaTime)
 		{
 			yield return null;
 			float num = _curve.Evaluate(elapsed);
@@ -47,6 +45,6 @@ public sealed class LerpTransform : CharacterOperation
 
 	public override void Stop()
 	{
-		((CoroutineReference)(ref _reference)).Stop();
+		_reference.Stop();
 	}
 }

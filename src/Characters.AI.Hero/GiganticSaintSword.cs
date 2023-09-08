@@ -38,7 +38,7 @@ public class GiganticSaintSword : MonoBehaviour
 		Vector2 dest = new Vector2(source.x, destY);
 		while (elapsed < _dropDuration)
 		{
-			elapsed += ((ChronometerBase)Chronometer.global).deltaTime;
+			elapsed += Chronometer.global.deltaTime;
 			_projectile.transform.position = Vector2.op_Implicit(Vector2.Lerp(Vector2.op_Implicit(source), dest, elapsed / _dropDuration));
 			yield return null;
 		}

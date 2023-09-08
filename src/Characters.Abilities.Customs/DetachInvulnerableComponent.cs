@@ -12,6 +12,6 @@ public class DetachInvulnerableComponent : AbilityComponent<DetachInvulnerable>
 
 	private void Awake()
 	{
-		_owner.invulnerable.Attach((object)_key);
+		_owner.invulnerable.Attach(_key);
 	}
 }

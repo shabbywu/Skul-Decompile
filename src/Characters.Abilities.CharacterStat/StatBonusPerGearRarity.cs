@@ -39,9 +39,9 @@ public class StatBonusPerGearRarity : Ability
 		private void UpdateStatBonus()
 		{
 			UpdateStack();
-			for (int i = 0; i < ((ReorderableArray<Stat.Value>)_stat).values.Length; i++)
+			for (int i = 0; i < _stat.values.Length; i++)
 			{
-				((ReorderableArray<Stat.Value>)_stat).values[i].value = ((ReorderableArray<Stat.Value>)ability._statPerGearTag).values[i].GetStackedValue(_stack);
+				_stat.values[i].value = ability._statPerGearTag.values[i].GetStackedValue(_stack);
 			}
 			owner.stat.SetNeedUpdate();
 		}
@@ -55,9 +55,6 @@ public class StatBonusPerGearRarity : Ability
 
 		private void UpdateStack()
 		{
-			//IL_002e: Unknown result type (might be due to invalid IL or missing references)
-			//IL_0054: Unknown result type (might be due to invalid IL or missing references)
-			//IL_007a: Unknown result type (might be due to invalid IL or missing references)
 			if (ability._component.loaded)
 			{
 				int itemCountByRarity = owner.playerComponents.inventory.item.GetItemCountByRarity(ability._rarity);

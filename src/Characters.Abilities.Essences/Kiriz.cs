@@ -20,8 +20,8 @@ public class Kiriz : Ability
 		protected override void OnAttach()
 		{
 			_accumulatedDamage = 0.0;
-			((ChronometerBase)owner.chronometer.animation).AttachTimeScale((object)this, 0.03f);
-			owner.health.onTakeDamage.Add(int.MinValue, (TakeDamageDelegate)OnTakeDamage);
+			owner.chronometer.animation.AttachTimeScale(this, 0.03f);
+			owner.health.onTakeDamage.Add(int.MinValue, OnTakeDamage);
 		}
 
 		protected override void OnDetach()
@@ -34,8 +34,8 @@ public class Kiriz : Ability
 			//IL_0093: Unknown result type (might be due to invalid IL or missing references)
 			//IL_00c8: Unknown result type (might be due to invalid IL or missing references)
 			//IL_0113: Unknown result type (might be due to invalid IL or missing references)
-			((ChronometerBase)owner.chronometer.animation).DetachTimeScale((object)this);
-			owner.health.onTakeDamage.Remove((TakeDamageDelegate)OnTakeDamage);
+			owner.chronometer.animation.DetachTimeScale(this);
+			owner.health.onTakeDamage.Remove(OnTakeDamage);
 			if (!owner.liveAndActive)
 			{
 				return;

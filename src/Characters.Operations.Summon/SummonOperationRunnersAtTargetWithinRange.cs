@@ -26,19 +26,7 @@ public class SummonOperationRunnersAtTargetWithinRange : CharacterOperation
 			Custom
 		}
 
-		private static readonly EnumArray<Pivot, Vector2> _pivotValues = new EnumArray<Pivot, Vector2>((Vector2[])(object)new Vector2[10]
-		{
-			new Vector2(0f, 0f),
-			new Vector2(-0.5f, 0.5f),
-			new Vector2(0f, 0.5f),
-			new Vector2(0.5f, 0.5f),
-			new Vector2(-0.5f, 0f),
-			new Vector2(0f, 0.5f),
-			new Vector2(-0.5f, -0.5f),
-			new Vector2(0f, -0.5f),
-			new Vector2(0.5f, -0.5f),
-			new Vector2(0f, 0f)
-		});
+		private static readonly EnumArray<Pivot, Vector2> _pivotValues = new EnumArray<Pivot, Vector2>(new Vector2(0f, 0f), new Vector2(-0.5f, 0.5f), new Vector2(0f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(-0.5f, 0f), new Vector2(0f, 0.5f), new Vector2(-0.5f, -0.5f), new Vector2(0f, -0.5f), new Vector2(0.5f, -0.5f), new Vector2(0f, 0f));
 
 		[SerializeField]
 		private Pivot _pivot;
@@ -217,7 +205,7 @@ public class SummonOperationRunnersAtTargetWithinRange : CharacterOperation
 		switch (_method)
 		{
 		case FindingMethod.Random:
-			ExtensionMethods.PseudoShuffle<Character>((IList<Character>)list);
+			list.PseudoShuffle();
 			break;
 		case FindingMethod.CloseToFar:
 			list.Sort(delegate(Character x, Character y)

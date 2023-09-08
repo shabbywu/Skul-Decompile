@@ -40,7 +40,7 @@ public class ComboSystem
 
 	public void Start()
 	{
-		ExtensionMethods.Shuffle<IComboable>((IList<IComboable>)_combos);
+		_combos.Shuffle();
 	}
 
 	public void Clear()

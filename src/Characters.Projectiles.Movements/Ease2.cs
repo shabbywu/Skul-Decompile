@@ -53,9 +53,9 @@ public class Ease2 : Movement
 		//IL_00ab: Unknown result type (might be due to invalid IL or missing references)
 		//IL_007b: Unknown result type (might be due to invalid IL or missing references)
 		float num = _startSpeed;
-		for (int i = 0; i < ((ReorderableArray<Info>)_infos).values.Length; i++)
+		for (int i = 0; i < _infos.values.Length; i++)
 		{
-			Info info = ((ReorderableArray<Info>)_infos).values[i];
+			Info info = _infos.values[i];
 			if (time > info.length)
 			{
 				num = info.targetSpeed;

@@ -30,7 +30,7 @@ public class MotionConstraint : Constraint
 	public override void Initilaize(Action action)
 	{
 		base.Initilaize(action);
-		Info[] values = ((ReorderableArray<Info>)_infos).values;
+		Info[] values = _infos.values;
 		foreach (Info info in values)
 		{
 			if (info.animationRange.y == 1f)
@@ -48,7 +48,7 @@ public class MotionConstraint : Constraint
 		{
 			return true;
 		}
-		Info[] values = ((ReorderableArray<Info>)_infos).values;
+		Info[] values = _infos.values;
 		foreach (Info info in values)
 		{
 			if ((Object)(object)runningMotion == (Object)(object)info.motion)

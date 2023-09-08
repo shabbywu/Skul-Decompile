@@ -66,9 +66,9 @@ public sealed class Heirloom : InscriptionInstance
 
 		void IAbilityInstance.Attach()
 		{
-			_owner.health.onTakeDamage.Add(200, (TakeDamageDelegate)OnTakeDamage);
+			_owner.health.onTakeDamage.Add(200, OnTakeDamage);
 			_heirloom.StartSpawningMotionTrail();
-			((PriorityList<GiveDamageDelegate>)_owner.onGiveDamage).Add(int.MaxValue, (GiveDamageDelegate)HanldeOnGiveDamage);
+			_owner.onGiveDamage.Add(int.MaxValue, HanldeOnGiveDamage);
 			((MonoBehaviour)_owner).StartCoroutine(_heirloom._onAttach.CRun(_owner));
 		}
 
@@ -90,8 +90,8 @@ public sealed class Heirloom : InscriptionInstance
 		{
 			_heirloom.SpawnMotionTrail();
 			_heirloom.StopSpawningMotionTrail();
-			_owner.health.onTakeDamage.Remove((TakeDamageDelegate)OnTakeDamage);
-			((PriorityList<GiveDamageDelegate>)_owner.onGiveDamage).Remove((GiveDamageDelegate)HanldeOnGiveDamage);
+			_owner.health.onTakeDamage.Remove(OnTakeDamage);
+			_owner.onGiveDamage.Remove(HanldeOnGiveDamage);
 			_owner.ability.Add(_heirloom._cooldownAbility);
 			((MonoBehaviour)_owner).StartCoroutine(_heirloom.CCooldown());
 			((MonoBehaviour)_owner).StartCoroutine(_heirloom._onDetach.CRun(_owner));
@@ -172,16 +172,14 @@ public sealed class Heirloom : InscriptionInstance
 
 	public override void Attach()
 	{
-		//IL_0012: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0017: Unknown result type (might be due to invalid IL or missing references)
-		((CoroutineReference)(ref _attachReference)).Stop();
-		_attachReference = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)this, "CStartAttachLoop");
+		_attachReference.Stop();
+		_attachReference = ((MonoBehaviour)(object)this).StartCoroutineWithReference("CStartAttachLoop");
 		_canUse = true;
 	}
 
 	public override void Detach()
 	{
-		((CoroutineReference)(ref _attachReference)).Stop();
+		_attachReference.Stop();
 		base.character.ability.Remove(_ability);
 		base.character.ability.Remove(_cooldownAbility);
 		((MonoBehaviour)this).StopCoroutine("CStartAttachLoop");

@@ -108,7 +108,7 @@ public class FloatingText : MonoBehaviour
 		{
 			SetFadeAlpha(t / duration);
 			yield return null;
-			t -= ((ChronometerBase)Chronometer.global).deltaTime;
+			t -= Chronometer.global.deltaTime;
 		}
 		SetFadeAlpha(0f);
 	}

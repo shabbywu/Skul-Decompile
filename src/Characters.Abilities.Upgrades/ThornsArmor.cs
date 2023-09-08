@@ -33,7 +33,7 @@ public sealed class ThornsArmor : Ability
 			//IL_00b3: Unknown result type (might be due to invalid IL or missing references)
 			//IL_00b8: Unknown result type (might be due to invalid IL or missing references)
 			Character character = tookDamage.attacker.character;
-			if (!(_remainCooldownTime > 0f) && !((Object)(object)character == (Object)null) && ((EnumArray<Character.Type, bool>)ability._characterType)[character.type] && ((EnumArray<Damage.MotionType, bool>)ability._motionType)[tookDamage.motionType] && ((EnumArray<Damage.AttackType, bool>)ability._attackType)[tookDamage.attackType] && !(damageDealt < (double)ability._minDamage))
+			if (!(_remainCooldownTime > 0f) && !((Object)(object)character == (Object)null) && ability._characterType[character.type] && ability._motionType[tookDamage.motionType] && ability._attackType[tookDamage.attackType] && !(damageDealt < (double)ability._minDamage))
 			{
 				_remainCooldownTime = ability._cooldownTime;
 				float value = ability._damage.value;

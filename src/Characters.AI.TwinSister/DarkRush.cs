@@ -40,7 +40,7 @@ public class DarkRush : MonoBehaviour
 
 	public IEnumerator CRun(DarkAideAI darkAideAI)
 	{
-		darkAideAI.character.status.unstoppable.Attach((object)this);
+		darkAideAI.character.status.unstoppable.Attach(this);
 		yield return _teleportBehind.CRun(darkAideAI);
 		_fristAttack.TryStart();
 		while (_fristAttack.running)
@@ -54,7 +54,7 @@ public class DarkRush : MonoBehaviour
 			yield return null;
 		}
 		yield return CFinishAttack();
-		darkAideAI.character.status.unstoppable.Detach((object)this);
+		darkAideAI.character.status.unstoppable.Detach(this);
 		while (_standing.running)
 		{
 			yield return null;
@@ -79,8 +79,8 @@ public class DarkRush : MonoBehaviour
 		{
 			componentsInChildren[i].ShowImpact();
 		}
-		float num = (GameData.HardmodeProgress.hardmode ? _attackLength_hard : _attackLength_normal);
-		yield return Chronometer.global.WaitForSeconds(num);
+		float seconds = (GameData.HardmodeProgress.hardmode ? _attackLength_hard : _attackLength_normal);
+		yield return Chronometer.global.WaitForSeconds(seconds);
 		componentsInChildren = ((Component)_parentPool.currentEffectParent).GetComponentsInChildren<DarkRushEffect>();
 		for (int i = 0; i < componentsInChildren.Length; i++)
 		{

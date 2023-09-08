@@ -40,7 +40,6 @@ public class MonsterSpawner : MonoBehaviour
 
 	private void SpawnCharacter()
 	{
-		//IL_005b: Unknown result type (might be due to invalid IL or missing references)
 		_destroyedBody.SetActive(true);
 		Character character = ((_target == Target.LooseSubject) ? _looseSubject : _strangeSubject);
 		((Component)character).gameObject.SetActive(true);
@@ -49,13 +48,13 @@ public class MonsterSpawner : MonoBehaviour
 			Map.Instance.waveContainer.Attach(character);
 		}
 		((Behaviour)character.collider).enabled = true;
-		CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)character, CAttachCinematic(character));
+		((MonoBehaviour)(object)character).StartCoroutineWithReference(CAttachCinematic(character));
 	}
 
 	private IEnumerator CAttachCinematic(Character character)
 	{
-		character.cinematic.Attach((object)this);
+		character.cinematic.Attach(this);
 		yield return (object)new WaitForSeconds(_cinematicDuration.value);
-		character.cinematic.Detach((object)this);
+		character.cinematic.Detach(this);
 	}
 }

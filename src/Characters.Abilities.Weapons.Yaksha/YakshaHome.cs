@@ -102,7 +102,7 @@ public sealed class YakshaHome : MonoBehaviour
 				((MonoBehaviour)CoroutineProxy.instance).StartCoroutine(_onActivate.CRun(_owner));
 				_ranActivateAction = true;
 			}
-			_remainTime -= ((ChronometerBase)Chronometer.global).deltaTime;
+			_remainTime -= Chronometer.global.deltaTime;
 			if (_remainTime < 0f)
 			{
 				Disappear();
@@ -202,9 +202,9 @@ public sealed class YakshaHome : MonoBehaviour
 			if (!((Object)(object)character == (Object)null) && !_enemies.Contains(character))
 			{
 				_enemies.Add(character);
-				for (int j = 0; j < ((SubcomponentArray<AbilityComponent>)_abilityComponents).components.Length; j++)
+				for (int j = 0; j < _abilityComponents.components.Length; j++)
 				{
-					character.ability.Add(((SubcomponentArray<AbilityComponent>)_abilityComponents).components[j].ability);
+					character.ability.Add(_abilityComponents.components[j].ability);
 				}
 			}
 		}
@@ -214,7 +214,7 @@ public sealed class YakshaHome : MonoBehaviour
 	{
 		foreach (Character enemy in _enemies)
 		{
-			AbilityComponent[] components = ((SubcomponentArray<AbilityComponent>)_abilityComponents).components;
+			AbilityComponent[] components = _abilityComponents.components;
 			foreach (AbilityComponent abilityComponent in components)
 			{
 				enemy.ability.Remove(abilityComponent.ability);
@@ -239,7 +239,7 @@ public sealed class YakshaHome : MonoBehaviour
 		{
 			if (OutExitArea(Vector2.op_Implicit(((Component)_enemies[num]).transform.position)))
 			{
-				AbilityComponent[] components = ((SubcomponentArray<AbilityComponent>)_abilityComponents).components;
+				AbilityComponent[] components = _abilityComponents.components;
 				foreach (AbilityComponent abilityComponent in components)
 				{
 					_enemies[num].ability.Remove(abilityComponent.ability);
@@ -279,7 +279,7 @@ public sealed class YakshaHome : MonoBehaviour
 	{
 		//IL_0019: Unknown result type (might be due to invalid IL or missing references)
 		//IL_001e: Unknown result type (might be due to invalid IL or missing references)
-		if (((ChronometerBase)Chronometer.global).timeScale != 0f && !InEnterArea(Vector2.op_Implicit(((Component)enemy).transform.position)))
+		if (Chronometer.global.timeScale != 0f && !InEnterArea(Vector2.op_Implicit(((Component)enemy).transform.position)))
 		{
 			enemy.movement.push.ApplyKnockback(_owner, _pushInfo);
 		}

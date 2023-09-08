@@ -235,7 +235,7 @@ public class DropMovement : MonoBehaviour
 		bool moveHorizontal = true;
 		while (true)
 		{
-			float deltaTime = ((ChronometerBase)Chronometer.global).deltaTime;
+			float deltaTime = Chronometer.global.deltaTime;
 			if (moveVertical)
 			{
 				_speed.y -= _gravity * deltaTime;
@@ -315,7 +315,7 @@ public class DropMovement : MonoBehaviour
 			if (_floating)
 			{
 				Vector3 zero = Vector3.zero;
-				t += ((ChronometerBase)Chronometer.global).deltaTime;
+				t += Chronometer.global.deltaTime;
 				zero.y = Mathf.Sin(t * (float)Math.PI * _floatFrequency) * _floatAmplitude;
 				_graphic.localPosition = zero;
 			}

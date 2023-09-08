@@ -16,7 +16,7 @@ public class ValueByRarity
 
 	public float this[int index] => _values[index];
 
-	public float this[Rarity rarity] => _values[rarity];
+	public float this[Rarity rarity] => _values[(int)rarity];
 
 	public ValueByRarity(params float[] values)
 	{

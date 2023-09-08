@@ -35,7 +35,6 @@ public class QuintessenceOption : MonoBehaviour
 	{
 		//IL_0028: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0032: Unknown result type (might be due to invalid IL or missing references)
-		//IL_006e: Unknown result type (might be due to invalid IL or missing references)
 		((Behaviour)_thumnailIcon).enabled = true;
 		_thumnailIcon.sprite = essence.thumbnail;
 		((Component)_thumnailIcon).transform.localScale = Vector3.one * 3f;

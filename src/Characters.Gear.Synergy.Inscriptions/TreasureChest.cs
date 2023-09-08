@@ -161,7 +161,6 @@ public sealed class TreasureChest : InteractiveObject, ILootable
 
 	private void LoadItem()
 	{
-		//IL_0029: Unknown result type (might be due to invalid IL or missing references)
 		_itemRequest?.Release();
 		do
 		{
@@ -174,18 +173,11 @@ public sealed class TreasureChest : InteractiveObject, ILootable
 
 	private void EvaluateGearRarity()
 	{
-		//IL_0025: Unknown result type (might be due to invalid IL or missing references)
-		//IL_002a: Unknown result type (might be due to invalid IL or missing references)
 		_gearRarity = Singleton<Service>.Instance.levelManager.currentChapter.currentStage.treasureInfo.itemRarityPossibilities.Evaluate(_random);
 	}
 
 	private void Drop()
 	{
-		//IL_00a3: Unknown result type (might be due to invalid IL or missing references)
-		//IL_00a8: Unknown result type (might be due to invalid IL or missing references)
-		//IL_00cb: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0101: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0107: Invalid comparison between Unknown and I4
 		IStageInfo currentStage = Singleton<Service>.Instance.levelManager.currentChapter.currentStage;
 		LevelManager levelManager = Singleton<Service>.Instance.levelManager;
 		if (_level == Level.Set2)
@@ -210,7 +202,7 @@ public sealed class TreasureChest : InteractiveObject, ILootable
 		case RewardType.Items:
 			Load();
 			((MonoBehaviour)this).StartCoroutine(CDelayedDrop());
-			if ((int)_gearRarity == 3)
+			if (_gearRarity == Rarity.Legendary)
 			{
 				((MonoBehaviour)this).StartCoroutine(_onLegendary.CRun(Singleton<Service>.Instance.levelManager.player));
 			}
@@ -219,7 +211,7 @@ public sealed class TreasureChest : InteractiveObject, ILootable
 		IEnumerator CDelayedCurrencyBagDrop()
 		{
 			yield return Chronometer.global.WaitForSeconds(0.5f);
-			if ((int)rarity == 3)
+			if (rarity == Rarity.Legendary)
 			{
 				((MonoBehaviour)this).StartCoroutine(_onLegendary.CRun(Singleton<Service>.Instance.levelManager.player));
 			}

@@ -49,7 +49,7 @@ public class BehaviourTreeRunner : MonoBehaviour
 		NodeState result;
 		do
 		{
-			_context.deltaTime = (((Object)(object)character == (Object)null) ? ((ChronometerBase)Chronometer.global).deltaTime : ((ChronometerBase)character.chronometer.master).deltaTime);
+			_context.deltaTime = (((Object)(object)character == (Object)null) ? Chronometer.global.deltaTime : character.chronometer.master.deltaTime);
 			result = _root.Tick(_context);
 			yield return null;
 		}

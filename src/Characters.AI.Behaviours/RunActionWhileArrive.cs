@@ -36,7 +36,7 @@ public sealed class RunActionWhileArrive : Behaviour
 		while (_action.running && base.result == Result.Doing && elapsed <= _maxTime && !TryMove(controller.character))
 		{
 			yield return null;
-			elapsed += ((ChronometerBase)controller.character.chronometer.master).deltaTime;
+			elapsed += controller.character.chronometer.master.deltaTime;
 		}
 	}
 

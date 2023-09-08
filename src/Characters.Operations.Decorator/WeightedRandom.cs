@@ -5,7 +5,7 @@ namespace Characters.Operations.Decorator;
 
 public class WeightedRandom : CharacterOperation
 {
-	[Subcomponent(typeof(OperationWithWeight))]
+	[UnityEditor.Subcomponent(typeof(OperationWithWeight))]
 	[SerializeField]
 	private OperationWithWeight.Subcomponents _toRandom;
 

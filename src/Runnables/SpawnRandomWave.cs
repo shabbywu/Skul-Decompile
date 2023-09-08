@@ -15,7 +15,7 @@ public class SpawnRandomWave : Runnable
 		IEnumerable<EnemyWave> enumerable = Map.Instance.waveContainer.enemyWaves.Where((EnemyWave wave) => wave.state == Wave.State.Waiting);
 		if (enumerable.Count() != 0)
 		{
-			ExtensionMethods.Random<EnemyWave>(enumerable).Spawn(_effectOnSpawned);
+			enumerable.Random().Spawn(_effectOnSpawned);
 		}
 	}
 }

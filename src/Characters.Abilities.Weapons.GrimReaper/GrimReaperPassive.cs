@@ -180,7 +180,7 @@ public class GrimReaperPassive : Ability, IAbilityInstance
 		//IL_0047: Unknown result type (might be due to invalid IL or missing references)
 		//IL_004c: Unknown result type (might be due to invalid IL or missing references)
 		//IL_004f: Unknown result type (might be due to invalid IL or missing references)
-		if (!((Object)(object)target.character == (Object)null) && ((EnumArray<Character.Type, bool>)_characterType)[target.character.type] && MMMaths.PercentChance(_possibility))
+		if (!((Object)(object)target.character == (Object)null) && _characterType[target.character.type] && MMMaths.PercentChance(_possibility))
 		{
 			GrimReaperSoul grimReaperSoul = _grimReaperSoul;
 			Bounds bounds = ((Collider2D)target.character.collider).bounds;
@@ -224,9 +224,9 @@ public class GrimReaperPassive : Ability, IAbilityInstance
 
 	private void UpdateStat()
 	{
-		for (int i = 0; i < ((ReorderableArray<Stat.Value>)_stat).values.Length; i++)
+		for (int i = 0; i < _stat.values.Length; i++)
 		{
-			((ReorderableArray<Stat.Value>)_stat).values[i].value = ((ReorderableArray<Stat.Value>)_statPerStack).values[i].GetStackedValue(stack);
+			_stat.values[i].value = _statPerStack.values[i].GetStackedValue(stack);
 		}
 		owner.stat.SetNeedUpdate();
 	}

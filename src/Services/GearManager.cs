@@ -42,9 +42,6 @@ public class GearManager : MonoBehaviour
 
 	public void Initialize()
 	{
-		//IL_0056: Unknown result type (might be due to invalid IL or missing references)
-		//IL_00ba: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0121: Unknown result type (might be due to invalid IL or missing references)
 		GearResource instance = GearResource.instance;
 		ReadOnlyCollection<ItemReference> items = instance.items;
 		ReadOnlyCollection<EssenceReference> essences = instance.essences;
@@ -123,7 +120,6 @@ public class GearManager : MonoBehaviour
 
 	private void UpdateLockedGearList()
 	{
-		//IL_0083: Unknown result type (might be due to invalid IL or missing references)
 		GearResource instance = GearResource.instance;
 		ReadOnlyCollection<ItemReference> items = instance.items;
 		ReadOnlyCollection<EssenceReference> essences = instance.essences;
@@ -141,15 +137,9 @@ public class GearManager : MonoBehaviour
 
 	public GearReference GetGearToUnlock(Random random, Rarity rarity)
 	{
-		//IL_000c: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0048: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0060: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0067: Unknown result type (might be due to invalid IL or missing references)
-		//IL_007f: Unknown result type (might be due to invalid IL or missing references)
-		//IL_00be: Unknown result type (might be due to invalid IL or missing references)
 		UpdateLockedGearList();
 		_ = _lockedGears[rarity];
-		if (((IEnumerable<List<GearReference>>)_lockedGears).Select((List<GearReference> list) => list.Count).Sum() == 0)
+		if (_lockedGears.Select((List<GearReference> list) => list.Count).Sum() == 0)
 		{
 			return null;
 		}
@@ -159,7 +149,7 @@ public class GearManager : MonoBehaviour
 		}
 		List<Rarity> list2 = EnumValues<Rarity>.Values.ToList();
 		int num = list2.IndexOf(rarity);
-		if ((int)rarity == 0)
+		if (rarity == Rarity.Common)
 		{
 			for (int i = 1; i < list2.Count; i++)
 			{
@@ -190,10 +180,9 @@ public class GearManager : MonoBehaviour
 
 	private bool TryGetGearToUnlock(Random random, Rarity rarity, out GearReference gearReference)
 	{
-		//IL_0009: Unknown result type (might be due to invalid IL or missing references)
 		gearReference = null;
 		List<GearReference> list2 = _lockedGears[rarity];
-		if (((IEnumerable<List<GearReference>>)_lockedGears).Select((List<GearReference> list) => list.Count).Sum() == 0)
+		if (_lockedGears.Select((List<GearReference> list) => list.Count).Sum() == 0)
 		{
 			return false;
 		}
@@ -201,16 +190,13 @@ public class GearManager : MonoBehaviour
 		{
 			return false;
 		}
-		gearReference = ExtensionMethods.Random<GearReference>((IEnumerable<GearReference>)list2, random);
+		gearReference = list2.Random(random);
 		return true;
 	}
 
 	public GearReference GetGearToTake(Rarity rarity)
 	{
-		//IL_0030: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0020: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0028: Unknown result type (might be due to invalid IL or missing references)
-		return ExtensionMethods.Random<Gear.Type>((IEnumerable<Gear.Type>)EnumValues<Gear.Type>.Values) switch
+		return EnumValues<Gear.Type>.Values.Random() switch
 		{
 			Gear.Type.Item => GetItemToTake(rarity), 
 			Gear.Type.Quintessence => GetQuintessenceToTake(rarity), 
@@ -221,22 +207,14 @@ public class GearManager : MonoBehaviour
 
 	public ItemReference GetItemToTake(Rarity rarity)
 	{
-		//IL_0006: Unknown result type (might be due to invalid IL or missing references)
 		return GetItemToTake(MMMaths.random, rarity);
 	}
 
 	public ItemReference GetItemToTake(Random random, Rarity rarity)
 	{
-		//IL_0073: Unknown result type (might be due to invalid IL or missing references)
-		//IL_001d: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0095: Unknown result type (might be due to invalid IL or missing references)
-		//IL_009d: Unknown result type (might be due to invalid IL or missing references)
-		//IL_009f: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0098: Unknown result type (might be due to invalid IL or missing references)
-		//IL_009a: Unknown result type (might be due to invalid IL or missing references)
 		if ((Object)(object)Singleton<Service>.Instance.levelManager.player == (Object)null)
 		{
-			return ExtensionMethods.Random<ItemReference>(_items[rarity].Where((ItemReference item) => item.obtainable && item.unlocked), random);
+			return _items[rarity].Where((ItemReference item) => item.obtainable && item.unlocked).Random(random);
 		}
 		_ = Singleton<Service>.Instance.levelManager.player.playerComponents.inventory.item;
 		IEnumerable<ItemReference> enumerable = _items[rarity].Where(delegate(ItemReference item)
@@ -269,9 +247,9 @@ public class GearManager : MonoBehaviour
 		});
 		if (enumerable.Count() == 0)
 		{
-			return GetItemToTake(random, (Rarity)(((int)rarity == 0) ? (rarity + 1) : (rarity - 1)));
+			return GetItemToTake(random, (rarity == Rarity.Common) ? (rarity + 1) : (rarity - 1));
 		}
-		return ExtensionMethods.Random<ItemReference>(enumerable, random);
+		return enumerable.Random(random);
 	}
 
 	public ItemReference GetItemToTake(Random random, Gear.Tag tag, bool optainable = true)
@@ -279,7 +257,7 @@ public class GearManager : MonoBehaviour
 		GearResource instance = GearResource.instance;
 		if ((Object)(object)Singleton<Service>.Instance.levelManager.player == (Object)null)
 		{
-			return ExtensionMethods.Random<ItemReference>(instance.items.Where((ItemReference item) => item.obtainable && item.unlocked && item.gearTag.HasFlag(tag)), random);
+			return instance.items.Where((ItemReference item) => item.obtainable && item.unlocked && item.gearTag.HasFlag(tag)).Random(random);
 		}
 		_ = Singleton<Service>.Instance.levelManager.player.playerComponents.inventory.item;
 		IEnumerable<ItemReference> enumerable = instance.items.Where(delegate(ItemReference item)
@@ -316,9 +294,9 @@ public class GearManager : MonoBehaviour
 		});
 		if (enumerable.Count() == 0)
 		{
-			return GetItemToTake(random, (Rarity)0);
+			return GetItemToTake(random, Rarity.Common);
 		}
-		return ExtensionMethods.Random<ItemReference>(enumerable, random);
+		return enumerable.Random(random);
 	}
 
 	public ItemReference GetOmenItems(Random random)
@@ -328,7 +306,7 @@ public class GearManager : MonoBehaviour
 		Gear.Tag except = Gear.Tag.UpgradedOmen;
 		if ((Object)(object)Singleton<Service>.Instance.levelManager.player == (Object)null)
 		{
-			return ExtensionMethods.Random<ItemReference>(instance.items.Where((ItemReference item) => item.obtainable && item.unlocked && item.gearTag.HasFlag(tag)), random);
+			return instance.items.Where((ItemReference item) => item.obtainable && item.unlocked && item.gearTag.HasFlag(tag)).Random(random);
 		}
 		_ = Singleton<Service>.Instance.levelManager.player.playerComponents.inventory.item;
 		IEnumerable<ItemReference> enumerable = instance.items.Where(delegate(ItemReference item)
@@ -361,26 +339,21 @@ public class GearManager : MonoBehaviour
 		});
 		if (enumerable.Count() == 0)
 		{
-			return GetItemToTake(random, (Rarity)0);
+			return GetItemToTake(random, Rarity.Common);
 		}
-		return ExtensionMethods.Random<ItemReference>(enumerable, random);
+		return enumerable.Random(random);
 	}
 
 	public EssenceReference GetQuintessenceToTake(Rarity rarity)
 	{
-		//IL_0006: Unknown result type (might be due to invalid IL or missing references)
 		return GetQuintessenceToTake(MMMaths.random, rarity);
 	}
 
 	public EssenceReference GetQuintessenceToTake(Random random, Rarity rarity)
 	{
-		//IL_0073: Unknown result type (might be due to invalid IL or missing references)
-		//IL_001d: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0095: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0097: Unknown result type (might be due to invalid IL or missing references)
 		if ((Object)(object)Singleton<Service>.Instance.levelManager.player == (Object)null)
 		{
-			return ExtensionMethods.Random<EssenceReference>(_quintessences[rarity].Where((EssenceReference essence) => essence.obtainable && essence.unlocked), random);
+			return _quintessences[rarity].Where((EssenceReference essence) => essence.obtainable && essence.unlocked).Random(random);
 		}
 		_ = Singleton<Service>.Instance.levelManager.player.playerComponents.inventory.quintessence;
 		IEnumerable<EssenceReference> enumerable = _quintessences[rarity].Where(delegate(EssenceReference essence)
@@ -413,9 +386,9 @@ public class GearManager : MonoBehaviour
 		});
 		if (enumerable.Count() == 0)
 		{
-			return GetQuintessenceToTake(random, (Rarity)(rarity - 1));
+			return GetQuintessenceToTake(random, rarity - 1);
 		}
-		return ExtensionMethods.Random<EssenceReference>(enumerable, random);
+		return enumerable.Random(random);
 	}
 
 	private string StripAwakeNumber(string name)
@@ -430,9 +403,6 @@ public class GearManager : MonoBehaviour
 
 	public ICollection<GearReference> GetGearListByRarity(Gear.Type type, Rarity rarity)
 	{
-		//IL_001d: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0015: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0025: Unknown result type (might be due to invalid IL or missing references)
 		return type switch
 		{
 			Gear.Type.Item => GetItemListByRarity(rarity), 
@@ -444,7 +414,6 @@ public class GearManager : MonoBehaviour
 
 	public ICollection<GearReference> GetItemListByRarity(Rarity rarity)
 	{
-		//IL_000c: Unknown result type (might be due to invalid IL or missing references)
 		ICollection<GearReference> collection = new List<GearReference>();
 		ItemReference[] array = _items[rarity];
 		foreach (ItemReference itemReference in array)
@@ -459,7 +428,6 @@ public class GearManager : MonoBehaviour
 
 	public ICollection<GearReference> GetWeaponListByRarity(Rarity rarity)
 	{
-		//IL_000c: Unknown result type (might be due to invalid IL or missing references)
 		ICollection<GearReference> collection = new List<GearReference>();
 		WeaponReference[] array = _weapons[rarity];
 		foreach (WeaponReference weaponReference in array)
@@ -474,7 +442,6 @@ public class GearManager : MonoBehaviour
 
 	public ICollection<GearReference> GetEssenceListByRarity(Rarity rarity)
 	{
-		//IL_000c: Unknown result type (might be due to invalid IL or missing references)
 		ICollection<GearReference> collection = new List<GearReference>();
 		EssenceReference[] array = _quintessences[rarity];
 		foreach (EssenceReference essenceReference in array)
@@ -501,19 +468,14 @@ public class GearManager : MonoBehaviour
 
 	public WeaponReference GetWeaponToTake(Rarity rarity)
 	{
-		//IL_0006: Unknown result type (might be due to invalid IL or missing references)
 		return GetWeaponToTake(MMMaths.random, rarity);
 	}
 
 	public WeaponReference GetWeaponToTake(Random random, Rarity rarity)
 	{
-		//IL_0073: Unknown result type (might be due to invalid IL or missing references)
-		//IL_001d: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0095: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0097: Unknown result type (might be due to invalid IL or missing references)
 		if ((Object)(object)Singleton<Service>.Instance.levelManager.player == (Object)null)
 		{
-			return ExtensionMethods.Random<WeaponReference>(_weapons[rarity].Where((WeaponReference weapon) => weapon.obtainable && weapon.unlocked), random);
+			return _weapons[rarity].Where((WeaponReference weapon) => weapon.obtainable && weapon.unlocked).Random(random);
 		}
 		_ = Singleton<Service>.Instance.levelManager.player.playerComponents.inventory.weapon;
 		IEnumerable<WeaponReference> enumerable = _weapons[rarity].Where(delegate(WeaponReference weapon)
@@ -537,22 +499,19 @@ public class GearManager : MonoBehaviour
 		});
 		if (enumerable.Count() == 0)
 		{
-			return GetWeaponToTake(random, (Rarity)(rarity - 1));
+			return GetWeaponToTake(random, rarity - 1);
 		}
-		return ExtensionMethods.Random<WeaponReference>(enumerable, random);
+		return enumerable.Random(random);
 	}
 
 	public WeaponReference GetWeaponByCategory(Random random, Rarity rarity, Weapon.Category category)
 	{
-		//IL_001a: Unknown result type (might be due to invalid IL or missing references)
-		//IL_003c: Unknown result type (might be due to invalid IL or missing references)
-		//IL_003e: Unknown result type (might be due to invalid IL or missing references)
 		IEnumerable<WeaponReference> enumerable = _weapons[rarity].Where(Pass);
 		if (enumerable.Count() == 0)
 		{
-			return GetWeaponByCategory(random, (Rarity)(rarity - 1), category);
+			return GetWeaponByCategory(random, rarity - 1, category);
 		}
-		return ExtensionMethods.Random<WeaponReference>(enumerable, random);
+		return enumerable.Random(random);
 		bool Pass(WeaponReference weapon)
 		{
 			if (!weapon.obtainable)
@@ -593,7 +552,7 @@ public class GearManager : MonoBehaviour
 			IEnumerable<ItemReference> enumerable = item.Where((ItemReference item) => item.name.Equals(key, StringComparison.OrdinalIgnoreCase));
 			if (enumerable.Count() != 0)
 			{
-				ItemReference itemReference = ExtensionMethods.Random<ItemReference>(enumerable);
+				ItemReference itemReference = enumerable.Random();
 				if (itemReference != null)
 				{
 					return itemReference;
@@ -605,7 +564,6 @@ public class GearManager : MonoBehaviour
 
 	public ItemReference GetItemByKeyword(Random random, Rarity rarity, Inscription.Key key)
 	{
-		//IL_001a: Unknown result type (might be due to invalid IL or missing references)
 		IEnumerable<ItemReference> enumerable = _items[rarity].Where(delegate(ItemReference item)
 		{
 			if (!item.obtainable)
@@ -646,7 +604,7 @@ public class GearManager : MonoBehaviour
 		{
 			return null;
 		}
-		ItemReference itemReference = ExtensionMethods.Random<ItemReference>(enumerable, random);
+		ItemReference itemReference = enumerable.Random(random);
 		if (itemReference != null)
 		{
 			return itemReference;

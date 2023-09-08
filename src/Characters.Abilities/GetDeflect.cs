@@ -17,12 +17,12 @@ public sealed class GetDeflect : Ability
 
 		protected override void OnAttach()
 		{
-			owner.health.onTakeDamage.Add(int.MaxValue, (TakeDamageDelegate)ability.OnOwnerTakeDamage);
+			owner.health.onTakeDamage.Add(int.MaxValue, ability.OnOwnerTakeDamage);
 		}
 
 		protected override void OnDetach()
 		{
-			owner.health.onTakeDamage.Remove((TakeDamageDelegate)ability.OnOwnerTakeDamage);
+			owner.health.onTakeDamage.Remove(ability.OnOwnerTakeDamage);
 		}
 	}
 

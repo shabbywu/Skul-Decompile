@@ -88,7 +88,7 @@ public sealed class BrothersAI : AIController
 
 	private IEnumerator COutro()
 	{
-		yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)character.chronometer.master, _lifeTime);
+		yield return character.chronometer.master.WaitForSeconds(_lifeTime);
 		_readyForOutro = true;
 	}
 }

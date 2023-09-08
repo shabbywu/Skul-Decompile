@@ -8,10 +8,10 @@ namespace Characters.Projectiles.Operations;
 
 public abstract class Operation : HitOperation
 {
-	public new class SubcomponentAttribute : SubcomponentAttribute
+	public new class SubcomponentAttribute : UnityEditor.SubcomponentAttribute
 	{
 		public SubcomponentAttribute()
-			: base(true, types, names)
+			: base(allowCustom: true, Operation.types, Operation.names)
 		{
 		}
 	}

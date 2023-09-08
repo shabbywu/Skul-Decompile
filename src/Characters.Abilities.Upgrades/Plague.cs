@@ -34,12 +34,10 @@ public class Plague : Ability
 
 		private void HandleOnMapLoaded()
 		{
-			//IL_0026: Unknown result type (might be due to invalid IL or missing references)
-			//IL_002b: Unknown result type (might be due to invalid IL or missing references)
-			((CoroutineReference)(ref _applyReference)).Stop();
+			_applyReference.Stop();
 			if ((Object)(object)owner != (Object)null)
 			{
-				_applyReference = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)owner, Apply());
+				_applyReference = ((MonoBehaviour)(object)owner).StartCoroutineWithReference(Apply());
 			}
 		}
 
@@ -50,7 +48,7 @@ public class Plague : Ability
 			{
 				foreach (Character allEnemy in Map.Instance.waveContainer.GetAllEnemies())
 				{
-					if (!_targets.Contains(allEnemy) && !allEnemy.health.dead && ((EnumArray<Character.Type, bool>)ability._characterType)[allEnemy.type] && !((Object)(object)allEnemy.ability == (Object)null))
+					if (!_targets.Contains(allEnemy) && !allEnemy.health.dead && ability._characterType[allEnemy.type] && !((Object)(object)allEnemy.ability == (Object)null))
 					{
 						allEnemy.ability.Add(ability._plagueAbility.ability);
 						_targets.Add(allEnemy);

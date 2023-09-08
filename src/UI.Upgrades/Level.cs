@@ -64,7 +64,7 @@ public sealed class Level : MonoBehaviour
 			while (remainTime > 0f)
 			{
 				yield return null;
-				float deltaTime = ((ChronometerBase)Chronometer.global).deltaTime;
+				float deltaTime = Chronometer.global.deltaTime;
 				_effect.Update(deltaTime);
 				remainTime -= deltaTime;
 			}

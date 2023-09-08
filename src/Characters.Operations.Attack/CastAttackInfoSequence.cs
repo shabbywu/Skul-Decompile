@@ -15,8 +15,8 @@ public class CastAttackInfoSequence : MonoBehaviour
 		{
 			Array.Sort(base.components, (CastAttackInfoSequence x, CastAttackInfoSequence y) => x.timeToTrigger.CompareTo(y.timeToTrigger));
 			noDelay = true;
-			CastAttackInfoSequence[] components = base.components;
-			foreach (CastAttackInfoSequence obj in components)
+			CastAttackInfoSequence[] array = base.components;
+			foreach (CastAttackInfoSequence obj in array)
 			{
 				if (obj._timeToTrigger > 0f)
 				{
@@ -28,9 +28,9 @@ public class CastAttackInfoSequence : MonoBehaviour
 
 		internal void StopAllOperationsToOwner()
 		{
-			for (int i = 0; i < base._components.Length; i++)
+			for (int i = 0; i < _components.Length; i++)
 			{
-				base._components[i].attackInfo.operationsToOwner.StopAll();
+				_components[i].attackInfo.operationsToOwner.StopAll();
 			}
 		}
 	}
@@ -49,6 +49,6 @@ public class CastAttackInfoSequence : MonoBehaviour
 
 	public override string ToString()
 	{
-		return $"{_timeToTrigger:0.##}s({_timeToTrigger * 60f:0.##}f), {ExtensionMethods.GetAutoName((object)_attackInfo)}";
+		return $"{_timeToTrigger:0.##}s({_timeToTrigger * 60f:0.##}f), {_attackInfo.GetAutoName()}";
 	}
 }

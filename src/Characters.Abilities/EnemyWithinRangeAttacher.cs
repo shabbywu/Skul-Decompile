@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using PhysicsUtils;
 using UnityEngine;
@@ -72,17 +71,11 @@ public class EnemyWithinRangeAttacher : AbilityAttacher
 
 	private IEnumerator CCheck()
 	{
-		UsingCollider val = default(UsingCollider);
 		while (true)
 		{
-			((UsingCollider)(ref val))._002Ector(_range, _optimizeRange);
-			try
+			using (new UsingCollider(_range, _optimizeRange))
 			{
 				_overlapper.OverlapCollider(_range);
-			}
-			finally
-			{
-				((IDisposable)(UsingCollider)(ref val)).Dispose();
 			}
 			if ((_type == Type.GreaterThanOrEqual && _overlapper.results.Count >= _numberOfEnemy) || (_type == Type.LessThan && _overlapper.results.Count < _numberOfEnemy) || (_type == Type.Equal && _overlapper.results.Count == _numberOfEnemy))
 			{
@@ -116,6 +109,6 @@ public class EnemyWithinRangeAttacher : AbilityAttacher
 
 	public override string ToString()
 	{
-		return ExtensionMethods.GetAutoName((object)this);
+		return this.GetAutoName();
 	}
 }

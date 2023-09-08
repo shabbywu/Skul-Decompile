@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using GameResources;
 using InControl;
 using UnityEngine;
@@ -51,7 +50,7 @@ public class NpcContent : MonoBehaviour
 		_npcConversation.skippable = false;
 		_npcConversation.Type();
 		((Component)_contentSelector).gameObject.SetActive(false);
-		((EnumArray<Type, GameObject>)_contents)[_type].gameObject.SetActive(true);
+		_contents[_type].gameObject.SetActive(true);
 	}
 
 	private void Chat()
@@ -71,7 +70,7 @@ public class NpcContent : MonoBehaviour
 	{
 		_type = type;
 		_name = Localization.GetLocalizedString(key + "/name");
-		_chatScripts = ExtensionMethods.Random<string[]>((IEnumerable<string[]>)Localization.GetLocalizedStringArrays("npc/" + key + "/chat"));
+		_chatScripts = Localization.GetLocalizedStringArrays("npc/" + key + "/chat").Random();
 		_greeting = Localization.GetLocalizedString(key + "/greeting");
 		_content = Localization.GetLocalizedString(key + "/content");
 		string localizedString = Localization.GetLocalizedString(key + "/contentLabel");
@@ -87,7 +86,7 @@ public class NpcContent : MonoBehaviour
 	{
 		_npcConversation.Done();
 		_contentSelector.Close();
-		((EnumArray<Type, GameObject>)_contents)[_type].gameObject.SetActive(false);
+		_contents[_type].gameObject.SetActive(false);
 		_contentContainer.SetActive(false);
 	}
 }

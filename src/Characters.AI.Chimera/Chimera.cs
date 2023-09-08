@@ -109,7 +109,7 @@ public class Chimera : AIController
 	{
 		if (!Service.quitting && !((Object)(object)Singleton<Service>.Instance.levelManager.player == (Object)null))
 		{
-			Singleton<Service>.Instance.levelManager.player.cinematic.Detach((object)this);
+			Singleton<Service>.Instance.levelManager.player.cinematic.Detach(this);
 		}
 	}
 
@@ -122,7 +122,7 @@ public class Chimera : AIController
 	{
 		character.health.onDiedTryCatch += delegate
 		{
-			Singleton<Service>.Instance.levelManager.player.cinematic.Attach((object)this);
+			Singleton<Service>.Instance.levelManager.player.cinematic.Attach(this);
 			_chimeraDie.KillAllEnemyInBounds(this);
 			StopAllCoroutinesWithBehaviour();
 			((MonoBehaviour)this).StartCoroutine(Die());
@@ -232,9 +232,9 @@ public class Chimera : AIController
 
 	private IEnumerator Intro()
 	{
-		character.cinematic.Attach((object)this);
+		character.cinematic.Attach(this);
 		yield return _chimeraAnimation.PlayIntroAnimation();
-		character.cinematic.Detach((object)this);
+		character.cinematic.Detach(this);
 	}
 
 	private IEnumerator CastBite()
@@ -288,7 +288,7 @@ public class Chimera : AIController
 	{
 		SetAnimationSpeed(1f);
 		yield return _chimeraAnimation.PlayDieAnimation();
-		Singleton<Service>.Instance.levelManager.player.cinematic.Detach((object)this);
+		Singleton<Service>.Instance.levelManager.player.cinematic.Detach(this);
 	}
 
 	private void RegisterBehaviourtoEvent()

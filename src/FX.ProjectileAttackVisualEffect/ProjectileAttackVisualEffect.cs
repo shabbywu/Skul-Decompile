@@ -8,10 +8,10 @@ namespace FX.ProjectileAttackVisualEffect;
 
 public abstract class ProjectileAttackVisualEffect : VisualEffect
 {
-	public class SubcomponentAttribute : SubcomponentAttribute
+	public class SubcomponentAttribute : UnityEditor.SubcomponentAttribute
 	{
 		public SubcomponentAttribute()
-			: base(true, types)
+			: base(allowCustom: true, ProjectileAttackVisualEffect.types)
 		{
 		}
 	}
@@ -21,17 +21,17 @@ public abstract class ProjectileAttackVisualEffect : VisualEffect
 	{
 		public void SpawnDespawn(IProjectile projectile)
 		{
-			for (int i = 0; i < base._components.Length; i++)
+			for (int i = 0; i < _components.Length; i++)
 			{
-				base._components[i].SpawnDespawn(projectile);
+				_components[i].SpawnDespawn(projectile);
 			}
 		}
 
 		public void SpawnExpire(IProjectile projectile)
 		{
-			for (int i = 0; i < base._components.Length; i++)
+			for (int i = 0; i < _components.Length; i++)
 			{
-				base._components[i].SpawnExpire(projectile);
+				_components[i].SpawnExpire(projectile);
 			}
 		}
 
@@ -40,9 +40,9 @@ public abstract class ProjectileAttackVisualEffect : VisualEffect
 			//IL_000d: Unknown result type (might be due to invalid IL or missing references)
 			//IL_000e: Unknown result type (might be due to invalid IL or missing references)
 			//IL_0011: Unknown result type (might be due to invalid IL or missing references)
-			for (int i = 0; i < base._components.Length; i++)
+			for (int i = 0; i < _components.Length; i++)
 			{
-				base._components[i].Spawn(projectile, origin, direction, distance, raycastHit);
+				_components[i].Spawn(projectile, origin, direction, distance, raycastHit);
 			}
 		}
 
@@ -51,9 +51,9 @@ public abstract class ProjectileAttackVisualEffect : VisualEffect
 			//IL_000d: Unknown result type (might be due to invalid IL or missing references)
 			//IL_000e: Unknown result type (might be due to invalid IL or missing references)
 			//IL_0011: Unknown result type (might be due to invalid IL or missing references)
-			for (int i = 0; i < base._components.Length; i++)
+			for (int i = 0; i < _components.Length; i++)
 			{
-				base._components[i].Spawn(projectile, origin, direction, distance, raycastHit, damage, target);
+				_components[i].Spawn(projectile, origin, direction, distance, raycastHit, damage, target);
 			}
 		}
 	}

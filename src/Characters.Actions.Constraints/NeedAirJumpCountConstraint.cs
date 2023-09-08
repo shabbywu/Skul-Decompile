@@ -6,7 +6,7 @@ public class NeedAirJumpCountConstraint : Constraint
 	{
 		if (!_action.owner.movement.controller.isGrounded)
 		{
-			return _action.owner.movement.currentAirJumpCount < ((Sum<int>)(object)_action.owner.movement.airJumpCount).total;
+			return _action.owner.movement.currentAirJumpCount < _action.owner.movement.airJumpCount.total;
 		}
 		return false;
 	}

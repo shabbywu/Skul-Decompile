@@ -74,7 +74,7 @@ public class StackableAdditionalHit : Ability
 			//IL_018d: Unknown result type (might be due to invalid IL or missing references)
 			//IL_01d6: Unknown result type (might be due to invalid IL or missing references)
 			//IL_01db: Unknown result type (might be due to invalid IL or missing references)
-			if ((Object)(object)target.character == (Object)null || _remainCooldownTime > 0f || target.character.health.dead || !((Component)target.transform).gameObject.activeSelf || (ability._needCritical && !tookDamage.critical) || !((EnumArray<Damage.MotionType, bool>)ability._attackTypes)[tookDamage.motionType] || !((EnumArray<Damage.AttackType, bool>)ability._damageTypes)[tookDamage.attackType])
+			if ((Object)(object)target.character == (Object)null || _remainCooldownTime > 0f || target.character.health.dead || !((Component)target.transform).gameObject.activeSelf || (ability._needCritical && !tookDamage.critical) || !ability._attackTypes[tookDamage.motionType] || !ability._damageTypes[tookDamage.attackType])
 			{
 				return;
 			}

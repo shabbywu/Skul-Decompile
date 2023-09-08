@@ -54,6 +54,6 @@ public class Gauge : Cooldown
 
 	private void Update()
 	{
-		gauge += _recoveryPerSecond * ((ChronometerBase)_character.chronometer.master).deltaTime;
+		gauge += _recoveryPerSecond * _character.chronometer.master.deltaTime;
 	}
 }

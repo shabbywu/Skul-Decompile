@@ -9,9 +9,9 @@ namespace Characters.AI.Behaviours;
 public class Teleport : Behaviour
 {
 	[AttributeUsage(AttributeTargets.Field)]
-	public new class SubcomponentAttribute : SubcomponentAttribute
+	public new class SubcomponentAttribute : UnityEditor.SubcomponentAttribute
 	{
-		public static readonly Type[] types = new Type[2]
+		public new static readonly Type[] types = new Type[2]
 		{
 			typeof(Teleport),
 			typeof(TeleportBehind)
@@ -29,12 +29,12 @@ public class Teleport : Behaviour
 	[SerializeField]
 	private Characters.Actions.Action _teleportEnd;
 
-	[Subcomponent(typeof(Hide))]
+	[UnityEditor.Subcomponent(typeof(Hide))]
 	[SerializeField]
 	private Hide _hide;
 
 	[SerializeField]
-	[Subcomponent(typeof(Idle))]
+	[UnityEditor.Subcomponent(typeof(Idle))]
 	private Idle _idle;
 
 	public override IEnumerator CRun(AIController controller)

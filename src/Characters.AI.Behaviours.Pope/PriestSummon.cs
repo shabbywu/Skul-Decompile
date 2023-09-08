@@ -7,12 +7,12 @@ namespace Characters.AI.Behaviours.Pope;
 
 public sealed class PriestSummon : Behaviour
 {
-	[Subcomponent(typeof(ActionAttack))]
+	[UnityEditor.Subcomponent(typeof(ActionAttack))]
 	[SerializeField]
 	private ActionAttack _attack;
 
 	[SerializeField]
-	[Subcomponent(typeof(MoveHandler))]
+	[UnityEditor.Subcomponent(typeof(MoveHandler))]
 	private MoveHandler _moveHandler;
 
 	public override IEnumerator CRun(AIController controller)

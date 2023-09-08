@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
@@ -12,7 +11,7 @@ public class RandomAction : Action
 
 	private int _indexToUse;
 
-	public override Motion[] motions => ((SubcomponentArray<Motion>)_motions).components;
+	public override Motion[] motions => _motions.components;
 
 	public override bool canUse
 	{
@@ -20,7 +19,7 @@ public class RandomAction : Action
 		{
 			if (base.cooldown.canUse && !_owner.stunedOrFreezed)
 			{
-				return PassAllConstraints(((SubcomponentArray<Motion>)_motions).components[_indexToUse]);
+				return PassAllConstraints(_motions.components[_indexToUse]);
 			}
 			return false;
 		}
@@ -38,7 +37,7 @@ public class RandomAction : Action
 
 	private void RandomizeIndex()
 	{
-		_indexToUse = ExtensionMethods.RandomIndex<Motion>((IEnumerable<Motion>)((SubcomponentArray<Motion>)_motions).components);
+		_indexToUse = _motions.components.RandomIndex();
 	}
 
 	public override bool TryStart()
@@ -47,7 +46,7 @@ public class RandomAction : Action
 		{
 			return false;
 		}
-		DoAction(((SubcomponentArray<Motion>)_motions).components[_indexToUse]);
+		DoAction(_motions.components[_indexToUse]);
 		RandomizeIndex();
 		return true;
 	}

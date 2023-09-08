@@ -93,7 +93,7 @@ public class LuckyMeasuringInstrumentReroll : InteractiveObject
 	{
 		IntData refreshCount = GameData.HardmodeProgress.luckyMeasuringInstrument.refreshCount;
 		int maxRefreshCount = Singleton<DarktechManager>.Instance.setting.행운계측기설정.maxRefreshCount;
-		if (((Data<int>)(object)refreshCount).value >= maxRefreshCount)
+		if (refreshCount.value >= maxRefreshCount)
 		{
 			ExtensionMethods.Set((Type)70);
 			Deactivate();
@@ -109,7 +109,7 @@ public class LuckyMeasuringInstrumentReroll : InteractiveObject
 		}
 		IntData refreshCount = GameData.HardmodeProgress.luckyMeasuringInstrument.refreshCount;
 		int maxRefreshCount = Singleton<DarktechManager>.Instance.setting.행운계측기설정.maxRefreshCount;
-		if (((Data<int>)(object)refreshCount).value >= maxRefreshCount)
+		if (refreshCount.value >= maxRefreshCount)
 		{
 			FailReroll();
 		}
@@ -132,8 +132,7 @@ public class LuckyMeasuringInstrumentReroll : InteractiveObject
 		_animator.Play(num, 0, 0f);
 		IntData refreshCount = GameData.HardmodeProgress.luckyMeasuringInstrument.refreshCount;
 		int maxRefreshCount = Singleton<DarktechManager>.Instance.setting.행운계측기설정.maxRefreshCount;
-		int value = ((Data<int>)(object)refreshCount).value;
-		((Data<int>)(object)refreshCount).value = value + 1;
+		refreshCount.value++;
 		UpdateInteractionGuide();
 		PersistentSingleton<SoundManager>.Instance.PlaySound(_interactSound, ((Component)this).transform.position);
 		this.onInteracted?.Invoke();
@@ -142,7 +141,7 @@ public class LuckyMeasuringInstrumentReroll : InteractiveObject
 		{
 			onReroll.Invoke();
 		}
-		if (((Data<int>)(object)refreshCount).value >= maxRefreshCount)
+		if (refreshCount.value >= maxRefreshCount)
 		{
 			ExtensionMethods.Set((Type)70);
 			Deactivate();
@@ -179,7 +178,7 @@ public class LuckyMeasuringInstrumentReroll : InteractiveObject
 		base.OnDeactivate();
 		IntData refreshCount = GameData.HardmodeProgress.luckyMeasuringInstrument.refreshCount;
 		int maxRefreshCount = Singleton<DarktechManager>.Instance.setting.행운계측기설정.maxRefreshCount;
-		if (((Data<int>)(object)refreshCount).value > maxRefreshCount)
+		if (refreshCount.value > maxRefreshCount)
 		{
 			Debug.Log((object)$"remainlootCount 1 {remainLootCount}");
 			if (remainLootCount == 2)
@@ -231,7 +230,7 @@ public class LuckyMeasuringInstrumentReroll : InteractiveObject
 		IntData refreshCount = GameData.HardmodeProgress.luckyMeasuringInstrument.refreshCount;
 		int maxRefreshCount = Singleton<DarktechManager>.Instance.setting.행운계측기설정.maxRefreshCount;
 		string text = (GameData.Currency.darkQuartz.Has(_cost) ? GameData.Currency.darkQuartz.colorCode : GameData.Currency.noMoneyColorCode);
-		int num = maxRefreshCount - ((Data<int>)(object)refreshCount).value;
+		int num = maxRefreshCount - refreshCount.value;
 		_rerollCount.text = $"{num}";
 		_text.text = string.Format("{0}( {1}  <color=#{2}>{3}</color> )", Localization.GetLocalizedString("label/interaction/refresh"), GameData.Currency.darkQuartz.spriteTMPKey, text, _cost);
 		if (num <= 0)

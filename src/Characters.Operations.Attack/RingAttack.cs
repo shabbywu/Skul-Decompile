@@ -32,7 +32,7 @@ public sealed class RingAttack : CharacterOperation, IAttack
 	[SerializeField]
 	private ChronoInfo _chronoToTarget;
 
-	[Subcomponent(typeof(OperationInfo))]
+	[UnityEditor.Subcomponent(typeof(OperationInfo))]
 	[SerializeField]
 	internal OperationInfo.Subcomponents _operationToOwnerWhenHitInfo;
 
@@ -59,7 +59,7 @@ public sealed class RingAttack : CharacterOperation, IAttack
 	private float _hitIntervalPerUnit = 0.5f;
 
 	[SerializeField]
-	[Subcomponent(typeof(TargetedOperationInfo))]
+	[UnityEditor.Subcomponent(typeof(TargetedOperationInfo))]
 	private TargetedOperationInfo.Subcomponents _operationInfo;
 
 	[BoundsAttackVisualEffect.Subcomponent]
@@ -81,7 +81,7 @@ public sealed class RingAttack : CharacterOperation, IAttack
 	private void Awake()
 	{
 		//IL_005e: Unknown result type (might be due to invalid IL or missing references)
-		Array.Sort(((SubcomponentArray<TargetedOperationInfo>)_operationInfo).components, (TargetedOperationInfo x, TargetedOperationInfo y) => x.timeToTrigger.CompareTo(y.timeToTrigger));
+		Array.Sort(_operationInfo.components, (TargetedOperationInfo x, TargetedOperationInfo y) => x.timeToTrigger.CompareTo(y.timeToTrigger));
 		_maxHits = Math.Min(_maxHits, 2048);
 		_overlapper = (NonAllocOverlapper)((_maxHits == _sharedOverlapper.capacity) ? ((object)_sharedOverlapper) : ((object)new NonAllocOverlapper(_maxHits)));
 	}
@@ -92,7 +92,7 @@ public sealed class RingAttack : CharacterOperation, IAttack
 		_attackDamage = ((Component)this).GetComponentInParent<IAttackDamage>();
 		_operationInfo.Initialize();
 		_hits.Clear();
-		TargetedOperationInfo[] components = ((SubcomponentArray<TargetedOperationInfo>)_operationInfo).components;
+		TargetedOperationInfo[] components = _operationInfo.components;
 		foreach (TargetedOperationInfo targetedOperationInfo in components)
 		{
 			if (targetedOperationInfo.operation is Knockback knockback)
@@ -109,10 +109,8 @@ public sealed class RingAttack : CharacterOperation, IAttack
 
 	public override void Run(Character owner)
 	{
-		//IL_0014: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0019: Unknown result type (might be due to invalid IL or missing references)
 		_hits.Clear();
-		coroutineReference = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)this, CDetect(owner));
+		coroutineReference = ((MonoBehaviour)(object)this).StartCoroutineWithReference(CDetect(owner));
 	}
 
 	private IEnumerator CDetect(Character owner)
@@ -121,12 +119,12 @@ public sealed class RingAttack : CharacterOperation, IAttack
 		Chronometer animationChronometer = owner.chronometer.animation;
 		while (elapsed < _duration)
 		{
-			if (_timeIndependent || ((ChronometerBase)animationChronometer).timeScale > float.Epsilon)
+			if (_timeIndependent || animationChronometer.timeScale > float.Epsilon)
 			{
 				Detect(owner);
 			}
 			yield return null;
-			elapsed = ((!_timeIndependent) ? (elapsed + ((ChronometerBase)animationChronometer).deltaTime) : (elapsed + ((ChronometerBase)Chronometer.global).deltaTime));
+			elapsed = ((!_timeIndependent) ? (elapsed + animationChronometer.deltaTime) : (elapsed + Chronometer.global.deltaTime));
 		}
 	}
 
@@ -212,22 +210,22 @@ public sealed class RingAttack : CharacterOperation, IAttack
 				continue;
 			}
 			Bounds bounds2 = ((Collider2D)_inCollider).bounds;
-			float num = Vector2.Distance(Vector2.op_Implicit(((Bounds)(ref bounds2)).center), ExtensionMethods.GetMostRightTop(component.collider.bounds));
+			float num = Vector2.Distance(Vector2.op_Implicit(((Bounds)(ref bounds2)).center), component.collider.bounds.GetMostRightTop());
 			bounds2 = ((Collider2D)_inCollider).bounds;
-			float num2 = Vector2.Distance(Vector2.op_Implicit(((Bounds)(ref bounds2)).center), ExtensionMethods.GetMostRightBottom(component.collider.bounds));
+			float num2 = Vector2.Distance(Vector2.op_Implicit(((Bounds)(ref bounds2)).center), component.collider.bounds.GetMostRightBottom());
 			bounds2 = ((Collider2D)_inCollider).bounds;
-			float num3 = Vector2.Distance(Vector2.op_Implicit(((Bounds)(ref bounds2)).center), ExtensionMethods.GetMostLeftBottom(component.collider.bounds));
+			float num3 = Vector2.Distance(Vector2.op_Implicit(((Bounds)(ref bounds2)).center), component.collider.bounds.GetMostLeftBottom());
 			bounds2 = ((Collider2D)_inCollider).bounds;
-			float num4 = Vector2.Distance(Vector2.op_Implicit(((Bounds)(ref bounds2)).center), ExtensionMethods.GetMostLeftTop(component.collider.bounds));
+			float num4 = Vector2.Distance(Vector2.op_Implicit(((Bounds)(ref bounds2)).center), component.collider.bounds.GetMostLeftTop());
 			if (num < _inCollider.radius * ((Component)_inCollider).transform.lossyScale.x && num2 < _inCollider.radius * ((Component)_inCollider).transform.lossyScale.x && num3 < _inCollider.radius * ((Component)_inCollider).transform.lossyScale.x && num4 < _inCollider.radius * ((Component)_inCollider).transform.lossyScale.x)
 			{
 				continue;
 			}
 			Bounds bounds3 = component.collider.bounds;
-			Bounds val = default(Bounds);
-			((Bounds)(ref val)).min = Vector2.op_Implicit(MMMaths.Max(Vector2.op_Implicit(((Bounds)(ref bounds)).min), Vector2.op_Implicit(((Bounds)(ref bounds3)).min)));
-			((Bounds)(ref val)).max = Vector2.op_Implicit(MMMaths.Min(Vector2.op_Implicit(((Bounds)(ref bounds)).max), Vector2.op_Implicit(((Bounds)(ref bounds3)).max)));
-			Vector2 hitPoint = MMMaths.RandomPointWithinBounds(val);
+			Bounds bounds4 = default(Bounds);
+			((Bounds)(ref bounds4)).min = Vector2.op_Implicit(MMMaths.Max(Vector2.op_Implicit(((Bounds)(ref bounds)).min), Vector2.op_Implicit(((Bounds)(ref bounds3)).min)));
+			((Bounds)(ref bounds4)).max = Vector2.op_Implicit(MMMaths.Min(Vector2.op_Implicit(((Bounds)(ref bounds)).max), Vector2.op_Implicit(((Bounds)(ref bounds3)).max)));
+			Vector2 hitPoint = MMMaths.RandomPointWithinBounds(bounds4);
 			Vector2 force = Vector2.zero;
 			if (_pushInfo != null)
 			{
@@ -246,7 +244,7 @@ public sealed class RingAttack : CharacterOperation, IAttack
 					Damage damage = owner.stat.GetDamage(_attackDamage.amount, hitPoint, _hitInfo);
 					if (_hitInfo.attackType != 0)
 					{
-						CommonResource.instance.hitParticle.Emit(Vector2.op_Implicit(((Component)component).transform.position), val, force);
+						CommonResource.instance.hitParticle.Emit(Vector2.op_Implicit(((Component)component).transform.position), bounds4, force);
 					}
 					flag = owner.TryAttackCharacter(component, ref damage);
 					_hits.AddOrUpdate(component);
@@ -254,7 +252,7 @@ public sealed class RingAttack : CharacterOperation, IAttack
 					{
 						((MonoBehaviour)this).StartCoroutine(_operationInfo.CRun(owner, component.character));
 						this.onHit?.Invoke(component, ref damage);
-						_effect.Spawn(owner, val, in damage, component);
+						_effect.Spawn(owner, bounds4, in damage, component);
 					}
 				}
 			}
@@ -263,8 +261,8 @@ public sealed class RingAttack : CharacterOperation, IAttack
 				Damage damage2 = owner.stat.GetDamage(_attackDamage.amount, hitPoint, _hitInfo);
 				if (component.damageable.spawnEffectOnHit && _hitInfo.attackType != 0)
 				{
-					CommonResource.instance.hitParticle.Emit(Vector2.op_Implicit(((Component)component).transform.position), val, force);
-					_effect.Spawn(owner, val, in damage2, component);
+					CommonResource.instance.hitParticle.Emit(Vector2.op_Implicit(((Component)component).transform.position), bounds4, force);
+					_effect.Spawn(owner, bounds4, in damage2, component);
 				}
 				if (_hitInfo.attackType == Damage.AttackType.None)
 				{
@@ -282,7 +280,7 @@ public sealed class RingAttack : CharacterOperation, IAttack
 		{
 			_chronoToGlobe.ApplyGlobe();
 			_chronoToOwner.ApplyTo(owner);
-			if (((SubcomponentArray<OperationInfo>)_operationToOwnerWhenHitInfo).components.Length != 0)
+			if (_operationToOwnerWhenHitInfo.components.Length != 0)
 			{
 				((MonoBehaviour)this).StartCoroutine(_operationToOwnerWhenHitInfo.CRun(owner));
 			}
@@ -292,6 +290,6 @@ public sealed class RingAttack : CharacterOperation, IAttack
 	public override void Stop()
 	{
 		_operationToOwnerWhenHitInfo.StopAll();
-		((CoroutineReference)(ref coroutineReference)).Stop();
+		coroutineReference.Stop();
 	}
 }

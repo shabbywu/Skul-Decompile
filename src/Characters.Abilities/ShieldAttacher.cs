@@ -36,16 +36,14 @@ public sealed class ShieldAttacher : AbilityAttacher
 
 	public override void StartAttach()
 	{
-		//IL_0008: Unknown result type (might be due to invalid IL or missing references)
-		//IL_000d: Unknown result type (might be due to invalid IL or missing references)
-		_checkReference = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)this, CCheck());
+		_checkReference = ((MonoBehaviour)(object)this).StartCoroutineWithReference(CCheck());
 	}
 
 	public override void StopAttach()
 	{
 		if (!((Object)(object)base.owner == (Object)null))
 		{
-			((CoroutineReference)(ref _checkReference)).Stop();
+			_checkReference.Stop();
 			base.owner.ability.Remove(_abilityComponent.ability);
 		}
 	}
@@ -95,6 +93,6 @@ public sealed class ShieldAttacher : AbilityAttacher
 
 	public override string ToString()
 	{
-		return ExtensionMethods.GetAutoName((object)this);
+		return this.GetAutoName();
 	}
 }

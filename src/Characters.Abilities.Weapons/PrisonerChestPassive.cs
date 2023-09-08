@@ -106,7 +106,7 @@ public class PrisonerChestPassive : Ability
 		//IL_0154: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0159: Unknown result type (might be due to invalid IL or missing references)
 		List<Character> allEnemies = Map.Instance.waveContainer.GetAllEnemies();
-		ExtensionMethods.PseudoShuffle<Character>((IList<Character>)allEnemies, random);
+		allEnemies.PseudoShuffle(random);
 		for (int i = 0; i < allEnemies.Count; i++)
 		{
 			Character character = allEnemies[i];
@@ -177,14 +177,14 @@ public class PrisonerChestPassive : Ability
 		{
 			scrollGrade = num;
 		}
-		PrisonerSkillInfosByGrade prisonerSkillInfosByGrade = ExtensionMethods.Random<PrisonerSkillInfosByGrade>(_skills.Where(delegate(PrisonerSkillInfosByGrade s)
+		PrisonerSkillInfosByGrade prisonerSkillInfosByGrade = _skills.Where(delegate(PrisonerSkillInfosByGrade s)
 		{
 			if (skill1.level >= scrollGrade && skill1.parent.key.Equals(s.key, StringComparison.OrdinalIgnoreCase))
 			{
 				return false;
 			}
 			return (skill2.level < scrollGrade || !skill2.parent.key.Equals(s.key, StringComparison.OrdinalIgnoreCase)) ? true : false;
-		}), random);
+		}).Random(random);
 		prisonerChest.SetSkillInfo(skillInfo: prisonerSkillInfosByGrade.skillInfos[scrollGrade], weapon: _weapon, skills: prisonerSkillInfosByGrade);
 	}
 }

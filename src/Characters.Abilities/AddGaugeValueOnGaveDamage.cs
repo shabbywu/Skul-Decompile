@@ -28,7 +28,7 @@ public class AddGaugeValueOnGaveDamage : Ability
 
 		private void OnGaveDamage(ITarget target, in Damage originalDamage, in Damage tookDamage, double damageDealt)
 		{
-			if (!((Object)(object)target.character == (Object)null) && ((EnumArray<Damage.MotionType, bool>)ability._attackTypes)[tookDamage.motionType] && ((EnumArray<Damage.AttackType, bool>)ability._types)[tookDamage.attackType] && MMMaths.PercentChance(ability._chance) && (string.IsNullOrWhiteSpace(ability._attackKey) || tookDamage.key.Equals(ability._attackKey, StringComparison.OrdinalIgnoreCase)))
+			if (!((Object)(object)target.character == (Object)null) && ability._attackTypes[tookDamage.motionType] && ability._types[tookDamage.attackType] && MMMaths.PercentChance(ability._chance) && (string.IsNullOrWhiteSpace(ability._attackKey) || tookDamage.key.Equals(ability._attackKey, StringComparison.OrdinalIgnoreCase)))
 			{
 				float num = (tookDamage.critical ? ability._amountOnCritical : ability._amount);
 				if (ability._multiplierByDamageDealt)

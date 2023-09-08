@@ -65,13 +65,11 @@ public class MotionTrail : CharacterOperation
 
 	public override void Run(Character owner)
 	{
-		//IL_0042: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0047: Unknown result type (might be due to invalid IL or missing references)
 		foreach (CharacterAnimation animation in owner.animationController.animations)
 		{
 			if (((Component)animation).gameObject.activeInHierarchy)
 			{
-				_cTrail = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)this, CTrail(owner, animation.spriteRenderer, owner.chronometer.animation));
+				_cTrail = ((MonoBehaviour)(object)this).StartCoroutineWithReference(CTrail(owner, animation.spriteRenderer, owner.chronometer.animation));
 			}
 		}
 	}
@@ -113,7 +111,7 @@ public class MotionTrail : CharacterOperation
 				remainInterval = _interval;
 			}
 			yield return null;
-			float num = ChronometerExtension.DeltaTime((ChronometerBase)(object)chronometer);
+			float num = chronometer.DeltaTime();
 			remainInterval -= num;
 			remainTime -= num;
 		}
@@ -121,6 +119,6 @@ public class MotionTrail : CharacterOperation
 
 	public override void Stop()
 	{
-		((CoroutineReference)(ref _cTrail)).Stop();
+		_cTrail.Stop();
 	}
 }

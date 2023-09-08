@@ -56,7 +56,7 @@ public sealed class AttachAbilityToTargetOnGaveStatus : QuintessenceEffect
 
 	private void OnGaveStatus(Character target, CharacterStatus.ApplyInfo applyInfo, bool result)
 	{
-		if (((EnumArray<CharacterStatus.Kind, bool>)_statusKind)[applyInfo.kind] && result)
+		if (_statusKind[applyInfo.kind] && result)
 		{
 			target.ability.Add(_abilityComponent.ability);
 		}

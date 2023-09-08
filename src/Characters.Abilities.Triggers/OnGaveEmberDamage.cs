@@ -36,12 +36,12 @@ public class OnGaveEmberDamage : Trigger
 	private void HandleOnGaveEmberDamage(Character attacker, Character target)
 	{
 		//IL_00ee: Unknown result type (might be due to invalid IL or missing references)
-		if (!((EnumArray<Character.Type, bool>)_characterTypes)[target.type] || (((EnumArray<Character.Type, bool>)_characterTypes)[Character.Type.Boss] && (target.key == Key.FirstHero1 || target.key == Key.FirstHero2 || target.key == Key.Unspecified)))
+		if (!_characterTypes[target.type] || (_characterTypes[Character.Type.Boss] && (target.key == Key.FirstHero1 || target.key == Key.FirstHero2 || target.key == Key.Unspecified)))
 		{
 			return;
 		}
 		bool flag = false;
-		if ((((EnumArray<CharacterStatus.Kind, bool>)_characterStatusKinds)[CharacterStatus.Kind.Wound] && target.status.wounded) || (((EnumArray<CharacterStatus.Kind, bool>)_characterStatusKinds)[CharacterStatus.Kind.Burn] && target.status.burning) || (((EnumArray<CharacterStatus.Kind, bool>)_characterStatusKinds)[CharacterStatus.Kind.Freeze] && target.status.freezed) || (((EnumArray<CharacterStatus.Kind, bool>)_characterStatusKinds)[CharacterStatus.Kind.Poison] && target.status.poisoned) || (((EnumArray<CharacterStatus.Kind, bool>)_characterStatusKinds)[CharacterStatus.Kind.Stun] && target.status.stuned))
+		if ((_characterStatusKinds[CharacterStatus.Kind.Wound] && target.status.wounded) || (_characterStatusKinds[CharacterStatus.Kind.Burn] && target.status.burning) || (_characterStatusKinds[CharacterStatus.Kind.Freeze] && target.status.freezed) || (_characterStatusKinds[CharacterStatus.Kind.Poison] && target.status.poisoned) || (_characterStatusKinds[CharacterStatus.Kind.Stun] && target.status.stuned))
 		{
 			flag = true;
 		}

@@ -25,7 +25,7 @@ public class CameraController : MonoBehaviour
 	private Vector3 _offset;
 
 	[SerializeField]
-	private Method _moveEaseMethod = (Method)21;
+	private EasingFunction.Method _moveEaseMethod = EasingFunction.Method.Linear;
 
 	[SerializeField]
 	private float _moveSpeed = 1f;
@@ -35,7 +35,7 @@ public class CameraController : MonoBehaviour
 	private EasingFunction _moveEase;
 
 	[SerializeField]
-	private Method _zoomEaseMethod = (Method)21;
+	private EasingFunction.Method _zoomEaseMethod = EasingFunction.Method.Linear;
 
 	[SerializeField]
 	private float _zoomSpeed = 1f;
@@ -105,12 +105,6 @@ public class CameraController : MonoBehaviour
 	{
 		//IL_0013: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0018: Unknown result type (might be due to invalid IL or missing references)
-		//IL_001f: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0024: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0029: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0030: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0035: Unknown result type (might be due to invalid IL or missing references)
-		//IL_003a: Unknown result type (might be due to invalid IL or missing references)
 		_camera.transparencySortMode = (TransparencySortMode)2;
 		_position = ((Component)this).transform.position;
 		_moveEase = new EasingFunction(_moveEaseMethod);
@@ -176,7 +170,7 @@ public class CameraController : MonoBehaviour
 			}
 			else
 			{
-				float num = ((EasingFunction)(ref _moveEase)).function.Invoke(0f, 1f, _moveTime);
+				float num = _moveEase.function(0f, 1f, _moveTime);
 				val = Vector3.LerpUnclamped(_position, _targetPosition, num);
 			}
 		}
@@ -189,7 +183,7 @@ public class CameraController : MonoBehaviour
 			}
 			else
 			{
-				_pixelPerfectCamera.zoom = ((EasingFunction)(ref _zoomEase)).function.Invoke(_formerZoom, _targetZoom, _zoomTime);
+				_pixelPerfectCamera.zoom = _zoomEase.function(_formerZoom, _targetZoom, _zoomTime);
 			}
 		}
 		val.z = _position.z;
@@ -251,7 +245,7 @@ public class CameraController : MonoBehaviour
 
 	public void Shake(float amount, float duration)
 	{
-		shake.Attach((object)this, amount, duration);
+		shake.Attach(this, amount, duration);
 	}
 
 	public void UpdateCameraPosition()

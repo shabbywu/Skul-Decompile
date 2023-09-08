@@ -106,12 +106,10 @@ public class IconWithCooldown : MonoBehaviour
 
 	private void SpawnEffect()
 	{
-		//IL_001c: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0021: Unknown result type (might be due to invalid IL or missing references)
 		if (((Behaviour)this).isActiveAndEnabled)
 		{
-			((CoroutineReference)(ref _cPlayEffectReference)).Stop();
-			_cPlayEffectReference = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)this, CPlayEffect());
+			_cPlayEffectReference.Stop();
+			_cPlayEffectReference = ((MonoBehaviour)(object)this).StartCoroutineWithReference(CPlayEffect());
 		}
 	}
 

@@ -26,10 +26,10 @@ public class Motion : MonoBehaviour
 	{
 		public void EndBehaviour()
 		{
-			Motion[] components = base.components;
-			for (int i = 0; i < components.Length; i++)
+			Motion[] array = base.components;
+			for (int i = 0; i < array.Length; i++)
 			{
-				components[i].EndBehaviour();
+				array[i].EndBehaviour();
 			}
 		}
 	}
@@ -49,32 +49,32 @@ public class Motion : MonoBehaviour
 	private Constraint.Subcomponents _constraints;
 
 	[SerializeField]
-	[Information(/*Could not decode attribute arguments.*/)]
+	[Information("재생 중 이동불가 여부", InformationAttribute.InformationType.Info, false)]
 	private bool _blockMovement = true;
 
-	[Information(/*Could not decode attribute arguments.*/)]
+	[Information("재생 중 방향 변경 불가 여부", InformationAttribute.InformationType.Info, false)]
 	[SerializeField]
 	private bool _blockLook = true;
 
 	[SerializeField]
-	[Information(/*Could not decode attribute arguments.*/)]
+	[Information("체크시 재생이 끝난 후 마지막 프레임 상태로 유지, 반복되는 애니메이션은 반복, 지속 시간은 Length를 따라감", InformationAttribute.InformationType.Info, false)]
 	private bool _stay;
 
 	[SerializeField]
-	[Information(/*Could not decode attribute arguments.*/)]
+	[Information("애니메이션 재생 시간, 0이면 CharacterBody 애니메이션의 길이만큼 지속", InformationAttribute.InformationType.Info, false)]
 	private float _length;
 
 	[SerializeField]
-	[Information(/*Could not decode attribute arguments.*/)]
+	[Information("애니메이션 재생 속도", InformationAttribute.InformationType.Info, false)]
 	private float _speed = 1f;
 
-	[Information(/*Could not decode attribute arguments.*/)]
+	[Information("어떤 속도 스탯을 사용할지", InformationAttribute.InformationType.Info, false)]
 	[SerializeField]
 	private SpeedMultiplierSource _speedMultiplierSource;
 
 	[SerializeField]
 	[Range(0f, 1f)]
-	[Information(/*Could not decode attribute arguments.*/)]
+	[Information("속도 스탯에 영향받는 정도", InformationAttribute.InformationType.Info, false)]
 	private float _speedMultiplierFactor = 1f;
 
 	private float _runSpeed;
@@ -156,11 +156,11 @@ public class Motion : MonoBehaviour
 		}
 		else if ((Object)(object)_action == (Object)null)
 		{
-			_operationInfos = ((SubcomponentArray<OperationInfo>)_operations).components.OrderBy((OperationInfo operation) => operation.timeToTrigger).ToArray();
+			_operationInfos = _operations.components.OrderBy((OperationInfo operation) => operation.timeToTrigger).ToArray();
 		}
 		else
 		{
-			_operationInfos = (from operation in _action.operations.Concat(((SubcomponentArray<OperationInfo>)_operations).components)
+			_operationInfos = (from operation in _action.operations.Concat(_operations.components)
 				orderby operation.timeToTrigger
 				select operation).ToArray();
 		}
@@ -202,9 +202,9 @@ public class Motion : MonoBehaviour
 	public void Initialize(Action action)
 	{
 		this.action = action;
-		for (int i = 0; i < ((SubcomponentArray<Constraint>)_constraints).components.Length; i++)
+		for (int i = 0; i < _constraints.components.Length; i++)
 		{
-			((SubcomponentArray<Constraint>)_constraints).components[i].Initilaize(action);
+			_constraints.components[i].Initilaize(action);
 		}
 	}
 
@@ -215,11 +215,11 @@ public class Motion : MonoBehaviour
 			return _length;
 		}
 		float num = 0f;
-		for (int i = 0; i < ((ReorderableArray<CharacterAnimationController.AnimationInfo.KeyClip>)_animationInfo).values.Length; i++)
+		for (int i = 0; i < _animationInfo.values.Length; i++)
 		{
-			if ((Object)(object)((ReorderableArray<CharacterAnimationController.AnimationInfo.KeyClip>)_animationInfo).values[i].clip != (Object)null && ((ReorderableArray<CharacterAnimationController.AnimationInfo.KeyClip>)_animationInfo).values[i].clip.length > num)
+			if ((Object)(object)_animationInfo.values[i].clip != (Object)null && _animationInfo.values[i].clip.length > num)
 			{
-				num = ((ReorderableArray<CharacterAnimationController.AnimationInfo.KeyClip>)_animationInfo).values[i].clip.length;
+				num = _animationInfo.values[i].clip.length;
 			}
 		}
 		return num;
@@ -227,14 +227,12 @@ public class Motion : MonoBehaviour
 
 	public void StartBehaviour(float speed)
 	{
-		//IL_0030: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0035: Unknown result type (might be due to invalid IL or missing references)
 		if (!running)
 		{
 			_runSpeed = speed;
 			running = true;
 			this.onStart?.Invoke();
-			_cRunOperations = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)this, CRunOperations());
+			_cRunOperations = ((MonoBehaviour)(object)this).StartCoroutineWithReference(CRunOperations());
 		}
 	}
 
@@ -245,7 +243,7 @@ public class Motion : MonoBehaviour
 			time = length;
 			StopAllOperations();
 			running = false;
-			((CoroutineReference)(ref _cRunOperations)).Stop();
+			_cRunOperations.Stop();
 			this.onEnd?.Invoke();
 		}
 	}
@@ -256,18 +254,18 @@ public class Motion : MonoBehaviour
 		{
 			StopAllOperations();
 			running = false;
-			((CoroutineReference)(ref _cRunOperations)).Stop();
+			_cRunOperations.Stop();
 			this.onCancel?.Invoke();
 		}
 	}
 
 	public override string ToString()
 	{
-		if (_animationInfo == null || ((ReorderableArray<CharacterAnimationController.AnimationInfo.KeyClip>)_animationInfo).values == null || ((ReorderableArray<CharacterAnimationController.AnimationInfo.KeyClip>)_animationInfo).values.Length == 0 || (Object)(object)((ReorderableArray<CharacterAnimationController.AnimationInfo.KeyClip>)_animationInfo).values[0].clip == (Object)null)
+		if (_animationInfo == null || _animationInfo.values == null || _animationInfo.values.Length == 0 || (Object)(object)_animationInfo.values[0].clip == (Object)null)
 		{
 			return ((Object)this).ToString();
 		}
-		return "Motion (" + ((Object)((ReorderableArray<CharacterAnimationController.AnimationInfo.KeyClip>)_animationInfo).values[0].clip).name + ")";
+		return "Motion (" + ((Object)_animationInfo.values[0].clip).name + ")";
 	}
 
 	public IEnumerator CWaitForEndOfRunning()
@@ -293,19 +291,19 @@ public class Motion : MonoBehaviour
 			else
 			{
 				yield return (object)new WaitForEndOfFrame();
-				time += ((ChronometerBase)owner.chronometer.animation).deltaTime * _runSpeed;
+				time += owner.chronometer.animation.deltaTime * _runSpeed;
 			}
 		}
 	}
 
 	internal bool PassConstraints()
 	{
-		return ((SubcomponentArray<Constraint>)_constraints).components.Pass();
+		return _constraints.components.Pass();
 	}
 
 	internal void ConsumeConstraints()
 	{
 		action.ConsumeConstraints();
-		((SubcomponentArray<Constraint>)_constraints).components.Consume();
+		_constraints.components.Consume();
 	}
 }

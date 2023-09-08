@@ -51,8 +51,8 @@ public class StatBonusByOtherStat : Ability
 		public void UpdateStat(bool force)
 		{
 			double num = (owner.stat.GetFinal(Stat.Kind.values[ability._sourceStat.kindIndex]) - 1.0) * (double)ability._conversionRatio;
-			double value = ((ReorderableArray<Stat.Value>)ability._targetStats).values[0].value;
-			if (num > ((ReorderableArray<Stat.Value>)ability._targetStats).values[0].value)
+			double value = ability._targetStats.values[0].value;
+			if (num > ability._targetStats.values[0].value)
 			{
 				num = value;
 			}
@@ -65,7 +65,7 @@ public class StatBonusByOtherStat : Ability
 
 		private void SetStat(double bonus)
 		{
-			Stat.Value[] values = ((ReorderableArray<Stat.Value>)_stat).values;
+			Stat.Value[] values = _stat.values;
 			for (int i = 0; i < values.Length; i++)
 			{
 				values[i].value = bonus;

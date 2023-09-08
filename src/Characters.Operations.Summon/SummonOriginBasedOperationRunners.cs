@@ -15,10 +15,10 @@ public class SummonOriginBasedOperationRunners : CharacterOperation
 		{
 			public void Dispose()
 			{
-				for (int i = 0; i < base.values.Length; i++)
+				for (int i = 0; i < values.Length; i++)
 				{
-					base.values[i].Dispose();
-					base.values[i] = null;
+					values[i].Dispose();
+					values[i] = null;
 				}
 			}
 		}
@@ -100,12 +100,12 @@ public class SummonOriginBasedOperationRunners : CharacterOperation
 
 	private IEnumerator CRun(Character owner)
 	{
-		Vector3[] preloadedPositions = (Vector3[])(object)new Vector3[((ReorderableArray<SummonOption>)_summonOptions).values.Length];
+		Vector3[] preloadedPositions = (Vector3[])(object)new Vector3[_summonOptions.values.Length];
 		if (_preloadPosition)
 		{
 			for (int i = 0; i < preloadedPositions.Length; i++)
 			{
-				Transform originPosition = ((ReorderableArray<SummonOption>)_summonOptions).values[i].originPosition;
+				Transform originPosition = _summonOptions.values[i].originPosition;
 				if ((Object)(object)originPosition == (Object)null)
 				{
 					preloadedPositions[i] = ((Component)this).transform.position;
@@ -118,7 +118,7 @@ public class SummonOriginBasedOperationRunners : CharacterOperation
 		}
 		int optionIndex = 0;
 		float time = 0f;
-		SummonOption[] options = ((ReorderableArray<SummonOption>)_summonOptions).values;
+		SummonOption[] options = _summonOptions.values;
 		Vector3 val2 = default(Vector3);
 		while (optionIndex < options.Length)
 		{
@@ -190,7 +190,7 @@ public class SummonOriginBasedOperationRunners : CharacterOperation
 				}
 			}
 			yield return null;
-			time = ((!_timeIndependant) ? (time + ((ChronometerBase)owner.chronometer.animation).deltaTime) : (time + ((ChronometerBase)Chronometer.global).deltaTime));
+			time = ((!_timeIndependant) ? (time + owner.chronometer.animation.deltaTime) : (time + Chronometer.global.deltaTime));
 		}
 	}
 

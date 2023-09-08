@@ -33,7 +33,7 @@ public class AdditionalHitToStatusTaker : Ability
 			//IL_0067: Unknown result type (might be due to invalid IL or missing references)
 			//IL_006c: Unknown result type (might be due to invalid IL or missing references)
 			//IL_0040: Unknown result type (might be due to invalid IL or missing references)
-			if (result && ((EnumArray<CharacterStatus.Kind, bool>)ability._statuses)[applyInfo.kind])
+			if (result && ability._statuses[applyInfo.kind])
 			{
 				if ((Object)(object)ability._targetPoint != (Object)null)
 				{

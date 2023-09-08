@@ -11,12 +11,12 @@ public class TeleportOverTime : CharacterOperation
 	[SerializeField]
 	private Curve _curve;
 
-	[Information(/*Could not decode attribute arguments.*/)]
+	[Information("0이상이면 텔레포트 실패 시 거리 1마다 재시도, 이동에 특별한 문제가 없는 한 0으로 유지.", InformationAttribute.InformationType.Info, false)]
 	[SerializeField]
 	private float _maxRetryDistance;
 
 	[Header("Start")]
-	[Information(/*Could not decode attribute arguments.*/)]
+	[Information("둘 다 비워두면 캐릭터의 현재 위치 사용", InformationAttribute.InformationType.Info, false)]
 	[SerializeField]
 	private Collider2D _startRange;
 
@@ -86,7 +86,7 @@ public class TeleportOverTime : CharacterOperation
 		target.movement.configs.Add(int.MaxValue, _staticMovementConfig);
 		while (time < duration)
 		{
-			time += ((ChronometerBase)target.chronometer.master).deltaTime;
+			time += target.chronometer.master.deltaTime;
 			Vector2 destination = Vector2.LerpUnclamped(startPosition, endPosition, time / duration);
 			Teleport(target, destination);
 			yield return null;

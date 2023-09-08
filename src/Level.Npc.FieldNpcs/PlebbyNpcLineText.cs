@@ -61,7 +61,7 @@ public class PlebbyNpcLineText : MonoBehaviour
 	{
 		if (_fieldNpc.release)
 		{
-			_elapsed += ((ChronometerBase)Chronometer.global).deltaTime;
+			_elapsed += Chronometer.global.deltaTime;
 			if (_elapsed > _cooltime)
 			{
 				_canRun = true;

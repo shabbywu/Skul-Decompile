@@ -42,7 +42,7 @@ public sealed class ContinuousTackle : Behaviour
 	private IEnumerator CCooldown(Chronometer chronometer)
 	{
 		canUse = false;
-		yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)chronometer, _coolTime);
+		yield return chronometer.WaitForSeconds(_coolTime);
 		canUse = true;
 	}
 }

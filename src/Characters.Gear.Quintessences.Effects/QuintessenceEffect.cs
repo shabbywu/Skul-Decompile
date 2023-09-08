@@ -7,10 +7,10 @@ namespace Characters.Gear.Quintessences.Effects;
 public abstract class QuintessenceEffect : MonoBehaviour
 {
 	[AttributeUsage(AttributeTargets.Field)]
-	public class SubcomponentAttribute : SubcomponentAttribute
+	public class SubcomponentAttribute : UnityEditor.SubcomponentAttribute
 	{
 		public SubcomponentAttribute()
-			: base(true, types)
+			: base(allowCustom: true, QuintessenceEffect.types)
 		{
 		}
 	}

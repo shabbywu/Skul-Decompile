@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using Characters.Gear.Synergy.Inscriptions;
 using Hardmode;
@@ -42,7 +41,7 @@ public class KeywordDisplay : MonoBehaviour
 	{
 		_detailFrame.SetActive(false);
 		_statFrame.SetActive(false);
-		Inscription[] array = ((IEnumerable<Inscription>)Singleton<Service>.Instance.levelManager.player.playerComponents.inventory.synergy.inscriptions).Where((Inscription keyword) => keyword.count > 0).OrderByDescending(delegate(Inscription keyword)
+		Inscription[] array = Singleton<Service>.Instance.levelManager.player.playerComponents.inventory.synergy.inscriptions.Where((Inscription keyword) => keyword.count > 0).OrderByDescending(delegate(Inscription keyword)
 		{
 			if (keyword.isMaxStep)
 			{

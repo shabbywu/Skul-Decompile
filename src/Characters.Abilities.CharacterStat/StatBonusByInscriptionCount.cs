@@ -60,9 +60,9 @@ public class StatBonusByInscriptionCount : Ability
 			_stack = num;
 			if (_stack < ability._maxStack)
 			{
-				for (int j = 0; j < ((ReorderableArray<Stat.Value>)_stat).values.Length; j++)
+				for (int j = 0; j < _stat.values.Length; j++)
 				{
-					((ReorderableArray<Stat.Value>)_stat).values[j].value = ((ReorderableArray<Stat.Value>)ability._statPerStack).values[j].GetStackedValue(_stack);
+					_stat.values[j].value = ability._statPerStack.values[j].GetStackedValue(_stack);
 				}
 				owner.stat.SetNeedUpdate();
 			}

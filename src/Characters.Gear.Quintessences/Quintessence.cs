@@ -50,25 +50,14 @@ public class Quintessence : Gear
 
 	public Sprite hudIcon => GearResource.instance.GetQuintessenceHudIcon(((Object)this).name) ?? base.icon;
 
-	public override int currencyByDiscard
+	public override int currencyByDiscard => base.rarity switch
 	{
-		get
-		{
-			//IL_0001: Unknown result type (might be due to invalid IL or missing references)
-			//IL_0006: Unknown result type (might be due to invalid IL or missing references)
-			//IL_0007: Unknown result type (might be due to invalid IL or missing references)
-			//IL_001d: Expected I4, but got Unknown
-			Rarity val = base.rarity;
-			return (int)val switch
-			{
-				0 => 3, 
-				1 => 5, 
-				2 => 10, 
-				3 => 15, 
-				_ => 0, 
-			};
-		}
-	}
+		Rarity.Common => 3, 
+		Rarity.Rare => 5, 
+		Rarity.Unique => 10, 
+		Rarity.Legendary => 15, 
+		_ => 0, 
+	};
 
 	public static string currencySpriteKey => "<sprite name=\"Others/Heart_Icon\">";
 
@@ -143,7 +132,7 @@ public class Quintessence : Gear
 
 	public void Use()
 	{
-		if (((SubcomponentArray<Constraint>)_constraints).components.Pass() && _cooldown.Consume())
+		if (_constraints.components.Pass() && _cooldown.Consume())
 		{
 			_active?.Invoke(this);
 			this.onUse?.Invoke();

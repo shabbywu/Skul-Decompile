@@ -88,9 +88,9 @@ public class CurseOfLight : Ability
 		private void UpdateStack()
 		{
 			Scene<GameBase>.instance.uiManager.curseOfLightVignette.UpdateStack(_stacks);
-			for (int i = 0; i < ((ReorderableArray<Stat.Value>)_stat).values.Length; i++)
+			for (int i = 0; i < _stat.values.Length; i++)
 			{
-				((ReorderableArray<Stat.Value>)_stat).values[i].value = ((ReorderableArray<Stat.Value>)_stat).values[i].value + (double)increasement;
+				_stat.values[i].value = _stat.values[i].value + (double)increasement;
 			}
 			owner.stat.SetNeedUpdate();
 			SpawnBuffText();

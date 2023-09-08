@@ -28,7 +28,7 @@ public class TimeLoop : Decorator
 	private IEnumerator CExpire()
 	{
 		_running = true;
-		yield return Chronometer.global.WaitForSeconds((float)_time);
+		yield return Chronometer.global.WaitForSeconds(_time);
 		_running = false;
 	}
 }

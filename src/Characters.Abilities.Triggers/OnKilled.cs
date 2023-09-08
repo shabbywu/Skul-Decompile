@@ -54,7 +54,7 @@ public class OnKilled : Trigger
 	{
 		//IL_00c6: Unknown result type (might be due to invalid IL or missing references)
 		//IL_00cb: Unknown result type (might be due to invalid IL or missing references)
-		if (((EnumArray<Character.Type, bool>)_characterTypes)[target.character.type] && (!((EnumArray<Character.Type, bool>)_characterTypes)[Character.Type.Boss] || target.character.type != Character.Type.Boss || (target.character.key != Key.FirstHero1 && target.character.key != Key.FirstHero2 && target.character.key != 0)) && ((EnumArray<Damage.MotionType, bool>)_attackTypes)[damage.motionType] && ((EnumArray<Damage.AttackType, bool>)_damageTypes)[damage.attackType] && (string.IsNullOrWhiteSpace(_attackKey) || damage.key.Equals(_attackKey, StringComparison.OrdinalIgnoreCase)))
+		if (_characterTypes[target.character.type] && (!_characterTypes[Character.Type.Boss] || target.character.type != Character.Type.Boss || (target.character.key != Key.FirstHero1 && target.character.key != Key.FirstHero2 && target.character.key != 0)) && _attackTypes[damage.motionType] && _damageTypes[damage.attackType] && (string.IsNullOrWhiteSpace(_attackKey) || damage.key.Equals(_attackKey, StringComparison.OrdinalIgnoreCase)))
 		{
 			if ((Object)(object)_moveToHitPosition != (Object)null)
 			{

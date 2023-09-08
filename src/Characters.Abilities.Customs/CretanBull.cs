@@ -58,7 +58,7 @@ public class CretanBull : Ability
 
 		private void OnCharacterAction(Characters.Actions.Action action)
 		{
-			if (((EnumArray<Characters.Actions.Action.Type, bool>)ability._actionTypeFilter).GetOrDefault(action.type) && (action.type != Characters.Actions.Action.Type.Skill || !action.cooldown.usedByStreak) && !(_remainCooldownTime > 0f) && owner.playerComponents.inventory.weapon.polymorphOrCurrent.category == ability._headCategory)
+			if (ability._actionTypeFilter.GetOrDefault(action.type) && (action.type != Characters.Actions.Action.Type.Skill || !action.cooldown.usedByStreak) && !(_remainCooldownTime > 0f) && owner.playerComponents.inventory.weapon.polymorphOrCurrent.category == ability._headCategory)
 			{
 				ability._operations.Run(owner);
 				_remainCooldownTime = ability._cooldownTime;

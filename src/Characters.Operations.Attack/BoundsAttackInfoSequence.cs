@@ -15,8 +15,8 @@ public sealed class BoundsAttackInfoSequence : MonoBehaviour
 		{
 			Array.Sort(base.components, (BoundsAttackInfoSequence x, BoundsAttackInfoSequence y) => x.timeToTrigger.CompareTo(y.timeToTrigger));
 			noDelay = true;
-			BoundsAttackInfoSequence[] components = base.components;
-			foreach (BoundsAttackInfoSequence obj in components)
+			BoundsAttackInfoSequence[] array = base.components;
+			foreach (BoundsAttackInfoSequence obj in array)
 			{
 				if (obj._timeToTrigger > 0f)
 				{
@@ -28,9 +28,9 @@ public sealed class BoundsAttackInfoSequence : MonoBehaviour
 
 		internal void StopAllOperationsToOwner()
 		{
-			for (int i = 0; i < base._components.Length; i++)
+			for (int i = 0; i < _components.Length; i++)
 			{
-				base._components[i].attackInfo.operationsToOwner.StopAll();
+				_components[i].attackInfo.operationsToOwner.StopAll();
 			}
 		}
 	}
@@ -49,6 +49,6 @@ public sealed class BoundsAttackInfoSequence : MonoBehaviour
 
 	public override string ToString()
 	{
-		return $"{_timeToTrigger:0.##}s({_timeToTrigger * 60f:0.##}f), {ExtensionMethods.GetAutoName((object)_attackInfo)}";
+		return $"{_timeToTrigger:0.##}s({_timeToTrigger * 60f:0.##}f), {_attackInfo.GetAutoName()}";
 	}
 }

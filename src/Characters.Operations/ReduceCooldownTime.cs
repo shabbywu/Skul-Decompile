@@ -15,11 +15,11 @@ public class ReduceCooldownTime : CharacterOperation
 	private Type _type;
 
 	[SerializeField]
-	[Information(/*Could not decode attribute arguments.*/)]
+	[Information("Percent의 경우 (0~1)", InformationAttribute.InformationType.Info, false)]
 	private float _amount;
 
 	[SerializeField]
-	[Information(/*Could not decode attribute arguments.*/)]
+	[Information("특정 액션만 적용할 때", InformationAttribute.InformationType.Info, false)]
 	private Action _specificAction;
 
 	[SerializeField]

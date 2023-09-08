@@ -127,7 +127,7 @@ public class TransportPlane : ControlableTrap
 				}
 				else
 				{
-					target.movement.force.x += (float)((_character.lookingDirection == Character.LookingDirection.Right) ? 1 : (-1)) * _speed * ((ChronometerBase)_character.chronometer.master).deltaTime;
+					target.movement.force.x += (float)((_character.lookingDirection == Character.LookingDirection.Right) ? 1 : (-1)) * _speed * _character.chronometer.master.deltaTime;
 				}
 			}
 		}
@@ -136,7 +136,7 @@ public class TransportPlane : ControlableTrap
 	private void OnTriggerEnter2D(Collider2D other)
 	{
 		//IL_0001: Unknown result type (might be due to invalid IL or missing references)
-		if (ExtensionMethods.Contains(_layer, ((Component)other).gameObject.layer))
+		if (_layer.Contains(((Component)other).gameObject.layer))
 		{
 			AddTarget(((Component)other).gameObject);
 		}
@@ -145,7 +145,7 @@ public class TransportPlane : ControlableTrap
 	private void OnTriggerExit2D(Collider2D other)
 	{
 		//IL_0001: Unknown result type (might be due to invalid IL or missing references)
-		if (ExtensionMethods.Contains(_layer, ((Component)other).gameObject.layer))
+		if (_layer.Contains(((Component)other).gameObject.layer))
 		{
 			RemoveTarget(((Component)other).gameObject);
 		}

@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Characters.Operations;
@@ -30,7 +29,7 @@ public class Worship : CharacterOperation
 		if (_current >= _operations.Length || _current == 0)
 		{
 			_current = 0;
-			ExtensionMethods.Shuffle<OperationInfos>((IList<OperationInfos>)_operations);
+			_operations.Shuffle();
 		}
 		int num = _current;
 		int num2 = 0;

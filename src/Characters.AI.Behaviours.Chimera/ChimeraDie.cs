@@ -83,7 +83,7 @@ public class ChimeraDie : MonoBehaviour
 					list[i].health.Kill();
 				}
 			}
-			elapsed += ((ChronometerBase)controller.character.chronometer.animation).deltaTime;
+			elapsed += controller.character.chronometer.animation.deltaTime;
 			yield return null;
 		}
 	}

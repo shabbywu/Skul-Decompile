@@ -6,10 +6,10 @@ namespace Runnables.Chances;
 
 public abstract class Chance : MonoBehaviour
 {
-	public class SubcomponentAttribute : SubcomponentAttribute
+	public class SubcomponentAttribute : UnityEditor.SubcomponentAttribute
 	{
 		public SubcomponentAttribute()
-			: base(true, types)
+			: base(allowCustom: true, Chance.types)
 		{
 		}
 	}

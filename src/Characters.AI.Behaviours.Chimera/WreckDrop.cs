@@ -48,7 +48,7 @@ public class WreckDrop : Behaviour
 	{
 		((Component)_outReadyOperations).gameObject.SetActive(true);
 		_outReadyOperations.Run(character);
-		character.status.unstoppable.Attach((object)character);
+		character.status.unstoppable.Attach(character);
 	}
 
 	public void OutJump(Character character)
@@ -94,7 +94,7 @@ public class WreckDrop : Behaviour
 	private IEnumerator CoolDown(Chronometer chronometer)
 	{
 		_coolDown = false;
-		yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)chronometer, _coolTime);
+		yield return chronometer.WaitForSeconds(_coolTime);
 		_coolDown = true;
 	}
 

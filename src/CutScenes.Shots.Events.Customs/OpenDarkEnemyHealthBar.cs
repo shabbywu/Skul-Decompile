@@ -48,7 +48,7 @@ public sealed class OpenDarkEnemyHealthBar : Event
 				IDictionary<Character, string> attached = Scene<GameBase>.instance.uiManager.headupDisplay.darkEnemyHealthBar.attached;
 				if (attached.Count > 0)
 				{
-					Scene<GameBase>.instance.uiManager.headupDisplay.darkEnemyHealthBar.Set(ExtensionMethods.Random<KeyValuePair<Character, string>>((IEnumerable<KeyValuePair<Character, string>>)attached).Key);
+					Scene<GameBase>.instance.uiManager.headupDisplay.darkEnemyHealthBar.Set(attached.Random().Key);
 				}
 			}
 		};

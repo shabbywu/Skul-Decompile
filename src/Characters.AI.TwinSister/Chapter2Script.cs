@@ -27,18 +27,18 @@ public class Chapter2Script : MonoBehaviour
 		{
 			public int Take()
 			{
-				if (base.values.Length == 0)
+				if (values.Length == 0)
 				{
 					return 0;
 				}
-				int num = base.values.Sum((DarkQuartzPossibility v) => v.weight);
+				int num = values.Sum((DarkQuartzPossibility v) => v.weight);
 				int num2 = Random.Range(0, num) + 1;
-				for (int i = 0; i < base.values.Length; i++)
+				for (int i = 0; i < values.Length; i++)
 				{
-					num2 -= base.values[i].weight;
+					num2 -= values[i].weight;
 					if (num2 <= 0)
 					{
-						return (int)base.values[i].amount.value;
+						return (int)values[i].amount.value;
 					}
 				}
 				return 0;
@@ -63,13 +63,13 @@ public class Chapter2Script : MonoBehaviour
 		public void IntroStart()
 		{
 			Scene<GameBase>.instance.uiManager.headupDisplay.visible = false;
-			PlayerInput.blocked.Attach((object)_script);
+			PlayerInput.blocked.Attach(_script);
 			Scene<GameBase>.instance.uiManager.letterBox.Appear();
 		}
 
 		public void IntroEnd()
 		{
-			PlayerInput.blocked.Detach((object)_script);
+			PlayerInput.blocked.Detach(_script);
 			Scene<GameBase>.instance.uiManager.headupDisplay.bossHealthBar.OpenChapter2Phase1(_script._shortHair.character, _script._longHair.character);
 		}
 
@@ -153,7 +153,7 @@ public class Chapter2Script : MonoBehaviour
 			while (master.singlePattern)
 			{
 				yield return null;
-				elapsed += ((ChronometerBase)Chronometer.global).deltaTime;
+				elapsed += Chronometer.global.deltaTime;
 				if (elapsed >= duration)
 				{
 					break;
@@ -190,7 +190,7 @@ public class Chapter2Script : MonoBehaviour
 
 		public void StartOutro()
 		{
-			Singleton<Service>.Instance.levelManager.player.invulnerable.Attach((object)_script);
+			Singleton<Service>.Instance.levelManager.player.invulnerable.Attach(_script);
 			_script.StartSequence();
 			_script.flash.Run(_script.darkAide.character);
 			PersistentSingleton<SoundManager>.Instance.StopBackGroundMusic();
@@ -363,10 +363,10 @@ public class Chapter2Script : MonoBehaviour
 			Scene<GameBase>.instance.uiManager.headupDisplay.bossHealthBar.CloseAll();
 			Scene<GameBase>.instance.uiManager.headupDisplay.visible = true;
 			LetterBox.instance.Disappear();
-			PlayerInput.blocked.Detach((object)this);
+			PlayerInput.blocked.Detach(this);
 			if ((Object)(object)Singleton<Service>.Instance.levelManager.player != (Object)null)
 			{
-				Singleton<Service>.Instance.levelManager.player.invulnerable.Detach((object)this);
+				Singleton<Service>.Instance.levelManager.player.invulnerable.Detach(this);
 			}
 			if (!((Object)(object)Scene<GameBase>.instance.cameraController == (Object)null) && !((Object)(object)Singleton<Service>.Instance.levelManager.player == (Object)null))
 			{
@@ -427,7 +427,7 @@ public class Chapter2Script : MonoBehaviour
 		yield return Scene<GameBase>.instance.uiManager.letterBox.CDisappear();
 		_shortHair.Dettachinvincibility();
 		_longHair.Dettachinvincibility();
-		_combatReference = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)this, Combat());
+		_combatReference = ((MonoBehaviour)(object)this).StartCoroutineWithReference(Combat());
 		_intro.IntroEnd();
 	}
 
@@ -438,7 +438,7 @@ public class Chapter2Script : MonoBehaviour
 		yield return twinSisterMasterAI.ProcessDualCombat();
 		_inGame.SetFieldAideAndBehindAide(_shortHair, _longHair, _leftGoldenAide, _rightGoldenAide);
 		yield return _inGame.CGotoBehind();
-		_expireSingleCombatReference = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)this, _inGame.CExpireSingleCombat(twinSisterMasterAI, _siglePatternDuration));
+		_expireSingleCombatReference = ((MonoBehaviour)(object)this).StartCoroutineWithReference(_inGame.CExpireSingleCombat(twinSisterMasterAI, _siglePatternDuration));
 		yield return _inGame.CProcessSingleCombat(twinSisterMasterAI);
 		while (!_goldenAideEnd)
 		{
@@ -446,7 +446,7 @@ public class Chapter2Script : MonoBehaviour
 			yield return twinSisterMasterAI.ProcessDualCombat();
 			_inGame.SetFieldAideAndBehindAide(_shortHair, _longHair, _leftGoldenAide, _rightGoldenAide);
 			yield return _inGame.CGotoBehind();
-			_expireSingleCombatReference = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)this, _inGame.CExpireSingleCombat(twinSisterMasterAI, _siglePatternDuration));
+			_expireSingleCombatReference = ((MonoBehaviour)(object)this).StartCoroutineWithReference(_inGame.CExpireSingleCombat(twinSisterMasterAI, _siglePatternDuration));
 			yield return _inGame.CProcessSingleCombat(twinSisterMasterAI);
 		}
 	}
@@ -458,14 +458,14 @@ public class Chapter2Script : MonoBehaviour
 			yield return null;
 		}
 		_goldenAideEnd = true;
-		((CoroutineReference)(ref _expireSingleCombatReference)).Stop();
+		_expireSingleCombatReference.Stop();
 		GoldenAideAI toBeDarkAide2 = (_shortHair.dead ? _longHair : _shortHair);
 		toBeDarkAide2.Attachinvincibility();
 		while (twinSisterMasterAI.lockForAwakening)
 		{
 			yield return null;
 		}
-		((CoroutineReference)(ref _combatReference)).Stop();
+		_combatReference.Stop();
 		PersistentSingleton<SoundManager>.Instance.StopBackGroundMusic();
 		if (twinSisterMasterAI.goldenAideDiedCount == 1)
 		{

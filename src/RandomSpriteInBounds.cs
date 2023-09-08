@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using Characters.Projectiles;
 using FX;
 using UnityEngine;
@@ -70,7 +69,7 @@ public class RandomSpriteInBounds : MonoBehaviour
 		{
 			Vector2 val = Random.insideUnitCircle * 2f;
 			_positions[i].position = Vector2.op_Implicit(Vector2.op_Implicit(_origin.position) + val);
-			_spriteRenderers[i].sprite = ExtensionMethods.Random<Sprite>((IEnumerable<Sprite>)_sprites);
+			_spriteRenderers[i].sprite = _sprites.Random();
 			((Renderer)_spriteRenderers[i]).enabled = true;
 		}
 	}

@@ -41,7 +41,7 @@ public sealed class TeleportAttack : CharacterOperation
 	private Transform _targetPoint;
 
 	[SerializeField]
-	[Subcomponent(typeof(TargetedOperationInfo))]
+	[UnityEditor.Subcomponent(typeof(TargetedOperationInfo))]
 	private TargetedOperationInfo.Subcomponents _onHitTargetOperations;
 
 	static TeleportAttack()
@@ -186,7 +186,7 @@ public sealed class TeleportAttack : CharacterOperation
 		int index = 0;
 		for (int i = 1; i < components.Count; i++)
 		{
-			if (!((Object)(object)components[i].character == (Object)null) && ((EnumArray<Character.Type, bool>)_targetFilter)[components[i].character.type] && components[i].character.movement.isGrounded)
+			if (!((Object)(object)components[i].character == (Object)null) && _targetFilter[components[i].character.type] && components[i].character.movement.isGrounded)
 			{
 				ColliderDistance2D val = Physics2D.Distance((Collider2D)(object)components[i].character.collider, (Collider2D)(object)character.collider);
 				float distance = ((ColliderDistance2D)(ref val)).distance;

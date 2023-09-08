@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -11,18 +10,18 @@ public class WeightedSelector : Decorator
 	private WeightedRandomizer<Behaviour> _weightedRandomizer;
 
 	[SerializeField]
-	[Subcomponent(typeof(Weight))]
+	[UnityEditor.Subcomponent(typeof(Weight))]
 	private Weight.Subcomponents _weights;
 
 	private void Awake()
 	{
 		List<(Behaviour, float)> list = new List<(Behaviour, float)>();
-		Weight[] components = ((SubcomponentArray<Weight>)_weights).components;
+		Weight[] components = _weights.components;
 		foreach (Weight weight in components)
 		{
 			list.Add((weight.key, weight.value));
 		}
-		_weightedRandomizer = new WeightedRandomizer<Behaviour>((ICollection<ValueTuple<Behaviour, float>>)list);
+		_weightedRandomizer = new WeightedRandomizer<Behaviour>(list);
 	}
 
 	public override IEnumerator CRun(AIController controller)

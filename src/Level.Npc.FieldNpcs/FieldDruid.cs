@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using Characters;
 using Characters.Gear.Items;
 using Characters.Player;
@@ -81,7 +80,7 @@ public sealed class FieldDruid : FieldNpc
 		int num = 7;
 		for (int i = 0; i < num; i++)
 		{
-			_selected = ExtensionMethods.Random<Item>((IEnumerable<Item>)_items, _random);
+			_selected = _items.Random(_random);
 			if (!item.Has(_selected))
 			{
 				break;

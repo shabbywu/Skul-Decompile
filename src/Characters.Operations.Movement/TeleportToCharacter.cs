@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Characters.Movements;
 using PhysicsUtils;
@@ -70,16 +69,10 @@ public class TeleportToCharacter : CharacterOperation
 		//IL_009b: Unknown result type (might be due to invalid IL or missing references)
 		//IL_00d2: Unknown result type (might be due to invalid IL or missing references)
 		//IL_00ea: Unknown result type (might be due to invalid IL or missing references)
-		UsingCollider val = default(UsingCollider);
-		((UsingCollider)(ref val))._002Ector(_findingRange, _optimizeFindingRange);
 		Character character;
-		try
+		using (new UsingCollider(_findingRange, _optimizeFindingRange))
 		{
 			character = FindTargetCharacter((Collider2D)(object)owner.collider, _findingRange, _layer.Evaluate(((Component)owner).gameObject), _findingMethod, _onlyGroundedTarget);
-		}
-		finally
-		{
-			((IDisposable)(UsingCollider)(ref val)).Dispose();
 		}
 		if (!((Object)(object)character == (Object)null))
 		{
@@ -142,7 +135,7 @@ public class TeleportToCharacter : CharacterOperation
 		switch (findingMethod)
 		{
 		case FindingMethod.Random:
-			return ExtensionMethods.Random<Character>((IEnumerable<Character>)_characters);
+			return _characters.Random();
 		case FindingMethod.Closest:
 		{
 			float num = float.MaxValue;

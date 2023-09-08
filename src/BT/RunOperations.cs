@@ -8,7 +8,7 @@ namespace BT;
 public class RunOperations : Node
 {
 	[SerializeField]
-	[Subcomponent(typeof(OperationInfo))]
+	[UnityEditor.Subcomponent(typeof(OperationInfo))]
 	private OperationInfo.Subcomponents _operations;
 
 	private void Awake()

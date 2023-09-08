@@ -61,9 +61,6 @@ public class SleepySkeleton : FieldNpc
 
 	private void Load()
 	{
-		//IL_000c: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0011: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0023: Unknown result type (might be due to invalid IL or missing references)
 		do
 		{
 			Rarity rarity = _headPossibilities.Evaluate(_random);

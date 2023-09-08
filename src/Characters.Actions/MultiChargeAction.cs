@@ -95,7 +95,7 @@ public class MultiChargeAction : Action
 		{
 			list.Add(_prepare);
 		}
-		ChargeMotions[] values = ((ReorderableArray<ChargeMotions>)_chargeMotions).values;
+		ChargeMotions[] values = _chargeMotions.values;
 		foreach (ChargeMotions chargeMotions in values)
 		{
 			list.Add(chargeMotions.charging);
@@ -104,7 +104,7 @@ public class MultiChargeAction : Action
 				list.Add(chargeMotions.charged);
 			}
 		}
-		list.Add(((ReorderableArray<ChargeMotions>)_chargeMotions).values.Last().finish);
+		list.Add(_chargeMotions.values.Last().finish);
 		for (int j = 0; j < list.Count - 1; j++)
 		{
 			Motion nextMotion = list[j + 1];
@@ -135,7 +135,7 @@ public class MultiChargeAction : Action
 			{
 				_earlyFinish.onStart += RepositLookingDirection;
 			}
-			values = ((ReorderableArray<ChargeMotions>)_chargeMotions).values;
+			values = _chargeMotions.values;
 			foreach (ChargeMotions chargeMotions2 in values)
 			{
 				chargeMotions2.charging.onStart += RepositLookingDirection;
@@ -148,13 +148,13 @@ public class MultiChargeAction : Action
 				chargeMotions2.finish.Initialize(this);
 			}
 		}
-		for (int k = 0; k < ((ReorderableArray<ChargeMotions>)_chargeMotions).values.Length; k++)
+		for (int k = 0; k < _chargeMotions.values.Length; k++)
 		{
-			ChargeMotions chargeMotions3 = ((ReorderableArray<ChargeMotions>)_chargeMotions).values[k];
+			ChargeMotions chargeMotions3 = _chargeMotions.values[k];
 			Motion motion = null;
-			if (k + 1 < ((ReorderableArray<ChargeMotions>)_chargeMotions).values.Length)
+			if (k + 1 < _chargeMotions.values.Length)
 			{
-				motion = ((ReorderableArray<ChargeMotions>)_chargeMotions).values[k + 1].charging;
+				motion = _chargeMotions.values[k + 1].charging;
 			}
 			if (k == 0)
 			{
@@ -230,9 +230,9 @@ public class MultiChargeAction : Action
 			ReserveEarlyFinish();
 			return false;
 		}
-		for (int i = 0; i < ((ReorderableArray<ChargeMotions>)_chargeMotions).values.Length; i++)
+		for (int i = 0; i < _chargeMotions.values.Length; i++)
 		{
-			ChargeMotions chargeMotions = ((ReorderableArray<ChargeMotions>)_chargeMotions).values[i];
+			ChargeMotions chargeMotions = _chargeMotions.values[i];
 			if ((Object)(object)runningMotion == (Object)(object)chargeMotions.finish)
 			{
 				return false;
@@ -249,7 +249,7 @@ public class MultiChargeAction : Action
 				}
 				else
 				{
-					DoMotion(((ReorderableArray<ChargeMotions>)_chargeMotions).values[i - 1].finish);
+					DoMotion(_chargeMotions.values[i - 1].finish);
 				}
 				return true;
 			}

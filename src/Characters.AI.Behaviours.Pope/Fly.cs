@@ -45,7 +45,7 @@ public sealed class Fly : Move
 				}
 				Vector2 val = Vector2.Lerp(Vector2.op_Implicit(source), destination, curve.Evaluate(elapsed));
 				owner.movement.force = val - Vector2.op_Implicit(((Component)owner).transform.position);
-				elapsed += ((ChronometerBase)owner.chronometer.master).deltaTime;
+				elapsed += owner.chronometer.master.deltaTime;
 			}
 		}
 	}

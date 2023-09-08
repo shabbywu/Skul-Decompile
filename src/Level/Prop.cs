@@ -59,10 +59,10 @@ public class Prop : DestructibleObject
 		public void Initialize(Prop prop)
 		{
 			_prop = prop;
-			_totalWeight = base.values.Sum((PhaseSprite v) => v.weight);
+			_totalWeight = values.Sum((PhaseSprite v) => v.weight);
 			current = 0;
-			PhaseSprite[] values = base.values;
-			foreach (PhaseSprite phaseSprite in values)
+			PhaseSprite[] array = values;
+			foreach (PhaseSprite phaseSprite in array)
 			{
 				phaseSprite.health = phaseSprite.weight / _totalWeight * _prop._health;
 				if ((Object)(object)phaseSprite.particleSpawnPoint == (Object)null)
@@ -80,11 +80,11 @@ public class Prop : DestructibleObject
 			//IL_0099: Unknown result type (might be due to invalid IL or missing references)
 			while (damage > 0.0)
 			{
-				if (base.values.Length <= current)
+				if (values.Length <= current)
 				{
 					return null;
 				}
-				PhaseSprite phaseSprite = base.values[current];
+				PhaseSprite phaseSprite = values[current];
 				if (phaseSprite.health > damage)
 				{
 					phaseSprite.health -= damage;
@@ -100,12 +100,12 @@ public class Prop : DestructibleObject
 					phaseSprite.particle.Emit(Vector2.op_Implicit(phaseSprite.particleSpawnPoint.position), _prop.collider.bounds, force);
 				}
 				current++;
-				if (base.values.Length <= current)
+				if (values.Length <= current)
 				{
 					return null;
 				}
 			}
-			return base.values[current];
+			return values[current];
 		}
 	}
 
@@ -186,7 +186,7 @@ public class Prop : DestructibleObject
 			((Behaviour)obj).enabled = true;
 		}
 		_destructionPhase.Initialize(this);
-		_spriteRenderer.sprite = ((ReorderableArray<DestructionPhaseInfo.PhaseSprite>)_destructionPhase).values[0].sprite;
+		_spriteRenderer.sprite = _destructionPhase.values[0].sprite;
 		if ((Object)(object)_animator != (Object)null)
 		{
 			((Behaviour)_animator).enabled = true;
@@ -201,8 +201,6 @@ public class Prop : DestructibleObject
 		//IL_0032: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0047: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0140: Unknown result type (might be due to invalid IL or missing references)
-		//IL_015e: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0163: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0087: Unknown result type (might be due to invalid IL or missing references)
 		//IL_00b5: Unknown result type (might be due to invalid IL or missing references)
 		//IL_00d2: Unknown result type (might be due to invalid IL or missing references)
@@ -243,8 +241,8 @@ public class Prop : DestructibleObject
 			}
 			_spriteRenderer.sprite = phaseSprite.sprite;
 			PersistentSingleton<SoundManager>.Instance.PlaySound(_hitSound, ((Component)this).transform.position);
-			((CoroutineReference)(ref _cEaseColorReference)).Stop();
-			_cEaseColorReference = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)this, CEaseColor());
+			_cEaseColorReference.Stop();
+			_cEaseColorReference = ((MonoBehaviour)(object)this).StartCoroutineWithReference(CEaseColor());
 		}
 	}
 
@@ -268,7 +266,7 @@ public class Prop : DestructibleObject
 	private IEnumerator CEaseColor()
 	{
 		float duration = _hitColorCurve.duration;
-		for (float time = 0f; time < duration; time += ((ChronometerBase)Chronometer.global).deltaTime)
+		for (float time = 0f; time < duration; time += Chronometer.global.deltaTime)
 		{
 			_spriteRenderer.color = Color.Lerp(_startColor, _endColor, _hitColorCurve.Evaluate(time));
 			yield return null;

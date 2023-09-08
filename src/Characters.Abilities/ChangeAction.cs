@@ -72,7 +72,7 @@ public class ChangeAction : Ability
 	}
 
 	[SerializeField]
-	[Information(/*Could not decode attribute arguments.*/)]
+	[Information("반드시 개수와 순서가 일치해야함, SkillInfo를 가지고 있을 경우 actions 대신 skills쪽에 할당", InformationAttribute.InformationType.Info, true)]
 	private Weapon _weapon;
 
 	[Space]

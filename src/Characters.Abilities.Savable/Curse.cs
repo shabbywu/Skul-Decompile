@@ -133,9 +133,9 @@ public sealed class Curse : IAbility, IAbilityInstance, ISavableAbility
 	private void UpdateStack()
 	{
 		Scene<GameBase>.instance.uiManager.curseOfLightVignette.UpdateStack(_stack);
-		for (int i = 0; i < ((ReorderableArray<Stat.Value>)_statClone).values.Length; i++)
+		for (int i = 0; i < _statClone.values.Length; i++)
 		{
-			((ReorderableArray<Stat.Value>)_statClone).values[i].value = ((ReorderableArray<Stat.Value>)_statClone).values[i].value + (double)valuePerStack;
+			_statClone.values[i].value = _statClone.values[i].value + (double)valuePerStack;
 		}
 		owner.stat.SetNeedUpdate();
 		SpawnBuffText();
@@ -154,9 +154,9 @@ public sealed class Curse : IAbility, IAbilityInstance, ISavableAbility
 	{
 		Scene<GameBase>.instance.uiManager.curseOfLightVignette.UpdateStack(_stack);
 		owner.stat.AttachValues(_statClone);
-		for (int i = 0; i < ((ReorderableArray<Stat.Value>)_statClone).values.Length; i++)
+		for (int i = 0; i < _statClone.values.Length; i++)
 		{
-			((ReorderableArray<Stat.Value>)_statClone).values[i].value = ((ReorderableArray<Stat.Value>)_statClone).values[i].value + (double)(valuePerStack * (float)Mathf.FloorToInt((float)(_stack / 3)));
+			_statClone.values[i].value = _statClone.values[i].value + (double)(valuePerStack * (float)Mathf.FloorToInt((float)(_stack / 3)));
 		}
 		owner.stat.SetNeedUpdate();
 		SpawnBuffText();

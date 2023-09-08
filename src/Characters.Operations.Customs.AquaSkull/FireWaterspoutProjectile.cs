@@ -51,7 +51,7 @@ public class FireWaterspoutProjectile : CharacterOperation
 	private DirectionType _directionType;
 
 	[SerializeField]
-	private Reorderable _directions;
+	private CustomAngle.Reorderable _directions;
 
 	private IAttackDamage _attackDamage;
 
@@ -94,7 +94,7 @@ public class FireWaterspoutProjectile : CharacterOperation
 		//IL_013a: Unknown result type (might be due to invalid IL or missing references)
 		//IL_014a: Unknown result type (might be due to invalid IL or missing references)
 		//IL_00c7: Unknown result type (might be due to invalid IL or missing references)
-		CustomAngle[] values = ((ReorderableArray<CustomAngle>)(object)_directions).values;
+		CustomAngle[] values = _directions.values;
 		float attackDamage = _attackDamage.amount * _damageMultiplier.value;
 		bool flipX = false;
 		bool flipY = false;

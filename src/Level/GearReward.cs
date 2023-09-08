@@ -128,19 +128,11 @@ public sealed class GearReward : MonoBehaviour
 
 	private void Load()
 	{
-		//IL_000c: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0011: Unknown result type (might be due to invalid IL or missing references)
-		//IL_002e: Unknown result type (might be due to invalid IL or missing references)
-		//IL_003a: Unknown result type (might be due to invalid IL or missing references)
-		//IL_003f: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0076: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0094: Unknown result type (might be due to invalid IL or missing references)
-		//IL_00b2: Unknown result type (might be due to invalid IL or missing references)
 		do
 		{
-			Rarity val = _rarityPossibilities.Evaluate(_random);
+			Rarity key = _rarityPossibilities.Evaluate(_random);
 			Gear.Type? type = _gearPossibilities.Evaluate(_random);
-			Rarity rarity = Settings.instance.containerPossibilities[val].Evaluate(_random);
+			Rarity rarity = Settings.instance.containerPossibilities[key].Evaluate(_random);
 			switch (type)
 			{
 			case Gear.Type.Weapon:

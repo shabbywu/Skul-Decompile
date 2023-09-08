@@ -138,7 +138,7 @@ public class SweepAttack2 : CharacterOperation, IAttack
 					//IL_00d6: Unknown result type (might be due to invalid IL or missing references)
 					//IL_00dc: Unknown result type (might be due to invalid IL or missing references)
 					//IL_00e8: Unknown result type (might be due to invalid IL or missing references)
-					if (ExtensionMethods.Contains(_terrainLayer, ((Component)((RaycastHit2D)(ref result)).collider).gameObject.layer))
+					if (_terrainLayer.Contains(((Component)((RaycastHit2D)(ref result)).collider).gameObject.layer))
 					{
 						this.onTerrainHit(origin, direction, distance, result);
 					}
@@ -187,11 +187,11 @@ public class SweepAttack2 : CharacterOperation, IAttack
 	private CollisionDetector _collisionDetector;
 
 	[SerializeField]
-	[Subcomponent(typeof(OperationInfo))]
+	[UnityEditor.Subcomponent(typeof(OperationInfo))]
 	private OperationInfo.Subcomponents _onTerrainHit;
 
 	[SerializeField]
-	[Subcomponent(typeof(CastAttackInfoSequence))]
+	[UnityEditor.Subcomponent(typeof(CastAttackInfoSequence))]
 	protected CastAttackInfoSequence.Subcomponents _attackAndEffect;
 
 	private IAttackDamage _attackDamage;
@@ -251,7 +251,7 @@ public class SweepAttack2 : CharacterOperation, IAttack
 			//IL_001b: Unknown result type (might be due to invalid IL or missing references)
 			//IL_001c: Unknown result type (might be due to invalid IL or missing references)
 			//IL_001e: Unknown result type (might be due to invalid IL or missing references)
-			CastAttackInfoSequence[] components = ((SubcomponentArray<CastAttackInfoSequence>)_attackAndEffect).components;
+			CastAttackInfoSequence[] components = _attackAndEffect.components;
 			foreach (CastAttackInfoSequence castAttackInfoSequence in components)
 			{
 				Attack(castAttackInfoSequence.attackInfo, origin, direction, distance, raycastHit, target);
@@ -271,19 +271,17 @@ public class SweepAttack2 : CharacterOperation, IAttack
 
 	public override void Run(Character owner)
 	{
-		//IL_0026: Unknown result type (might be due to invalid IL or missing references)
-		//IL_002b: Unknown result type (might be due to invalid IL or missing references)
 		this.owner = owner;
 		_collisionDetector.Initialize(this);
-		((CoroutineReference)(ref _detectReference)).Stop();
-		_detectReference = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)owner, CDetect());
+		_detectReference.Stop();
+		_detectReference = ((MonoBehaviour)(object)owner).StartCoroutineWithReference(CDetect());
 	}
 
 	public override void Stop()
 	{
 		base.Stop();
 		_attackAndEffect.StopAllOperationsToOwner();
-		((CoroutineReference)(ref _detectReference)).Stop();
+		_detectReference.Stop();
 	}
 
 	private IEnumerator CDetect()
@@ -293,7 +291,7 @@ public class SweepAttack2 : CharacterOperation, IAttack
 		Chronometer animationChronometer = owner.chronometer.animation;
 		while (time < _duration)
 		{
-			if (_timeIndependent || ((ChronometerBase)animationChronometer).timeScale > float.Epsilon)
+			if (_timeIndependent || animationChronometer.timeScale > float.Epsilon)
 			{
 				Vector2 distance = Vector2.zero;
 				if (_trackMovement && (Object)(object)owner.movement != (Object)null)
@@ -303,7 +301,7 @@ public class SweepAttack2 : CharacterOperation, IAttack
 				_collisionDetector.Detect(Vector2.op_Implicit(((Component)this).transform.position), distance);
 			}
 			yield return null;
-			time = ((!_timeIndependent) ? (time + ((ChronometerBase)animationChronometer).deltaTime) : (time + ((ChronometerBase)Chronometer.global).deltaTime));
+			time = ((!_timeIndependent) ? (time + animationChronometer.deltaTime) : (time + Chronometer.global.deltaTime));
 		}
 	}
 
@@ -343,7 +341,7 @@ public class SweepAttack2 : CharacterOperation, IAttack
 			if (target.character.liveAndActive && !((Object)(object)target.character == (Object)(object)owner) && !target.character.cinematic.value)
 			{
 				attackInfo.ApplyChrono(owner, target.character);
-				if (((SubcomponentArray<OperationInfo>)attackInfo.operationsToOwner).components.Length != 0)
+				if (attackInfo.operationsToOwner.components.Length != 0)
 				{
 					((MonoBehaviour)owner).StartCoroutine(attackInfo.operationsToOwner.CRun(owner));
 				}
@@ -392,12 +390,12 @@ public class SweepAttack2 : CharacterOperation, IAttack
 		float time = 0f;
 		Vector3 originOffset = MMMaths.Vector2ToVector3(origin) - ((Component)target).transform.position;
 		Vector3 hitPointOffset = MMMaths.Vector2ToVector3(((RaycastHit2D)(ref raycastHit)).point) - ((Component)target).transform.position;
-		while ((Object)(object)this != (Object)null && index < ((SubcomponentArray<CastAttackInfoSequence>)_attackAndEffect).components.Length)
+		while ((Object)(object)this != (Object)null && index < _attackAndEffect.components.Length)
 		{
-			for (; index < ((SubcomponentArray<CastAttackInfoSequence>)_attackAndEffect).components.Length; index++)
+			for (; index < _attackAndEffect.components.Length; index++)
 			{
 				CastAttackInfoSequence castAttackInfoSequence;
-				if (!(time >= (castAttackInfoSequence = ((SubcomponentArray<CastAttackInfoSequence>)_attackAndEffect).components[index]).timeToTrigger))
+				if (!(time >= (castAttackInfoSequence = _attackAndEffect.components[index]).timeToTrigger))
 				{
 					break;
 				}
@@ -405,7 +403,7 @@ public class SweepAttack2 : CharacterOperation, IAttack
 				Attack(castAttackInfoSequence.attackInfo, Vector2.op_Implicit(((Component)target).transform.position + originOffset), direction, distance, raycastHit, target);
 			}
 			yield return null;
-			time += ((ChronometerBase)owner.chronometer.animation).deltaTime;
+			time += owner.chronometer.animation.deltaTime;
 		}
 	}
 }

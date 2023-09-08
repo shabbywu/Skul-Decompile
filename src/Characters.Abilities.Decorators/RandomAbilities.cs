@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Characters.Abilities.Decorators;
@@ -18,7 +17,7 @@ public sealed class RandomAbilities : Ability
 
 		protected override void OnAttach()
 		{
-			_target = ExtensionMethods.Random<AbilityComponent>((IEnumerable<AbilityComponent>)((SubcomponentArray<AbilityComponent>)ability._abilityComponents).components);
+			_target = ability._abilityComponents.components.Random();
 			owner.ability.Add(_target.ability);
 		}
 
@@ -29,7 +28,7 @@ public sealed class RandomAbilities : Ability
 			{
 				owner.ability.Remove(_target.ability);
 			}
-			_target = ExtensionMethods.Random<AbilityComponent>((IEnumerable<AbilityComponent>)((SubcomponentArray<AbilityComponent>)ability._abilityComponents).components);
+			_target = ability._abilityComponents.components.Random();
 			owner.ability.Add(_target.ability);
 		}
 

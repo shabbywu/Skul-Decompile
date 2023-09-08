@@ -232,7 +232,7 @@ public class LightSwordFieldHelper : MonoBehaviour
 			num3 = num4;
 			num4 = num3 + num2;
 		}
-		ExtensionMethods.Shuffle<Interval>((IList<Interval>)_intervals);
+		_intervals.Shuffle();
 	}
 
 	private Vector2 CalculateFirePosition(Vector2 destination, float degree)

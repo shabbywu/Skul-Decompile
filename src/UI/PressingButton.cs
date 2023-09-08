@@ -102,7 +102,7 @@ public class PressingButton : MonoBehaviour
 
 	public void StopPressing()
 	{
-		((CoroutineReference)(ref _pressing)).Stop();
+		_pressing.Stop();
 		_iconOutline.fillAmount = 1f;
 		StopPressingSound();
 	}
@@ -171,7 +171,7 @@ public class PressingButton : MonoBehaviour
 		{
 			if (((OneAxisInputControl)_action).WasPressed)
 			{
-				_pressing = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)this, CPressing());
+				_pressing = ((MonoBehaviour)(object)this).StartCoroutineWithReference(CPressing());
 			}
 			yield return null;
 		}

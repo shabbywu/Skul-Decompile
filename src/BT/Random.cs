@@ -9,16 +9,16 @@ public class Random : Composite
 
 	protected virtual Node GetChild(int i)
 	{
-		if (i >= ((SubcomponentArray<BehaviourTree>)_child).components.Length || i < 0)
+		if (i >= _child.components.Length || i < 0)
 		{
 			throw new ArgumentException($"{i} : invalid child index");
 		}
-		return ((SubcomponentArray<BehaviourTree>)_child).components[i].node;
+		return _child.components[i].node;
 	}
 
 	protected override void OnInitialize()
 	{
-		_index = Random.Range(0, ((SubcomponentArray<BehaviourTree>)_child).components.Length);
+		_index = Random.Range(0, _child.components.Length);
 		base.OnInitialize();
 	}
 
@@ -29,7 +29,7 @@ public class Random : Composite
 
 	protected override void DoReset(NodeState state)
 	{
-		_index = Random.Range(0, ((SubcomponentArray<BehaviourTree>)_child).components.Length);
+		_index = Random.Range(0, _child.components.Length);
 		base.DoReset(state);
 	}
 }

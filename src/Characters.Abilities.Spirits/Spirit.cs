@@ -46,7 +46,7 @@ public class Spirit : AbilityAttacher, IAbility, IAbilityInstance
 
 	[Space]
 	[SerializeField]
-	[Subcomponent(typeof(OperationInfo))]
+	[UnityEditor.Subcomponent(typeof(OperationInfo))]
 	private OperationInfo.Subcomponents _operations;
 
 	private OperationInfo[] _operationInfos;
@@ -125,7 +125,7 @@ public class Spirit : AbilityAttacher, IAbility, IAbilityInstance
 	protected virtual void Awake()
 	{
 		_remainTimeToNextAttack = _attackInterval;
-		_operationInfos = ((SubcomponentArray<OperationInfo>)_operations).components.OrderBy((OperationInfo operation) => operation.timeToTrigger).ToArray();
+		_operationInfos = _operations.components.OrderBy((OperationInfo operation) => operation.timeToTrigger).ToArray();
 		for (int i = 0; i < _operationInfos.Length; i++)
 		{
 			_operationInfos[i].operation.Initialize();
@@ -163,7 +163,7 @@ public class Spirit : AbilityAttacher, IAbility, IAbilityInstance
 		//IL_0044: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0068: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0061: Unknown result type (might be due to invalid IL or missing references)
-		_position = Vector3.Lerp(_position, targetPosition.position, ((ChronometerBase)base.owner.chronometer.master).deltaTime * _trackSpeed);
+		_position = Vector3.Lerp(_position, targetPosition.position, base.owner.chronometer.master.deltaTime * _trackSpeed);
 		((Component)this).transform.localScale = ((targetPosition.position.x - _position.x < 0f) ? _leftScale : _rightScale);
 	}
 
@@ -182,7 +182,7 @@ public class Spirit : AbilityAttacher, IAbility, IAbilityInstance
 		((ContactFilter2D)(ref _overlapper.contactFilter)).SetLayerMask(_layer.Evaluate(((Component)base.owner).gameObject));
 		((Behaviour)_detectRange).enabled = true;
 		_overlapper.OverlapCollider(_detectRange);
-		if (GetComponentExtension.GetComponents<Collider2D, Target>((IEnumerable<Collider2D>)_overlapper.results, true).Count == 0)
+		if (((IEnumerable<Collider2D>)_overlapper.results).GetComponents<Collider2D, Target>(clearList: true).Count == 0)
 		{
 			return false;
 		}
@@ -203,7 +203,7 @@ public class Spirit : AbilityAttacher, IAbility, IAbilityInstance
 			else
 			{
 				yield return null;
-				time += ((ChronometerBase)base.owner.chronometer.animation).deltaTime;
+				time += base.owner.chronometer.animation.deltaTime;
 			}
 		}
 	}

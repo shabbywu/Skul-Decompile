@@ -8,10 +8,10 @@ namespace Characters.AI.Behaviours.Pope;
 public sealed class DivineImpact : Behaviour
 {
 	[SerializeField]
-	[Subcomponent(typeof(ActionAttack))]
+	[UnityEditor.Subcomponent(typeof(ActionAttack))]
 	private ActionAttack _attack;
 
-	[Subcomponent(typeof(MoveHandler))]
+	[UnityEditor.Subcomponent(typeof(MoveHandler))]
 	[SerializeField]
 	private MoveHandler _moveHandler;
 

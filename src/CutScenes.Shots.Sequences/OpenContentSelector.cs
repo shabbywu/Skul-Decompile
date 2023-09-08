@@ -27,11 +27,11 @@ public class OpenContentSelector : Sequence
 	private string _cancelLabelKey = "label/confirm/no";
 
 	[SerializeField]
-	[Subcomponent(typeof(ShotInfo))]
+	[UnityEditor.Subcomponent(typeof(ShotInfo))]
 	private ShotInfo.Subcomponents _onContents;
 
 	[SerializeField]
-	[Subcomponent(typeof(ShotInfo))]
+	[UnityEditor.Subcomponent(typeof(ShotInfo))]
 	private ShotInfo.Subcomponents _onClose;
 
 	public override IEnumerator CRun()

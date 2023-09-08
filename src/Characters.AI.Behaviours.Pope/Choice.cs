@@ -11,7 +11,7 @@ namespace Characters.AI.Behaviours.Pope;
 public sealed class Choice : Behaviour
 {
 	[SerializeField]
-	[Subcomponent(typeof(ActionAttack))]
+	[UnityEditor.Subcomponent(typeof(ActionAttack))]
 	private ActionAttack _attack;
 
 	[SerializeField]

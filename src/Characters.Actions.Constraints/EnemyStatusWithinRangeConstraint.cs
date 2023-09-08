@@ -1,4 +1,3 @@
-using System;
 using PhysicsUtils;
 using UnityEngine;
 
@@ -25,9 +24,7 @@ public class EnemyStatusWithinRangeConstraint : Constraint
 
 	public override bool Pass()
 	{
-		UsingCollider val = default(UsingCollider);
-		((UsingCollider)(ref val))._002Ector(_searchRange);
-		try
+		using (new UsingCollider(_searchRange))
 		{
 			ReadonlyBoundedList<Collider2D> results = _enemyOverlapper.OverlapCollider(_searchRange).results;
 			for (int i = 0; i < results.Count; i++)
@@ -39,10 +36,6 @@ public class EnemyStatusWithinRangeConstraint : Constraint
 				}
 			}
 			return false;
-		}
-		finally
-		{
-			((IDisposable)(UsingCollider)(ref val)).Dispose();
 		}
 	}
 }

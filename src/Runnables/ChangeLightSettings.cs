@@ -26,7 +26,7 @@ public class ChangeLightSettings : CRunnable
 		float elapsed = 0f;
 		while (elapsed < _curve.duration)
 		{
-			elapsed += ((ChronometerBase)Chronometer.global).deltaTime;
+			elapsed += Chronometer.global.deltaTime;
 			float num = _curve.Evaluate(elapsed);
 			_light.color = Color.Lerp(startColor, _color, num);
 			_light.intensity = Mathf.Lerp(startIntensity, _intensity, num);

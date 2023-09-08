@@ -137,7 +137,7 @@ public class CharacterController2D : MonoBehaviour
 			//IL_000e: Unknown result type (might be due to invalid IL or missing references)
 			if (collisionState.below)
 			{
-				return ExtensionMethods.Contains(terrainMask, ((Component)collisionState.lastStandingCollider).gameObject.layer);
+				return terrainMask.Contains(((Component)collisionState.lastStandingCollider).gameObject.layer);
 			}
 			return false;
 		}
@@ -150,7 +150,7 @@ public class CharacterController2D : MonoBehaviour
 			//IL_000e: Unknown result type (might be due to invalid IL or missing references)
 			if (collisionState.below)
 			{
-				return ExtensionMethods.Contains(oneWayPlatformMask, ((Component)collisionState.lastStandingCollider).gameObject.layer);
+				return oneWayPlatformMask.Contains(((Component)collisionState.lastStandingCollider).gameObject.layer);
 			}
 			return false;
 		}
@@ -237,8 +237,8 @@ public class CharacterController2D : MonoBehaviour
 		//IL_0087: Unknown result type (might be due to invalid IL or missing references)
 		//IL_008b: Unknown result type (might be due to invalid IL or missing references)
 		//IL_009b: Unknown result type (might be due to invalid IL or missing references)
-		Vector2 mostLeftTop = ExtensionMethods.GetMostLeftTop(bounds);
-		Vector2 mostRightTop = ExtensionMethods.GetMostRightTop(bounds);
+		Vector2 mostLeftTop = bounds.GetMostLeftTop();
+		Vector2 mostRightTop = bounds.GetMostRightTop();
 		LineSequenceNonAllocCaster topRaycaster = _boxCaster.topRaycaster;
 		float num = mostLeftTop.y;
 		if (topRaycaster.start.y < mostLeftTop.y - _skinWidth)
@@ -287,8 +287,8 @@ public class CharacterController2D : MonoBehaviour
 		//IL_0087: Unknown result type (might be due to invalid IL or missing references)
 		//IL_008b: Unknown result type (might be due to invalid IL or missing references)
 		//IL_009b: Unknown result type (might be due to invalid IL or missing references)
-		Vector2 mostLeftBottom = ExtensionMethods.GetMostLeftBottom(bounds);
-		Vector2 mostRightBottom = ExtensionMethods.GetMostRightBottom(bounds);
+		Vector2 mostLeftBottom = bounds.GetMostLeftBottom();
+		Vector2 mostRightBottom = bounds.GetMostRightBottom();
 		LineSequenceNonAllocCaster bottomRaycaster = _boxCaster.bottomRaycaster;
 		float num = mostLeftBottom.y;
 		if (bottomRaycaster.start.y > mostLeftBottom.y + _skinWidth)
@@ -337,8 +337,8 @@ public class CharacterController2D : MonoBehaviour
 		//IL_0087: Unknown result type (might be due to invalid IL or missing references)
 		//IL_008b: Unknown result type (might be due to invalid IL or missing references)
 		//IL_009b: Unknown result type (might be due to invalid IL or missing references)
-		Vector2 mostLeftTop = ExtensionMethods.GetMostLeftTop(bounds);
-		Vector2 mostLeftBottom = ExtensionMethods.GetMostLeftBottom(bounds);
+		Vector2 mostLeftTop = bounds.GetMostLeftTop();
+		Vector2 mostLeftBottom = bounds.GetMostLeftBottom();
 		LineSequenceNonAllocCaster leftRaycaster = _boxCaster.leftRaycaster;
 		float num = mostLeftTop.x;
 		if (leftRaycaster.start.x > mostLeftTop.x + _skinWidth)
@@ -387,8 +387,8 @@ public class CharacterController2D : MonoBehaviour
 		//IL_0087: Unknown result type (might be due to invalid IL or missing references)
 		//IL_008b: Unknown result type (might be due to invalid IL or missing references)
 		//IL_009b: Unknown result type (might be due to invalid IL or missing references)
-		Vector2 mostRightTop = ExtensionMethods.GetMostRightTop(bounds);
-		Vector2 mostRightBottom = ExtensionMethods.GetMostRightBottom(bounds);
+		Vector2 mostRightTop = bounds.GetMostRightTop();
+		Vector2 mostRightBottom = bounds.GetMostRightBottom();
 		LineSequenceNonAllocCaster rightRaycaster = _boxCaster.rightRaycaster;
 		float num = mostRightTop.x;
 		if (rightRaycaster.start.x < mostRightTop.x - _skinWidth)
@@ -778,7 +778,7 @@ public class CharacterController2D : MonoBehaviour
 				RaycastHit2D val2 = val.results[0];
 				if (RaycastHit2D.op_Implicit(val2))
 				{
-					if (ExtensionMethods.Contains(lastStandingMask, ((Component)((RaycastHit2D)(ref val2)).collider).gameObject.layer))
+					if (lastStandingMask.Contains(((Component)((RaycastHit2D)(ref val2)).collider).gameObject.layer))
 					{
 						collisionState.lastStandingCollider = ((RaycastHit2D)(ref val2)).collider;
 					}

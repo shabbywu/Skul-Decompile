@@ -51,10 +51,10 @@ public class SimpleActionWithEnding : SimpleAction
 	{
 		int operationIndex = 0;
 		float time = 0f;
-		OperationInfo[] components = ((SubcomponentArray<OperationInfo>)_endingOperations).components;
+		OperationInfo[] components = _endingOperations.components;
 		while ((_endingOperationDuration == 0f && operationIndex < components.Length) || (_endingOperationDuration > 0f && time < _endingOperationDuration))
 		{
-			for (time += ((ChronometerBase)Chronometer.global).deltaTime; operationIndex < components.Length && time >= components[operationIndex].timeToTrigger; operationIndex++)
+			for (time += Chronometer.global.deltaTime; operationIndex < components.Length && time >= components[operationIndex].timeToTrigger; operationIndex++)
 			{
 				components[operationIndex].operation.Run(base.owner);
 			}

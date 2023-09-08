@@ -9,9 +9,8 @@ public sealed class Button
 	public class StringPopupAttribute : PopupAttribute
 	{
 		public StringPopupAttribute()
+			: base(allowCustom: false, _names)
 		{
-			object[] names = _names;
-			((PopupAttribute)this)._002Ector(false, names);
 		}
 	}
 

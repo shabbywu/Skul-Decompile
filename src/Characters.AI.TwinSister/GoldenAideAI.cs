@@ -1015,7 +1015,7 @@ public class GoldenAideAI : AIController
 		((Component)_risingPeieceLeftRange).transform.position = new Vector3(cachedPositionX, ((Bounds)(ref platformBounds)).max.y);
 		Physics2D.SyncTransforms();
 		_risingPieceStartAttackOperations.Run(character);
-		yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)character.chronometer.animation, _risingPeieceTerm);
+		yield return character.chronometer.animation.WaitForSeconds(_risingPeieceTerm);
 		for (int i = 1; i < _risingPeieceCount; i++)
 		{
 			if (character.health.dead)
@@ -1027,7 +1027,7 @@ public class GoldenAideAI : AIController
 			Physics2D.SyncTransforms();
 			((Component)_risingPieceAttackOperations).gameObject.SetActive(true);
 			_risingPieceAttackOperations.Run(character);
-			yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)character.chronometer.animation, _risingPeieceTerm);
+			yield return character.chronometer.animation.WaitForSeconds(_risingPeieceTerm);
 		}
 	}
 
@@ -1102,11 +1102,11 @@ public class GoldenAideAI : AIController
 		while (action.running)
 		{
 			yield return null;
-			if (!(((ChronometerBase)character.chronometer.master).deltaTime <= 0f) && !character.stunedOrFreezed)
+			if (!(character.chronometer.master.deltaTime <= 0f) && !character.stunedOrFreezed)
 			{
 				Vector2 val3 = Vector2.Lerp(Vector2.op_Implicit(source), Vector2.op_Implicit(dest), elapsed / duration);
 				((Component)character).transform.position = Vector2.op_Implicit(val3);
-				elapsed += ((ChronometerBase)character.chronometer.animation).deltaTime;
+				elapsed += character.chronometer.animation.deltaTime;
 				if (character.health.dead)
 				{
 					character.movement.config.type = Movement.Config.Type.Walking;
@@ -1129,7 +1129,7 @@ public class GoldenAideAI : AIController
 		}
 		while (true)
 		{
-			if (((ChronometerBase)character.chronometer.master).deltaTime <= 0f)
+			if (character.chronometer.master.deltaTime <= 0f)
 			{
 				yield return null;
 				continue;
@@ -1198,12 +1198,12 @@ public class GoldenAideAI : AIController
 
 	public void Dettachinvincibility()
 	{
-		character.cinematic.Detach((object)this);
+		character.cinematic.Detach(this);
 	}
 
 	public void Attachinvincibility()
 	{
-		character.cinematic.Attach((object)this);
+		character.cinematic.Attach(this);
 	}
 
 	public bool CanUseDimensionPierce()
@@ -1233,14 +1233,14 @@ public class GoldenAideAI : AIController
 	public IEnumerator CStartSinglePhasePreDelay()
 	{
 		_preDelayOfRisingPierceEnd = false;
-		yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)character.chronometer.animation, _preDelayOfRisingPierce);
+		yield return character.chronometer.animation.WaitForSeconds(_preDelayOfRisingPierce);
 		_preDelayOfRisingPierceEnd = true;
 	}
 
 	private IEnumerator CCoolDownRisingPierce()
 	{
 		_canUseRisingPierce = false;
-		yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)character.chronometer.master, _delayOfRisingPierce);
+		yield return character.chronometer.master.WaitForSeconds(_delayOfRisingPierce);
 		_canUseRisingPierce = true;
 	}
 }

@@ -9,7 +9,7 @@ public class MultipleAction : Action
 	[SerializeField]
 	protected Motion.Subcomponents _motions;
 
-	public override Motion[] motions => ((SubcomponentArray<Motion>)_motions).components;
+	public override Motion[] motions => _motions.components;
 
 	public override bool canUse
 	{
@@ -19,9 +19,9 @@ public class MultipleAction : Action
 			{
 				return false;
 			}
-			for (int i = 0; i < ((SubcomponentArray<Motion>)_motions).components.Length; i++)
+			for (int i = 0; i < _motions.components.Length; i++)
 			{
-				if (PassAllConstraints(((SubcomponentArray<Motion>)_motions).components[i]))
+				if (PassAllConstraints(_motions.components[i]))
 				{
 					return true;
 				}
@@ -45,11 +45,11 @@ public class MultipleAction : Action
 		{
 			return false;
 		}
-		for (int i = 0; i < ((SubcomponentArray<Motion>)_motions).components.Length; i++)
+		for (int i = 0; i < _motions.components.Length; i++)
 		{
-			if (PassAllConstraints(((SubcomponentArray<Motion>)_motions).components[i]) && ConsumeCooldownIfNeeded())
+			if (PassAllConstraints(_motions.components[i]) && ConsumeCooldownIfNeeded())
 			{
-				DoAction(((SubcomponentArray<Motion>)_motions).components[i]);
+				DoAction(_motions.components[i]);
 				return true;
 			}
 		}

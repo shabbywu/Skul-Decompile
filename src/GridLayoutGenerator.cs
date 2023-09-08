@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using FX;
 using UnityEngine;
 
@@ -59,7 +58,7 @@ public class GridLayoutGenerator : MonoBehaviour
 			{
 				if (_prefabs != null && _prefabs.Length != 0)
 				{
-					val = ExtensionMethods.Random<GameObject>((IEnumerable<GameObject>)_prefabs);
+					val = _prefabs.Random();
 				}
 				GameObject obj = Object.Instantiate<GameObject>(val, ((Component)this).transform);
 				obj.transform.position = Vector2.op_Implicit(new Vector2(((Component)this).transform.position.x + _distanceX * (float)j - num, ((Component)this).transform.position.y + _distanceY * (float)i));

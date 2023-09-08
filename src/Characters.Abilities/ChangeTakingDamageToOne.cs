@@ -16,12 +16,12 @@ public class ChangeTakingDamageToOne : Ability
 
 		protected override void OnAttach()
 		{
-			owner.health.onTakeDamage.Add(int.MinValue, (TakeDamageDelegate)OnOwnerTakeDamage);
+			owner.health.onTakeDamage.Add(int.MinValue, OnOwnerTakeDamage);
 		}
 
 		protected override void OnDetach()
 		{
-			owner.health.onTakeDamage.Remove((TakeDamageDelegate)OnOwnerTakeDamage);
+			owner.health.onTakeDamage.Remove(OnOwnerTakeDamage);
 		}
 
 		private bool OnOwnerTakeDamage(ref Damage damage)

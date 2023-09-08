@@ -52,21 +52,21 @@ public class MasterPieceBerserkersGlove : Ability
 		private void UpdateStat()
 		{
 			double num = Math.Min(1.0 - owner.health.percent, ability._maxLostPercent) * 100.0;
-			_statValue = num * ((ReorderableArray<Stat.Value>)ability._statPerLostHealth).values[0].value;
-			for (int i = 0; i < ((ReorderableArray<Stat.Value>)_stat).values.Length; i++)
+			_statValue = num * ability._statPerLostHealth.values[0].value;
+			for (int i = 0; i < _stat.values.Length; i++)
 			{
-				double num2 = num * ((ReorderableArray<Stat.Value>)ability._statPerLostHealth).values[i].value;
-				if (((ReorderableArray<Stat.Value>)ability._statPerLostHealth).values[i].categoryIndex == Stat.Category.Percent.index)
+				double num2 = num * ability._statPerLostHealth.values[i].value;
+				if (ability._statPerLostHealth.values[i].categoryIndex == Stat.Category.Percent.index)
 				{
 					num2 += 1.0;
 				}
-				((ReorderableArray<Stat.Value>)_stat).values[i].value = num2;
+				_stat.values[i].value = num2;
 			}
 			if (owner.health.percent <= (double)ability._bonusHealthPercent)
 			{
 				if (_bonusStack <= 0)
 				{
-					_bonusStack = (int)(((ReorderableArray<Stat.Value>)ability._bonus).values[0].value * 100.0);
+					_bonusStack = (int)(ability._bonus.values[0].value * 100.0);
 					owner.stat.AttachValues(ability._bonus);
 				}
 			}

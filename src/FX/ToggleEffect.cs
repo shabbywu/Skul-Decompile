@@ -50,6 +50,6 @@ public class ToggleEffect : MonoBehaviour
 
 	private void Update()
 	{
-		_animator.speed = ((_chronometer == null) ? ((ChronometerBase)Chronometer.global).timeScale : ((ChronometerBase)_chronometer).timeScale) / Time.timeScale;
+		_animator.speed = ((_chronometer == null) ? Chronometer.global.timeScale : _chronometer.timeScale) / Time.timeScale;
 	}
 }

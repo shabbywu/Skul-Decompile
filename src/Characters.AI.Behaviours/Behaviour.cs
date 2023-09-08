@@ -9,9 +9,9 @@ namespace Characters.AI.Behaviours;
 public abstract class Behaviour : MonoBehaviour
 {
 	[AttributeUsage(AttributeTargets.Field)]
-	public class SubcomponentAttribute : SubcomponentAttribute
+	public class SubcomponentAttribute : UnityEditor.SubcomponentAttribute
 	{
-		public static readonly Type[] types = new Type[15]
+		public new static readonly Type[] types = new Type[15]
 		{
 			typeof(Selector),
 			typeof(Sequence),
@@ -69,14 +69,14 @@ public abstract class Behaviour : MonoBehaviour
 	{
 		//IL_0015: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0016: Unknown result type (might be due to invalid IL or missing references)
-		float num = Random.Range(durationMinMax.x, durationMinMax.y);
-		yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)controller.character.chronometer.master, num);
+		float seconds = Random.Range(durationMinMax.x, durationMinMax.y);
+		yield return controller.character.chronometer.master.WaitForSeconds(seconds);
 		Stop();
 	}
 
 	protected IEnumerator CExpire(AIController controller, float duration)
 	{
-		yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)controller.character.chronometer.master, duration);
+		yield return controller.character.chronometer.master.WaitForSeconds(duration);
 		Stop();
 	}
 
@@ -97,6 +97,6 @@ public abstract class Behaviour : MonoBehaviour
 
 	public override string ToString()
 	{
-		return ExtensionMethods.GetAutoName((object)this);
+		return this.GetAutoName();
 	}
 }

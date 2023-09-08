@@ -18,7 +18,7 @@ public class DroppedCorpse : DestructibleObject
 	[SerializeField]
 	private bool _collideWithTerrain = true;
 
-	[Information(/*Could not decode attribute arguments.*/)]
+	[Information("0이면 영구지속", InformationAttribute.InformationType.Info, false)]
 	[SerializeField]
 	private float _duration;
 

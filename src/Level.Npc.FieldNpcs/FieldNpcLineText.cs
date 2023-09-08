@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using GameResources;
 using UnityEngine;
 
@@ -70,7 +69,7 @@ public class FieldNpcLineText : MonoBehaviour
 		{
 			return;
 		}
-		_elapsed += ((ChronometerBase)Chronometer.global).deltaTime;
+		_elapsed += Chronometer.global.deltaTime;
 		if (_elapsed > _cooltime)
 		{
 			_canRun = true;
@@ -87,7 +86,7 @@ public class FieldNpcLineText : MonoBehaviour
 			}
 			else
 			{
-				ShowLineText(ExtensionMethods.Random<string>((IEnumerable<string>)Localization.GetLocalizedStringArray(_overrideNormalLineKey)));
+				ShowLineText(Localization.GetLocalizedStringArray(_overrideNormalLineKey).Random());
 			}
 		}
 	}

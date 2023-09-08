@@ -4,7 +4,7 @@ namespace Characters.Operations.Movement;
 
 public class DualKnockback : TargetedCharacterOperation
 {
-	[Information(/*Could not decode attribute arguments.*/)]
+	[Information("Obsolete", InformationAttribute.InformationType.Warning, true)]
 	[SerializeField]
 	private PushForce _pushForce1;
 

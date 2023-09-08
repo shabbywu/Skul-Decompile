@@ -33,7 +33,7 @@ public class YggdrasillElderEntAI : AIController
 	private void OnDie()
 	{
 		character.health.onDie -= OnDie;
-		character.status.unstoppable.Attach((object)this);
+		character.status.unstoppable.Attach(this);
 		character.health.Heal(0.009999999776482582, notify: false);
 		_onPhase2.Run();
 		StopAllCoroutinesWithBehaviour();
@@ -45,7 +45,7 @@ public class YggdrasillElderEntAI : AIController
 	{
 		yield return null;
 		character.status.RemoveAllStatus();
-		character.status.unstoppable.Detach((object)this);
+		character.status.unstoppable.Detach(this);
 	}
 
 	public void Update2PhaseFreezeEffect()

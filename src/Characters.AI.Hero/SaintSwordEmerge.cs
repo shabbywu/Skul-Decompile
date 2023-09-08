@@ -32,7 +32,7 @@ public class SaintSwordEmerge : MonoBehaviour
 		while (elapsed < _duration)
 		{
 			yield return null;
-			elapsed += ((ChronometerBase)owner.chronometer.master).deltaTime;
+			elapsed += owner.chronometer.master.deltaTime;
 			((Component)this).transform.position = Vector2.op_Implicit(Vector2.Lerp(Vector2.op_Implicit(source), Vector2.op_Implicit(dest), elapsed / _duration));
 		}
 		((Component)this).transform.position = dest;

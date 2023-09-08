@@ -27,7 +27,7 @@ public sealed class MiracleGrail : Ability
 			_stack++;
 			if (_stack + 1 >= ability._cycle)
 			{
-				((PriorityList<GiveDamageDelegate>)owner.onGiveDamage).Add(int.MaxValue, (GiveDamageDelegate)HandleOnGiveDamage);
+				owner.onGiveDamage.Add(int.MaxValue, HandleOnGiveDamage);
 				_stack = -1;
 			}
 		}
@@ -46,14 +46,14 @@ public sealed class MiracleGrail : Ability
 			targetPoint.position = ((Bounds)(ref bounds)).center;
 			((MonoBehaviour)owner).StartCoroutine(ability._targetOperationInfo.CRun(owner, target.character));
 			damage.percentMultiplier *= ability._multiplier;
-			((PriorityList<GiveDamageDelegate>)owner.onGiveDamage).Remove((GiveDamageDelegate)HandleOnGiveDamage);
+			owner.onGiveDamage.Remove(HandleOnGiveDamage);
 			return false;
 		}
 
 		protected override void OnDetach()
 		{
 			owner.status.onApplyBleed -= HandleOnApplyBleed;
-			((PriorityList<GiveDamageDelegate>)owner.onGiveDamage).Remove((GiveDamageDelegate)HandleOnGiveDamage);
+			owner.onGiveDamage.Remove(HandleOnGiveDamage);
 		}
 	}
 

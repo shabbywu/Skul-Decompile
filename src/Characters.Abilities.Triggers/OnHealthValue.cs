@@ -71,7 +71,7 @@ public class OnHealthValue : Trigger
 	{
 		base.UpdateTime(deltaTime);
 		_elapsed += deltaTime;
-		if (_remainTimes <= 0 || _remainCooldownTime > 0f || !((SubcomponentArray<Constraint>)_constraint).components.Pass() || _elapsed < _checkInterval)
+		if (_remainTimes <= 0 || _remainCooldownTime > 0f || !_constraint.components.Pass() || _elapsed < _checkInterval)
 		{
 			return;
 		}

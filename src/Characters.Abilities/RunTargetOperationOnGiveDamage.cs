@@ -17,7 +17,7 @@ public sealed class RunTargetOperationOnGiveDamage : Ability
 
 		protected override void OnAttach()
 		{
-			((PriorityList<GiveDamageDelegate>)owner.onGiveDamage).Add(int.MaxValue, (GiveDamageDelegate)HandleOnGiveDamage);
+			owner.onGiveDamage.Add(int.MaxValue, HandleOnGiveDamage);
 		}
 
 		private bool HandleOnGiveDamage(ITarget target, ref Damage damage)
@@ -26,15 +26,15 @@ public sealed class RunTargetOperationOnGiveDamage : Ability
 			{
 				return false;
 			}
-			if (!((EnumArray<Character.Type, bool>)ability._characterType)[target.character.type])
+			if (!ability._characterType[target.character.type])
 			{
 				return false;
 			}
-			if (!((EnumArray<Damage.AttackType, bool>)ability._attackType)[damage.attackType])
+			if (!ability._attackType[damage.attackType])
 			{
 				return false;
 			}
-			if (!((EnumArray<Damage.MotionType, bool>)ability._motionType)[damage.motionType])
+			if (!ability._motionType[damage.motionType])
 			{
 				return false;
 			}
@@ -44,7 +44,7 @@ public sealed class RunTargetOperationOnGiveDamage : Ability
 
 		protected override void OnDetach()
 		{
-			((PriorityList<GiveDamageDelegate>)owner.onGiveDamage).Remove((GiveDamageDelegate)HandleOnGiveDamage);
+			owner.onGiveDamage.Remove(HandleOnGiveDamage);
 		}
 	}
 

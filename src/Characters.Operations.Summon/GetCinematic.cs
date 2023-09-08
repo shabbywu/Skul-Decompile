@@ -12,14 +12,13 @@ public class GetCinematic : IBDCharacterSetting
 
 	public void ApplyTo(Character character)
 	{
-		//IL_0008: Unknown result type (might be due to invalid IL or missing references)
-		CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)character, CAttachCinematic(character));
+		((MonoBehaviour)(object)character).StartCoroutineWithReference(CAttachCinematic(character));
 	}
 
 	private IEnumerator CAttachCinematic(Character character)
 	{
-		character.cinematic.Attach((object)this);
+		character.cinematic.Attach(this);
 		yield return (object)new WaitForSeconds(_duration.value);
-		character.cinematic.Detach((object)this);
+		character.cinematic.Detach(this);
 	}
 }

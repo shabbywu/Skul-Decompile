@@ -18,7 +18,7 @@ public class RandomFanaticPolicy : FanaticPolicy
 		results.Clear();
 		for (int i = 0; i < count; i++)
 		{
-			results.Add(ExtensionMethods.Random<FanaticFactory.SummonType>((IEnumerable<FanaticFactory.SummonType>)_summonTypes));
+			results.Add(_summonTypes.Random());
 		}
 	}
 }

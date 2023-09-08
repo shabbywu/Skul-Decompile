@@ -6,7 +6,7 @@ namespace Characters.Gear.Upgrades;
 
 public sealed class RunOperations : UpgradeAbility
 {
-	[Subcomponent(typeof(OperationInfo))]
+	[UnityEditor.Subcomponent(typeof(OperationInfo))]
 	[SerializeField]
 	private OperationInfo.Subcomponents _operations;
 

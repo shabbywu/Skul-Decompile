@@ -43,7 +43,7 @@ public class ParentPool : MonoBehaviour
 
 	public Transform GetRandomParent()
 	{
-		EffectrRangeKeyValue effectrRangeKeyValue = ExtensionMethods.Random<EffectrRangeKeyValue>((IEnumerable<EffectrRangeKeyValue>)_parents);
+		EffectrRangeKeyValue effectrRangeKeyValue = _parents.Random();
 		currentEffectParent = effectrRangeKeyValue.effect;
 		_currentAttackParent = effectrRangeKeyValue.range;
 		PickOneAttackRange();

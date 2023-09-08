@@ -39,7 +39,7 @@ public class OnUpdate : Trigger
 	public override void UpdateTime(float deltaTime)
 	{
 		base.UpdateTime(deltaTime);
-		if (_remainTimes > 0 && !(_remainCooldownTime > 0f) && ((SubcomponentArray<Constraint>)_constraint).components.Pass())
+		if (_remainTimes > 0 && !(_remainCooldownTime > 0f) && _constraint.components.Pass())
 		{
 			if (MMMaths.PercentChance(_possibility))
 			{

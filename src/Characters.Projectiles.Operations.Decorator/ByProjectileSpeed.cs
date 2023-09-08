@@ -36,8 +36,6 @@ public sealed class ByProjectileSpeed : Operation
 
 	public override void Run(IProjectile projectile)
 	{
-		//IL_0040: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0045: Unknown result type (might be due to invalid IL or missing references)
 		if (_checkDuration == 0f)
 		{
 			if (CheckHorizontal(projectile) && CheckVertical(projectile))
@@ -47,8 +45,8 @@ public sealed class ByProjectileSpeed : Operation
 		}
 		else
 		{
-			((CoroutineReference)(ref _coroutineReference)).Stop();
-			_coroutineReference = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)this, CRun(projectile));
+			_coroutineReference.Stop();
+			_coroutineReference = ((MonoBehaviour)(object)this).StartCoroutineWithReference(CRun(projectile));
 		}
 	}
 
@@ -64,7 +62,7 @@ public sealed class ByProjectileSpeed : Operation
 				_operations.Run(projectile);
 				yield break;
 			}
-			remainTime -= ((ChronometerBase)Chronometer.global).deltaTime;
+			remainTime -= Chronometer.global.deltaTime;
 			yield return null;
 		}
 		Debug.Log((object)"End");

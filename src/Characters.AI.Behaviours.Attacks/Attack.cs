@@ -6,9 +6,9 @@ namespace Characters.AI.Behaviours.Attacks;
 public abstract class Attack : Behaviour
 {
 	[AttributeUsage(AttributeTargets.Field)]
-	public new class SubcomponentAttribute : SubcomponentAttribute
+	public new class SubcomponentAttribute : UnityEditor.SubcomponentAttribute
 	{
-		public static readonly Type[] types = new Type[4]
+		public new static readonly Type[] types = new Type[4]
 		{
 			typeof(ActionAttack),
 			typeof(CircularProjectileAttack),

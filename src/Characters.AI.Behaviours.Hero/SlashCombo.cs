@@ -7,19 +7,19 @@ namespace Characters.AI.Behaviours.Hero;
 
 public class SlashCombo : Behaviour
 {
-	[Subcomponent(typeof(ChainAction))]
+	[UnityEditor.Subcomponent(typeof(ChainAction))]
 	[SerializeField]
 	private Action _readyAction;
 
-	[Subcomponent(typeof(ChainAction))]
+	[UnityEditor.Subcomponent(typeof(ChainAction))]
 	[SerializeField]
 	private Action _attackAction;
 
-	[Subcomponent(typeof(ChainAction))]
+	[UnityEditor.Subcomponent(typeof(ChainAction))]
 	[SerializeField]
 	private Action _fall;
 
-	[Subcomponent(typeof(ChainAction))]
+	[UnityEditor.Subcomponent(typeof(ChainAction))]
 	[SerializeField]
 	private Action _endAction;
 

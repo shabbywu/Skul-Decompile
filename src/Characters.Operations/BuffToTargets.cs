@@ -56,6 +56,6 @@ public class BuffToTargets : CharacterOperation
 
 	private Character SelectTarget()
 	{
-		return ExtensionMethods.Random<Character>((IEnumerable<Character>)_targets);
+		return _targets.Random();
 	}
 }

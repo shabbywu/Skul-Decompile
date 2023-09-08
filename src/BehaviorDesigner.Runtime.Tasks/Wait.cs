@@ -51,7 +51,7 @@ public class Wait : Action
 
 	public override TaskStatus OnUpdate()
 	{
-		_remainTime -= ((ChronometerBase)_choronometer).deltaTime;
+		_remainTime -= _choronometer.deltaTime;
 		if (!(_remainTime <= 0f))
 		{
 			return (TaskStatus)3;

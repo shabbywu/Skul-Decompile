@@ -30,12 +30,10 @@ public class AbilityBuffData
 
 	public AbilityBuffData(string key, int count, string defaultValue)
 	{
-		//IL_0028: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0032: Expected O, but got Unknown
 		this.key = key;
 		this.count = count;
 		_defaultValue = defaultValue;
-		_count = new IntData(key + "/count", false);
+		_count = new IntData(key + "/count");
 		_stringDataBuffer = new List<string>(count);
 		for (int i = 0; i < count; i++)
 		{

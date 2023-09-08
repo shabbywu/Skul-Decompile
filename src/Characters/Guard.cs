@@ -168,23 +168,21 @@ public sealed class Guard : MonoBehaviour
 
 	public void GuardUp()
 	{
-		//IL_004e: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0053: Unknown result type (might be due to invalid IL or missing references)
 		_currentDurability = _durability;
-		_owner.health.onTakeDamage.Add(int.MinValue, (TakeDamageDelegate)Block);
+		_owner.health.onTakeDamage.Add(int.MinValue, Block);
 		active = true;
 		if (_lifeTime > 0f)
 		{
-			_cexpireReference = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)this, CExpire());
+			_cexpireReference = ((MonoBehaviour)(object)this).StartCoroutineWithReference(CExpire());
 		}
 	}
 
 	public void GuardDown()
 	{
-		((CoroutineReference)(ref _cexpireReference)).Stop();
+		_cexpireReference.Stop();
 		if ((Object)(object)_owner != (Object)null)
 		{
-			_owner.health.onTakeDamage.Remove((TakeDamageDelegate)Block);
+			_owner.health.onTakeDamage.Remove(Block);
 		}
 		active = false;
 	}
@@ -202,7 +200,7 @@ public sealed class Guard : MonoBehaviour
 
 	private IEnumerator CExpire()
 	{
-		yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)_owner.chronometer.master, _lifeTime);
+		yield return _owner.chronometer.master.WaitForSeconds(_lifeTime);
 		GuardDown();
 	}
 

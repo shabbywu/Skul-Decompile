@@ -13,11 +13,11 @@ public class SummonMinion : CharacterOperation
 	private bool _lookOwnerDirection;
 
 	[SerializeField]
-	[Information(/*Could not decode attribute arguments.*/)]
+	[Information("비워둘 경우 Default 설정 값을 적용", InformationAttribute.InformationType.Info, false)]
 	private MinionSetting _overrideSetting;
 
 	[SerializeField]
-	[Information(/*Could not decode attribute arguments.*/)]
+	[Information("비워둘 경우 플레이어 위치에 1마리 소환, 그 외에는 지정된 위치마다 소환됨", InformationAttribute.InformationType.Info, false)]
 	private Transform[] _spawnPositions;
 
 	[SerializeField]

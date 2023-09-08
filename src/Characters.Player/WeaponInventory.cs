@@ -114,7 +114,7 @@ public sealed class WeaponInventory : MonoBehaviour, IAttackDamage
 
 	private void OnDisable()
 	{
-		PlayerInput.blocked.Detach((object)this);
+		PlayerInput.blocked.Detach(this);
 	}
 
 	private void Update()
@@ -122,7 +122,7 @@ public sealed class WeaponInventory : MonoBehaviour, IAttackDamage
 		if (_remainCooldown > 0f)
 		{
 			swapReady = false;
-			_remainCooldown -= ((ChronometerBase)_character.chronometer.master).deltaTime * _character.stat.GetSwapCooldownSpeed();
+			_remainCooldown -= _character.chronometer.master.deltaTime * _character.stat.GetSwapCooldownSpeed();
 			return;
 		}
 		if (!swapReady)
@@ -289,8 +289,6 @@ public sealed class WeaponInventory : MonoBehaviour, IAttackDamage
 	{
 		//IL_003e: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0057: Unknown result type (might be due to invalid IL or missing references)
-		//IL_007f: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0089: Expected O, but got Unknown
 		int index = currentIndex;
 		for (int i = 0; i < weapons.Length; i++)
 		{
@@ -437,8 +435,6 @@ public sealed class WeaponInventory : MonoBehaviour, IAttackDamage
 
 	public int GetCountByRarity(Rarity rarity)
 	{
-		//IL_001b: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0020: Unknown result type (might be due to invalid IL or missing references)
 		int num = 0;
 		Weapon[] array = weapons;
 		foreach (Weapon weapon in array)
@@ -453,9 +449,7 @@ public sealed class WeaponInventory : MonoBehaviour, IAttackDamage
 
 	public void UpgradeCurrentWeapon()
 	{
-		//IL_0006: Unknown result type (might be due to invalid IL or missing references)
-		//IL_000c: Invalid comparison between Unknown and I4
-		if ((int)current.rarity == 3 || ((Object)current).name.Equals("Skul", StringComparison.OrdinalIgnoreCase))
+		if (current.rarity == Rarity.Legendary || ((Object)current).name.Equals("Skul", StringComparison.OrdinalIgnoreCase))
 		{
 			Debug.Log((object)"각성할 수 없는 헤드입니다");
 		}

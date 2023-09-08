@@ -23,20 +23,20 @@ public static class PlatformUtils
 		{
 			return null;
 		}
-		int num = 0;
+		int index = 0;
 		RaycastHit2D val = results[0];
-		float num2 = ((RaycastHit2D)(ref val)).distance;
+		float num = ((RaycastHit2D)(ref val)).distance;
 		for (int i = 1; i < results.Count; i++)
 		{
 			val = results[i];
 			float distance2 = ((RaycastHit2D)(ref val)).distance;
-			if (distance2 < num2)
+			if (distance2 < num)
 			{
-				num2 = distance2;
-				num = i;
+				num = distance2;
+				index = i;
 			}
 		}
-		val = results[num];
+		val = results[index];
 		return ((RaycastHit2D)(ref val)).collider;
 	}
 
@@ -60,20 +60,20 @@ public static class PlatformUtils
 		{
 			return origin;
 		}
-		int num = 0;
+		int index = 0;
 		RaycastHit2D val = results[0];
-		float num2 = ((RaycastHit2D)(ref val)).distance;
+		float num = ((RaycastHit2D)(ref val)).distance;
 		for (int i = 1; i < results.Count; i++)
 		{
 			val = results[i];
 			float distance2 = ((RaycastHit2D)(ref val)).distance;
-			if (distance2 < num2)
+			if (distance2 < num)
 			{
-				num2 = distance2;
-				num = i;
+				num = distance2;
+				index = i;
 			}
 		}
-		val = results[num];
+		val = results[index];
 		return ((RaycastHit2D)(ref val)).point;
 	}
 

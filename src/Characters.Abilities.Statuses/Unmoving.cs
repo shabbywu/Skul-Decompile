@@ -66,11 +66,11 @@ public class Unmoving : IAbility, IAbilityInstance
 		remainTime = duration;
 		if (owner.type == Character.Type.Boss)
 		{
-			((ChronometerBase)owner.chronometer.animation).AttachTimeScale((object)this, 0f);
-			owner.blockLook.Attach((object)this);
+			owner.chronometer.animation.AttachTimeScale(this, 0f);
+			owner.blockLook.Attach(this);
 			if ((Object)(object)owner.movement != (Object)null)
 			{
-				owner.movement.blocked.Attach((object)this);
+				owner.movement.blocked.Attach(this);
 			}
 		}
 		else
@@ -86,10 +86,10 @@ public class Unmoving : IAbility, IAbilityInstance
 				owner.animationController.Unmove(owner.hit.action.motions[num].animationInfo);
 			}
 		}
-		owner.blockLook.Attach((object)this);
+		owner.blockLook.Attach(this);
 		if ((Object)(object)owner.movement != (Object)null)
 		{
-			owner.movement.blocked.Attach((object)this);
+			owner.movement.blocked.Attach(this);
 		}
 	}
 
@@ -98,21 +98,21 @@ public class Unmoving : IAbility, IAbilityInstance
 		remainTime = 0f;
 		if (owner.type == Character.Type.Boss)
 		{
-			((ChronometerBase)owner.chronometer.animation).DetachTimeScale((object)this);
-			owner.blockLook.Detach((object)this);
+			owner.chronometer.animation.DetachTimeScale(this);
+			owner.blockLook.Detach(this);
 			if ((Object)(object)owner.movement != (Object)null)
 			{
-				owner.movement.blocked.Detach((object)this);
+				owner.movement.blocked.Detach(this);
 			}
 		}
 		else
 		{
 			owner.animationController.StopAll();
 		}
-		owner.blockLook.Detach((object)this);
+		owner.blockLook.Detach(this);
 		if ((Object)(object)owner.movement != (Object)null)
 		{
-			owner.movement.blocked.Detach((object)this);
+			owner.movement.blocked.Detach(this);
 		}
 	}
 

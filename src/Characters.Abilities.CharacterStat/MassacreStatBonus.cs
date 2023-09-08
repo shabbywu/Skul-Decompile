@@ -23,7 +23,7 @@ public sealed class MassacreStatBonus : Ability
 		private void HandleOnKilled(ITarget target, ref Damage damage)
 		{
 			Character character = target.character;
-			if (!((Object)(object)character == (Object)null) && ((EnumArray<Character.Type, bool>)ability._targetFilter)[character.type])
+			if (!((Object)(object)character == (Object)null) && ability._targetFilter[character.type])
 			{
 				base.remainTime += ability._recoverTime;
 			}

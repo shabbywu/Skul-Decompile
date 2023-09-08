@@ -22,7 +22,7 @@ public class AdditionalHitOnStatusTrigger : Ability
 		{
 			foreach (CharacterStatus.Kind value in Enum.GetValues(typeof(CharacterStatus.Kind)))
 			{
-				if (((EnumArray<CharacterStatus.Kind, bool>)ability._statuses)[value])
+				if (ability._statuses[value])
 				{
 					owner.status.Register(value, ability._timing, _handle);
 				}
@@ -33,7 +33,7 @@ public class AdditionalHitOnStatusTrigger : Ability
 		{
 			foreach (CharacterStatus.Kind value in Enum.GetValues(typeof(CharacterStatus.Kind)))
 			{
-				if (((EnumArray<CharacterStatus.Kind, bool>)ability._statuses)[value])
+				if (ability._statuses[value])
 				{
 					owner.status.Unregister(value, ability._timing, _handle);
 				}

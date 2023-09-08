@@ -42,8 +42,8 @@ public class Timer : Trigger
 	private IEnumerator CRun()
 	{
 		_running = true;
-		float num = (_range ? Random.Range(_timeRange.x, _timeRange.y) : _time);
-		yield return Chronometer.global.WaitForSeconds(num);
+		float seconds = (_range ? Random.Range(_timeRange.x, _timeRange.y) : _time);
+		yield return Chronometer.global.WaitForSeconds(seconds);
 		_running = false;
 	}
 }

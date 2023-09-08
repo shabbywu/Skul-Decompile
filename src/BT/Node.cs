@@ -7,9 +7,9 @@ namespace BT;
 public abstract class Node : MonoBehaviour, INode
 {
 	[AttributeUsage(AttributeTargets.Field)]
-	public class SubcomponentAttribute : SubcomponentAttribute
+	public class SubcomponentAttribute : UnityEditor.SubcomponentAttribute
 	{
-		public static readonly Type[] types = new Type[27]
+		public new static readonly Type[] types = new Type[27]
 		{
 			typeof(AutoReset),
 			typeof(CheckWithInSight),

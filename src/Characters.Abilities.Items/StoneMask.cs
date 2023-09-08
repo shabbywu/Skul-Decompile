@@ -28,31 +28,23 @@ public sealed class StoneMask : Ability
 		protected override void OnDetach()
 		{
 			_inventory.onChanged -= UpdateMultiplier;
-			((Sum<double>)(object)GameData.Currency.currencies[ability._type].multiplier).Remove((object)this);
+			GameData.Currency.currencies[ability._type].multiplier.Remove(this);
 		}
 
 		private void UpdateMultiplier(Weapon old, Weapon @new)
 		{
-			//IL_002e: Unknown result type (might be due to invalid IL or missing references)
-			//IL_0033: Unknown result type (might be due to invalid IL or missing references)
-			//IL_003f: Unknown result type (might be due to invalid IL or missing references)
-			//IL_0068: Unknown result type (might be due to invalid IL or missing references)
-			//IL_006d: Unknown result type (might be due to invalid IL or missing references)
-			//IL_006e: Unknown result type (might be due to invalid IL or missing references)
-			//IL_006f: Unknown result type (might be due to invalid IL or missing references)
-			//IL_007d: Unknown result type (might be due to invalid IL or missing references)
-			((Sum<double>)(object)GameData.Currency.currencies[ability._type].multiplier).Remove((object)this);
+			GameData.Currency.currencies[ability._type].multiplier.Remove(this);
 			Rarity rarity = _inventory.weapons[0].rarity;
-			float num = ((EnumArray<Rarity, float>)ability._percentByRarity)[rarity];
+			float num = ability._percentByRarity[rarity];
 			if ((Object)(object)_inventory.weapons[1] != (Object)null)
 			{
 				Rarity rarity2 = _inventory.weapons[1].rarity;
 				if (rarity2 > rarity)
 				{
-					num = ((EnumArray<Rarity, float>)ability._percentByRarity)[rarity2];
+					num = ability._percentByRarity[rarity2];
 				}
 			}
-			((Sum<double>)(object)GameData.Currency.currencies[ability._type].multiplier).AddOrUpdate((object)this, (double)num);
+			GameData.Currency.currencies[ability._type].multiplier.AddOrUpdate(this, num);
 		}
 	}
 

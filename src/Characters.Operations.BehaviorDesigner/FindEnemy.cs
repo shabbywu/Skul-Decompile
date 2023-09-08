@@ -59,7 +59,7 @@ public class FindEnemy : Operation
 		}
 		if (_shuffle)
 		{
-			ExtensionMethods.PseudoShuffle<Character>((IList<Character>)enemyList);
+			enemyList.PseudoShuffle();
 		}
 		foreach (Character item in enemyList)
 		{

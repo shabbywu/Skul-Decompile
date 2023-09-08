@@ -18,8 +18,6 @@ public sealed class GetCharacterChronometer : Action
 
 	public override void OnAwake()
 	{
-		//IL_003b: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0045: Expected O, but got Unknown
 		_characterValue = ((SharedVariable<Character>)_character).Value;
 		if (((Component)_characterValue).gameObject.activeInHierarchy)
 		{
@@ -29,8 +27,6 @@ public sealed class GetCharacterChronometer : Action
 
 	public override TaskStatus OnUpdate()
 	{
-		//IL_002f: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0039: Expected O, but got Unknown
 		if (!((Object)(object)_characterValue == (Object)null))
 		{
 			if (_time == null)

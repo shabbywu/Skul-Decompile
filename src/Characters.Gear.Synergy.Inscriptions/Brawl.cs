@@ -144,7 +144,7 @@ public sealed class Brawl : InscriptionInstance
 
 		private void HandleOnGaveDamage(ITarget target, in Damage originalDamage, in Damage gaveDamage, double damageDealt)
 		{
-			if (!((EnumArray<Damage.AttackType, bool>)_attackTypeFilter)[gaveDamage.attackType] || !((EnumArray<Damage.MotionType, bool>)_motionTypeFilter)[gaveDamage.motionType] || !((EnumArray<Character.Type, bool>)_hitTargetTypeFilter)[target.character.type] || gaveDamage.key.Equals(_attackKey, StringComparison.OrdinalIgnoreCase) || inscriptionInstance.keyword.step < 1)
+			if (!_attackTypeFilter[gaveDamage.attackType] || !_motionTypeFilter[gaveDamage.motionType] || !_hitTargetTypeFilter[target.character.type] || gaveDamage.key.Equals(_attackKey, StringComparison.OrdinalIgnoreCase) || inscriptionInstance.keyword.step < 1)
 			{
 				return;
 			}

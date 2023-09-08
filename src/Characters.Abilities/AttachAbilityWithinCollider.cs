@@ -44,7 +44,7 @@ public class AttachAbilityWithinCollider : Ability
 			for (int i = 0; i < _charactersWithinCollider.Current.Count; i++)
 			{
 				Character character = _charactersWithinCollider.Current[i];
-				AbilityComponent[] components = ((SubcomponentArray<AbilityComponent>)ability._abilityComponents).components;
+				AbilityComponent[] components = ability._abilityComponents.components;
 				if (!((Object)(object)character == (Object)null))
 				{
 					for (int j = 0; j < components.Length; j++)
@@ -83,7 +83,7 @@ public class AttachAbilityWithinCollider : Ability
 				if ((Object)(object)component == (Object)null)
 				{
 					Minion component2 = ((Component)_sharedOverlapper.results[i]).GetComponent<Minion>();
-					if ((Object)(object)component2 == (Object)null || !((EnumArray<Character.Type, bool>)ability._characterTypeFilter)[Character.Type.PlayerMinion])
+					if ((Object)(object)component2 == (Object)null || !ability._characterTypeFilter[Character.Type.PlayerMinion])
 					{
 						continue;
 					}
@@ -91,7 +91,7 @@ public class AttachAbilityWithinCollider : Ability
 				}
 				else
 				{
-					if ((Object)(object)component.character == (Object)null || !((EnumArray<Character.Type, bool>)ability._characterTypeFilter)[component.character.type])
+					if ((Object)(object)component.character == (Object)null || !ability._characterTypeFilter[component.character.type])
 					{
 						continue;
 					}
@@ -104,9 +104,9 @@ public class AttachAbilityWithinCollider : Ability
 					_charactersWithinCollider.Current.RemoveAt(num);
 					continue;
 				}
-				for (int j = 0; j < ((SubcomponentArray<AbilityComponent>)ability._abilityComponents).components.Length; j++)
+				for (int j = 0; j < ability._abilityComponents.components.Length; j++)
 				{
-					character.ability.Add(((SubcomponentArray<AbilityComponent>)ability._abilityComponents).components[j].ability);
+					character.ability.Add(ability._abilityComponents.components[j].ability);
 				}
 			}
 			for (int k = 0; k < _charactersWithinCollider.Current.Count; k++)
@@ -114,9 +114,9 @@ public class AttachAbilityWithinCollider : Ability
 				Character character2 = _charactersWithinCollider.Current[k];
 				if (!((Object)(object)character2 == (Object)null))
 				{
-					for (int l = 0; l < ((SubcomponentArray<AbilityComponent>)ability._abilityComponents).components.Length; l++)
+					for (int l = 0; l < ability._abilityComponents.components.Length; l++)
 					{
-						character2.ability.Remove(((SubcomponentArray<AbilityComponent>)ability._abilityComponents).components[l].ability);
+						character2.ability.Remove(ability._abilityComponents.components[l].ability);
 					}
 				}
 			}

@@ -41,7 +41,7 @@ public class DarkOrb : MonoBehaviour
 		//IL_0081: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0086: Unknown result type (might be due to invalid IL or missing references)
 		Vector3 val = ((Component)_pivot).transform.position - ((Component)_character).transform.position;
-		_rotationTime += _rotateSpeed * ((ChronometerBase)_character.chronometer.master).deltaTime;
+		_rotationTime += _rotateSpeed * _character.chronometer.master.deltaTime;
 		_character.movement.MoveHorizontal(Vector2.op_Implicit(val) + new Vector2(Mathf.Cos(_rotationTime), Mathf.Sin(_rotationTime)) * _radius);
 	}
 }

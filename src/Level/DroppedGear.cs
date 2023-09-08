@@ -77,12 +77,10 @@ public class DroppedGear : InteractiveObject
 
 	private void OnGround()
 	{
-		//IL_0028: Unknown result type (might be due to invalid IL or missing references)
-		//IL_002e: Invalid comparison between Unknown and I4
 		Activate();
 		if ((Object)(object)gear != (Object)null && (Object)(object)_droppedEffect != (Object)null)
 		{
-			if ((int)gear.rarity == 3)
+			if (gear.rarity == Rarity.Legendary)
 			{
 				_droppedEffect.SpawnLegendaryEffect();
 			}
@@ -124,8 +122,6 @@ public class DroppedGear : InteractiveObject
 		//IL_00fa: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0113: Unknown result type (might be due to invalid IL or missing references)
 		//IL_00d7: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0131: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0137: Invalid comparison between Unknown and I4
 		if ((Object)(object)gear != (Object)null && !gear.lootable)
 		{
 			return;
@@ -150,7 +146,7 @@ public class DroppedGear : InteractiveObject
 		PersistentSingleton<SoundManager>.Instance.PlaySound(_interactSound, ((Component)this).transform.position);
 		price = 0;
 		((Component)this).transform.localPosition = _initialPosition;
-		if ((Object)(object)gear != (Object)null && (int)gear.rarity == 3 && (Object)(object)_droppedEffect != (Object)null)
+		if ((Object)(object)gear != (Object)null && gear.rarity == Rarity.Legendary && (Object)(object)_droppedEffect != (Object)null)
 		{
 			_droppedEffect.Despawn();
 		}
@@ -159,10 +155,8 @@ public class DroppedGear : InteractiveObject
 
 	public override void InteractWithByPressing(Character character)
 	{
-		//IL_001a: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0020: Invalid comparison between Unknown and I4
 		ClosePopup();
-		if ((Object)(object)gear != (Object)null && (int)gear.rarity == 3 && (Object)(object)_droppedEffect != (Object)null)
+		if ((Object)(object)gear != (Object)null && gear.rarity == Rarity.Legendary && (Object)(object)_droppedEffect != (Object)null)
 		{
 			_droppedEffect.Despawn();
 		}

@@ -20,7 +20,7 @@ public class ChangeGlobalLightIntensity : CRunnable
 		float elapsed = 0f;
 		while (elapsed < _curve.duration)
 		{
-			elapsed += ((ChronometerBase)Chronometer.global).deltaTime;
+			elapsed += Chronometer.global.deltaTime;
 			globalLight.intensity = Mathf.Lerp(startIntensity, _intensity, _curve.Evaluate(elapsed));
 			yield return null;
 		}

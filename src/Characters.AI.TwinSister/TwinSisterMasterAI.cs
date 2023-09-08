@@ -279,7 +279,7 @@ public class TwinSisterMasterAI : MonoBehaviour
 		Vector3 source = Vector3.one * 0.6f;
 		Vector3 dest = Vector3.one;
 		float duration = 2.6399999f;
-		for (float elapsed = 0f; elapsed < duration; elapsed += ((ChronometerBase)_master.chronometer.master).deltaTime)
+		for (float elapsed = 0f; elapsed < duration; elapsed += _master.chronometer.master.deltaTime)
 		{
 			yield return null;
 			((Component)_master).transform.localScale = Vector3.Lerp(source, dest, elapsed / duration);
@@ -295,13 +295,13 @@ public class TwinSisterMasterAI : MonoBehaviour
 	public IEnumerator ProcessDualCombat()
 	{
 		float count = Random.Range(_dualCombatCount.x, _dualCombatCount.y);
-		DualPattern before = _dualPatterns[ExtensionMethods.RandomIndex<DualPattern>((IEnumerable<DualPattern>)_dualPatterns)];
+		DualPattern before = _dualPatterns[_dualPatterns.RandomIndex()];
 		for (int i = 0; (float)i < count; i++)
 		{
 			DualPattern pattern;
 			do
 			{
-				pattern = _dualPatterns[ExtensionMethods.RandomIndex<DualPattern>((IEnumerable<DualPattern>)_dualPatterns)];
+				pattern = _dualPatterns[_dualPatterns.RandomIndex()];
 			}
 			while (before == pattern);
 			before = pattern;
@@ -311,7 +311,7 @@ public class TwinSisterMasterAI : MonoBehaviour
 			{
 				if (!_shortHairAide.character.stunedOrFreezed && !_longHairAide.character.stunedOrFreezed)
 				{
-					elapsed += ((ChronometerBase)Chronometer.global).deltaTime;
+					elapsed += Chronometer.global.deltaTime;
 				}
 				yield return null;
 			}
@@ -338,8 +338,8 @@ public class TwinSisterMasterAI : MonoBehaviour
 			yield break;
 		}
 		((Behaviour)behindAide.character.collider).enabled = false;
-		behindAide.character.cinematic.Attach((object)this);
-		CoroutineReference predelayCoroutine = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)this, _fieldAide.CStartSinglePhasePreDelay());
+		behindAide.character.cinematic.Attach(this);
+		CoroutineReference predelayCoroutine = ((MonoBehaviour)(object)this).StartCoroutineWithReference(_fieldAide.CStartSinglePhasePreDelay());
 		yield return OrderToGoldmaneMeteor();
 		while (singlePattern)
 		{
@@ -367,7 +367,7 @@ public class TwinSisterMasterAI : MonoBehaviour
 				yield return RunSinglePattern(SinglePattern.SkippableIdle);
 				continue;
 			}
-			SinglePattern pattern = ((!IsMeleeCombat()) ? ExtensionMethods.Random<SinglePattern>((IEnumerable<SinglePattern>)_rangePatterns) : ExtensionMethods.Random<SinglePattern>((IEnumerable<SinglePattern>)_meleePatterns));
+			SinglePattern pattern = ((!IsMeleeCombat()) ? _rangePatterns.Random() : _meleePatterns.Random());
 			yield return RunSinglePattern(pattern);
 			if (!singlePattern)
 			{
@@ -412,8 +412,8 @@ public class TwinSisterMasterAI : MonoBehaviour
 			}
 		}
 		((Behaviour)behindAide.character.collider).enabled = true;
-		behindAide.character.cinematic.Detach((object)this);
-		((CoroutineReference)(ref predelayCoroutine)).Stop();
+		behindAide.character.cinematic.Detach(this);
+		predelayCoroutine.Stop();
 		yield return OrderToEscape(_fieldAide);
 	}
 
@@ -484,7 +484,7 @@ public class TwinSisterMasterAI : MonoBehaviour
 		List<SinglePattern> list = new List<SinglePattern>(_resetPoint);
 		for (int i = 0; i < _resetPoint; i++)
 		{
-			int index = ExtensionMethods.RandomIndex<SinglePattern>((IEnumerable<SinglePattern>)singlePatterns);
+			int index = singlePatterns.RandomIndex();
 			list.Add(singlePatterns[index]);
 			singlePatterns.Remove(singlePatterns[index]);
 		}
@@ -637,7 +637,7 @@ public class TwinSisterMasterAI : MonoBehaviour
 		Vector3 source = Vector3.one;
 		Vector3 dest = Vector3.one * 0.6f;
 		float duration = 2.6399999f;
-		for (float elapsed = 0f; elapsed < duration; elapsed += ((ChronometerBase)_master.chronometer.master).deltaTime)
+		for (float elapsed = 0f; elapsed < duration; elapsed += _master.chronometer.master.deltaTime)
 		{
 			yield return null;
 			((Component)_master).transform.localScale = Vector3.Lerp(source, dest, elapsed / duration);

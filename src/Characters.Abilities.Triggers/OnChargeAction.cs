@@ -65,7 +65,7 @@ public class OnChargeAction : Trigger
 
 	private void OnCharacterCharging(Characters.Actions.Action action)
 	{
-		if (((EnumArray<Characters.Actions.Action.Type, bool>)_types).GetOrDefault(action.type))
+		if (_types.GetOrDefault(action.type))
 		{
 			Invoke();
 		}

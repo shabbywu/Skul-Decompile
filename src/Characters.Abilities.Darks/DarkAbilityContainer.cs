@@ -50,7 +50,7 @@ public sealed class DarkAbilityContainer : MonoBehaviour
 		_random = new Random(GameData.Save.instance.randomSeed + 1177618293 + (int)currentChapter.type * 256 + currentChapter.stageIndex * 16 + currentChapter.currentStage.pathIndex + extraSeed);
 		_countWeight = new int[2] { _singleAbility, _dualAbility };
 		_candidates = new List<(DarkAbility, float)>();
-		WeightedDarkAbility[] components = ((SubcomponentArray<WeightedDarkAbility>)_weightedDarkAbility).components;
+		WeightedDarkAbility[] components = _weightedDarkAbility.components;
 		foreach (WeightedDarkAbility weightedDarkAbility in components)
 		{
 			if (weightedDarkAbility.Available(owner))
@@ -58,7 +58,7 @@ public sealed class DarkAbilityContainer : MonoBehaviour
 				_candidates.Add((weightedDarkAbility.key, weightedDarkAbility.value));
 			}
 		}
-		_weightedRandomizer = new WeightedRandomizer<DarkAbility>((ICollection<ValueTuple<DarkAbility, float>>)_candidates);
+		_weightedRandomizer = new WeightedRandomizer<DarkAbility>(_candidates);
 	}
 
 	public ICollection<DarkAbility> GetDarkAbility()
@@ -82,7 +82,7 @@ public sealed class DarkAbilityContainer : MonoBehaviour
 				if ((Object)(object)_candidates[num2].Item1 == (Object)(object)darkAbility)
 				{
 					_candidates.RemoveAt(num2);
-					_weightedRandomizer = new WeightedRandomizer<DarkAbility>((ICollection<ValueTuple<DarkAbility, float>>)_candidates);
+					_weightedRandomizer = new WeightedRandomizer<DarkAbility>(_candidates);
 					break;
 				}
 			}
@@ -120,7 +120,7 @@ public sealed class DarkAbilityContainer : MonoBehaviour
 
 	public void ResetAllWeightValue()
 	{
-		WeightedDarkAbility[] components = ((SubcomponentArray<WeightedDarkAbility>)_weightedDarkAbility).components;
+		WeightedDarkAbility[] components = _weightedDarkAbility.components;
 		for (int i = 0; i < components.Length; i++)
 		{
 			components[i].ResetValue();

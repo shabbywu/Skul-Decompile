@@ -69,9 +69,9 @@ public class StatBonusByIncome : Ability
 
 		private void UpdateStat()
 		{
-			for (int i = 0; i < ((ReorderableArray<Stat.Value>)_stat).values.Length; i++)
+			for (int i = 0; i < _stat.values.Length; i++)
 			{
-				((ReorderableArray<Stat.Value>)_stat).values[i].value = (double)_stacks * ((ReorderableArray<Stat.Value>)ability._statPerStack).values[i].value;
+				_stat.values[i].value = (double)_stacks * ability._statPerStack.values[i].value;
 			}
 			owner.stat.SetNeedUpdate();
 		}

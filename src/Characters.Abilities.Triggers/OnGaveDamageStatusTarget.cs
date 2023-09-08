@@ -35,7 +35,7 @@ public sealed class OnGaveDamageStatusTarget : Trigger
 	public override void Attach(Character character)
 	{
 		_character = character;
-		((PriorityList<GiveDamageDelegate>)_character.onGiveDamage).Add(int.MaxValue, (GiveDamageDelegate)HandleOnGiveDamage);
+		_character.onGiveDamage.Add(int.MaxValue, HandleOnGiveDamage);
 		Character character2 = _character;
 		character2.onGaveDamage = (GaveDamageDelegate)Delegate.Combine(character2.onGaveDamage, new GaveDamageDelegate(HandleOnGaveDamage));
 	}
@@ -53,7 +53,7 @@ public sealed class OnGaveDamageStatusTarget : Trigger
 
 	public override void Detach()
 	{
-		((PriorityList<GiveDamageDelegate>)_character.onGiveDamage).Remove((GiveDamageDelegate)HandleOnGiveDamage);
+		_character.onGiveDamage.Remove(HandleOnGiveDamage);
 		Character character = _character;
 		character.onGaveDamage = (GaveDamageDelegate)Delegate.Remove(character.onGaveDamage, new GaveDamageDelegate(HandleOnGaveDamage));
 	}
@@ -63,7 +63,7 @@ public sealed class OnGaveDamageStatusTarget : Trigger
 		//IL_007e: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0083: Unknown result type (might be due to invalid IL or missing references)
 		//IL_00ac: Unknown result type (might be due to invalid IL or missing references)
-		if (_passPrecondition && ((EnumArray<Character.Type, bool>)_characterTypes)[target.character.type] && ((EnumArray<Damage.AttackType, bool>)_attackType)[gaveDamage.attackType] && (!_onCritical || gaveDamage.critical) && (string.IsNullOrWhiteSpace(_attackKey) || gaveDamage.key.Equals(_attackKey, StringComparison.OrdinalIgnoreCase)))
+		if (_passPrecondition && _characterTypes[target.character.type] && _attackType[gaveDamage.attackType] && (!_onCritical || gaveDamage.critical) && (string.IsNullOrWhiteSpace(_attackKey) || gaveDamage.key.Equals(_attackKey, StringComparison.OrdinalIgnoreCase)))
 		{
 			if ((Object)(object)_moveToHitPosition != (Object)null)
 			{

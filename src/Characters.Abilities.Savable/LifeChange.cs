@@ -73,18 +73,18 @@ public sealed class LifeChange : IAbility, IAbilityInstance, ISavableAbility
 	void IAbilityInstance.Attach()
 	{
 		_buffClone = _buff.Clone();
-		for (int i = 0; i < ((ReorderableArray<Stat.Value>)_buff).values.Length; i++)
+		for (int i = 0; i < _buff.values.Length; i++)
 		{
-			((ReorderableArray<Stat.Value>)_buffClone).values[i].value = ((ReorderableArray<Stat.Value>)_buff).values[i].GetStackedValue(stack);
+			_buffClone.values[i].value = _buff.values[i].GetStackedValue(stack);
 		}
 		_owner.stat.AttachValues(_buffClone);
 	}
 
 	void IAbilityInstance.Refresh()
 	{
-		for (int i = 0; i < ((ReorderableArray<Stat.Value>)_buff).values.Length; i++)
+		for (int i = 0; i < _buff.values.Length; i++)
 		{
-			((ReorderableArray<Stat.Value>)_buffClone).values[i].value = ((ReorderableArray<Stat.Value>)_buff).values[i].GetStackedValue(stack);
+			_buffClone.values[i].value = _buff.values[i].GetStackedValue(stack);
 		}
 		_owner.stat.SetNeedUpdate();
 	}

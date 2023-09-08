@@ -45,7 +45,7 @@ public sealed class GhoulPassive2 : Ability, IAbilityInstance
 				}
 				if (_decreasing)
 				{
-					_grayHealth.maximum -= _decreasingSpeed * ((ChronometerBase)Chronometer.global).deltaTime;
+					_grayHealth.maximum -= _decreasingSpeed * Chronometer.global.deltaTime;
 				}
 			}
 		}
@@ -191,7 +191,7 @@ public sealed class GhoulPassive2 : Ability, IAbilityInstance
 		owner.stat.AttachValues(_stat);
 		UpdateStack();
 		owner.health.onTookDamage += AddGrayHealth;
-		((PriorityList<GiveDamageDelegate>)owner.onGiveDamage).Add(int.MinValue, (GiveDamageDelegate)OnOwnerGiveDamage);
+		owner.onGiveDamage.Add(int.MinValue, OnOwnerGiveDamage);
 		Character character = owner;
 		character.onGaveDamage = (GaveDamageDelegate)Delegate.Combine(character.onGaveDamage, new GaveDamageDelegate(OnOwnerGaveDamage));
 		Character character2 = owner;
@@ -241,7 +241,7 @@ public sealed class GhoulPassive2 : Ability, IAbilityInstance
 		DestroyGrayHealth();
 		owner.stat.DetachValues(_stat);
 		owner.health.onTookDamage -= AddGrayHealth;
-		((PriorityList<GiveDamageDelegate>)owner.onGiveDamage).Remove((GiveDamageDelegate)OnOwnerGiveDamage);
+		owner.onGiveDamage.Remove(OnOwnerGiveDamage);
 		Character character = owner;
 		character.onGaveDamage = (GaveDamageDelegate)Delegate.Remove(character.onGaveDamage, new GaveDamageDelegate(OnOwnerGaveDamage));
 	}
@@ -293,7 +293,7 @@ public sealed class GhoulPassive2 : Ability, IAbilityInstance
 		{
 			owner.health.GrayHeal();
 		}
-		_cachedDamageMultiplierByStack = 1f + _damageMultiperByStack.Evaluate((float)_stacks);
+		_cachedDamageMultiplierByStack = 1f + _damageMultiperByStack.Evaluate(_stacks);
 		_stacks = 0;
 		UpdateStack();
 		if (_used)
@@ -305,8 +305,8 @@ public sealed class GhoulPassive2 : Ability, IAbilityInstance
 	private void UpdateCanHealAmount()
 	{
 		double maximum = owner.health.grayHealth.maximum;
-		float num = (float)_stacks / (float)_maxStack;
-		owner.health.grayHealth.canHeal = maximum * (double)_recoveryCurve.Evaluate(num);
+		float time = (float)_stacks / (float)_maxStack;
+		owner.health.grayHealth.canHeal = maximum * (double)_recoveryCurve.Evaluate(time);
 	}
 
 	private void DestroyGrayHealth()
@@ -333,7 +333,7 @@ public sealed class GhoulPassive2 : Ability, IAbilityInstance
 		//IL_00a0: Unknown result type (might be due to invalid IL or missing references)
 		//IL_00a5: Unknown result type (might be due to invalid IL or missing references)
 		//IL_00aa: Unknown result type (might be due to invalid IL or missing references)
-		if (!((Object)(object)target.character == (Object)null) && target.character.type != Character.Type.Dummy && target.character.type != Character.Type.Trap && ((EnumArray<Damage.AttackType, bool>)_attackTypeFilter)[gaveDamage.attackType] && ((EnumArray<Damage.MotionType, bool>)_motionTypeFilter)[gaveDamage.motionType])
+		if (!((Object)(object)target.character == (Object)null) && target.character.type != Character.Type.Dummy && target.character.type != Character.Type.Trap && _attackTypeFilter[gaveDamage.attackType] && _motionTypeFilter[gaveDamage.motionType])
 		{
 			string damageKey = gaveDamage.key;
 			if (_consumeKey.Any((string key) => damageKey.Equals(key, StringComparison.OrdinalIgnoreCase)))
@@ -353,16 +353,16 @@ public sealed class GhoulPassive2 : Ability, IAbilityInstance
 		//IL_0115: Unknown result type (might be due to invalid IL or missing references)
 		//IL_00f9: Unknown result type (might be due to invalid IL or missing references)
 		//IL_00fe: Unknown result type (might be due to invalid IL or missing references)
-		for (int i = 0; i < ((ReorderableArray<Stat.Value>)_stat).values.Length; i++)
+		for (int i = 0; i < _stat.values.Length; i++)
 		{
-			Stat.Value value = ((ReorderableArray<Stat.Value>)_stat).values[i];
+			Stat.Value value = _stat.values[i];
 			if (value.kindIndex == Stat.Kind.PhysicalAttackDamage.index && (Object)(object)_consumeAbility != (Object)null && owner.ability.Contains(_consumeAbility.ability))
 			{
-				value.value = ((ReorderableArray<Stat.Value>)_statPerStack).values[i].GetStackedValue(_stacks + (int)_consumeAbility.stack * _consumeAbilityStackMultiplier);
+				value.value = _statPerStack.values[i].GetStackedValue(_stacks + (int)_consumeAbility.stack * _consumeAbilityStackMultiplier);
 			}
 			else
 			{
-				value.value = ((ReorderableArray<Stat.Value>)_statPerStack).values[i].GetStackedValue(_stacks);
+				value.value = _statPerStack.values[i].GetStackedValue(_stacks);
 			}
 		}
 		owner.stat.SetNeedUpdate();

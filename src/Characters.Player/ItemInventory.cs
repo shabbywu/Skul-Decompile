@@ -55,7 +55,7 @@ public class ItemInventory : MonoBehaviour
 			}
 			else
 			{
-				ExtensionMethods.Swap<Item>((IList<Item>)items, i, i - num);
+				items.Swap(i, i - num);
 			}
 		}
 	}
@@ -191,8 +191,6 @@ public class ItemInventory : MonoBehaviour
 
 	public int GetItemCountByRarity(Rarity rarity)
 	{
-		//IL_0026: Unknown result type (might be due to invalid IL or missing references)
-		//IL_002b: Unknown result type (might be due to invalid IL or missing references)
 		int num = 0;
 		for (int i = 0; i < items.Count; i++)
 		{

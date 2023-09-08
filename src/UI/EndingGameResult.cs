@@ -61,9 +61,9 @@ public class EndingGameResult : MonoBehaviour
 
 	private void OnEnable()
 	{
-		PlayerInput.blocked.Attach((object)this);
+		PlayerInput.blocked.Attach(this);
 		Scene<GameBase>.instance.uiManager.pauseEventSystem.PushEmpty();
-		((ChronometerBase)Chronometer.global).AttachTimeScale((object)this, 0f);
+		Chronometer.global.AttachTimeScale(this, 0f);
 		((MonoBehaviour)this).StartCoroutine(CAnimate());
 		((TMP_Text)_playTime).text = new TimeSpan(0, 0, GameData.Progress.playTime).ToString("hh\\:mm\\:ss", CultureInfo.InvariantCulture);
 		((TMP_Text)_deaths).text = GameData.Progress.deaths.ToString();
@@ -75,14 +75,14 @@ public class EndingGameResult : MonoBehaviour
 
 	private void OnDisable()
 	{
-		PlayerInput.blocked.Detach((object)this);
+		PlayerInput.blocked.Detach(this);
 		Scene<GameBase>.instance.uiManager.pauseEventSystem.PopEvent();
-		((ChronometerBase)Chronometer.global).DetachTimeScale((object)this);
+		Chronometer.global.DetachTimeScale(this);
 	}
 
 	private void UpdateGearList()
 	{
-		ExtensionMethods.Empty(_gearListContainer);
+		_gearListContainer.Empty();
 		Characters.Player.Inventory inventory = Singleton<Service>.Instance.levelManager.player.playerComponents.inventory;
 		WeaponInventory weapon = inventory.weapon;
 		QuintessenceInventory quintessence = inventory.quintessence;

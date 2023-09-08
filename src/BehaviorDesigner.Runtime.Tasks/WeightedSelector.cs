@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,7 +23,7 @@ public class WeightedSelector : Composite
 		{
 			list.Add((i, _weights[i]));
 		}
-		_randomizer = new WeightedRandomizer<int>((ICollection<ValueTuple<int, float>>)list);
+		_randomizer = new WeightedRandomizer<int>(list);
 		currentChildIndex = _randomizer.TakeOne();
 	}
 

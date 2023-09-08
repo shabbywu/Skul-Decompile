@@ -7,7 +7,7 @@ namespace Characters.AI.Behaviours.Pope;
 
 public sealed class Baptism : Behaviour
 {
-	[Subcomponent(typeof(ActionAttack))]
+	[UnityEditor.Subcomponent(typeof(ActionAttack))]
 	[SerializeField]
 	private ActionAttack _attack;
 

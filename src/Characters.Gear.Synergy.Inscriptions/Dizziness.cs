@@ -71,7 +71,7 @@ public class Dizziness : SimpleStatBonusKeyword
 	public override void Attach()
 	{
 		base.Attach();
-		((PriorityList<GiveDamageDelegate>)base.character.onGiveDamage).Add(int.MaxValue, (GiveDamageDelegate)OnGiveDamage);
+		base.character.onGiveDamage.Add(int.MaxValue, OnGiveDamage);
 	}
 
 	public override void Detach()
@@ -79,6 +79,6 @@ public class Dizziness : SimpleStatBonusKeyword
 		base.Detach();
 		base.character.ability.Remove(_statBonus);
 		base.character.ability.Remove(_step1Ability.ability);
-		((PriorityList<GiveDamageDelegate>)base.character.onGiveDamage).Remove((GiveDamageDelegate)OnGiveDamage);
+		base.character.onGiveDamage.Remove(OnGiveDamage);
 	}
 }

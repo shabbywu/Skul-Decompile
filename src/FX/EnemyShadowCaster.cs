@@ -11,7 +11,7 @@ public class EnemyShadowCaster : MonoBehaviour
 	private Collider2D _collider;
 
 	[SerializeField]
-	[Information(/*Could not decode attribute arguments.*/)]
+	[Information("0이면 콜라이더 크기 따라감", InformationAttribute.InformationType.Info, false)]
 	private float _customWidth;
 
 	private FootShadowRenderer _shadowRenderer;

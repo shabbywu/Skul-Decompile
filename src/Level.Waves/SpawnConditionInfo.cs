@@ -28,6 +28,6 @@ public sealed class SpawnConditionInfo : MonoBehaviour
 		{
 			return _tag;
 		}
-		return ExtensionMethods.GetAutoName((object)this);
+		return this.GetAutoName();
 	}
 }

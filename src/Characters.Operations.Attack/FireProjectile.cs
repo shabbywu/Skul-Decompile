@@ -53,7 +53,7 @@ public class FireProjectile : CharacterOperation
 	private DirectionType _directionType;
 
 	[SerializeField]
-	private Reorderable _directions;
+	private CustomAngle.Reorderable _directions;
 
 	private IAttackDamage _attackDamage;
 
@@ -107,7 +107,7 @@ public class FireProjectile : CharacterOperation
 		{
 			_projectile = _projectileReferenceHandle.WaitForCompletion().GetComponent<Projectile>();
 		}
-		CustomAngle[] values = ((ReorderableArray<CustomAngle>)(object)_directions).values;
+		CustomAngle[] values = _directions.values;
 		bool flipX = false;
 		bool flipY = false;
 		HitHistoryManager hitHistoryManager = (_group ? new HitHistoryManager(15) : null);

@@ -37,7 +37,7 @@ public sealed class TimeBombGiver : Ability
 		{
 			_bombs = new List<TimeBomb.Instance>(128);
 			_remainExplodeTime = ability._explodeTime;
-			((PriorityList<GiveDamageDelegate>)owner.onGiveDamage).Add(int.MaxValue, (GiveDamageDelegate)HandleOnGiveDamage);
+			owner.onGiveDamage.Add(int.MaxValue, HandleOnGiveDamage);
 			_alpha = 0f;
 		}
 
@@ -114,7 +114,7 @@ public sealed class TimeBombGiver : Ability
 
 		protected override void OnDetach()
 		{
-			((PriorityList<GiveDamageDelegate>)owner.onGiveDamage).Remove((GiveDamageDelegate)HandleOnGiveDamage);
+			owner.onGiveDamage.Remove(HandleOnGiveDamage);
 			foreach (TimeBomb.Instance bomb in _bombs)
 			{
 				if (bomb != null && !((Object)(object)bomb.owner == (Object)null) && !bomb.owner.health.dead)

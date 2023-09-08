@@ -40,7 +40,7 @@ public class ColorChange : MonoBehaviour
 	public float runTime = 0.2f;
 
 	[SerializeField]
-	private Method _runEaseMethod = (Method)21;
+	private EasingFunction.Method _runEaseMethod = EasingFunction.Method.Linear;
 
 	[SerializeField]
 	private Renderer _renderer;
@@ -55,9 +55,6 @@ public class ColorChange : MonoBehaviour
 
 	private void Awake()
 	{
-		//IL_0002: Unknown result type (might be due to invalid IL or missing references)
-		//IL_0007: Unknown result type (might be due to invalid IL or missing references)
-		//IL_000c: Unknown result type (might be due to invalid IL or missing references)
 		//IL_001c: Unknown result type (might be due to invalid IL or missing references)
 		//IL_0026: Expected O, but got Unknown
 		_runEase = new EasingFunction(_runEaseMethod);
@@ -85,10 +82,10 @@ public class ColorChange : MonoBehaviour
 		do
 		{
 			yield return null;
-			_renderer.sharedMaterial.SetFloat("_ColorR", ((EasingFunction)(ref _runEase)).function.Invoke(_ColorR, 0f, t / runTime));
-			_renderer.sharedMaterial.SetFloat("_ColorG", ((EasingFunction)(ref _runEase)).function.Invoke(_ColorG, 0f, t / runTime));
-			_renderer.sharedMaterial.SetFloat("_ColorB", ((EasingFunction)(ref _runEase)).function.Invoke(_ColorB, 0f, t / runTime));
-			t += ((ChronometerBase)chronometer).deltaTime;
+			_renderer.sharedMaterial.SetFloat("_ColorR", _runEase.function(_ColorR, 0f, t / runTime));
+			_renderer.sharedMaterial.SetFloat("_ColorG", _runEase.function(_ColorG, 0f, t / runTime));
+			_renderer.sharedMaterial.SetFloat("_ColorB", _runEase.function(_ColorB, 0f, t / runTime));
+			t += chronometer.deltaTime;
 		}
 		while (!(t > runTime));
 		_renderer.sharedMaterial = defaultMaterial;

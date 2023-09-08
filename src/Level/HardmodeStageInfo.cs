@@ -33,7 +33,7 @@ public sealed class HardmodeStageInfo : StageInfo
 		for (int i = 0; i < array.Length; i++)
 		{
 			List<MapReference> list = _remainMaps[Map.Type.Normal];
-			int index = ExtensionMethods.RandomIndex<MapReference>((IEnumerable<MapReference>)list, random);
+			int index = list.RandomIndex(random);
 			MapReference reference = list[index];
 			list.RemoveAt(index);
 			array[i] = (new PathNode(reference, MapReward.Type.Gold, Gate.Type.Normal), new PathNode(reference, MapReward.Type.Gold, Gate.Type.Normal));
@@ -71,25 +71,25 @@ public sealed class HardmodeStageInfo : StageInfo
 		if (_remainMaps[Map.Type.Special] != null)
 		{
 			List<MapReference> list2 = _remainMaps[Map.Type.Special].Where((MapReference m) => !SpecialMap.GetEncoutered(m.specialMapType)).ToList();
-			int num8 = Math.Min(GetSpecialMapCount(random), list2.Count);
-			int[] array3 = MMMaths.MultipleRandomWithoutDuplactes(random, num8, 0, num);
+			int count = Math.Min(GetSpecialMapCount(random), list2.Count);
+			int[] array3 = MMMaths.MultipleRandomWithoutDuplactes(random, count, 0, num);
 			for (int k = 0; k < array3.Length; k++)
 			{
-				int index2 = ExtensionMethods.RandomIndex<MapReference>((IEnumerable<MapReference>)list2, random);
+				int index2 = list2.RandomIndex(random);
 				MapReference reference2 = list2[index2];
 				list2.RemoveAt(index2);
-				int num9 = array3[k];
-				array[num9].Item1.reference = reference2;
-				array[num9].Item2.reference = reference2;
+				int num8 = array3[k];
+				array[num8].Item1.reference = reference2;
+				array[num8].Item2.reference = reference2;
 			}
 		}
 		int minValue = Mathf.RoundToInt((float)(num * ((Vector2Int)(ref _castleNpc.positionRange)).x) * 0.01f);
 		int maxValue = Mathf.RoundToInt((float)(num * ((Vector2Int)(ref _castleNpc.positionRange)).y) * 0.01f);
-		int num10 = random.Next(minValue, maxValue) + 1;
+		int num9 = random.Next(minValue, maxValue) + 1;
 		if (!_castleNpc.reference.IsNullOrEmpty() && !GameData.Progress.GetRescued(_npcType))
 		{
-			array[num10].Item1 = _castleNpc;
-			array[num10].Item2 = _castleNpc;
+			array[num9].Item1 = _castleNpc;
+			array[num9].Item2 = _castleNpc;
 		}
 		for (int l = 0; l < array.Length; l++)
 		{
@@ -111,7 +111,7 @@ public sealed class HardmodeStageInfo : StageInfo
 			list3.Add((_terminal, PathNode.none));
 		}
 		List<ExtraMapInfo> list4 = new List<ExtraMapInfo>();
-		ExtraMapInfo[] values = ((ReorderableArray<ExtraMapInfo>)_extraMaps).values;
+		ExtraMapInfo[] values = _extraMaps.values;
 		foreach (ExtraMapInfo extraMapInfo in values)
 		{
 			if (MMMaths.Chance(random, extraMapInfo.possibility / 100f))

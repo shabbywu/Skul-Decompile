@@ -56,12 +56,12 @@ public sealed class KingSlayer : Ability
 					Bounds bounds = ((Collider2D)owner.collider).bounds;
 					Vector3 center = ((Bounds)(ref bounds)).center;
 					_markEffect = ability._markEffect.Spawn(center, owner);
-					((ChronometerBase)owner.chronometer.animation).AttachTimeScale((object)this, ability._timeScaleDuringKilling);
+					owner.chronometer.animation.AttachTimeScale(this, ability._timeScaleDuringKilling);
 					EffectInfo killEffect = ability._killEffect;
 					bounds = ((Collider2D)owner.collider).bounds;
 					killEffect.Spawn(((Bounds)(ref bounds)).center, owner);
 					PersistentSingleton<SoundManager>.Instance.PlaySound(ability._markSound, ((Component)owner).gameObject.transform.position);
-					yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)owner.chronometer.master, 1f);
+					yield return owner.chronometer.master.WaitForSeconds(1f);
 					if ((Object)(object)_markEffect != (Object)null)
 					{
 						_markEffect.Stop();
@@ -73,10 +73,10 @@ public sealed class KingSlayer : Ability
 					}
 					if (owner.health.dead)
 					{
-						((ChronometerBase)owner.chronometer.animation).DetachTimeScale((object)this);
+						owner.chronometer.animation.DetachTimeScale(this);
 						yield break;
 					}
-					((ChronometerBase)owner.chronometer.animation).DetachTimeScale((object)this);
+					owner.chronometer.animation.DetachTimeScale(this);
 					Attacker attacker = ability._attacker;
 					double currentHealth = owner.health.currentHealth;
 					bounds = ((Collider2D)owner.collider).bounds;
@@ -179,7 +179,7 @@ public sealed class KingSlayer : Ability
 
 		private void OnGaveDamage(ITarget target, in Damage originalDamage, in Damage gaveDamage, double damageDealt)
 		{
-			if (!((Object)(object)target.character == (Object)null) && !target.character.health.dead && (string.IsNullOrWhiteSpace(ability._attackKey) || gaveDamage.key.Equals(ability._attackKey, StringComparison.OrdinalIgnoreCase)) && ((EnumArray<Character.Type, bool>)ability._targetFilter)[target.character.type] && ((EnumArray<Damage.MotionType, bool>)ability._motionTypeFilter)[gaveDamage.motionType] && ((EnumArray<Damage.AttackType, bool>)ability._attackTypeFilter)[gaveDamage.attackType] && !_targets.Contains(target.character))
+			if (!((Object)(object)target.character == (Object)null) && !target.character.health.dead && (string.IsNullOrWhiteSpace(ability._attackKey) || gaveDamage.key.Equals(ability._attackKey, StringComparison.OrdinalIgnoreCase)) && ability._targetFilter[target.character.type] && ability._motionTypeFilter[gaveDamage.motionType] && ability._attackTypeFilter[gaveDamage.attackType] && !_targets.Contains(target.character))
 			{
 				(target.character.ability.Add(ability._kingMark) as KingMark.Instance).ability.SetAttacker(owner);
 				_targets.Add(target.character);

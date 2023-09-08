@@ -21,9 +21,7 @@ public sealed class OnUseReassembleAttacher : AbilityAttacher
 
 	public override void StartAttach()
 	{
-		//IL_0008: Unknown result type (might be due to invalid IL or missing references)
-		//IL_000d: Unknown result type (might be due to invalid IL or missing references)
-		_cUpdateReference = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)this, CCheckLoop());
+		_cUpdateReference = ((MonoBehaviour)(object)this).StartCoroutineWithReference(CCheckLoop());
 	}
 
 	private IEnumerator CCheckLoop()
@@ -42,7 +40,7 @@ public sealed class OnUseReassembleAttacher : AbilityAttacher
 
 	public override void StopAttach()
 	{
-		((CoroutineReference)(ref _cUpdateReference)).Stop();
+		_cUpdateReference.Stop();
 		if ((Object)(object)base.owner != (Object)null)
 		{
 			base.owner.ability.Remove(_abilityComponent.ability);

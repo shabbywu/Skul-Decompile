@@ -7,7 +7,7 @@ namespace Characters.Projectiles.Operations.Decorator;
 public class Repeater2 : Operation
 {
 	[SerializeField]
-	private ReorderableFloatArray _timesToTrigger = new ReorderableFloatArray(new float[1]);
+	private ReorderableFloatArray _timesToTrigger = new ReorderableFloatArray(default(float));
 
 	[SerializeField]
 	[Subcomponent]
@@ -15,14 +15,14 @@ public class Repeater2 : Operation
 
 	private void Awake()
 	{
-		Array.Sort(((ReorderableArray<float>)(object)_timesToTrigger).values);
+		Array.Sort(_timesToTrigger.values);
 	}
 
 	internal IEnumerator CRun(IProjectile projectile)
 	{
 		int operationIndex = 0;
 		float time = 0f;
-		float[] timesToTrigger = ((ReorderableArray<float>)(object)_timesToTrigger).values;
+		float[] timesToTrigger = _timesToTrigger.values;
 		while (operationIndex < timesToTrigger.Length)
 		{
 			for (; operationIndex < timesToTrigger.Length && time >= timesToTrigger[operationIndex]; operationIndex++)
@@ -30,7 +30,7 @@ public class Repeater2 : Operation
 				_toRepeat.Run(projectile);
 			}
 			yield return null;
-			time += ((ChronometerBase)projectile.owner.chronometer.projectile).deltaTime;
+			time += projectile.owner.chronometer.projectile.deltaTime;
 		}
 	}
 

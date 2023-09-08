@@ -198,7 +198,7 @@ public sealed class InscriptionSynthesisEquipmentSlot : InteractiveObject
 		Character player = Singleton<Service>.Instance.levelManager.player;
 		_interactionCache = ((Component)player).GetComponent<CharacterInteraction>();
 		_inventoryCache = player.playerComponents.inventory;
-		if (((Data)GameData.HardmodeProgress.inscriptionSynthesisEquipment[_slotIndex]).isDefaultValue)
+		if (GameData.HardmodeProgress.inscriptionSynthesisEquipment[_slotIndex].isDefaultValue)
 		{
 			UpdateDisplayToSelected();
 			return;
@@ -217,7 +217,7 @@ public sealed class InscriptionSynthesisEquipmentSlot : InteractiveObject
 		_selectCurrency.Consume(_price);
 		SelectCurrentKey();
 		_animator.Play(_fixHash);
-		for (int i = 0; i < GameData.HardmodeProgress.InscriptionSynthesisEquipment.count && ((Data<int>)(object)GameData.HardmodeProgress.inscriptionSynthesisEquipment[i]).value != -1; i++)
+		for (int i = 0; i < GameData.HardmodeProgress.InscriptionSynthesisEquipment.count && GameData.HardmodeProgress.inscriptionSynthesisEquipment[i].value != -1; i++)
 		{
 			if (i == GameData.HardmodeProgress.InscriptionSynthesisEquipment.count - 1)
 			{
@@ -373,7 +373,7 @@ public sealed class InscriptionSynthesisEquipmentSlot : InteractiveObject
 
 	private void SaveSelectedData()
 	{
-		((Data<int>)(object)GameData.HardmodeProgress.inscriptionSynthesisEquipment[_slotIndex]).value = (int)_selected.Value;
+		GameData.HardmodeProgress.inscriptionSynthesisEquipment[_slotIndex].value = (int)_selected.Value;
 	}
 
 	private void LoadSelectedData()
@@ -381,7 +381,7 @@ public sealed class InscriptionSynthesisEquipmentSlot : InteractiveObject
 		int num = 0;
 		foreach (Inscription.Key key in Inscription.keys)
 		{
-			if (num == ((Data<int>)(object)GameData.HardmodeProgress.inscriptionSynthesisEquipment[_slotIndex]).value)
+			if (num == GameData.HardmodeProgress.inscriptionSynthesisEquipment[_slotIndex].value)
 			{
 				_selected = key;
 				_animator.Play(_fixLoopHash);

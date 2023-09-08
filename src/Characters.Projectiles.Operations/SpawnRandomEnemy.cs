@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Characters.AI;
 using Level;
 using Services;
@@ -43,7 +42,7 @@ public class SpawnRandomEnemy : Operation
 			Vector3 val = position;
 			val.x += Random.Range(0f - _distribution, _distribution);
 			val.y += Random.Range(0f - _distribution, _distribution);
-			Character character = Object.Instantiate<Character>(ExtensionMethods.Random<Character>((IEnumerable<Character>)_characters), val, Quaternion.identity);
+			Character character = Object.Instantiate<Character>(_characters.Random(), val, Quaternion.identity);
 			character.ForceToLookAt((num < 0f) ? Character.LookingDirection.Left : Character.LookingDirection.Right);
 			if (_setPlayerAsTarget)
 			{

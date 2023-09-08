@@ -61,9 +61,6 @@ public class AdventurerReward : MonoBehaviour, ILootable
 
 	private void Load()
 	{
-		//IL_00b1: Unknown result type (might be due to invalid IL or missing references)
-		//IL_00c1: Unknown result type (might be due to invalid IL or missing references)
-		//IL_00d0: Unknown result type (might be due to invalid IL or missing references)
 		Chapter currentChapter = Singleton<Service>.Instance.levelManager.currentChapter;
 		Random random = new Random(GameData.Save.instance.randomSeed + -1222149140 + (int)currentChapter.type * 256 + currentChapter.stageIndex * 16 + currentChapter.currentStage.pathIndex);
 		_gearInfosToDrop = new GearReference[_slots.Length];

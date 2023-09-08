@@ -62,10 +62,10 @@ public class OperationInfos : MonoBehaviour
 		_running = true;
 		int operationIndex = 0;
 		float time = 0f;
-		OperationInfo[] components = ((SubcomponentArray<OperationInfo>)_operations).components;
+		OperationInfo[] components = _operations.components;
 		while ((_duration == 0f && operationIndex < components.Length) || (_duration > 0f && time < _duration))
 		{
-			for (time += ((ChronometerBase)Chronometer.global).deltaTime * speed; operationIndex < components.Length && time >= components[operationIndex].timeToTrigger; operationIndex++)
+			for (time += Chronometer.global.deltaTime * speed; operationIndex < components.Length && time >= components[operationIndex].timeToTrigger; operationIndex++)
 			{
 				if (((Component)components[operationIndex].operation).gameObject.activeSelf && ((Component)_owner).gameObject.activeSelf)
 				{

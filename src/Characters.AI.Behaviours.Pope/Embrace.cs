@@ -7,20 +7,20 @@ namespace Characters.AI.Behaviours.Pope;
 
 public sealed class Embrace : Behaviour
 {
-	[Subcomponent(typeof(ActionAttack))]
+	[UnityEditor.Subcomponent(typeof(ActionAttack))]
 	[SerializeField]
 	private ActionAttack _pull;
 
 	[SerializeField]
-	[Subcomponent(typeof(ActionAttack))]
+	[UnityEditor.Subcomponent(typeof(ActionAttack))]
 	private ActionAttack _attack;
 
 	[SerializeField]
-	[Subcomponent(typeof(ActionAttack))]
+	[UnityEditor.Subcomponent(typeof(ActionAttack))]
 	private ActionAttack _end;
 
 	[SerializeField]
-	[Subcomponent(typeof(MoveHandler))]
+	[UnityEditor.Subcomponent(typeof(MoveHandler))]
 	private MoveHandler _moveHandler;
 
 	public override IEnumerator CRun(AIController controller)

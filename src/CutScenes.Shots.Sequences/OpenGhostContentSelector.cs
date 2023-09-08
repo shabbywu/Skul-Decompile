@@ -32,11 +32,11 @@ public class OpenGhostContentSelector : Sequence
 	[SerializeField]
 	private string _cancelLabelKey = "label/confirm/no";
 
-	[Subcomponent(typeof(ShotInfo))]
+	[UnityEditor.Subcomponent(typeof(ShotInfo))]
 	[SerializeField]
 	private ShotInfo.Subcomponents _onContents;
 
-	[Subcomponent(typeof(ShotInfo))]
+	[UnityEditor.Subcomponent(typeof(ShotInfo))]
 	[SerializeField]
 	private ShotInfo.Subcomponents _onClose;
 

@@ -86,7 +86,7 @@ public class ShadeInstantAttack : CharacterOperation
 		Bounds bounds = _attackRange.bounds;
 		_overlapper.OverlapCollider(_attackRange);
 		((Behaviour)_attackRange).enabled = false;
-		List<Target> components = GetComponentExtension.GetComponents<Collider2D, Target>((IEnumerable<Collider2D>)_overlapper.results, true);
+		List<Target> components = ((IEnumerable<Collider2D>)_overlapper.results).GetComponents<Collider2D, Target>(clearList: true);
 		if (components.Count == 0)
 		{
 			return;
@@ -99,12 +99,12 @@ public class ShadeInstantAttack : CharacterOperation
 			if (!((Object)(object)target == (Object)null) && !((Object)(object)target.character == (Object)null) && !((Object)(object)target.character == (Object)(object)owner) && target.character.liveAndActive)
 			{
 				Bounds bounds2 = target.collider.bounds;
-				Bounds val = default(Bounds);
-				((Bounds)(ref val)).min = Vector2.op_Implicit(MMMaths.Max(Vector2.op_Implicit(((Bounds)(ref bounds)).min), Vector2.op_Implicit(((Bounds)(ref bounds2)).min)));
-				((Bounds)(ref val)).max = Vector2.op_Implicit(MMMaths.Min(Vector2.op_Implicit(((Bounds)(ref bounds)).max), Vector2.op_Implicit(((Bounds)(ref bounds2)).max)));
-				Vector2 hitPoint = MMMaths.RandomPointWithinBounds(val);
+				Bounds bounds3 = default(Bounds);
+				((Bounds)(ref bounds3)).min = Vector2.op_Implicit(MMMaths.Max(Vector2.op_Implicit(((Bounds)(ref bounds)).min), Vector2.op_Implicit(((Bounds)(ref bounds2)).min)));
+				((Bounds)(ref bounds3)).max = Vector2.op_Implicit(MMMaths.Min(Vector2.op_Implicit(((Bounds)(ref bounds)).max), Vector2.op_Implicit(((Bounds)(ref bounds2)).max)));
+				Vector2 hitPoint = MMMaths.RandomPointWithinBounds(bounds3);
 				Damage damage = owner.stat.GetDamage(num, hitPoint, _hitInfo);
-				subcomponents.Spawn(owner, val, in damage, target);
+				subcomponents.Spawn(owner, bounds3, in damage, target);
 				if (!target.character.cinematic.value)
 				{
 					owner.TryAttackCharacter(target, ref damage);

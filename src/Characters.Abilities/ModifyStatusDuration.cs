@@ -15,12 +15,12 @@ public sealed class ModifyStatusDuration : Ability
 
 		protected override void OnAttach()
 		{
-			((Sum<float>)(object)owner.status.durationMultiplier[ability._kind]).AddOrUpdate((object)this, ability._multiplier);
+			owner.status.durationMultiplier[ability._kind].AddOrUpdate(this, ability._multiplier);
 		}
 
 		protected override void OnDetach()
 		{
-			((Sum<float>)(object)owner.status.durationMultiplier[ability._kind]).Remove((object)this);
+			owner.status.durationMultiplier[ability._kind].Remove(this);
 		}
 	}
 

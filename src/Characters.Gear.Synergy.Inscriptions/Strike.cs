@@ -44,7 +44,7 @@ public sealed class Strike : SimpleStatBonusKeyword
 	public override void Attach()
 	{
 		base.Attach();
-		((PriorityList<GiveDamageDelegate>)base.character.onGiveDamage).Add(int.MinValue, (GiveDamageDelegate)OnGiveDamage);
+		base.character.onGiveDamage.Add(int.MinValue, OnGiveDamage);
 	}
 
 	public override void UpdateBonus(bool wasActive, bool wasOmen)
@@ -86,11 +86,11 @@ public sealed class Strike : SimpleStatBonusKeyword
 			Vector3 position = center + size;
 			_targetPoint.position = position;
 		}
-		target.character.health.onTakeDamage.Add(int.MinValue, (TakeDamageDelegate)MultiplyCriticalDamage);
+		target.character.health.onTakeDamage.Add(int.MinValue, MultiplyCriticalDamage);
 		return false;
 		bool MultiplyCriticalDamage(ref Damage takeDamage)
 		{
-			target.character.health.onTakeDamage.Remove((TakeDamageDelegate)MultiplyCriticalDamage);
+			target.character.health.onTakeDamage.Remove(MultiplyCriticalDamage);
 			if (takeDamage.critical)
 			{
 				takeDamage.percentMultiplier *= _criticalDamageMultiplier;
@@ -103,6 +103,6 @@ public sealed class Strike : SimpleStatBonusKeyword
 	public override void Detach()
 	{
 		base.Detach();
-		((PriorityList<GiveDamageDelegate>)base.character.onGiveDamage).Remove((GiveDamageDelegate)OnGiveDamage);
+		base.character.onGiveDamage.Remove(OnGiveDamage);
 	}
 }

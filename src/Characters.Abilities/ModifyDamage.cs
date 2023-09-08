@@ -32,12 +32,12 @@ public class ModifyDamage : Ability
 		protected override void OnAttach()
 		{
 			_remainCount = ((ability._applyCount == 0) ? int.MaxValue : ability._applyCount);
-			((PriorityList<GiveDamageDelegate>)owner.onGiveDamage).Add(0, (GiveDamageDelegate)OnOwnerGiveDamage);
+			owner.onGiveDamage.Add(0, OnOwnerGiveDamage);
 		}
 
 		protected override void OnDetach()
 		{
-			((PriorityList<GiveDamageDelegate>)owner.onGiveDamage).Remove((GiveDamageDelegate)OnOwnerGiveDamage);
+			owner.onGiveDamage.Remove(OnOwnerGiveDamage);
 		}
 
 		public override void UpdateTime(float deltaTime)
@@ -52,15 +52,15 @@ public class ModifyDamage : Ability
 			{
 				return false;
 			}
-			if ((Object)(object)target.character != (Object)null && !((EnumArray<Character.Type, bool>)ability._characterTypes)[target.character.type])
+			if ((Object)(object)target.character != (Object)null && !ability._characterTypes[target.character.type])
 			{
 				return false;
 			}
-			if (!((EnumArray<Damage.MotionType, bool>)ability._attackTypes)[damage.motionType])
+			if (!ability._attackTypes[damage.motionType])
 			{
 				return false;
 			}
-			if (!((EnumArray<Damage.AttackType, bool>)ability._damageTypes)[damage.attackType])
+			if (!ability._damageTypes[damage.attackType])
 			{
 				return false;
 			}

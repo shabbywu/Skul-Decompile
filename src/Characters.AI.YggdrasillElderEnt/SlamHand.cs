@@ -147,7 +147,7 @@ public class SlamHand : MonoBehaviour
 		while (true)
 		{
 			((Component)_sprite).transform.localPosition = Random.insideUnitSphere * shakeAmount;
-			elapsedTime += ((ChronometerBase)chronometer.animation).deltaTime;
+			elapsedTime += chronometer.animation.deltaTime;
 			if (elapsedTime > length)
 			{
 				break;
@@ -175,7 +175,7 @@ public class SlamHand : MonoBehaviour
 		{
 			Vector2 val = Vector2.Lerp(Vector2.op_Implicit(_source), Vector2.op_Implicit(dest), elapsedTime / length);
 			((Component)this).transform.position = Vector2.op_Implicit(val);
-			elapsedTime += ((ChronometerBase)chronometer.animation).deltaTime;
+			elapsedTime += chronometer.animation.deltaTime;
 			if (elapsedTime > length)
 			{
 				break;

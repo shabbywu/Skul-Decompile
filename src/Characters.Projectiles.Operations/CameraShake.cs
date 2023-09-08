@@ -18,10 +18,10 @@ public class CameraShake : Operation
 
 	public override void Run(IProjectile projectile)
 	{
-		Scene<GameBase>.instance.cameraController.shake.Attach((object)this, _amount, _duration);
+		Scene<GameBase>.instance.cameraController.shake.Attach(this, _amount, _duration);
 		if (_vibrateController)
 		{
-			Singleton<Service>.Instance.controllerVibation.vibration.Attach((object)this, _amount, _duration);
+			Singleton<Service>.Instance.controllerVibation.vibration.Attach(this, _amount, _duration);
 		}
 	}
 }

@@ -10,12 +10,12 @@ public class SummonMinionToTarget : CharacterOperation
 	[SerializeField]
 	private Minion _minion;
 
-	[Information(/*Could not decode attribute arguments.*/)]
+	[Information("비워둘 경우 Default 설정 값을 적용", InformationAttribute.InformationType.Info, false)]
 	[SerializeField]
 	private MinionSetting _overrideSetting;
 
 	[SerializeField]
-	[Information(/*Could not decode attribute arguments.*/)]
+	[Information("해당 개수만큼 하수인을 미리 로드해두어 하수인이 소환되는 순간의 프레임 드랍을 없애줌", InformationAttribute.InformationType.Info, false)]
 	private int _preloadCount = 1;
 
 	[SerializeField]

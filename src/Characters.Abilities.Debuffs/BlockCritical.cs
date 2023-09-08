@@ -14,7 +14,7 @@ public sealed class BlockCritical : Ability
 
 		protected override void OnAttach()
 		{
-			((PriorityList<GiveDamageDelegate>)owner.onGiveDamage).Add(int.MinValue, (GiveDamageDelegate)HandleOnGiveDamage);
+			owner.onGiveDamage.Add(int.MinValue, HandleOnGiveDamage);
 		}
 
 		private bool HandleOnGiveDamage(ITarget target, ref Damage damage)
@@ -25,7 +25,7 @@ public sealed class BlockCritical : Ability
 
 		protected override void OnDetach()
 		{
-			((PriorityList<GiveDamageDelegate>)owner.onGiveDamage).Remove((GiveDamageDelegate)HandleOnGiveDamage);
+			owner.onGiveDamage.Remove(HandleOnGiveDamage);
 		}
 	}
 

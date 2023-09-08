@@ -21,7 +21,7 @@ public sealed class InstantAttackByCount : CharacterOperation
 	[SerializeField]
 	private Collider2D _attackRange;
 
-	[Subcomponent(typeof(TargetedOperationInfo))]
+	[UnityEditor.Subcomponent(typeof(TargetedOperationInfo))]
 	[SerializeField]
 	private TargetedOperationInfo.Subcomponents _operationInfo;
 
@@ -52,7 +52,7 @@ public sealed class InstantAttackByCount : CharacterOperation
 		//IL_0011: Expected O, but got Unknown
 		_overlapper = new NonAllocOverlapper(_maxHits);
 		((Behaviour)_attackRange).enabled = false;
-		Array.Sort(((SubcomponentArray<TargetedOperationInfo>)_operationInfo).components, (TargetedOperationInfo x, TargetedOperationInfo y) => x.timeToTrigger.CompareTo(y.timeToTrigger));
+		Array.Sort(_operationInfo.components, (TargetedOperationInfo x, TargetedOperationInfo y) => x.timeToTrigger.CompareTo(y.timeToTrigger));
 	}
 
 	public override void Initialize()
@@ -92,7 +92,7 @@ public sealed class InstantAttackByCount : CharacterOperation
 		Bounds bounds = _attackRange.bounds;
 		_overlapper.OverlapCollider(_attackRange);
 		((Behaviour)_attackRange).enabled = false;
-		List<Target> components = GetComponentExtension.GetComponents<Collider2D, Target>((IEnumerable<Collider2D>)_overlapper.results, true);
+		List<Target> components = ((IEnumerable<Collider2D>)_overlapper.results).GetComponents<Collider2D, Target>(clearList: true);
 		if (components.Count == 0)
 		{
 			return;
@@ -107,10 +107,10 @@ public sealed class InstantAttackByCount : CharacterOperation
 			if (!((Object)(object)target == (Object)null) && !((Object)(object)target.character == (Object)null) && !((Object)(object)target.character == (Object)(object)owner) && target.character.liveAndActive)
 			{
 				Bounds bounds2 = target.collider.bounds;
-				Bounds val = default(Bounds);
-				((Bounds)(ref val)).min = Vector2.op_Implicit(MMMaths.Max(Vector2.op_Implicit(((Bounds)(ref bounds)).min), Vector2.op_Implicit(((Bounds)(ref bounds2)).min)));
-				((Bounds)(ref val)).max = Vector2.op_Implicit(MMMaths.Min(Vector2.op_Implicit(((Bounds)(ref bounds)).max), Vector2.op_Implicit(((Bounds)(ref bounds2)).max)));
-				Vector2 hitPoint = MMMaths.RandomPointWithinBounds(val);
+				Bounds bounds3 = default(Bounds);
+				((Bounds)(ref bounds3)).min = Vector2.op_Implicit(MMMaths.Max(Vector2.op_Implicit(((Bounds)(ref bounds)).min), Vector2.op_Implicit(((Bounds)(ref bounds2)).min)));
+				((Bounds)(ref bounds3)).max = Vector2.op_Implicit(MMMaths.Min(Vector2.op_Implicit(((Bounds)(ref bounds)).max), Vector2.op_Implicit(((Bounds)(ref bounds2)).max)));
+				Vector2 hitPoint = MMMaths.RandomPointWithinBounds(bounds3);
 				Damage damage = owner.stat.GetDamage(_attackDamage.amount, hitPoint, _hitInfo);
 				if (_baseDamageMultiplierMaxCount != 0)
 				{
@@ -121,7 +121,7 @@ public sealed class InstantAttackByCount : CharacterOperation
 					damage.multiplier += _multiplierCurve.Evaluate((float)components.Count / (float)_damageMultiplierMaxCount);
 				}
 				((MonoBehaviour)this).StartCoroutine(_operationInfo.CRun(owner, target.character));
-				_effect.Spawn(owner, val, in damage, target);
+				_effect.Spawn(owner, bounds3, in damage, target);
 				if (!target.character.cinematic.value)
 				{
 					owner.TryAttackCharacter(target, ref damage);

@@ -93,7 +93,7 @@ public sealed class ObsessiveCompulsive : Ability
 		{
 			//IL_00e3: Unknown result type (might be due to invalid IL or missing references)
 			Character character = target.character;
-			if (!((Object)(object)character == (Object)null) && ((EnumArray<Damage.AttackType, bool>)ability._attackTypeFilter)[gaveDamage.attackType] && ((EnumArray<Damage.MotionType, bool>)ability._motionTypeFilter)[gaveDamage.motionType] && ((EnumArray<Character.Type, bool>)ability._targetTypeFilter)[character.type])
+			if (!((Object)(object)character == (Object)null) && ability._attackTypeFilter[gaveDamage.attackType] && ability._motionTypeFilter[gaveDamage.motionType] && ability._targetTypeFilter[character.type])
 			{
 				if (_previousHistory.ContainsKey(character))
 				{

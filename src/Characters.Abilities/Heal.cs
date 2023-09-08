@@ -24,15 +24,13 @@ public class Heal : Ability
 
 		protected override void OnAttach()
 		{
-			//IL_0018: Unknown result type (might be due to invalid IL or missing references)
-			//IL_001d: Unknown result type (might be due to invalid IL or missing references)
-			((CoroutineReference)(ref _cHealReference)).Stop();
-			_cHealReference = CoroutineReferenceExtension.StartCoroutineWithReference((MonoBehaviour)(object)owner, CHeal());
+			_cHealReference.Stop();
+			_cHealReference = ((MonoBehaviour)(object)owner).StartCoroutineWithReference(CHeal());
 		}
 
 		protected override void OnDetach()
 		{
-			((CoroutineReference)(ref _cHealReference)).Stop();
+			_cHealReference.Stop();
 		}
 
 		private IEnumerator CHeal()
@@ -40,7 +38,7 @@ public class Heal : Ability
 			for (int i = 0; i < ability._count; i++)
 			{
 				owner.health.PercentHeal((float)(ability._totalPercent / ability._count) * 0.01f);
-				yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)owner.chronometer.master, ability.duration / (float)ability._count);
+				yield return owner.chronometer.master.WaitForSeconds(ability.duration / (float)ability._count);
 			}
 		}
 	}

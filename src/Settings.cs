@@ -64,9 +64,9 @@ public class Settings : ScriptableObject
 	public void Initialize()
 	{
 		containerPossibilities = new EnumArray<Rarity, RarityPossibilities>();
-		containerPossibilities[(Rarity)0] = _commonContainerPossibilities;
-		containerPossibilities[(Rarity)1] = _rareContainerPossibilities;
-		containerPossibilities[(Rarity)2] = _uniqueContainerPossibilities;
-		containerPossibilities[(Rarity)3] = _legendaryContainerPossibilities;
+		containerPossibilities[Rarity.Common] = _commonContainerPossibilities;
+		containerPossibilities[Rarity.Rare] = _rareContainerPossibilities;
+		containerPossibilities[Rarity.Unique] = _uniqueContainerPossibilities;
+		containerPossibilities[Rarity.Legendary] = _legendaryContainerPossibilities;
 	}
 }

@@ -73,7 +73,7 @@ public abstract class Basic : Cooldown
 		while (_remainStreaksTime > 0f)
 		{
 			yield return null;
-			_remainStreaksTime -= ((ChronometerBase)chronometer).deltaTime;
+			_remainStreaksTime -= chronometer.deltaTime;
 		}
 		_remainStreaks = 0;
 		_streak = null;

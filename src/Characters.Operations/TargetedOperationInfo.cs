@@ -33,7 +33,7 @@ internal class TargetedOperationInfo : MonoBehaviour
 					base.components[operationIndex].operation.Run(owner, target);
 				}
 				yield return null;
-				time += ((ChronometerBase)owner.chronometer.animation).deltaTime * speed;
+				time += owner.chronometer.animation.deltaTime * speed;
 			}
 		}
 	}
@@ -52,6 +52,6 @@ internal class TargetedOperationInfo : MonoBehaviour
 
 	public override string ToString()
 	{
-		return $"{_timeToTrigger:0.##}s({_timeToTrigger * 60f:0.##}f), {ExtensionMethods.GetAutoName((object)_operation)}";
+		return $"{_timeToTrigger:0.##}s({_timeToTrigger * 60f:0.##}f), {_operation.GetAutoName()}";
 	}
 }

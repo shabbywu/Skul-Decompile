@@ -71,9 +71,9 @@ public sealed class FortitudeBuff : IAbility, IAbilityInstance, ISavableAbility
 		_attached = _buff.Clone();
 		remainTime = Singleton<DarktechManager>.Instance.setting.품목순환장치버프맵카운트;
 		_owner.stat.AttachValues(_attached);
-		for (int i = 0; i < ((ReorderableArray<Stat.Value>)_attached).values.Length; i++)
+		for (int i = 0; i < _attached.values.Length; i++)
 		{
-			((ReorderableArray<Stat.Value>)_attached).values[i].value = ((ReorderableArray<Stat.Value>)_buff).values[i].GetStackedValue(stack);
+			_attached.values[i].value = _buff.values[i].GetStackedValue(stack);
 		}
 	}
 
@@ -81,9 +81,9 @@ public sealed class FortitudeBuff : IAbility, IAbilityInstance, ISavableAbility
 	{
 		remainTime = Singleton<DarktechManager>.Instance.setting.품목순환장치버프맵카운트;
 		stack++;
-		for (int i = 0; i < ((ReorderableArray<Stat.Value>)_attached).values.Length; i++)
+		for (int i = 0; i < _attached.values.Length; i++)
 		{
-			((ReorderableArray<Stat.Value>)_attached).values[i].value = ((ReorderableArray<Stat.Value>)_buff).values[i].GetStackedValue(stack);
+			_attached.values[i].value = _buff.values[i].GetStackedValue(stack);
 		}
 		_owner.stat.SetNeedUpdate();
 	}

@@ -25,11 +25,11 @@ namespace Characters.Abilities;
 
 public abstract class AbilityComponent : MonoBehaviour
 {
-	public class SubcomponentAttribute : SubcomponentAttribute
+	public class SubcomponentAttribute : UnityEditor.SubcomponentAttribute
 	{
-		public static readonly Type[] types;
+		public new static readonly Type[] types;
 
-		public static readonly string[] names;
+		public new static readonly string[] names;
 
 		static SubcomponentAttribute()
 		{
@@ -325,7 +325,7 @@ public abstract class AbilityComponent : MonoBehaviour
 		}
 
 		public SubcomponentAttribute()
-			: base(true, types, names)
+			: base(allowCustom: true, types, names)
 		{
 		}
 	}

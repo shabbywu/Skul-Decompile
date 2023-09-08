@@ -94,7 +94,7 @@ public sealed class RangeWander : Action
 			{
 				if (_remainIdleTime > 0f)
 				{
-					_remainIdleTime -= ((ChronometerBase)_characterValue.chronometer.master).deltaTime;
+					_remainIdleTime -= _characterValue.chronometer.master.deltaTime;
 					return (TaskStatus)3;
 				}
 				Collider2D lastStandingCollider = _characterValue.movement.controller.collisionState.lastStandingCollider;

@@ -124,7 +124,7 @@ public sealed class ThunderLineEffect : MonoBehaviour
 			}
 			else
 			{
-				yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)chronometer, _updateTime);
+				yield return chronometer.WaitForSeconds(_updateTime);
 			}
 		}
 	}

@@ -65,7 +65,7 @@ public class DroppedCentauros : MonoBehaviour
 		yield return Chronometer.global.WaitForSeconds(0.5f);
 		while (!((Object)(object)_quintessence == (Object)null) && !_quintessence.cooldown.time.canUse)
 		{
-			time += ((ChronometerBase)Chronometer.global).deltaTime;
+			time += Chronometer.global.deltaTime;
 			if (time >= 0.5f && _collisionStay)
 			{
 				_quintessence.cooldown.time.remainTime -= _reduceAmount;

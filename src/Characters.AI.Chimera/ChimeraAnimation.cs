@@ -61,7 +61,7 @@ public class ChimeraAnimation : MonoBehaviour
 	private IEnumerator PlayAndWaitAnimation(CharacterAnimationController.AnimationInfo animationInfo, float extraLength = 0f)
 	{
 		_character.animationController.Play(animationInfo, speed);
-		yield return ChronometerExtension.WaitForSeconds((ChronometerBase)(object)_character.chronometer.animation, animationInfo.dictionary["Body"].length / speed + extraLength);
+		yield return _character.chronometer.animation.WaitForSeconds(animationInfo.dictionary["Body"].length / speed + extraLength);
 	}
 
 	public IEnumerator PlaySleepAnimation()

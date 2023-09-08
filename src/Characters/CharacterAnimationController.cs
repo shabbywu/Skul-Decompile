@@ -11,7 +11,7 @@ public class CharacterAnimationController : MonoBehaviour
 	public class KeyAttribute : PopupAttribute
 	{
 		public KeyAttribute()
-			: base(true, new object[2] { "CharacterBody", "Polymorph" })
+			: base(true, "CharacterBody", "Polymorph")
 		{
 		}
 	}
@@ -48,32 +48,32 @@ public class CharacterAnimationController : MonoBehaviour
 
 		private Dictionary<string, AnimationClip> _dictionary;
 
-		public Dictionary<string, AnimationClip> dictionary => _dictionary ?? (_dictionary = base.values.ToDictionary((KeyClip v) => v.key, (KeyClip v) => v.clip));
+		public Dictionary<string, AnimationClip> dictionary => _dictionary ?? (_dictionary = values.ToDictionary((KeyClip v) => v.key, (KeyClip v) => v.clip));
 
 		public AnimationClip defaultClip
 		{
 			get
 			{
-				if (base.values.Length == 0)
+				if (values.Length == 0)
 				{
 					return null;
 				}
-				return base.values[0].clip;
+				return values[0].clip;
 			}
 		}
 
 		public AnimationInfo(params KeyClip[] keyClips)
 		{
-			base.values = keyClips;
+			values = keyClips;
 		}
 
 		public void Dispose()
 		{
 			_dictionary?.Clear();
-			KeyClip[] values = base.values;
-			for (int i = 0; i < values.Length; i++)
+			KeyClip[] array = values;
+			for (int i = 0; i < array.Length; i++)
 			{
-				values[i].Dispose();
+				array[i].Dispose();
 			}
 		}
 	}
@@ -123,7 +123,7 @@ public class CharacterAnimationController : MonoBehaviour
 		for (int i = 0; i < animations.Count; i++)
 		{
 			CharacterAnimation characterAnimation = animations[i];
-			characterAnimation.speed = ((ChronometerBase)_character.chronometer.animation).timeScale / Time.timeScale;
+			characterAnimation.speed = _character.chronometer.animation.timeScale / Time.timeScale;
 			((AnimatorVariable<bool>)(object)characterAnimation.parameter.walk).Value = parameter.walk;
 			((AnimatorVariable<bool>)(object)characterAnimation.parameter.grounded).Value = parameter.grounded;
 			((AnimatorVariable<float>)(object)characterAnimation.parameter.movementSpeed).Value = parameter.movementSpeed;
@@ -148,7 +148,7 @@ public class CharacterAnimationController : MonoBehaviour
 		for (int i = 0; i < animations.Count; i++)
 		{
 			CharacterAnimation characterAnimation = animations[i];
-			characterAnimation.speed = ((ChronometerBase)_character.chronometer.animation).timeScale / Time.timeScale;
+			characterAnimation.speed = _character.chronometer.animation.timeScale / Time.timeScale;
 			((AnimatorVariable<bool>)(object)characterAnimation.parameter.walk).ForceSet(parameter.walk);
 			((AnimatorVariable<bool>)(object)characterAnimation.parameter.grounded).ForceSet(parameter.grounded);
 			((AnimatorVariable<float>)(object)characterAnimation.parameter.movementSpeed).ForceSet(parameter.movementSpeed);
@@ -217,7 +217,7 @@ public class CharacterAnimationController : MonoBehaviour
 		while (seconds >= 0f)
 		{
 			yield return null;
-			seconds -= ((ChronometerBase)_character.chronometer.animation).deltaTime;
+			seconds -= _character.chronometer.animation.deltaTime;
 		}
 		StopAll();
 		this.onExpire?.Invoke();

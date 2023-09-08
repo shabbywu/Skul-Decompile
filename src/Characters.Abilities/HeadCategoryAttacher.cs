@@ -40,23 +40,14 @@ public class HeadCategoryAttacher : AbilityAttacher
 	private void Check(Weapon old, Weapon @new)
 	{
 		EnumArray<Weapon.Category, int> categoryCounts = new EnumArray<Weapon.Category, int>();
-		EnumArray<Weapon.Category, int> obj = categoryCounts;
-		Weapon.Category category = _category1;
-		int num = obj[category];
-		obj[category] = num + 1;
-		EnumArray<Weapon.Category, int> obj2 = categoryCounts;
-		category = _category2;
-		num = obj2[category];
-		obj2[category] = num + 1;
+		categoryCounts[_category1]++;
+		categoryCounts[_category2]++;
 		Weapon[] weapons = base.owner.playerComponents.inventory.weapon.weapons;
 		foreach (Weapon weapon in weapons)
 		{
 			if (!((Object)(object)weapon == (Object)null))
 			{
-				EnumArray<Weapon.Category, int> obj3 = categoryCounts;
-				category = weapon.category;
-				int num2 = obj3[category];
-				obj3[category] = num2 - 1;
+				categoryCounts[weapon.category]--;
 			}
 		}
 		if (CanAttach())
@@ -69,9 +60,9 @@ public class HeadCategoryAttacher : AbilityAttacher
 		}
 		bool CanAttach()
 		{
-			for (int i = 0; i < categoryCounts.Keys.Count; i++)
+			for (int j = 0; j < categoryCounts.Keys.Count; j++)
 			{
-				if (categoryCounts.Array[i] != 0)
+				if (categoryCounts.Array[j] != 0)
 				{
 					return false;
 				}
@@ -100,6 +91,6 @@ public class HeadCategoryAttacher : AbilityAttacher
 
 	public override string ToString()
 	{
-		return ExtensionMethods.GetAutoName((object)this);
+		return this.GetAutoName();
 	}
 }

@@ -66,7 +66,7 @@ public class FollowMovement : MonoBehaviour
 			//IL_0091: Unknown result type (might be due to invalid IL or missing references)
 			//IL_0096: Unknown result type (might be due to invalid IL or missing references)
 			((ContactFilter2D)(ref _overlapper.contactFilter)).SetLayerMask(_layerMask);
-			List<Collider2D> list = ((IEnumerable<Collider2D>)_overlapper.OverlapCollider(_range).results).Where(delegate(Collider2D result)
+			List<Collider2D> list = _overlapper.OverlapCollider(_range).results.Where(delegate(Collider2D result)
 			{
 				if (!_hasCharacter)
 				{
@@ -165,7 +165,7 @@ public class FollowMovement : MonoBehaviour
 				targetTransform = _target.GetTransform();
 				continue;
 			}
-			float deltaTime = ((ChronometerBase)Chronometer.global).deltaTime;
+			float deltaTime = Chronometer.global.deltaTime;
 			elapsed += deltaTime;
 			((Vector2)(ref val))._002Ector(targetTransform.position.x + offsetX, targetTransform.position.y + offsetY);
 			((Component)this).transform.position = Vector3.Lerp(((Component)this).transform.position, Vector2.op_Implicit(val), deltaTime * _trackSpeed);
@@ -181,7 +181,7 @@ public class FollowMovement : MonoBehaviour
 		while (true)
 		{
 			Vector3 zero = Vector3.zero;
-			t += ((ChronometerBase)Chronometer.global).deltaTime;
+			t += Chronometer.global.deltaTime;
 			if (_floatingY)
 			{
 				zero.y = Mathf.Sin(t * (float)Math.PI * floatFrequency) * floatAmplitude;

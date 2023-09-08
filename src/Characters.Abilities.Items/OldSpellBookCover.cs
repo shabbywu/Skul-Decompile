@@ -59,7 +59,7 @@ public sealed class OldSpellBookCover : Ability
 
 		private void HandleOnGaveDamage(ITarget target, in Damage originalDamage, in Damage gaveDamage, double damageDealt)
 		{
-			if (((EnumArray<Damage.MotionType, bool>)ability._motionTypeFilter)[gaveDamage.motionType] && !((Object)(object)target.character == (Object)null) && ((EnumArray<Character.Type, bool>)ability._targetTypeFilter)[target.character.type] && target != null && !((Object)(object)target.character == (Object)null))
+			if (ability._motionTypeFilter[gaveDamage.motionType] && !((Object)(object)target.character == (Object)null) && ability._targetTypeFilter[target.character.type] && target != null && !((Object)(object)target.character == (Object)null))
 			{
 				Invoke(target.character);
 			}

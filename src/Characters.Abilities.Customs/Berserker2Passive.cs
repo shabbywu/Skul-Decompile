@@ -57,7 +57,7 @@ public class Berserker2Passive : Ability
 
 		private void OnOwnerGaveDamage(ITarget target, in Damage originalDamage, in Damage tookDamage, double damageDealt)
 		{
-			if (!((Object)(object)target.character == (Object)null) && ((EnumArray<Damage.AttackType, bool>)ability._attackTypeFilter)[tookDamage.attackType] && ((EnumArray<Damage.MotionType, bool>)ability._motionTypeFilter)[tookDamage.motionType])
+			if (!((Object)(object)target.character == (Object)null) && ability._attackTypeFilter[tookDamage.attackType] && ability._motionTypeFilter[tookDamage.motionType])
 			{
 				ability._gauge.Add(ability._gettingGaugeAmountByGaveDamage);
 			}
@@ -65,7 +65,7 @@ public class Berserker2Passive : Ability
 
 		private void OnOwnerTookDamage(in Damage originalDamage, in Damage tookDamage, double damageDealt)
 		{
-			if (((EnumArray<Damage.AttackType, bool>)ability._attackTypeFilter)[tookDamage.attackType] && ((EnumArray<Damage.MotionType, bool>)ability._motionTypeFilter)[tookDamage.motionType])
+			if (ability._attackTypeFilter[tookDamage.attackType] && ability._motionTypeFilter[tookDamage.motionType])
 			{
 				ability._gauge.Add(ability._gettingGaugeAmountByTookDamage);
 			}

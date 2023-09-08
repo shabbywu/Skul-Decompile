@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using Characters;
 using Data;
 using GameResources;
@@ -49,17 +48,17 @@ public class Fox : InteractiveObject
 
 	public string displayName => Localization.GetLocalizedString($"npc/{NpcType.Fox}/name");
 
-	public string greeting => ExtensionMethods.Random<string>((IEnumerable<string>)Localization.GetLocalizedStringArray($"npc/{NpcType.Fox}/greeting"));
+	public string greeting => Localization.GetLocalizedStringArray($"npc/{NpcType.Fox}/greeting").Random();
 
-	public string[] chat => ExtensionMethods.Random<string[]>((IEnumerable<string[]>)Localization.GetLocalizedStringArrays($"npc/{NpcType.Fox}/chat"));
+	public string[] chat => Localization.GetLocalizedStringArrays($"npc/{NpcType.Fox}/chat").Random();
 
-	public string[] giveHeadScripts => ExtensionMethods.Random<string[]>((IEnumerable<string[]>)Localization.GetLocalizedStringArrays($"npc/{NpcType.Fox}/GiveHead"));
+	public string[] giveHeadScripts => Localization.GetLocalizedStringArrays($"npc/{NpcType.Fox}/GiveHead").Random();
 
-	public string giveExtraHead => string.Format(ExtensionMethods.Random<string>((IEnumerable<string>)Localization.GetLocalizedStringArray($"npc/{NpcType.Fox}/GiveExtraHead")), _extraHeadDarkQuartzCost);
+	public string giveExtraHead => string.Format(Localization.GetLocalizedStringArray($"npc/{NpcType.Fox}/GiveExtraHead").Random(), _extraHeadDarkQuartzCost);
 
 	public string giveExtraHeadLabel => Localization.GetLocalizedString($"npc/{NpcType.Fox}/GiveExtraHead/label");
 
-	public string[] giveExtraHeadNoMoney => ExtensionMethods.Random<string[]>((IEnumerable<string[]>)Localization.GetLocalizedStringArrays($"npc/{NpcType.Fox}/GiveExtraHead/NoMoney"));
+	public string[] giveExtraHeadNoMoney => Localization.GetLocalizedStringArrays($"npc/{NpcType.Fox}/GiveExtraHead/NoMoney").Random();
 
 	protected override void Awake()
 	{
@@ -73,7 +72,6 @@ public class Fox : InteractiveObject
 
 	private void Start()
 	{
-		//IL_0032: Unknown result type (might be due to invalid IL or missing references)
 		_npcConversation = Scene<GameBase>.instance.uiManager.npcConversation;
 		_weaponToDrop = Singleton<Service>.Instance.gearManager.GetWeaponToTake(_random, _headPossibilities.Evaluate(_random)).LoadAsync();
 	}

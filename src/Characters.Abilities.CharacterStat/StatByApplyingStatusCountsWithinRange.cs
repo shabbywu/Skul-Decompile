@@ -61,14 +61,14 @@ public class StatByApplyingStatusCountsWithinRange : Ability
 		private void UpdateStat()
 		{
 			_count = ability.GetCountWithinRange(((Component)owner).gameObject);
-			for (int i = 0; i < ((ReorderableArray<Stat.Value>)_stat).values.Length; i++)
+			for (int i = 0; i < _stat.values.Length; i++)
 			{
-				double num = (double)_count * ((ReorderableArray<Stat.Value>)ability._statPerCount).values[i].value;
-				if (((ReorderableArray<Stat.Value>)ability._statPerCount).values[i].categoryIndex == Stat.Category.Percent.index)
+				double num = (double)_count * ability._statPerCount.values[i].value;
+				if (ability._statPerCount.values[i].categoryIndex == Stat.Category.Percent.index)
 				{
 					num += 1.0;
 				}
-				((ReorderableArray<Stat.Value>)_stat).values[i].value = num;
+				_stat.values[i].value = num;
 			}
 			owner.stat.SetNeedUpdate();
 		}
@@ -90,11 +90,11 @@ public class StatByApplyingStatusCountsWithinRange : Ability
 	[SerializeField]
 	private CharacterStatusKindBoolArray _targetStatusFilter;
 
-	[Information(/*Could not decode attribute arguments.*/)]
+	[Information("스탯 배수에 적용할 기본 배수", InformationAttribute.InformationType.Info, false)]
 	[SerializeField]
 	private int _base;
 
-	[Information(/*Could not decode attribute arguments.*/)]
+	[Information("효과가 적용되기 시작하는 최소 개수", InformationAttribute.InformationType.Info, false)]
 	[SerializeField]
 	private int _min;
 

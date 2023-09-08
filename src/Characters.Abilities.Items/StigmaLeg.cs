@@ -182,7 +182,7 @@ public sealed class StigmaLeg : Ability
 					yield return null;
 					continue;
 				}
-				if (((ChronometerBase)animationChronometer).timeScale > float.Epsilon)
+				if (animationChronometer.timeScale > float.Epsilon)
 				{
 					Vector2 val = Vector2.zero;
 					if ((Object)(object)owner.movement != (Object)null)

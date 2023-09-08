@@ -35,9 +35,9 @@ public class StatBonusPerGearTag : Ability
 		private void UpdateStatBonus()
 		{
 			int itemCountByTag = owner.playerComponents.inventory.item.GetItemCountByTag(ability._tag);
-			for (int i = 0; i < ((ReorderableArray<Stat.Value>)_stat).values.Length; i++)
+			for (int i = 0; i < _stat.values.Length; i++)
 			{
-				((ReorderableArray<Stat.Value>)_stat).values[i].value = (double)itemCountByTag * ((ReorderableArray<Stat.Value>)ability._statPerGearTag).values[i].value;
+				_stat.values[i].value = (double)itemCountByTag * ability._statPerGearTag.values[i].value;
 			}
 			owner.stat.SetNeedUpdate();
 		}
